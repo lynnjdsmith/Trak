@@ -36,11 +36,21 @@
 		BA4DBEAF19CF563F00CFFBFA /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */; };
 		BA4DBEB119CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */; };
 		BA51669219B2218900E44717 /* logInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C84DEDB1982A456009162CD /* logInViewController.swift */; };
+		BA5A9A4119D3DC0F00A410DF /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BACF75B919D3D51A00E2540D /* Instabug.framework */; };
+		BA5A9A4319D3DC4400A410DF /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4219D3DC4400A410DF /* CoreMotion.framework */; };
+		BA5A9A4519D3DC5E00A410DF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4419D3DC5E00A410DF /* CoreTelephony.framework */; };
+		BA5A9A4719D3DC7300A410DF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4619D3DC7300A410DF /* AVFoundation.framework */; };
+		BA5A9A4919D3DCAB00A410DF /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4819D3DCAB00A410DF /* libc++.dylib */; };
+		BA5A9A4B19D3DCB800A410DF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4A19D3DCB800A410DF /* MessageUI.framework */; };
+		BA5A9A4D19D3DCBF00A410DF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4C19D3DCBF00A410DF /* OpenGLES.framework */; };
+		BA5A9A4F19D3DCCA00A410DF /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */; };
+		BA5A9A5119D3DCEB00A410DF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */; };
 		BA5B40A719C68DB300794F13 /* dataMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A619C68DB300794F13 /* dataMainVC.swift */; };
 		BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A819C7D64000794F13 /* dataMainCell.swift */; };
 		BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */; };
 		BABFA3FF19CF402900434B51 /* dataMigraineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */; };
 		BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BACBCCCA19AEC17900C79000 /* MBProgressHUD.m */; };
+		BACF75BC19D3D60600E2540D /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BACF75BB19D3D60600E2540D /* Instabug.bundle */; };
 		BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */; };
 		BAE0DC9119A6BA2E00F02683 /* itemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE0DC9019A6BA2E00F02683 /* itemModel.swift */; };
 		BAE626C2199FBB5500747932 /* calendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE626C1199FBB5500747932 /* calendarViewController.swift */; };
@@ -91,12 +101,22 @@
 		BA4DBE9E19CF4B7F00CFFBFA /* TrakTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrakTests.swift; sourceTree = "<group>"; };
 		BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSymptomLine_GraphView.swift; sourceTree = "<group>"; };
+		BA5A9A4219D3DC4400A410DF /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		BA5A9A4419D3DC5E00A410DF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BA5A9A4619D3DC7300A410DF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BA5A9A4819D3DCAB00A410DF /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		BA5A9A4A19D3DCB800A410DF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		BA5A9A4C19D3DCBF00A410DF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		BA5B40A619C68DB300794F13 /* dataMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainVC.swift; sourceTree = "<group>"; };
 		BA5B40A819C7D64000794F13 /* dataMainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainCell.swift; sourceTree = "<group>"; };
 		BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timelineCell.swift; sourceTree = "<group>"; };
 		BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMigraineVC.swift; sourceTree = "<group>"; };
 		BACBCCC919AEC17900C79000 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BACBCCCA19AEC17900C79000 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		BACF75B919D3D51A00E2540D /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
+		BACF75BB19D3D60600E2540D /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Instabug.bundle; sourceTree = "<group>"; };
 		BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = theExtensions.swift; sourceTree = "<group>"; };
 		BAE0DC9019A6BA2E00F02683 /* itemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemModel.swift; sourceTree = "<group>"; };
 		BAE626C1199FBB5500747932 /* calendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarViewController.swift; sourceTree = "<group>"; };
@@ -107,19 +127,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C143DE919803A0800B4F0E4 /* Accounts.framework in Frameworks */,
+				5C143DEB19803A0800B4F0E4 /* Foundation.framework in Frameworks */,
+				BA5A9A5119D3DCEB00A410DF /* CoreFoundation.framework in Frameworks */,
 				5C143DED19803A0800B4F0E4 /* UIKit.framework in Frameworks */,
-				5C143DE11980397700B4F0E4 /* Social.framework in Frameworks */,
+				BA5A9A4F19D3DCCA00A410DF /* GLKit.framework in Frameworks */,
+				BA5A9A4D19D3DCBF00A410DF /* OpenGLES.framework in Frameworks */,
+				BA5A9A4B19D3DCB800A410DF /* MessageUI.framework in Frameworks */,
+				BA5A9A4919D3DCAB00A410DF /* libc++.dylib in Frameworks */,
 				5C143DD5198032E100B4F0E4 /* QuartzCore.framework in Frameworks */,
+				5C143DDB198032E100B4F0E4 /* AudioToolbox.framework in Frameworks */,
+				BA5A9A4719D3DC7300A410DF /* AVFoundation.framework in Frameworks */,
+				5C143DD8198032E100B4F0E4 /* CoreLocation.framework in Frameworks */,
+				BA5A9A4519D3DC5E00A410DF /* CoreTelephony.framework in Frameworks */,
+				5C143DD6198032E100B4F0E4 /* MobileCoreServices.framework in Frameworks */,
+				BA5A9A4319D3DC4400A410DF /* CoreMotion.framework in Frameworks */,
+				5C143DE919803A0800B4F0E4 /* Accounts.framework in Frameworks */,
+				5C143DE11980397700B4F0E4 /* Social.framework in Frameworks */,
+				BA5A9A4119D3DC0F00A410DF /* Instabug.framework in Frameworks */,
 				5C143DD3198032E100B4F0E4 /* StoreKit.framework in Frameworks */,
 				5C143DD7198032E100B4F0E4 /* libz.dylib in Frameworks */,
-				5C143DDB198032E100B4F0E4 /* AudioToolbox.framework in Frameworks */,
 				5C143DD9198032E100B4F0E4 /* CoreGraphics.framework in Frameworks */,
-				5C143DEB19803A0800B4F0E4 /* Foundation.framework in Frameworks */,
 				5C143DDA198032E100B4F0E4 /* CFNetwork.framework in Frameworks */,
 				5C143DD2198032E100B4F0E4 /* SystemConfiguration.framework in Frameworks */,
-				5C143DD8198032E100B4F0E4 /* CoreLocation.framework in Frameworks */,
-				5C143DD6198032E100B4F0E4 /* MobileCoreServices.framework in Frameworks */,
 				5C143DEA19803A0800B4F0E4 /* AdSupport.framework in Frameworks */,
 				5C143DE819803A0800B4F0E4 /* libsqlite3.0.dylib in Frameworks */,
 				5C143DD4198032E100B4F0E4 /* Security.framework in Frameworks */,
@@ -190,6 +219,16 @@
 		5C143DDC198032E600B4F0E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */,
+				BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */,
+				BA5A9A4C19D3DCBF00A410DF /* OpenGLES.framework */,
+				BA5A9A4A19D3DCB800A410DF /* MessageUI.framework */,
+				BA5A9A4819D3DCAB00A410DF /* libc++.dylib */,
+				BA5A9A4619D3DC7300A410DF /* AVFoundation.framework */,
+				BA5A9A4419D3DC5E00A410DF /* CoreTelephony.framework */,
+				BA5A9A4219D3DC4400A410DF /* CoreMotion.framework */,
+				BACF75BB19D3D60600E2540D /* Instabug.bundle */,
+				BACF75B919D3D51A00E2540D /* Instabug.framework */,
 				5C143DE219803A0800B4F0E4 /* libsqlite3.0.dylib */,
 				5C143DE319803A0800B4F0E4 /* Accounts.framework */,
 				5C143DE419803A0800B4F0E4 /* AdSupport.framework */,
@@ -332,6 +371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BACF75BC19D3D60600E2540D /* Instabug.bundle in Resources */,
 				5C143DAD1980326B00B4F0E4 /* Main.storyboard in Resources */,
 				5C143DAF1980326B00B4F0E4 /* Images.xcassets in Resources */,
 				BA4DBE9F19CF4B7F00CFFBFA /* Info.plist in Resources */,
@@ -519,6 +559,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -538,6 +579,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Trak/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

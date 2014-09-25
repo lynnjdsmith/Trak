@@ -5,3 +5,7 @@
 #import <Parse/Parse.h>
 
 #import "MBProgressHUD.h"
+
+#import <Instabug/Instabug.h>
+
+//#import <Instabug/Instabug.h>
