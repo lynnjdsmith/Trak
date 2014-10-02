@@ -558,30 +558,32 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cgw-Tn-myR" userLabel="list btn">
-                                <rect key="frame" x="221" y="33" width="25" height="21"/>
+                                <rect key="frame" x="195" y="30" width="30" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="+" image="icon_notebook_44_transp">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ehw-Mo-YVx" kind="custom" customClass="regSeg" id="Hv8-re-mNo"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gcg-VA-vtv" userLabel="data btn">
-                                <rect key="frame" x="251" y="33" width="27" height="22"/>
+                                <rect key="frame" x="236" y="30" width="32" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="+" image="icon_data_44_transp">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nxQ-p4-Ftx" userLabel="profile btn">
-                                <rect key="frame" x="285" y="32" width="27" height="25"/>
+                                <rect key="frame" x="278" y="29" width="32" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="+" image="icon_profile_44_transp">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="s5F-Ly-D2N" kind="modal" id="2c0-Rm-CXH"/>
+                                </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="icon_carat_44_transp" id="hyo-j1-9aW">
-                                <rect key="frame" x="240" y="18" width="50" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     </view>
@@ -628,7 +630,6 @@
     </scenes>
     <resources>
         <image name="icon_X_44_transp" width="50" height="44"/>
-        <image name="icon_carat_44_transp" width="50" height="44"/>
         <image name="icon_data_44_transp" width="50" height="44"/>
         <image name="icon_notebook_44_transp" width="50" height="44"/>
         <image name="icon_profile_44_transp" width="50" height="44"/>
@@ -641,8 +642,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Ku3-uL-ndB"/>
-        <segue reference="WO7-AJ-1v0"/>
+        <segue reference="2c0-Rm-CXH"/>
+        <segue reference="Hv8-re-mNo"/>
         <segue reference="ems-e1-1l4"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>

@@ -29,7 +29,7 @@ class SingleSymptomLine_GraphView: UIView {
   var graphColor  = UIColor.appRed()
   var labelFont   = UIFont.systemFontOfSize(12)
   var labelColor  = UIColor.blackColor()
-  
+  var labelWidth :CGFloat = 36.0
   
   required init(coder: NSCoder) {
       fatalError("NSCoding not supported")
@@ -47,15 +47,63 @@ class SingleSymptomLine_GraphView: UIView {
       
   }
   
+  // This function draws everything
 override func drawRect(rect: CGRect) {
-      super.drawRect(rect)
-      context = UIGraphicsGetCurrentContext()
+  super.drawRect(rect)
+  context = UIGraphicsGetCurrentContext()
 
-      // Graph size
-      graphWidth = (rect.size.width - padding) - 10
-      graphHeight = rect.size.height - 40
-      axisWidth = rect.size.width - 10
-      axisHeight = (rect.size.height - padding) - 10
+  var size :CGFloat = 20
+  //var label :NSString = "Bacon"
+  var yPos :NSNumber = 20
+  var ySpacing :NSNumber = size * 1.5
+  var xPos :NSNumber = 30
+
+  let labelList :NSArray = ["Milk", "Bacon", "Cheese"]
+  let colorz :NSArray = [UIColor.greenColor(), UIColor.redColor(), UIColor.blueColor()]
+  
+  for (index, value) in enumerate(labelList) {
+    println("Item \(index + 1): \(value)")
+    let obj1 :Dictionary<String, AnyObject> = ["label" : value, "size" : size, "xPos" : xPos, "yPos" : yPos, "color" : colorz[index]] as Dictionary
+    placePoint(obj1)
+    xPos = xPos + (size * 2.5)
+  }
+  
+  
+  /* let obj1 :Dictionary<String, AnyObject> = ["label" : "Milk", "size" : size, "xPos" : xPos, "yPos" : yPos] as Dictionary
+  
+  xPos = xPos + (size * 2.5)
+  let obj2 :Dictionary<String, AnyObject> = ["label" : "Bacon", "size" : size, "xPos" : xPos, "yPos" : yPos] as Dictionary
+  
+  placePoint(obj1)
+  placePoint(obj2) */
+  
+  //let myP = [["label" : "Milk",   "value" : NSNumber(int:38), "x" : NSNumber(int:10), "y" : yNum]] as NSArray
+  //plotPoint(myP[0] as NSDictionary) // label: daLabel)
+
+  //yNum = yNum + 48
+  
+  //let myP2 = [["label" : "Bacon",   "value" : NSNumber(int:38), "x" : NSNumber(int:10), "y" : yNum]] as NSArray
+  //plotPoint(myP2[0] as NSDictionary) // label: daLabel)
+
+  
+
+  
+  // Graph size
+  //graphWidth = (rect.size.width - padding) - 10
+  //graphHeight = rect.size.height - 40
+  //axisWidth = rect.size.width - 10
+  //axisHeight = (rect.size.height - padding) - 10
+  
+  
+  // draw initial circle
+  //let pointPath = CGPathCreateMutable()
+  
+  // Set stroke colours and stroke the values path
+  //CGContextAddPath(context, pointPath)
+  //CGContextSetLineWidth(context, 2)
+  //CGContextSetStrokeColorWithColor(context, graphColor.CGColor)
+  //CGContextStrokePath(context)
+  
   
       //everest = CGFloat(Int(ceilf(Float(10) / 25) * 25))
   
@@ -100,17 +148,13 @@ override func drawRect(rect: CGRect) {
       }  */
   
   
-  let myP = [["label" : "Milk",   "value" : NSNumber(int:15)]] as NSArray
-  
-  // draw initial circle
-  let pointPath = CGPathCreateMutable()
+
   //let daPoint = (myP[0] as NSDictionary).objectForKey("value") as NSNumber
   //let daY : CGFloat = 100  //ceil((CGFloat(daPoint.integerValue as Int) * (axisHeight / everest))) - 10
   //let daX : CGFloat = 30//padding + (showPoints ? 10 : 0)
   //CGPathMoveToPoint(pointPath, nil, daX, graphHeight - daY)
   //var daLabel = "Migraine"
-  plotPoint(myP[0] as NSDictionary) // label: daLabel)
-  
+
       /* Lets move to the first point
       let pointPath = CGPathCreateMutable()
       let firstPoint = (data[0] as NSDictionary).objectForKey("value") as NSNumber
@@ -126,17 +170,57 @@ override func drawRect(rect: CGRect) {
         //plotPoint(point as NSNumber, path: pointPath, label: aLabel)
       }
       */
-      // Set stroke colours and stroke the values path
-      CGContextAddPath(context, pointPath)
-      CGContextSetLineWidth(context, 2)
-      CGContextSetStrokeColorWithColor(context, graphColor.CGColor)
-      CGContextStrokePath(context)
+
+  }
+  
+  // Places a point
+  func placePoint(point : Dictionary<String, AnyObject>) -> CALayer {
+    
+    let size :CGFloat = point["size"] as AnyObject? as CGFloat
+    var label :NSString = point["label"] as AnyObject? as NSString
+    var xPos :CGFloat = point["xPos"] as AnyObject? as CGFloat
+    var yPos :CGFloat = point["yPos"] as AnyObject? as CGFloat
+    var color :UIColor = point["color"] as AnyObject? as UIColor
+    
+    let pointMarker = valueMarker(size, color: color) //myP2[0] as NSDictionary)
+    pointMarker.frame = CGRectMake(xPos, yPos, 50, 50)
+    layer.addSublayer(pointMarker)
+    
+    let xLabel = axisLabel(label as NSString) //myP2[0].objectForKey("label") as NSString)
+    xLabel.frame = CGRectMake(xPos - size, yPos + size, size * 3, size)
+    xLabel.textAlignment = NSTextAlignment.Center
+    xLabel.layer.borderColor = color.CGColor //.CGColor //UIColor.redColor().CGColor
+    xLabel.layer.borderWidth = 0
+    xLabel.textColor = UIColor.blackColor()
+    addSubview(xLabel)
+    
+    
+    /*let pointMarker = CALayer()
+    pointMarker.backgroundColor = backgroundColor?.CGColor
+    pointMarker.cornerRadius = 8
+    pointMarker.masksToBounds = true
+    
+    let pointValue = point.objectForKey("value") as NSNumber
+    
+    let markerInner = CALayer()
+    //markerInner.frame = CGRectMake(0, 0, 50, 50)
+    markerInner.frame = CGRectMake(0, 0, pointValue, pointValue)
+    markerInner.cornerRadius = pointValue / 2
+    
+    // ORIG - with space between surrounding line and circle  markerInner.frame = CGRectMake(3, 3, 20, 20)
+    //markerInner.cornerRadius = 5
+    markerInner.masksToBounds = true
+    markerInner.backgroundColor = graphColor.CGColor
+    
+    pointMarker.addSublayer(markerInner) */
+    
+    return pointMarker
   }
   
   
 
   // Plot a point on the graph
-  func plotPoint(point : NSDictionary) {
+ /*  func plotPoint(point : NSDictionary) {
     
     // work out the distance to draw the remaining points at
     let interval = Int(graphWidth) / (data.count - 1);
@@ -145,8 +229,9 @@ override func drawRect(rect: CGRect) {
     
     // Calculate X and Y positions
     // var yposition : CGFloat = ceil((CGFloat(pointValue.integerValue as Int) * (axisHeight / everest))) - 10
-    var yposition : CGFloat = 0
-    var xposition : CGFloat = 10//CGFloat(interval * (data.indexOfObject(point))) + padding
+    var yposition : CGFloat = point.objectForKey("x") as NSNumber
+    var xposition : CGFloat = point.objectForKey("y") as NSNumber
+    //CGFloat(interval * (data.indexOfObject(point))) + padding
     
     // If its the first point we want to nuge it in slightly
     //if(data.indexOfObject(point) == 0 && showPoints) {
@@ -159,17 +244,17 @@ override func drawRect(rect: CGRect) {
     
     //if(showPoints) {
       // Add a marker for this value
-      let pointMarker = valueMarker()
+      let pointMarker = valueMarker(point)
       pointMarker.frame = CGRectMake(xposition, yposition, 50, 50)
       layer.addSublayer(pointMarker)
     //}
     
     let xLabel = axisLabel(point.objectForKey("label") as NSString)
-    xLabel.frame = CGRectMake(xposition, yposition, 36, 20)
+    xLabel.frame = CGRectMake(xposition, yposition, pointValue, pointValue)
     xLabel.textAlignment = NSTextAlignment.Center
     xLabel.textColor = UIColor.whiteColor() 
     addSubview(xLabel)
-  }
+  } */
 
   
   // Returns an axis label
@@ -180,26 +265,28 @@ override func drawRect(rect: CGRect) {
       label.textColor = labelColor
       label.backgroundColor = backgroundColor
       label.textAlignment = NSTextAlignment.Right
-      
       return label
   }
   
   
-  // Returns a point for plotting
-  func valueMarker() -> CALayer {
+  //func valueMarker(point : NSDictionary) -> CALayer {
+  func valueMarker(size : CGFloat, color: UIColor) -> CALayer {
       let pointMarker = CALayer()
       pointMarker.backgroundColor = backgroundColor?.CGColor
       pointMarker.cornerRadius = 8
       pointMarker.masksToBounds = true
-      
+
+      //let pointValue = point.objectForKey("value") as NSNumber
+    
       let markerInner = CALayer()
-      markerInner.frame = CGRectMake(0, 0, 50, 50)
-      markerInner.cornerRadius = 25
+      //markerInner.frame = CGRectMake(0, 0, 50, 50)
+      markerInner.frame = CGRectMake(0, 0, size, size)
+      markerInner.cornerRadius = size / 2
 
       // ORIG - with space between surrounding line and circle  markerInner.frame = CGRectMake(3, 3, 20, 20)
       //markerInner.cornerRadius = 5
       markerInner.masksToBounds = true
-      markerInner.backgroundColor = graphColor.CGColor
+      markerInner.backgroundColor = color.CGColor //graphColor.CGColor
       
       pointMarker.addSublayer(markerInner)
       
