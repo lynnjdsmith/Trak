@@ -6,10 +6,12 @@
 //https://parse.com/docs/ios_guide#top/iOS
 // error - no initalizers, put ? at the end of your IBOutlets
 
-class logInViewController: PFLogInViewController {
+class logInViewController: PFLogInViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+        self.logInView.passwordField.delegate = self
       
         self.view.backgroundColor = UIColor.clearColor()
         var fieldsBackground = UIImageView(image:UIImage(named:"bkg1_320.png"))
@@ -59,15 +61,42 @@ class logInViewController: PFLogInViewController {
         self.logInView.signUpButton.layer.frame = CGRectMake(35.0, 405.0, 250.0, 40.0)
     }
     
-    func showMain () {
-        PFUser.logInWithUsername(self.logInView.usernameField.text, password: self.logInView.passwordField.text)
+    func showMain() {
+      println("show main ***")
+      //var loginError :NSErrorPointer
+      var error: NSError?
+      
+      var theUser = PFUser.logInWithUsername(self.logInView.usernameField.text, password: self.logInView.passwordField.text, error: &error)
+      
+      if let actualError = error {
+        println("An Error Occurred: \(actualError)")
+      }
+      else {
+        //theUser.saveInBackgroundWithBlock {
+        //(success: Bool!, error: NSError!) -> Void in
+        println("user exists")
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "Main", bundle: nil)
         var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
         self.presentViewController(viewcontroller, animated: true, completion: nil)
+      }
+      
+      //if error { println("no error") } else {
+
+      //}
+      
     }
+  
+  override func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+    super.textFieldShouldReturn(textField)
+    println("return go")
+    //self.logInView.passwordField.resignFirstResponder()
+    self.showMain()
+    return true
+  }
     
 }
+
 
 
 func keyboardWillA() {
