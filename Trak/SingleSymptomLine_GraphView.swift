@@ -105,15 +105,16 @@ class SingleSymptomLine_GraphView: UIView {
     var yPos :NSNumber = 78
     
     // draw legend circles
-   let labelList :NSArray = ["Milk", "Bacon", "Cheese", "Tea", "Coffee"]
+    let labelList :NSArray = ["Milk", "Bacon", "Cheese", "Tea", "Coffee"]
     let colorz :NSArray = [UIColor.color1(), UIColor.color2(), UIColor.color3(), UIColor.color4(), UIColor.color5()]
     
     for (index, value) in enumerate(labelList) {
       //println("Item \(index + 1): \(value)")
       let obj1 :Dictionary<String, AnyObject> = ["label" : value,  "labelType" : "under", "size" : sizeLegendDot, "xPos" : xPosLegend, "yPos" : yPosLegendLabels, "color" : colorz[index]] as Dictionary
-      placeCircle(obj1)
+      var theCircleLayer :CALayer = placeCircle(obj1)
       xPosLegend = xPosLegend + 58
     }
+    
     
     // loading data for last 50 incidents      // THIS WORKS
     var today :NSDate = NSDate()

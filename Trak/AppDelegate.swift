@@ -15,10 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
       
+        // Test Flight
+        //[TestFlight takeOff:@"46d4e63a-faca-40cb-b659-19290ccfc815"];
+      
         // set parse and instabug
         Parse.setApplicationId("fYKgQaZQVXiHaPF4CqpTpYCUHrgjcdTd0mUg6EZX", clientKey: "anNgZkMlFrFNOVFIMgJJs1BmZUgTBm4Zkie00oUB")
         Instabug.startWithToken("dcea2ba4a815b84590074f75715ae8b9", captureSource:IBGCaptureSourceUIKit, invocationEvent:IBGInvocationEventShake)
       
+
+        
         return true
     }
 

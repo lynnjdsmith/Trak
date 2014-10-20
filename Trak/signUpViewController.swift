@@ -16,7 +16,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
         var fieldsBackground = UIImageView(image:UIImage(named:"bkg1_320.png"))
         self.signUpView.insertSubview(fieldsBackground, atIndex:1)
     }
-    
+  
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -50,8 +50,8 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
         self.signUpView.signUpButton.layer.frame = CGRectMake(35.0, 370.0, 250.0, 40.0)
         self.signUpView.signUpButton.backgroundColor = UIColor.clearColor()
         self.signUpView.signUpButton.setImage(UIImage(named:"Default-568h@2x.png"), forState: UIControlState.Highlighted)
-        self.signUpView.signUpButton.setTitle("Start Tracking!", forState:UIControlState.Normal)
-        self.signUpView.signUpButton.setTitle("Start Tracking!", forState:UIControlState.Highlighted)
+        self.signUpView.signUpButton.setTitle("Sign Up!", forState:UIControlState.Normal)
+        self.signUpView.signUpButton.setTitle("Sign Up!", forState:UIControlState.Highlighted)
         self.signUpView.signUpButton.addTarget(self, action: Selector("showMain"), forControlEvents: .TouchUpInside)
     }
   
@@ -71,9 +71,71 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
   //println("done")
 //}
     func showMain() {
-      if((self.presentingViewController) != nil){
+      println("show main")
+      var mainView: UIStoryboard!
+      mainView = UIStoryboard(name: "Main", bundle: nil)
+      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+      self.presentViewController(viewcontroller, animated: true, completion: nil)
+      
+  }
+  
+  /*if((self.presentingViewController) != nil){
         self.dismissViewControllerAnimated(false, completion: nil)
         println("Signed in. Navigating to timeline")
       }
+    } */
+  
+  
+  //func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+  
+  //- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user;
+  func signUpViewController(signUpController:PFSignUpViewController, didSignUpUser user:PFUser) {
+    println("signupview done")
+    var mainView: UIStoryboard!
+    mainView = UIStoryboard(name: "Main", bundle: nil)
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+    self.presentViewController(viewcontroller, animated: true, completion: nil)
+    //self.dismissModalViewControllerAnimated(true) //:YES]; // Dismiss the PFSignUpViewController
+  }
+  
+ // - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+ // [self dismissModalViewControllerAnimated:YES]; // Dismiss the PFSignUpViewController
+ // }
+  
+ /*  func myMethod() {
+    println("mymethod")
+    var user = PFUser()
+    user.username = "myUsername"
+    user.password = "myPassword"
+    user.email = "email@example.com"
+    // other fields can be set just like with PFObject
+    user["phone"] = "415-392-0202"
+    
+    user.signUpInBackgroundWithBlock {
+      (succeeded: Bool!, error: NSError!) -> Void in
+      if error == nil {
+        // Hooray! Let them use the app now.
+      } else {
+        //let errorString = error.userInfo["error"] as NSString
+        // Show the errorString somewhere and let the user try again.
+      }
     }
+  } */
+  
+  /* func showMain () {
+    // set username/pass/email
+    PFUser *user = [PFUser currentUser];
+    user.username = @"existing username";
+    user.password = @"my pass";
+    user.email = @"email@example.com";
+    [user setObject:@"415-392-0202" forKey:@"phone"];
+    BOOL success = [user signUp];
+    
+    PFUser.signUp(<#PFUser#>) //WithUsername(self.signUpView.usernameField.text, password: self.signUpView.passwordField.text)
+    var mainView: UIStoryboard!
+    mainView = UIStoryboard(name: "Main", bundle: nil)
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+    self.presentViewController(viewcontroller, animated: true, completion: nil)
+  } */
+  
 }

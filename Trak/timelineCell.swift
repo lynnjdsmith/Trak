@@ -15,7 +15,6 @@ class timelineCell: UITableViewCell {
   
   var delegate    :tCellDelegate? = nil
   
-  
   /* NAH override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
 

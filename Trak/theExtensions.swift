@@ -134,7 +134,7 @@ extension UIColor {
 @objc(regSeg) class regSeg: UIStoryboardSegue {
   
   override func perform() {
-    //println("segue")
+    println("segue")
     let sourceViewController = self.sourceViewController as UIViewController
     let destinationViewController = self.destinationViewController as UIViewController
     

@@ -7,7 +7,7 @@ import QuartzCore
 
 class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-  @IBOutlet var tableView: UITableView!
+  @IBOutlet var tableViewData: UITableView!
   @IBOutlet var topBackView: UIView!
   var items           :NSMutableArray = []
   
@@ -24,7 +24,7 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     self.navigationController?.navigationBarHidden = true
     //text1.becomeFirstResponder()
     //helpView.hidden = true
-    tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    tableViewData.separatorStyle = UITableViewCellSeparatorStyle.None
 
     loadData("Potato")
     
@@ -59,7 +59,7 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
           self.items.addObject(object)
           println(object)
         }
-        self.tableView.reloadData()
+        self.tableViewData.reloadData()
       } else {
         println("error: \(error)")
       }
@@ -107,6 +107,8 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     paddingView.backgroundColor = UIColor.clearColor()
     cell.timeTextField.leftView = paddingView
     cell.timeTextField.leftViewMode = UITextFieldViewMode.Always
+    
+    //cell.allowsSelection = true
     
     return cell
   }

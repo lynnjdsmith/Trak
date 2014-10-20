@@ -8,6 +8,7 @@ import QuartzCore
 class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate, itemDetailDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, tCellDelegate {
   
   // set variables
+  @IBOutlet var helloView: UIView!
   @IBOutlet var tableView: UITableView!
   @IBOutlet var text1: UITextField!
   @IBOutlet var dayBtn: UIButton!
@@ -22,14 +23,57 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
-    //println("viewWillAppear")
+    println("viewWillAppear")
+    helloView.hidden = true
+    
+
+    //var path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+    //var dict :NSMutableDictionary = NSMutableDictionary(contentsOfFile: path!)
+    //var theLaunchedVal :NSString = dict.objectForKey("hasLaunchedOnce") as NSString
+    //var theLaunchedVal :Bool = true;
+    
+    // First time? Show Hello!
+    //if (theLaunchedVal == "t") {
+      println("ONCE TRUE")
+      // not logged in - present login controller
+      if (PFUser.currentUser() == nil) {
+        //println("current user nil")
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
+        let svc = signUpViewController()
+        vc.delegate = self
+        vc.signUpController = svc
+        svc.delegate = self
+        self.presentViewController(vc, animated: true, completion: nil)
+      } else {
+        //println("current username \(PFUser.currentUser().username)")
+        loadDataForDate(daDate)
+      }
+      
+    /* } else {
+      
+      println("ONCE FALSE")
+      text1.resignFirstResponder()
+      helloView.hidden = false
+
+      dict.setValue("t", forKey: "hasLaunchedOnce")  //("t" as NSString, forKey: "hasLaunchedOnce")
+      dict.writeToFile(path!, atomically: true)
+      
+      //NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLaunchedOnce")
+      //NSUserDefaults.standardUserDefaults().synchronize()
+    } */
+
+    
     
     // setup nav bar
     self.navigationController?.navigationBarHidden = true
+    tableView.allowsSelection = true
     
     // empty text string
     self.text1.text = ""
   
+    self.tableView.reloadData()
+    //println("vWA reloaded data")
   }
   
   override func viewDidLoad() {
@@ -78,7 +122,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     dayBtn.setTitle(str, forState: UIControlState.Normal)
     dayBtn.setTitle(str, forState: UIControlState.Highlighted)
     
-    // not logged in - present login controller
+    /* not logged in - present login controller
     if (PFUser.currentUser() == nil) {
       //println("current user nil")
       let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -91,7 +135,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     } else {
       //println("current username \(PFUser.currentUser().username)")
       loadDataForDate(daDate)
-    }
+    } */
   }
 
   
@@ -154,6 +198,27 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
   }
   
+
+  @IBAction func closeHello(sender: AnyObject) {
+    println("closeHello")
+    
+    // not logged in - present login controller
+    if (PFUser.currentUser() == nil) {
+      //println("current user nil")
+      let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
+      let svc = signUpViewController()
+      vc.delegate = self
+      vc.signUpController = svc
+      svc.delegate = self
+      self.presentViewController(vc, animated: true, completion: nil)
+    } else {
+      //println("current username \(PFUser.currentUser().username)")
+      loadDataForDate(daDate)
+    }
+    
+    helloView.hidden = true
+  }
   
   @IBAction func startEditingEntryPanelTimeTF(sender: AnyObject) {
     println("startEditingEntryPanelTimeTF")
@@ -339,14 +404,25 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   
   func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-    //println("You selected cell #\(indexPath.row)!")
+    println("You selected cell #\(indexPath.row)!")
+    
+    
+    //ResultsTableViewController *childViewController = [[ResultsTableViewController alloc] init];
+    //childViewController.tableView.delegate = self.results;
+    //[self.navigationController pushViewController:childViewController animated:YES];
+    
     
     //select row, show item detail
     self.selectedRow = indexPath.row
-    let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("itemDetailController") as itemDetailController
-    secondViewController.objID = items[selectedRow].objectId
-    secondViewController.delegate = self
-    self.navigationController?.pushViewController(secondViewController, animated: true)
+    
+    var mainView: UIStoryboard!
+    mainView = UIStoryboard(name: "Main", bundle: nil)
+    let s = mainView.instantiateViewControllerWithIdentifier("itemDetailController") as itemDetailController
+    s.objID = items[selectedRow].objectId
+    s.delegate = self
+    self.navigationController?.pushViewController(s, animated: true)
+    //self.presentViewController(s, animated: true, completion: nil)
+    println("You selected cell #\(indexPath.row)!")
   }
   
 } // END class timeline view controller

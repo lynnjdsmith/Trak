@@ -222,6 +222,13 @@
                                     <action selector="deleteMe:" destination="s5F-Ly-D2N" eventType="touchUpInside" id="Eqh-n8-184"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trak Beta 2.7" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mcF-uJ-Pv2">
+                                <rect key="frame" x="40" y="410" width="240" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.92156862750000001" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     </view>
@@ -283,17 +290,11 @@
                             <view contentMode="scaleToFill" id="Y58-c7-Rb5" userLabel="Top Back View">
                                 <rect key="frame" x="-5" y="-5" width="330" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="topBkg" id="kZJ-4T-9Oy">
-                                        <rect key="frame" x="-5" y="-5" width="340" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="8" id="8MS-y0-65h" userLabel="time on entry panel">
-                                <rect key="frame" x="5" y="88" width="65" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="8" id="8MS-y0-65h" userLabel="time on entry panel">
+                                <rect key="frame" x="6" y="88" width="63" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -304,20 +305,68 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter events here" clearsOnBeginEditing="YES" minimumFontSize="16" clearButtonMode="whileEditing" id="KFR-Lo-zrc">
                                 <rect key="frame" x="85" y="88" width="223" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done"/>
                                 <connections>
                                     <action selector="processInput:" destination="ehw-Mo-YVx" eventType="editingDidEndOnExit" id="svG-R7-umI"/>
                                 </connections>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bda-Ij-ceO">
-                                <rect key="frame" x="0.0" y="129.99999954357469" width="320" height="430"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bps-E3-CHI">
+                                <rect key="frame" x="12" y="29" width="176" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showCalendar:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="gnO-Ap-m41"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.80000001192092896" contentMode="scaleToFill" id="5pT-t2-oa5">
+                                <rect key="frame" x="74" y="80" width="4" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NcA-oz-GST" userLabel="list btn">
+                                <rect key="frame" x="195" y="30" width="30" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="+" image="icon_notebook_44_transp">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5sG-Yd-BmI" userLabel="data btn">
+                                <rect key="frame" x="236" y="30" width="32" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="+" image="icon_data_44_transp">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Mk8-zH-yhX" kind="custom" identifier="regSeg2" customClass="regSeg" id="GEK-bL-XGU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M7L-xx-i0X" userLabel="profile btn">
+                                <rect key="frame" x="278" y="29" width="32" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="+" image="icon_profile_44_transp">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="s5F-Ly-D2N" kind="modal" id="Ku3-uL-ndB"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="upCarat_20_12v3" id="Y2N-cd-zCk">
+                                <rect key="frame" x="200" y="53" width="20" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bda-Ij-ceO">
+                                <rect key="frame" x="0.0" y="130" width="320" height="430"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.96470588235294119" green="0.98431372549019602" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell1" id="Y3H-uH-Oxe" customClass="timelineCell" customModule="Trak" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell1" id="Y3H-uH-Oxe" customClass="timelineCell" customModule="Trak" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y3H-uH-Oxe" id="O4z-Ia-GSa">
@@ -330,8 +379,8 @@
                                                     <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="8" id="rVJ-gR-lDS">
-                                                    <rect key="frame" x="9" y="5" width="59" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="8" id="rVJ-gR-lDS">
+                                                    <rect key="frame" x="5" y="5" width="60" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <accessibility key="accessibilityConfiguration">
@@ -365,56 +414,52 @@
                                     <outlet property="delegate" destination="ehw-Mo-YVx" id="gRm-3j-hAz"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bps-E3-CHI">
-                                <rect key="frame" x="12" y="29" width="176" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showCalendar:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="gnO-Ap-m41"/>
-                                </connections>
-                            </button>
-                            <view alpha="0.80000001192092896" contentMode="scaleToFill" id="5pT-t2-oa5">
-                                <rect key="frame" x="74" y="80" width="4" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" id="eS5-YW-Ljh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="470"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="x1w-P9-cbB">
+                                        <rect key="frame" x="274" y="33" width="40" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="icon_X_44_transp">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeHello:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="GU6-mq-VeW"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Trak Beta 2.7" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jeh-ze-Ek5">
+                                        <rect key="frame" x="10" y="29" width="240" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="0.92156862750000001" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="FeC-bs-mGi">
+                                        <rect key="frame" x="10" y="84" width="300" height="400"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <string key="text">To report a bug, shake your phone.
+
+During this beta, we may have to look at your data for analysis. We will do this as little as possible. But, it could happen.
+
+This beta is the first MVP. There are bugs. There are incomplete sections.
+
+Please do not report any bugs on the login / signup sections. We know. Thanks!
+
+When you sign up, please login after. </string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NcA-oz-GST" userLabel="list btn">
-                                <rect key="frame" x="195" y="30" width="30" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+" image="icon_notebook_44_transp">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5sG-Yd-BmI" userLabel="data btn">
-                                <rect key="frame" x="236" y="30" width="32" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+" image="icon_data_44_transp">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Mk8-zH-yhX" kind="custom" customClass="regSeg" id="GEK-bL-XGU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M7L-xx-i0X" userLabel="profile btn">
-                                <rect key="frame" x="278" y="29" width="32" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+" image="icon_profile_44_transp">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="s5F-Ly-D2N" kind="modal" id="Ku3-uL-ndB"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="eu3-eG-YJy"/>
                     <connections>
                         <outlet property="dayBtn" destination="Bps-E3-CHI" id="CMx-z1-jmy"/>
+                        <outlet property="helloView" destination="eS5-YW-Ljh" id="4Sh-Mv-Exn"/>
                         <outlet property="tableView" destination="bda-Ij-ceO" id="nOJ-Q3-seg"/>
                         <outlet property="text1" destination="KFR-Lo-zrc" id="7AC-Q4-PQB"/>
                         <outlet property="timeTF" destination="8MS-y0-65h" id="Ne8-qx-gtO"/>
@@ -493,7 +538,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ehw-Mo-YVx" kind="custom" identifier="regSeg" customClass="regSeg" id="E0l-Yg-5JS"/>
+                                    <segue destination="ehw-Mo-YVx" kind="push" identifier="regSeg" id="E0l-Yg-5JS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vIu-Ld-f1Z" userLabel="data btn">
@@ -540,7 +585,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="vUC-Y3-ppw"/>
                     <connections>
-                        <outlet property="tableView" destination="0KC-Mx-QNj" id="CPB-BU-4ae"/>
+                        <outlet property="tableViewData" destination="0KC-Mx-QNj" id="JIa-hz-zL3"/>
                         <outlet property="topBackView" destination="oYt-6R-CgV" id="Ea2-V4-c2R"/>
                     </connections>
                 </viewController>
@@ -562,11 +607,11 @@
                                 <subviews>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon_carat_44_transp" id="OId-ha-NgB">
                                         <rect key="frame" x="91" y="37" width="25" height="23"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon_settings_44_transp" id="swN-2e-6fz">
                                         <rect key="frame" x="118" y="38" width="24" height="21"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="jx3-cd-B3N">
                                         <rect key="frame" x="20" y="27" width="120" height="44"/>
@@ -586,7 +631,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ehw-Mo-YVx" kind="custom" customClass="regSeg" id="Hv8-re-mNo"/>
+                                    <segue destination="1Gd-da-pvQ" kind="custom" customClass="regSeg" id="f7j-gs-bjM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gcg-VA-vtv" userLabel="data btn">
@@ -606,6 +651,10 @@
                                     <segue destination="s5F-Ly-D2N" kind="modal" id="2c0-Rm-CXH"/>
                                 </connections>
                             </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="upCarat_20_12v3" id="1g1-nc-3Ye">
+                                <rect key="frame" x="242" y="53" width="20" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     </view>
@@ -636,10 +685,14 @@
         <scene sceneID="8wF-gH-hC7">
             <objects>
                 <navigationController restorationIdentifier="navViewController" storyboardIdentifier="navViewController" navigationBarHidden="YES" id="1Gd-da-pvQ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="trak_logo_70" id="gMS-dY-Rb2">
+                    <navigationItem key="navigationItem" id="9T7-zQ-5Pz"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="trak_logo_70" backIndicatorTransitionMaskImage="trak_logo_70" id="gMS-dY-Rb2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="delegate" destination="1Gd-da-pvQ" id="iB7-ak-4OA"/>
+                        </connections>
                     </navigationBar>
                     <connections>
                         <segue destination="ehw-Mo-YVx" kind="relationship" relationship="rootViewController" id="WO7-AJ-1v0"/>
@@ -657,8 +710,8 @@
         <image name="icon_notebook_44_transp" width="50" height="44"/>
         <image name="icon_profile_44_transp" width="50" height="44"/>
         <image name="icon_settings_44_transp" width="50" height="44"/>
-        <image name="topBkg" width="640" height="126"/>
         <image name="trak_logo_70" width="198" height="70"/>
+        <image name="upCarat_20_12v3" width="20" height="12"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -666,9 +719,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ems-e1-1l4"/>
-        <segue reference="Hv8-re-mNo"/>
         <segue reference="Ku3-uL-ndB"/>
+        <segue reference="WO7-AJ-1v0"/>
+        <segue reference="ems-e1-1l4"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
 </document>

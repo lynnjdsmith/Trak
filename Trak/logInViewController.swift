@@ -10,18 +10,16 @@ class logInViewController: PFLogInViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      
         self.view.backgroundColor = UIColor.clearColor()
         var fieldsBackground = UIImageView(image:UIImage(named:"bkg1_320.png"))
         self.logInView.insertSubview(fieldsBackground, atIndex:1)
-      
-          var svc :signUpViewController = signUpViewController()
-        //var signUpVC :signUpViewController = signUpViewController()
+        var svc :signUpViewController = signUpViewController()
         self.signUpController = svc
-        
-        //signUpVC.delegate = self
-        //signUpViewController.setFields:PFSignUpFieldsDefault | PFSignUpFieldsAdditional];
-        //logInViewController.setValue(signUpVC, forKey: "SignUpViewController")
+     // NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillA"), name: UIKeyboardWillShowNotification, object: nil)
+     // NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillH"), name: UIKeyboardWillHideNotification, object: nil)
+      // NSNotificationCenter().addObserver(self, selector: Selector(keyboardWillA()), name: UIKeyboardWillShowNotification, object: nil)
+      // NSNotificationCenter().addObserver(self, selector: Selector(keyboardWillH()), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,26 +37,26 @@ class logInViewController: PFLogInViewController {
         self.logInView.signUpButton.setTitle("Sign Up", forState:UIControlState.Normal)
         self.logInView.signUpButton.setTitle("Sign Up", forState:UIControlState.Highlighted)
         
-        self.logInView.usernameField.layer.frame = CGRectMake(35.0, 195.0, 250.0, 50.0)
+        self.logInView.usernameField.layer.frame = CGRectMake(35.0, 145.0, 250.0, 50.0)
         self.logInView.usernameField.backgroundColor = UIColor.whiteColor()
         self.logInView.usernameField.borderStyle = UITextBorderStyle.RoundedRect
         self.logInView.usernameField.layer.borderColor = (UIColor( red: 0.5, green: 0.5, blue:0, alpha: 1.0 )).CGColor;
         self.logInView.usernameField.textColor = UIColor(red: 135.0/255.0, green: 100.0/255.0, blue: 92.0/255.0, alpha: 1.0)
         self.logInView.usernameField.layer.shadowOpacity = 0.0
         
-        self.logInView.passwordField.layer.frame = CGRectMake(35.0, 260.0, 250.0, 50.0)
+        self.logInView.passwordField.layer.frame = CGRectMake(35.0, 210.0, 250.0, 50.0)
         self.logInView.passwordField.backgroundColor = UIColor.whiteColor()
         self.logInView.passwordField.borderStyle = UITextBorderStyle.RoundedRect
         self.logInView.passwordField.layer.borderColor = (UIColor( red: 0.5, green: 0.5, blue:0, alpha: 1.0 )).CGColor;
         self.logInView.passwordField.textColor = UIColor(red: 135.0/255.0, green: 100.0/255.0, blue: 92.0/255.0, alpha: 1.0)
         self.logInView.passwordField.layer.shadowOpacity = 0.0
         
-        self.logInView.logInButton.layer.frame = CGRectMake(35.0, 325.0, 250.0, 50.0)
-        self.logInView.logInButton.setTitle("Start Tracking!", forState:UIControlState.Normal)
-        self.logInView.logInButton.setTitle("Start Tracking!", forState:UIControlState.Highlighted)
+        self.logInView.logInButton.layer.frame = CGRectMake(35.0, 295.0, 250.0, 50.0)
+        self.logInView.logInButton.setTitle("Login & Start Tracking!", forState:UIControlState.Normal)
+        self.logInView.logInButton.setTitle("Login & Start Tracking!", forState:UIControlState.Highlighted)
         self.logInView.logInButton.addTarget(self, action: Selector("showMain"), forControlEvents: .TouchUpInside)
         
-        self.logInView.signUpButton.layer.frame = CGRectMake(35.0, 465.0, 250.0, 40.0)
+        self.logInView.signUpButton.layer.frame = CGRectMake(35.0, 405.0, 250.0, 40.0)
     }
     
     func showMain () {
@@ -72,8 +70,15 @@ class logInViewController: PFLogInViewController {
 }
 
 
+func keyboardWillA() {
+  println("keyboardWasShown")
 
+}
 
+func keyboardWillH() {
+  println("keyboardWasHidden")
+  
+}
 /*
 
 /* WORKS for making a button
