@@ -54,6 +54,7 @@
 		BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */; };
 		BAE0DC9119A6BA2E00F02683 /* itemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE0DC9019A6BA2E00F02683 /* itemModel.swift */; };
 		BAE626C2199FBB5500747932 /* calendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE626C1199FBB5500747932 /* calendarViewController.swift */; };
+		BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = theExtensions.swift; sourceTree = "<group>"; };
 		BAE0DC9019A6BA2E00F02683 /* itemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemModel.swift; sourceTree = "<group>"; };
 		BAE626C1199FBB5500747932 /* calendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarViewController.swift; sourceTree = "<group>"; };
+		BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AF+Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				BAE626C1199FBB5500747932 /* calendarViewController.swift */,
 				BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */,
 				BAE0DC9019A6BA2E00F02683 /* itemModel.swift */,
+				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
 				BA5B40AA19C8A03100794F13 /* Data Screens */,
 				BAEA6F3C19B01650002EC6E8 /* Progress Indicator */,
 				BAE626C3199FBBF800747932 /* Login and Signup */,
@@ -396,6 +399,7 @@
 				BA4DBEB119CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift in Sources */,
 				BABFA3FF19CF402900434B51 /* dataMigraineVC.swift in Sources */,
 				BA5B40A719C68DB300794F13 /* dataMainVC.swift in Sources */,
+				BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */,
 				BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */,
 				5C84DEDE1982A498009162CD /* signUpViewController.swift in Sources */,
 				BA4DBEAF19CF563F00CFFBFA /* GraphView.swift in Sources */,

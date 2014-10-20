@@ -1,16 +1,17 @@
 //
-//  TipCalculatorModel.swift
-//  TipCalculator
-//
-//  Created by Main Account on 7/7/14.
-//  Copyright (c) 2014 Razeware LLC. All rights reserved.
-//
 
-import Foundation
 
-class anItem: PFObject {
-
-    var name:NSString
+//class anItem: PFObject, PFSubclassing  {
+class anItem: PFObject  {
+ /* override class func load() {
+    self.registerSubclass()
+  }
+  
+  class func parseClassName() -> String! {
+    return "Armor"
+  } */
+  
+  var name:NSString
     var triggerOrSymptom: NSString
     var type: NSString
     

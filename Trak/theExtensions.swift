@@ -89,6 +89,44 @@ extension UIColor {
     //return UIColor(red: 236/255, green: 243/255, blue: 248/255, alpha: 1)
     return UIColor(red: 246/255, green: 251/255, blue: 255/255, alpha: 1)
   }
+  
+  class func color1() -> UIColor {      // blue
+    return UIColor(red: 53/255, green: 144/255, blue: 211/255, alpha: 1)
+  }
+  class func color2() -> UIColor {      // blue
+    return UIColor(red: 101/255, green: 188/255, blue: 130/255, alpha: 1)
+  }
+  class func color3() -> UIColor {      // blue
+    return UIColor(red: 248/255, green: 168/255, blue: 131/255, alpha: 1)
+  }
+  class func color4() -> UIColor {      // blue
+    return UIColor(red: 113/255, green: 75/255, blue: 154/255, alpha: 1)
+  }
+  class func color5() -> UIColor {      // blue
+    return UIColor(red: 209/255, green: 81/255, blue: 216/255, alpha: 1)
+  }
+/*  class func color6() -> UIColor {      // blue
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1)
+  }
+  class func color7() -> UIColor {      // blue
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1)
+  }
+  class func color8() -> UIColor {      // blue
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1)
+  }
+  class func color9() -> UIColor {      // blue
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1)
+  }
+  class func color10() -> UIColor {      // blue
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1)
+  }
+  class func color11() -> UIColor {      // blue
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1)
+  }
+  class func color12() -> UIColor {      // blue
+    return UIColor(red: /255, green: /255, blue: /255, alpha: 1)
+  } */
+  
 }
 
 
@@ -96,7 +134,7 @@ extension UIColor {
 @objc(regSeg) class regSeg: UIStoryboardSegue {
   
   override func perform() {
-    println("segue")
+    //println("segue")
     let sourceViewController = self.sourceViewController as UIViewController
     let destinationViewController = self.destinationViewController as UIViewController
     

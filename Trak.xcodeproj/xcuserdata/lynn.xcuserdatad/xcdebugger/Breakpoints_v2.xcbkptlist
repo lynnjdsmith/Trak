@@ -42,12 +42,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/SingleSymptomLine_GraphView.swift"
-            timestampString = "433907175.396819"
+            timestampString = "434485063.122499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "drawRect(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Trak/SingleSymptomLine_GraphView.swift"
+            timestampString = "434486708.863396"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "drawIncident(_:yPos:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -34,7 +34,7 @@ class dataMigraineVC: UIViewController{
       ["label" : "Red Wine",   "value" : NSNumber(int:45)],
       ] as NSArray
     
-    let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 70, 320, 400), data: myData)
+    let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 80, 320, 400), data: myData)
     self.view.addSubview(graph)
     
   }

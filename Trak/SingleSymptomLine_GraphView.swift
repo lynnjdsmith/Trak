@@ -1,20 +1,17 @@
-//
 //  GraphView.swift
 //  Graph
-//
-//  Created by Tim Davies on 11/08/2014.
-//  Copyright (c) 2014 Tim Davies. All rights reserved.
-//
+
 
 import UIKit
 import QuartzCore
+
 
 class SingleSymptomLine_GraphView: UIView {
 
   private var data = NSMutableArray()
   private var context : CGContextRef?
   
-  private let padding     : CGFloat = 30
+  private let padding     : CGFloat = 0
   private var graphWidth  : CGFloat = 0
   private var graphHeight : CGFloat = 0
   private var axisWidth   : CGFloat = 0
@@ -30,267 +27,321 @@ class SingleSymptomLine_GraphView: UIView {
   var labelFont   = UIFont.systemFontOfSize(12)
   var labelColor  = UIColor.blackColor()
   var labelWidth :CGFloat = 36.0
+  var fontBigger :UIFont = UIFont.systemFontOfSize(12)
+  var fontMedium :UIFont = UIFont.systemFontOfSize(11)
+  var dataPoints :NSMutableArray = []
   
   required init(coder: NSCoder) {
       fatalError("NSCoding not supported")
   }
   
+  
   override init(frame: CGRect) {
       super.init(frame: frame)
   }
   
+  
   init(frame: CGRect, data: NSArray) {
-
       super.init(frame: frame)
       backgroundColor = UIColor.clearColor()
       self.data = data.mutableCopy() as NSMutableArray
-      
+  
+    // add time markers/labels
+    let timeLabel1 = UILabel(frame: CGRectMake(15, 50, 100, 20))
+    timeLabel1.text = "24 hrs."
+    timeLabel1.font = fontMedium
+    timeLabel1.backgroundColor = backgroundColor
+    timeLabel1.textAlignment = NSTextAlignment.Left
+    timeLabel1.layer.borderColor = UIColor.blackColor().CGColor
+    timeLabel1.layer.borderWidth = 0
+    timeLabel1.textColor = UIColor.blackColor()
+    addSubview(timeLabel1)
+
+    // 1 day
+    let timeLabel2 = UILabel(frame: CGRectMake(90, 50, 100, 20))
+    timeLabel2.text = "12 hrs."
+    timeLabel2.font = fontMedium
+    timeLabel2.backgroundColor = backgroundColor
+    timeLabel2.textAlignment = NSTextAlignment.Left
+    timeLabel2.layer.borderColor = UIColor.blackColor().CGColor
+    timeLabel2.layer.borderWidth = 0
+    timeLabel2.textColor = UIColor.blackColor()
+    addSubview(timeLabel2)
+    
+    // 12 hours
+    let timeLabel3 = UILabel(frame: CGRectMake(150, 50, 100, 20))
+    timeLabel3.text = "6 Hrs."
+    timeLabel3.font = fontMedium
+    timeLabel3.backgroundColor = backgroundColor
+    timeLabel3.textAlignment = NSTextAlignment.Left
+    timeLabel3.layer.borderColor = UIColor.blackColor().CGColor
+    timeLabel3.layer.borderWidth = 0
+    timeLabel3.textColor = UIColor.blackColor()
+    addSubview(timeLabel3)
+    
+    // 2 hours
+    let timeLabel4 = UILabel(frame: CGRectMake(220, 50, 100, 20))
+    timeLabel4.text = "2 Hrs."
+    timeLabel4.font = fontMedium
+    timeLabel4.backgroundColor = backgroundColor
+    timeLabel4.textAlignment = NSTextAlignment.Left
+    timeLabel4.layer.borderColor = UIColor.blackColor().CGColor
+    timeLabel4.layer.borderWidth = 0
+    timeLabel4.textColor = UIColor.blackColor()
+    addSubview(timeLabel4)
   }
+  
   
   // This function draws everything
-override func drawRect(rect: CGRect) {
-  super.drawRect(rect)
-  context = UIGraphicsGetCurrentContext()
-
-  var size :CGFloat = 20
-  //var label :NSString = "Bacon"
-  var yPos :NSNumber = 20
-  var ySpacing :NSNumber = size * 1.5
-  var xPos :NSNumber = 30
-
-  let labelList :NSArray = ["Milk", "Bacon", "Cheese"]
-  let colorz :NSArray = [UIColor.greenColor(), UIColor.redColor(), UIColor.blueColor()]
-  
-  for (index, value) in enumerate(labelList) {
-    println("Item \(index + 1): \(value)")
-    let obj1 :Dictionary<String, AnyObject> = ["label" : value, "size" : size, "xPos" : xPos, "yPos" : yPos, "color" : colorz[index]] as Dictionary
-    placePoint(obj1)
-    xPos = xPos + (size * 2.5)
-  }
-  
-  
-  /* let obj1 :Dictionary<String, AnyObject> = ["label" : "Milk", "size" : size, "xPos" : xPos, "yPos" : yPos] as Dictionary
-  
-  xPos = xPos + (size * 2.5)
-  let obj2 :Dictionary<String, AnyObject> = ["label" : "Bacon", "size" : size, "xPos" : xPos, "yPos" : yPos] as Dictionary
-  
-  placePoint(obj1)
-  placePoint(obj2) */
-  
-  //let myP = [["label" : "Milk",   "value" : NSNumber(int:38), "x" : NSNumber(int:10), "y" : yNum]] as NSArray
-  //plotPoint(myP[0] as NSDictionary) // label: daLabel)
-
-  //yNum = yNum + 48
-  
-  //let myP2 = [["label" : "Bacon",   "value" : NSNumber(int:38), "x" : NSNumber(int:10), "y" : yNum]] as NSArray
-  //plotPoint(myP2[0] as NSDictionary) // label: daLabel)
-
-  
-
-  
-  // Graph size
-  //graphWidth = (rect.size.width - padding) - 10
-  //graphHeight = rect.size.height - 40
-  //axisWidth = rect.size.width - 10
-  //axisHeight = (rect.size.height - padding) - 10
-  
-  
-  // draw initial circle
-  //let pointPath = CGPathCreateMutable()
-  
-  // Set stroke colours and stroke the values path
-  //CGContextAddPath(context, pointPath)
-  //CGContextSetLineWidth(context, 2)
-  //CGContextSetStrokeColorWithColor(context, graphColor.CGColor)
-  //CGContextStrokePath(context)
-  
-  
-      //everest = CGFloat(Int(ceilf(Float(10) / 25) * 25))
-  
-      // Lets work out the highest value and round to the nearest 25. 
-      // This will be used to work out the position of each value
-      // on the Y axis, it essentialy reperesents 100% of Y
-      /* for point in data {
-          let n : Int = (point.objectForKey("value") as NSNumber).integerValue
-          if CGFloat(n) > everest {
-              everest = CGFloat(Int(ceilf(Float(n) / 25) * 25))
-          }
-      } */
-      
-      /* Draw graph AXIS
-      let axisPath = CGPathCreateMutable()
-      CGPathMoveToPoint(axisPath, nil, padding, 10)
-      CGPathAddLineToPoint(axisPath, nil, padding, rect.size.height - 31)
-      CGPathAddLineToPoint(axisPath, nil, axisWidth, rect.size.height - 31)
-      CGContextAddPath(context, axisPath)
-      
-      CGContextSetStrokeColorWithColor(context, axisColor.CGColor)
-      CGContextStrokePath(context) */
-  
-      /* Draw y axis labels and lines */
-      //var yLabelInterval : Int = Int(everest / 5)
-      //let label = axisLabel(NSString(format: "%d", 1 * yLabelInterval))
-  
-      /* for i in 0...5 {
-          
-          let label = axisLabel(NSString(format: "%d", i * yLabelInterval))
-          label.frame = CGRectMake(0, floor((rect.size.height - padding) - CGFloat(i) * (axisHeight / 5) - 10), 20, 20)
-          addSubview(label)
-          
-          if(showLines && i != 0) {
-              let line = CGPathCreateMutable()
-              CGPathMoveToPoint(line, nil, padding + 1, floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5)))
-              CGPathAddLineToPoint(line, nil, axisWidth, floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5)))
-              CGContextAddPath(context, line)
-              CGContextSetStrokeColorWithColor(context, linesColor.CGColor)
-              CGContextStrokePath(context)
-          }
-      }  */
-  
-  
-
-  //let daPoint = (myP[0] as NSDictionary).objectForKey("value") as NSNumber
-  //let daY : CGFloat = 100  //ceil((CGFloat(daPoint.integerValue as Int) * (axisHeight / everest))) - 10
-  //let daX : CGFloat = 30//padding + (showPoints ? 10 : 0)
-  //CGPathMoveToPoint(pointPath, nil, daX, graphHeight - daY)
-  //var daLabel = "Migraine"
-
-      /* Lets move to the first point
-      let pointPath = CGPathCreateMutable()
-      let firstPoint = (data[0] as NSDictionary).objectForKey("value") as NSNumber
-      let initialY : CGFloat = ceil((CGFloat(firstPoint.integerValue as Int) * (axisHeight / everest))) - 10
-      let initialX : CGFloat = padding + (showPoints ? 10 : 0)
-      CGPathMoveToPoint(pointPath, nil, initialX, graphHeight - initialY)
-      
-      // Loop over the remaining values
-      for point in data {
-        var aPoint = (data[0] as NSDictionary).objectForKey("value") as NSNumber
-        var aLabel = "Mig"//(data[1] as NSDictionary).objectForKey("value") as NSString
-        plotPoint(point as NSDictionary, path: pointPath)
-        //plotPoint(point as NSNumber, path: pointPath, label: aLabel)
-      }
-      */
-
-  }
-  
-  // Places a point
-  func placePoint(point : Dictionary<String, AnyObject>) -> CALayer {
+  override func drawRect(rect: CGRect) {
     
+    // set variables - reference circles
+    super.drawRect(rect)
+    context = UIGraphicsGetCurrentContext()
+    var sizeLegendDot :CGFloat = 16
+    var xPosLegend :NSNumber = 15
+    //var xPosLegendLabels :NSNumber = 30
+    var yPosLegendLabels :NSNumber = 14
+    var yPos :NSNumber = 78
+    
+    // draw legend circles
+   let labelList :NSArray = ["Milk", "Bacon", "Cheese", "Tea", "Coffee"]
+    let colorz :NSArray = [UIColor.color1(), UIColor.color2(), UIColor.color3(), UIColor.color4(), UIColor.color5()]
+    
+    for (index, value) in enumerate(labelList) {
+      //println("Item \(index + 1): \(value)")
+      let obj1 :Dictionary<String, AnyObject> = ["label" : value,  "labelType" : "under", "size" : sizeLegendDot, "xPos" : xPosLegend, "yPos" : yPosLegendLabels, "color" : colorz[index]] as Dictionary
+      placeCircle(obj1)
+      xPosLegend = xPosLegend + 58
+    }
+    
+    // loading data for last 50 incidents      // THIS WORKS
+    var today :NSDate = NSDate()
+    //var tenAgo :NSDate = today.dateByAddingTimeInterval(-100*24*60*60)
+    var theSymptomEvents :NSArray = loadSymptoms(today, name: "Migraine")  //loadDataForDates(tenAgo, endDate: today) // for Dates works!
+    
+    for theSymptomObject in theSymptomEvents {
+      drawIncident(theSymptomObject as PFObject, yPos: yPos)
+      yPos = yPos + 60
+    }
+    
+    
+    /* for theObject in theEvents {
+      if theObject.valueForKey("name").isEqual("Migraine") {
+        theSymptomEvents.addObject(theObject)
+      }
+    } */
+
+    
+    //var theSymptomEvents :NSArray = loadDataForSymptom(tenAgo, endDate:today)
+    
+    // get date of first object
+    //var theFirstObject :PFObject = theEvents[0] as PFObject
+    //var theFirstDate :NSDate = theFirstObject.valueForKey("myDateTime") as NSDate
+    //var theObject :PFObject
+    //var curObjects :NSMutableArray = []
+    
+    
+    
+    // see if the date of this point is the same or different?
+    //let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+
+
+    // get date of current object
+    //var theObjDate :NSDate = theObject.valueForKey("myDateTime") as NSDate
+    
+    //let theNewDate :NSDate = theObject.valueForKey("myDateTime") as NSDate
+    //let dif = calendar.compareDate(theNewDate, toDate: theCurDate, toUnitGranularity: NSCalendarUnit.HourCalendarUnit)
+    //var dateComparisionResult:NSComparisonResult = theObjDate.compare(theFirstDate)
+    
+    //if dateComparisionResult == NSComparisonResult.OrderedSame {
+    //  curObjects.addObject(theObject)
+    //} else {
+      // we have a new date, so send the old events
+      //drawIncidents(curObjects, theWord: "Migraine")
+      
+      // start a new set of events
+      //curObjects.removeAllObjects()
+      //curObjects.addObject(theObject)
+      //}
+
+    
+  }
+  
+  
+  func loadDataForDates(beginDate: NSDate, endDate: NSDate) -> NSArray {     // THIS WORKS! Load data for dates
+    
+    // query parameters
+    var findData:PFQuery = PFQuery(className: "Items")
+    findData.whereKey("username", equalTo:PFUser.currentUser().username)
+    findData.whereKey("myDateTime", greaterThan:beginDate)
+    findData.whereKey("myDateTime", lessThan:endDate)
+    findData.orderByDescending("myDateTime")
+
+    // query
+    var theArray :NSArray = findData.findObjects() // as AnyObject as [String]
+    println(theArray)
+    return theArray
+  }
+  
+
+  func loadSymptoms(endDate: NSDate, name: NSString) -> NSArray {
+    
+    // query parameters
+    var findData:PFQuery = PFQuery(className: "Items")
+    findData.whereKey("username", equalTo:PFUser.currentUser().username)
+    findData.whereKey("name", equalTo:name)
+    //query.skip = 50
+    findData.limit = 50
+    //findData.whereKey("myDateTime", greaterThan:beginDate)
+    //findData.whereKey("myDateTime", lessThan:endDate)
+    findData.orderByDescending("myDateTime")
+    
+    // query
+    var theArray :NSArray = findData.findObjects() // as AnyObject as [String]
+    //println(theArray)
+    return theArray
+  }
+  
+  
+  func drawIncident(theEvent :PFObject, yPos :NSNumber) {
+  
+    // set vars
+    var size :CGFloat = 16
+    var xPos :NSNumber = 268
+    let daColorz = UIColor.appRed()
+    var sizeLabelDot :CGFloat = 38
+    var dotColor = UIColor.color3()
+    var graphWidth = 300
+    
+    // set incident time
+    var incidentTime :NSDate = theEvent.valueForKey("myDateTime") as NSDate
+    
+    // draw line
+    let m1 = CALayer()
+    m1.frame = CGRectMake(0, yPos + (sizeLabelDot/2) - 1, 320, 2)
+    m1.masksToBounds = true
+    m1.backgroundColor = UIColor.redColor().CGColor
+    layer.addSublayer(m1)
+    
+    // draw bigDot
+    let obj1 :Dictionary<String, AnyObject> = ["label" : "12/15",  "labelType" : "inside", "size" : sizeLabelDot, "xPos" : xPos, "yPos" : yPos, "color" : daColorz] as Dictionary
+    placeCircle(obj1)
+    
+    // load data for incident
+    var findData:PFQuery = PFQuery(className: "Items")
+    findData.whereKey("username", equalTo:PFUser.currentUser().username)
+    findData.limit = 5
+    findData.whereKey("myDateTime", lessThan:incidentTime)
+    findData.orderByDescending("myDateTime")
+    
+    // query
+    var theTriggers :NSArray = findData.findObjects() as NSArray
+    
+    // draw data dots       //1440 = minutes in a day
+    for it in theTriggers {
+      //println(it)
+      var itObject :PFObject = it as PFObject
+      var eventTime :NSDate = itObject.valueForKey("myDateTime") as NSDate
+      var minutesBetween = incidentTime.minutesAfterDate(eventTime)
+      
+      // within the last day
+      if (minutesBetween < 1440) {
+        if (itObject.valueForKey("name") as NSString  == "Chocolate") { dotColor = UIColor.color1() }
+        if (itObject.valueForKey("name") as NSString == "Milk") { dotColor = UIColor.color2() }
+        if (itObject.valueForKey("name") as NSString == "Cheese") { dotColor = UIColor.color4() }
+      
+        var myXPos = minutesBetween //* 0.25
+        println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
+        let objDot :Dictionary<String, AnyObject> = ["label" : "none", "labelType" : "none", "size" : size, "xPos" : myXPos, "yPos" : yPos + (sizeLabelDot/2) - (size/2), "color" : dotColor] as Dictionary
+        placeCircle(objDot)
+      }
+    }
+  
+    
+    /*  // draw big circles
+    var sizeLabelDot :CGFloat = 38
+    var sizeDataDot :CGFloat = 15
+    yPos = 75
+    xPos = 268
+    
+    let daLabel = "12/15"
+    let daColorz = UIColor.appRed()
+    
+    
+    // draw line
+    let m1 = CALayer()
+    m1.frame = CGRectMake(0, yPos + (sizeLabelDot/2) - 1, 320, 2)
+    m1.masksToBounds = true
+    m1.backgroundColor = UIColor.redColor().CGColor
+    layer.addSublayer(m1)
+    
+    // draw bigDot
+    let obj1 :Dictionary<String, AnyObject> = ["label" : daLabel,  "labelType" : "inside", "size" : sizeLabelDot, "xPos" : xPos, "yPos" : yPos, "color" : daColorz] as Dictionary
+    placeCircle(obj1)
+    
+    for index in 1 ... 5 {
+      let objDot :Dictionary<String, AnyObject> = ["label" : "none", "labelType" : "none", "size" : sizeDataDot, "xPos" : 15, "yPos" : yPos + (sizeLabelDot/2) - (sizeDataDot/2), "color" : UIColor.color3()] as Dictionary
+      placeCircle(objDot)
+      yPos = yPos + 60
+    }  */
+
+  
+  }
+  // Places a point
+  func placeCircle(point : Dictionary<String, AnyObject>) -> CALayer {
+    
+    // unwrap variables
     let size :CGFloat = point["size"] as AnyObject? as CGFloat
     var label :NSString = point["label"] as AnyObject? as NSString
+    var labelType :NSString = point["labelType"] as AnyObject? as NSString
     var xPos :CGFloat = point["xPos"] as AnyObject? as CGFloat
     var yPos :CGFloat = point["yPos"] as AnyObject? as CGFloat
     var color :UIColor = point["color"] as AnyObject? as UIColor
     
-    let pointMarker = valueMarker(size, color: color) //myP2[0] as NSDictionary)
+
+    // holder for circle and label
+    let pointMarker = CALayer()
+
+    // draw circle
+    let markerInner = CALayer()
+    markerInner.frame = CGRectMake(0, 0, size, size)
+    markerInner.cornerRadius = size / 2
+    markerInner.masksToBounds = true
+    markerInner.backgroundColor = color.CGColor //graphColor.CGColor
+    
+    pointMarker.addSublayer(markerInner)
     pointMarker.frame = CGRectMake(xPos, yPos, 50, 50)
     layer.addSublayer(pointMarker)
     
-    let xLabel = axisLabel(label as NSString) //myP2[0].objectForKey("label") as NSString)
-    xLabel.frame = CGRectMake(xPos - size, yPos + size, size * 3, size)
-    xLabel.textAlignment = NSTextAlignment.Center
-    xLabel.layer.borderColor = color.CGColor //.CGColor //UIColor.redColor().CGColor
-    xLabel.layer.borderWidth = 0
-    xLabel.textColor = UIColor.blackColor()
-    addSubview(xLabel)
+    // draw Label - under
+    if (labelType == "under") {
+      let theLabel = UILabel(frame: CGRectMake(xPos - size, yPos + size, size * 3, size))
+      theLabel.text = label
+      theLabel.font = labelFont
+      theLabel.backgroundColor = backgroundColor
+      theLabel.textAlignment = NSTextAlignment.Center
+      theLabel.layer.borderColor = color.CGColor
+      theLabel.layer.borderWidth = 0
+      theLabel.textColor = UIColor.blackColor()
+      addSubview(theLabel)
+    }
     
-    
-    /*let pointMarker = CALayer()
-    pointMarker.backgroundColor = backgroundColor?.CGColor
-    pointMarker.cornerRadius = 8
-    pointMarker.masksToBounds = true
-    
-    let pointValue = point.objectForKey("value") as NSNumber
-    
-    let markerInner = CALayer()
-    //markerInner.frame = CGRectMake(0, 0, 50, 50)
-    markerInner.frame = CGRectMake(0, 0, pointValue, pointValue)
-    markerInner.cornerRadius = pointValue / 2
-    
-    // ORIG - with space between surrounding line and circle  markerInner.frame = CGRectMake(3, 3, 20, 20)
-    //markerInner.cornerRadius = 5
-    markerInner.masksToBounds = true
-    markerInner.backgroundColor = graphColor.CGColor
-    
-    pointMarker.addSublayer(markerInner) */
+    // draw Label - inside
+    if (labelType == "inside") {
+      let theLabel = UILabel(frame: CGRectMake(xPos - size, yPos, size * 3, size))
+      theLabel.text = label
+      theLabel.font = fontBigger
+      theLabel.backgroundColor = backgroundColor
+      theLabel.textAlignment = NSTextAlignment.Center
+      theLabel.layer.borderColor = color.CGColor
+      theLabel.layer.borderWidth = 0
+      theLabel.textColor = UIColor.whiteColor()
+      addSubview(theLabel)
+    }
     
     return pointMarker
   }
-  
-  
 
-  // Plot a point on the graph
- /*  func plotPoint(point : NSDictionary) {
-    
-    // work out the distance to draw the remaining points at
-    let interval = Int(graphWidth) / (data.count - 1);
-    
-    let pointValue = point.objectForKey("value") as NSNumber
-    
-    // Calculate X and Y positions
-    // var yposition : CGFloat = ceil((CGFloat(pointValue.integerValue as Int) * (axisHeight / everest))) - 10
-    var yposition : CGFloat = point.objectForKey("x") as NSNumber
-    var xposition : CGFloat = point.objectForKey("y") as NSNumber
-    //CGFloat(interval * (data.indexOfObject(point))) + padding
-    
-    // If its the first point we want to nuge it in slightly
-    //if(data.indexOfObject(point) == 0 && showPoints) {
-    //  xposition += 10
-    //}
-    
-    // Draw line to this value
-    //CGPathAddLineToPoint(path, nil, xposition, graphHeight - yposition);
-  
-    
-    //if(showPoints) {
-      // Add a marker for this value
-      let pointMarker = valueMarker(point)
-      pointMarker.frame = CGRectMake(xposition, yposition, 50, 50)
-      layer.addSublayer(pointMarker)
-    //}
-    
-    let xLabel = axisLabel(point.objectForKey("label") as NSString)
-    xLabel.frame = CGRectMake(xposition, yposition, pointValue, pointValue)
-    xLabel.textAlignment = NSTextAlignment.Center
-    xLabel.textColor = UIColor.whiteColor() 
-    addSubview(xLabel)
-  } */
-
-  
-  // Returns an axis label
-  func axisLabel(title: NSString) -> UILabel {
-      let label = UILabel(frame: CGRectZero)
-      label.text = title
-      label.font = labelFont
-      label.textColor = labelColor
-      label.backgroundColor = backgroundColor
-      label.textAlignment = NSTextAlignment.Right
-      return label
-  }
-  
-  
-  //func valueMarker(point : NSDictionary) -> CALayer {
-  func valueMarker(size : CGFloat, color: UIColor) -> CALayer {
-      let pointMarker = CALayer()
-      pointMarker.backgroundColor = backgroundColor?.CGColor
-      pointMarker.cornerRadius = 8
-      pointMarker.masksToBounds = true
-
-      //let pointValue = point.objectForKey("value") as NSNumber
-    
-      let markerInner = CALayer()
-      //markerInner.frame = CGRectMake(0, 0, 50, 50)
-      markerInner.frame = CGRectMake(0, 0, size, size)
-      markerInner.cornerRadius = size / 2
-
-      // ORIG - with space between surrounding line and circle  markerInner.frame = CGRectMake(3, 3, 20, 20)
-      //markerInner.cornerRadius = 5
-      markerInner.masksToBounds = true
-      markerInner.backgroundColor = color.CGColor //graphColor.CGColor
-      
-      pointMarker.addSublayer(markerInner)
-      
-      return pointMarker
-  }
     
 }

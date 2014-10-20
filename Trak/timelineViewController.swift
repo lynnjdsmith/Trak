@@ -22,7 +22,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
-    println("viewWillAppear")
+    //println("viewWillAppear")
     
     // setup nav bar
     self.navigationController?.navigationBarHidden = true
@@ -98,7 +98,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   /****   Load Data Functions   ****/
   
   func loadDataForDate(theDate: NSString) {
-/*    //println("In loadDataForDate")
+    //println("In loadDataForDate")
     //println("Load data for date - string: \(theDate) daTime: \(daTime)")
     
     // convert date string to date
@@ -151,7 +151,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
             }
             self.tableView.reloadData()
         }
-    } */
+    }
   }
   
   
