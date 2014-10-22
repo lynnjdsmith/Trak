@@ -34,6 +34,7 @@ class itemDetailController: UIViewController {
   
   override func viewWillAppear(animated: Bool) {
     loadDataForStart()
+    seeAllBtn.hidden = true
   }
   
   override func viewDidLoad() {
@@ -92,7 +93,7 @@ class itemDetailController: UIViewController {
     trigSympControl.layer.borderColor = UIColor.appRed().CGColor
     trigSympControl.layer.borderWidth = 0
     trigSympControl.layer.cornerRadius = 10
-    trigSympControl.transform = CGAffineTransformMakeScale(0.7, 0.7)
+    trigSympControl.transform = CGAffineTransformMakeScale(0.8, 0.8)
     
     // style the text field
     noteTextField.layer.borderColor = UIColor.appRed().CGColor

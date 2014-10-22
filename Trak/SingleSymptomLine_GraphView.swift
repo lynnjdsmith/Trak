@@ -44,11 +44,11 @@ class SingleSymptomLine_GraphView: UIView {
   init(frame: CGRect, data: NSArray) {
       super.init(frame: frame)
       backgroundColor = UIColor.clearColor()
-      self.data = data.mutableCopy() as NSMutableArray
+      //self.data = data.mutableCopy() as NSMutableArray
   
     // add time markers/labels
-    let timeLabel1 = UILabel(frame: CGRectMake(15, 50, 100, 20))
-    timeLabel1.text = "24 hrs."
+    let timeLabel1 = UILabel(frame: CGRectMake(5, 50, 100, 20))
+    timeLabel1.text = "Incident"
     timeLabel1.font = fontMedium
     timeLabel1.backgroundColor = backgroundColor
     timeLabel1.textAlignment = NSTextAlignment.Left
@@ -59,7 +59,7 @@ class SingleSymptomLine_GraphView: UIView {
 
     // 1 day
     let timeLabel2 = UILabel(frame: CGRectMake(90, 50, 100, 20))
-    timeLabel2.text = "12 hrs."
+    timeLabel2.text = "2 hrs"
     timeLabel2.font = fontMedium
     timeLabel2.backgroundColor = backgroundColor
     timeLabel2.textAlignment = NSTextAlignment.Left
@@ -69,8 +69,8 @@ class SingleSymptomLine_GraphView: UIView {
     addSubview(timeLabel2)
     
     // 12 hours
-    let timeLabel3 = UILabel(frame: CGRectMake(150, 50, 100, 20))
-    timeLabel3.text = "6 Hrs."
+    let timeLabel3 = UILabel(frame: CGRectMake(190, 50, 100, 20))
+    timeLabel3.text = "12 hrs"
     timeLabel3.font = fontMedium
     timeLabel3.backgroundColor = backgroundColor
     timeLabel3.textAlignment = NSTextAlignment.Left
@@ -80,8 +80,8 @@ class SingleSymptomLine_GraphView: UIView {
     addSubview(timeLabel3)
     
     // 2 hours
-    let timeLabel4 = UILabel(frame: CGRectMake(220, 50, 100, 20))
-    timeLabel4.text = "2 Hrs."
+    let timeLabel4 = UILabel(frame: CGRectMake(280, 50, 100, 20))
+    timeLabel4.text = "24 hrs"
     timeLabel4.font = fontMedium
     timeLabel4.backgroundColor = backgroundColor
     timeLabel4.textAlignment = NSTextAlignment.Left
@@ -99,19 +99,30 @@ class SingleSymptomLine_GraphView: UIView {
     super.drawRect(rect)
     context = UIGraphicsGetCurrentContext()
     var sizeLegendDot :CGFloat = 16
-    var xPosLegend :NSNumber = 15
-    //var xPosLegendLabels :NSNumber = 30
-    var yPosLegendLabels :NSNumber = 14
+    var xPosLegend :NSNumber = 35
+    var yPosLegend :NSNumber = 3
     var yPos :NSNumber = 78
     
     // draw legend circles
-    let labelList :NSArray = ["Milk", "Bacon", "Cheese", "Tea", "Coffee"]
+    let labelList :NSArray = ["Red Wine", "Bacon", "Cheese", "Tea", "+"]
     let colorz :NSArray = [UIColor.color1(), UIColor.color2(), UIColor.color3(), UIColor.color4(), UIColor.color5()]
     
     for (index, value) in enumerate(labelList) {
       //println("Item \(index + 1): \(value)")
-      let obj1 :Dictionary<String, AnyObject> = ["label" : value,  "labelType" : "under", "size" : sizeLegendDot, "xPos" : xPosLegend, "yPos" : yPosLegendLabels, "color" : colorz[index]] as Dictionary
-      var theCircleLayer :CALayer = placeCircle(obj1)
+      let obj1 :Dictionary<String, AnyObject> = ["size" : sizeLegendDot, "xPos" : xPosLegend, "yPos" : yPosLegend, "color" : colorz[index]] as Dictionary
+      var l :CALayer = placeCircle(obj1)
+      layer.addSublayer(l)
+      
+      let theLabel = UILabel(frame: CGRectMake(xPosLegend - sizeLegendDot, yPosLegend + sizeLegendDot, sizeLegendDot * 3, sizeLegendDot))
+      theLabel.text = value as NSString
+      theLabel.font = labelFont
+      theLabel.backgroundColor = backgroundColor
+      theLabel.textAlignment = NSTextAlignment.Center
+      theLabel.layer.borderColor = UIColor.blackColor().CGColor
+      theLabel.layer.borderWidth = 0
+      theLabel.textColor = UIColor.blackColor()
+      addSubview(theLabel)
+      
       xPosLegend = xPosLegend + 58
     }
     
@@ -209,15 +220,12 @@ class SingleSymptomLine_GraphView: UIView {
   
     // set vars
     var size :CGFloat = 16
-    var xPos :NSNumber = 268
+    var xPos :NSNumber = 5 //268
     let daColorz = UIColor.appRed()
     var sizeLabelDot :CGFloat = 38
     var dotColor = UIColor.color3()
     var graphWidth = 300
-    
-    // set incident time
-    var incidentTime :NSDate = theEvent.valueForKey("myDateTime") as NSDate
-    
+
     // draw line
     let m1 = CALayer()
     m1.frame = CGRectMake(0, yPos + (sizeLabelDot/2) - 1, 320, 2)
@@ -225,9 +233,27 @@ class SingleSymptomLine_GraphView: UIView {
     m1.backgroundColor = UIColor.redColor().CGColor
     layer.addSublayer(m1)
     
+    // set incident time
+    var incidentTime :NSDate = theEvent.valueForKey("myDateTime") as NSDate
+    
+    let dateStringFormatter = NSDateFormatter()
+    dateStringFormatter.dateFormat = "MM/dd"
+    let d = dateStringFormatter.stringFromDate(theEvent.valueForKey("myDateTime") as NSDate)
+    
     // draw bigDot
-    let obj1 :Dictionary<String, AnyObject> = ["label" : "12/15",  "labelType" : "inside", "size" : sizeLabelDot, "xPos" : xPos, "yPos" : yPos, "color" : daColorz] as Dictionary
-    placeCircle(obj1)
+    let obj1 :Dictionary<String, AnyObject> = ["size" : sizeLabelDot, "xPos" : xPos, "yPos" : yPos, "color" : daColorz] as Dictionary
+    var bl :CALayer = placeCircle(obj1)
+    layer.addSublayer(bl)
+    let theLabel = UILabel(frame: CGRectMake(xPos - sizeLabelDot, yPos, sizeLabelDot * 3, sizeLabelDot))
+    theLabel.text = d
+    theLabel.font = fontBigger
+    theLabel.backgroundColor = backgroundColor
+    theLabel.textAlignment = NSTextAlignment.Center
+    theLabel.layer.borderColor = UIColor.whiteColor().CGColor
+    theLabel.layer.borderWidth = 0
+    theLabel.textColor = UIColor.whiteColor()
+    addSubview(theLabel)
+
     
     // load data for incident
     var findData:PFQuery = PFQuery(className: "Items")
@@ -241,10 +267,12 @@ class SingleSymptomLine_GraphView: UIView {
     
     // draw data dots       //1440 = minutes in a day
     for it in theTriggers {
+      
       //println(it)
       var itObject :PFObject = it as PFObject
       var eventTime :NSDate = itObject.valueForKey("myDateTime") as NSDate
       var minutesBetween = incidentTime.minutesAfterDate(eventTime)
+
       
       // within the last day
       if (minutesBetween < 1440) {
@@ -252,10 +280,11 @@ class SingleSymptomLine_GraphView: UIView {
         if (itObject.valueForKey("name") as NSString == "Milk") { dotColor = UIColor.color2() }
         if (itObject.valueForKey("name") as NSString == "Cheese") { dotColor = UIColor.color4() }
       
-        var myXPos = minutesBetween //* 0.25
+        var myXPos = minutesBetween + 40 //* 0.25
         println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
-        let objDot :Dictionary<String, AnyObject> = ["label" : "none", "labelType" : "none", "size" : size, "xPos" : myXPos, "yPos" : yPos + (sizeLabelDot/2) - (size/2), "color" : dotColor] as Dictionary
-        placeCircle(objDot)
+        let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : yPos + (sizeLabelDot/2) - (size/2), "color" : dotColor] as Dictionary
+        var dl :CALayer = placeCircle(objDot)
+        layer.addSublayer(dl)
       }
     }
   
@@ -294,8 +323,8 @@ class SingleSymptomLine_GraphView: UIView {
     
     // unwrap variables
     let size :CGFloat = point["size"] as AnyObject? as CGFloat
-    var label :NSString = point["label"] as AnyObject? as NSString
-    var labelType :NSString = point["labelType"] as AnyObject? as NSString
+    //var label :NSString = point["label"] as AnyObject? as NSString
+    //var labelType :NSString = point["labelType"] as AnyObject? as NSString
     var xPos :CGFloat = point["xPos"] as AnyObject? as CGFloat
     var yPos :CGFloat = point["yPos"] as AnyObject? as CGFloat
     var color :UIColor = point["color"] as AnyObject? as UIColor
@@ -313,9 +342,9 @@ class SingleSymptomLine_GraphView: UIView {
     
     pointMarker.addSublayer(markerInner)
     pointMarker.frame = CGRectMake(xPos, yPos, 50, 50)
-    layer.addSublayer(pointMarker)
+    //layer.addSublayer(pointMarker)
     
-    // draw Label - under
+    /* draw Label - under
     if (labelType == "under") {
       let theLabel = UILabel(frame: CGRectMake(xPos - size, yPos + size, size * 3, size))
       theLabel.text = label
@@ -339,7 +368,7 @@ class SingleSymptomLine_GraphView: UIView {
       theLabel.layer.borderWidth = 0
       theLabel.textColor = UIColor.whiteColor()
       addSubview(theLabel)
-    }
+    } */
     
     return pointMarker
   }

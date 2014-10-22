@@ -30,6 +30,7 @@
 		5C143DED19803A0800B4F0E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C143DE719803A0800B4F0E4 /* UIKit.framework */; };
 		5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4988C61980521A00873C6D /* timelineViewController.swift */; };
 		5C84DEDE1982A498009162CD /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C84DEDD1982A498009162CD /* signUpViewController.swift */; };
+		BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */; };
 		BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */; };
 		BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4AF874198DD02400FC10D2 /* itemDetailController.swift */; };
 		BA4DBE9F19CF4B7F00CFFBFA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA4DBE9D19CF4B7F00CFFBFA /* Info.plist */; };
@@ -96,6 +97,7 @@
 		5C4988C61980521A00873C6D /* timelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timelineViewController.swift; sourceTree = "<group>"; };
 		5C84DEDB1982A456009162CD /* logInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = logInViewController.swift; sourceTree = "<group>"; };
 		5C84DEDD1982A498009162CD /* signUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
+		BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = symptTrigListViewController.swift; sourceTree = "<group>"; };
 		BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
 		BA4AF874198DD02400FC10D2 /* itemDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemDetailController.swift; sourceTree = "<group>"; };
 		BA4DBE9D19CF4B7F00CFFBFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */,
 				BA4AF874198DD02400FC10D2 /* itemDetailController.swift */,
 				BAE626C1199FBB5500747932 /* calendarViewController.swift */,
+				BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */,
 				BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */,
 				BAE0DC9019A6BA2E00F02683 /* itemModel.swift */,
 				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
@@ -395,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */,
 				BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */,
 				BA4DBEB119CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift in Sources */,
 				BABFA3FF19CF402900434B51 /* dataMigraineVC.swift in Sources */,

@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/signUpViewController.swift"
-            timestampString = "435458921.619402"
+            timestampString = "435509023.515915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "showMain()"
-            landmarkType = "5">
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "signUpViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/itemDetailController.swift"
-            timestampString = "433015542.596789"
+            timestampString = "435513949.36127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/SingleSymptomLine_GraphView.swift"
-            timestampString = "435471957.29615"
+            timestampString = "435516998.959445"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "drawRect(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/SingleSymptomLine_GraphView.swift"
-            timestampString = "435471957.29615"
+            timestampString = "435516998.959445"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "drawIncident(_:yPos:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/signUpViewController.swift"
-            timestampString = "435458921.619402"
+            timestampString = "435510336.257101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "signUpViewController(_:didSignUpUser:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/timelineViewController.swift"
-            timestampString = "435478108.417686"
+            timestampString = "435509937.502347"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "423"
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/logInViewController.swift"
-            timestampString = "435507164.868074"
+            timestampString = "435510057.47527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "showMain()"
             landmarkType = "5">
          </BreakpointContent>

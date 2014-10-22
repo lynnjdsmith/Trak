@@ -5,7 +5,7 @@
 import UIKit
 import QuartzCore
 
-class dataMigraineVC: UIViewController{
+class dataMigraineVC: UIViewController, stlDelegate {
 
   @IBOutlet var topBackView: UIView!
   var items           :NSMutableArray = []
@@ -24,20 +24,32 @@ class dataMigraineVC: UIViewController{
 
     loadElements()
     
-    let myData = [
-      ["label" : "Milk",   "value" : NSNumber(int:15)],
-      ["label" : "Wheat",  "value" : NSNumber(int:30)],
-      ["label" : "Bilk",  "value" : NSNumber(int:7)],
+    let myData = []
+    /* let myData = [
+      ["label" : "Red Wine",   "value" : NSNumber(int:15)],
+      ["label" : "Bacon",  "value" : NSNumber(int:30)],
+      ["label" : "Milk",  "value" : NSNumber(int:7)],
       ["label" : "Chocolate", "value" : NSNumber(int:60)],
       ["label" : "Butter",   "value" : NSNumber(int:30)],
       ["label" : "Coffee",   "value" : NSNumber(int:15)],
       ["label" : "Red Wine",   "value" : NSNumber(int:45)],
-      ] as NSArray
+      ] as NSArray */
     
     let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 80, 320, 400), data: myData)
     self.view.addSubview(graph)
     
   }
+  
+  
+  @IBAction func showSympTrigList(sender: AnyObject) {
+    // setup view controller
+    println("sstl")
+    let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc : symptTrigListViewController = storyboard.instantiateViewControllerWithIdentifier("symptTrigListViewController") as symptTrigListViewController
+    vc.delegate = self
+    self.presentViewController(vc, animated: true, completion: nil)
+  }
+  
   
   
   /****   Load Data Functions   ****/

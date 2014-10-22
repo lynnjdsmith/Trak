@@ -37,7 +37,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       println("ONCE TRUE")
       // not logged in - present login controller
       if (PFUser.currentUser() == nil) {
-        //println("current user nil")
+        println("current user nil")
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
         let svc = signUpViewController()
