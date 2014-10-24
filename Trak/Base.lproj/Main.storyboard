@@ -114,16 +114,6 @@
                                             <action selector="deleteMe:" destination="ZcL-zW-Vet" eventType="touchUpInside" id="eGM-dp-IuM"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="drz-aM-PWD">
-                                        <rect key="frame" x="170" y="373" width="130" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="See All">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="deleteMe:" destination="ZcL-zW-Vet" eventType="touchUpInside" id="Fvj-VG-h4y"/>
-                                        </connections>
-                                    </button>
                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" id="Nsw-4c-xmD">
                                         <rect key="frame" x="138" y="57" width="2" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -150,6 +140,17 @@
                                             <action selector="onTOSValueChanged:" destination="ZcL-zW-Vet" eventType="valueChanged" id="ZC2-Nh-Avb"/>
                                         </connections>
                                     </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1bH-Q3-8DU">
+                                        <rect key="frame" x="15" y="425" width="110" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="See Chart">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToSingleSymptomDetail:" destination="ZcL-zW-Vet" eventType="touchUpInside" id="DbV-26-shW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <gestureRecognizers/>
                             </scrollView>
@@ -166,14 +167,14 @@
                         <outlet property="deleteBtn" destination="1gz-SS-byA" id="CZO-pW-Fid"/>
                         <outlet property="noteTextField" destination="VC9-vX-KYe" id="Kwh-Mm-vb5"/>
                         <outlet property="scrollView" destination="WJS-vY-wMP" id="jiT-In-j54"/>
-                        <outlet property="seeAllBtn" destination="drz-aM-PWD" id="knW-M9-jip"/>
+                        <outlet property="seeChart" destination="1bH-Q3-8DU" id="xWi-qs-XmY"/>
                         <outlet property="timeTextField" destination="8Jc-6B-4FV" id="lpe-v5-nPj"/>
                         <outlet property="trigSympControl" destination="023-IA-E4q" id="AeU-Mx-dGJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cgu-XY-b5R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1084" y="304"/>
+            <point key="canvasLocation" x="267" y="-533"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="NRL-ZI-jlo">
@@ -244,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qcQ-ow-8ZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1499" y="304"/>
+            <point key="canvasLocation" x="758" y="304"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="GZT-dh-w7z">
@@ -314,7 +315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7BU-fP-B3K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1499" y="1020"/>
+            <point key="canvasLocation" x="1913" y="948"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="32e-LO-X72">
@@ -392,7 +393,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Mk8-zH-yhX" kind="custom" identifier="regSeg2" customClass="regSeg" id="GEK-bL-XGU"/>
+                                    <segue destination="NZC-sh-PHz" kind="custom" customClass="regSeg" id="hTv-mL-re8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M7L-xx-i0X" userLabel="profile btn">
@@ -506,6 +507,89 @@ When you sign up, please login after. </string>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" id="pFg-jF-gwj">
+                                <rect key="frame" x="10" y="140" width="300" height="280"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="helperBkg" id="IdL-AD-eC1">
+                                        <rect key="frame" x="0.0" y="25" width="300" height="246"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sQ9-aG-ZGo">
+                                        <rect key="frame" x="267" y="6" width="30" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="icon_X_44_transp">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeHelper:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="yar-0Y-tzX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="BO0-Dv-DIT">
+                                        <rect key="frame" x="132" y="47" width="40" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" title="a3">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="typeText:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="0Z9-gL-CRe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="3kT-T2-yjK">
+                                        <rect key="frame" x="85" y="47" width="40" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" title="a2">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="typeText:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="C4V-qZ-8bg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="FJj-ee-GFW">
+                                        <rect key="frame" x="40" y="47" width="40" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="highlighted" title="a1">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="typeText:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="PEv-tf-0Pl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="MBc-pq-Ejh">
+                                        <rect key="frame" x="176" y="47" width="40" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" title="a4">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="typeText:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="I3l-SL-pwy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="7Gc-VN-wQv">
+                                        <rect key="frame" x="219" y="47" width="40" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" title="a5">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="typeText:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="Cvr-Av-rJd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     </view>
@@ -513,6 +597,7 @@ When you sign up, please login after. </string>
                     <connections>
                         <outlet property="dayBtn" destination="Bps-E3-CHI" id="CMx-z1-jmy"/>
                         <outlet property="helloView" destination="eS5-YW-Ljh" id="4Sh-Mv-Exn"/>
+                        <outlet property="helperView" destination="pFg-jF-gwj" id="rBs-De-OlJ"/>
                         <outlet property="tableView" destination="bda-Ij-ceO" id="nOJ-Q3-seg"/>
                         <outlet property="text1" destination="KFR-Lo-zrc" id="7AC-Q4-PQB"/>
                         <outlet property="timeTF" destination="8MS-y0-65h" id="Ne8-qx-gtO"/>
@@ -523,7 +608,7 @@ When you sign up, please login after. </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRB-Qc-kFO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="304"/>
+            <point key="canvasLocation" x="267" y="304"/>
         </scene>
         <!--Data MainVC-->
         <scene sceneID="eJy-6q-z3D">
@@ -590,9 +675,6 @@ When you sign up, please login after. </string>
                                 <state key="normal" title="+" image="icon_notebook_44_transp">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="ehw-Mo-YVx" kind="push" identifier="regSeg" id="E0l-Yg-5JS"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vIu-Ld-f1Z" userLabel="data btn">
                                 <rect key="frame" x="236" y="30" width="32" height="28"/>
@@ -607,9 +689,6 @@ When you sign up, please login after. </string>
                                 <state key="normal" title="+" image="icon_profile_44_transp">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="s5F-Ly-D2N" kind="modal" identifier="" id="2oA-qn-SbZ"/>
-                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="search" borderStyle="roundedRect" placeholder="enter events here" clearsOnBeginEditing="YES" minimumFontSize="16" clearButtonMode="whileEditing" id="b6q-K9-xMh">
                                 <rect key="frame" x="10" y="28" width="177" height="30"/>
@@ -644,12 +723,12 @@ When you sign up, please login after. </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZtM-gZ-XVF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1084" y="1020"/>
+            <point key="canvasLocation" x="1913" y="1598"/>
         </scene>
-        <!--Data MigraineVC-->
+        <!--Single Symptom DataVC-->
         <scene sceneID="Upu-6N-KlN">
             <objects>
-                <viewController storyboardIdentifier="dataMigraineVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mk8-zH-yhX" customClass="dataMigraineVC" customModule="Trak" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="singleSymptomDataVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mk8-zH-yhX" customClass="singleSymptomDataVC" customModule="Trak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l2q-23-PDu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -658,25 +737,13 @@ When you sign up, please login after. </string>
                                 <rect key="frame" x="-5" y="-5" width="330" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon_carat_44_transp" id="OId-ha-NgB">
-                                        <rect key="frame" x="91" y="37" width="25" height="23"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symptom Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZH3-GZ-eSq">
+                                        <rect key="frame" x="20" y="29" width="159" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon_settings_44_transp" id="swN-2e-6fz">
-                                        <rect key="frame" x="118" y="38" width="24" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="jx3-cd-B3N">
-                                        <rect key="frame" x="20" y="27" width="120" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Migraine">
-                                            <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="showSympTrigList:" destination="Mk8-zH-yhX" eventType="touchUpInside" id="SQt-dz-mUV"/>
-                                        </connections>
-                                    </button>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="0.92156862750000001" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -687,7 +754,7 @@ When you sign up, please login after. </string>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="1Gd-da-pvQ" kind="custom" customClass="regSeg" id="f7j-gs-bjM"/>
+                                    <segue destination="1Gd-da-pvQ" kind="custom" identifier="regSeg3" customClass="regSeg" id="f7j-gs-bjM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gcg-VA-vtv" userLabel="data btn">
@@ -716,12 +783,90 @@ When you sign up, please login after. </string>
                     </view>
                     <navigationItem key="navigationItem" id="ajF-J5-nhI"/>
                     <connections>
+                        <outlet property="titleTop" destination="ZH3-GZ-eSq" id="iyA-Tj-0vI"/>
                         <outlet property="topBackView" destination="WCw-mz-mv7" id="ouC-Vu-dmF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LrI-vQ-kb9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="1020"/>
+            <point key="canvasLocation" x="758" y="-533"/>
+        </scene>
+        <!--Data MigraineVC-->
+        <scene sceneID="Bgb-v7-Njl">
+            <objects>
+                <viewController storyboardIdentifier="dataMigraineVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NZC-sh-PHz" customClass="dataMigraineVC" customModule="Trak" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5p1-aM-287">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="EkO-k2-hYn" userLabel="Top Back View">
+                                <rect key="frame" x="-5" y="-5" width="330" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon_carat_44_transp" id="Qe1-jT-4az">
+                                        <rect key="frame" x="91" y="37" width="25" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon_settings_44_transp" id="yzV-E8-LY7">
+                                        <rect key="frame" x="118" y="38" width="24" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Wc6-XA-HaR">
+                                        <rect key="frame" x="20" y="27" width="120" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Migraine">
+                                            <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showSympTrigList:" destination="NZC-sh-PHz" eventType="touchUpInside" id="6f4-mJ-dC4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2yI-X9-M23" userLabel="data btn">
+                                        <rect key="frame" x="241" y="35" width="32" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="+" image="icon_data_44_transp">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uto-3Q-2TA" userLabel="list btn">
+                                <rect key="frame" x="195" y="30" width="30" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="+" image="icon_notebook_44_transp">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="1Gd-da-pvQ" kind="custom" customClass="regSeg" id="Wdj-81-nuH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3vj-b1-xWy" userLabel="profile btn">
+                                <rect key="frame" x="278" y="29" width="32" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="+" image="icon_profile_44_transp">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="s5F-Ly-D2N" kind="modal" id="yBb-qF-o33"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="upCarat_20_12v3" id="hmZ-Ik-KyM">
+                                <rect key="frame" x="242" y="53" width="20" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Oag-Hw-m2D"/>
+                    <connections>
+                        <outlet property="topBackView" destination="EkO-k2-hYn" id="gaX-6D-duu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="miM-pE-eJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="267" y="1082"/>
         </scene>
         <!--Log In View Controller-->
         <scene sceneID="XRa-Fv-qFA">
@@ -735,7 +880,7 @@ When you sign up, please login after. </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mw8-Z6-HaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1913" y="-371"/>
+            <point key="canvasLocation" x="1285" y="304"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8wF-gH-hC7">
@@ -756,11 +901,12 @@ When you sign up, please login after. </string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGk-3O-tCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228" y="304"/>
+            <point key="canvasLocation" x="-264" y="304"/>
         </scene>
     </scenes>
     <resources>
         <image name="heart44" width="44" height="44"/>
+        <image name="helperBkg" width="578" height="501"/>
         <image name="icon_X_44_transp" width="50" height="44"/>
         <image name="icon_carat_44_transp" width="50" height="44"/>
         <image name="icon_data_44_transp" width="50" height="44"/>
@@ -777,7 +923,7 @@ When you sign up, please login after. </string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WO7-AJ-1v0"/>
+        <segue reference="f7j-gs-bjM"/>
         <segue reference="ems-e1-1l4"/>
         <segue reference="2c0-Rm-CXH"/>
     </inferredMetricsTieBreakers>

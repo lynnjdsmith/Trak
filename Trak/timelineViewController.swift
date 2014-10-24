@@ -9,11 +9,13 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   // set variables
   @IBOutlet var helloView: UIView!
+  @IBOutlet var helperView: UIView!
   @IBOutlet var tableView: UITableView!
   @IBOutlet var text1: UITextField!
   @IBOutlet var dayBtn: UIButton!
   @IBOutlet var topBackView: UIView!
   @IBOutlet var timeTF: UITextField!
+  
   var items           :NSMutableArray = []
   var daDate          :NSString!  /* NOTE: always use hh:mm - no seconds! */
   var daTime          :NSString! = ""
@@ -23,10 +25,13 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
-    println("viewWillAppear")
+    //println("viewWillAppear")
     helloView.hidden = true
+    helperView.hidden = true
+    helperView.layer.borderColor = UIColor.appLightGray().CGColor
+    helperView.layer.borderWidth = 1
+    helperView.layer.cornerRadius = 8
     
-
     //var path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
     //var dict :NSMutableDictionary = NSMutableDictionary(contentsOfFile: path!)
     //var theLaunchedVal :NSString = dict.objectForKey("hasLaunchedOnce") as NSString
@@ -34,7 +39,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // First time? Show Hello!
     //if (theLaunchedVal == "t") {
-      println("ONCE TRUE")
+     // println("ONCE TRUE")
       // not logged in - present login controller
       if (PFUser.currentUser() == nil) {
         println("current user nil")
@@ -197,7 +202,12 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
   }
+
   
+  @IBAction func closeHelper(sender: AnyObject) {
+    println("closeHelper")
+    helperView.hidden = true
+  }
 
   @IBAction func closeHello(sender: AnyObject) {
     println("closeHello")
@@ -220,8 +230,16 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     helloView.hidden = true
   }
   
+  @IBAction func typeText(sender: AnyObject) {
+    if (text1.text.hasSuffix(" ")) { text1.text = text1.text + sender.titleForState(.Highlighted)!
+    } else {
+    text1.text = text1.text + " " + sender.titleForState(.Highlighted)!
+    }
+  }
+  
+  
   @IBAction func startEditingEntryPanelTimeTF(sender: AnyObject) {
-    println("startEditingEntryPanelTimeTF")
+    //println("startEditingEntryPanelTimeTF")
     timeTF.layer.borderColor = UIColor.appBlue().CGColor
     timeTF.layer.backgroundColor = UIColor.whiteColor().CGColor
   }
@@ -251,6 +269,8 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     // resign first responder. NAH.
     //text1.becomeFirstResponder()
 
+    closeHelper(sender)
+    
     // split into items
     var theText :NSString = text1.text.stringByTrimmingCharactersInSet(NSCharacterSet (charactersInString: "., "))
     var newitems = theText.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: ".,"))

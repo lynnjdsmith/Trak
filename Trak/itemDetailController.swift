@@ -21,7 +21,8 @@ class itemDetailController: UIViewController {
   @IBOutlet var trigSympControl :UISegmentedControl!
   @IBOutlet var amountSlider    :UISlider!
   @IBOutlet var deleteBtn       :UIButton!
-  @IBOutlet var seeAllBtn       :UIButton!
+  //@IBOutlet var seeAllBtn       :UIButton!
+  @IBOutlet var seeChart       :UIButton!
   @IBOutlet var scrollView      :UIScrollView!
   
   // Variables
@@ -31,15 +32,19 @@ class itemDetailController: UIViewController {
   var daDate    :NSString!
   var daTime    :NSString! = ""
   var daAMPM    :NSString! = "AM"
+  var name      :NSString! = ""
   
   override func viewWillAppear(animated: Bool) {
     loadDataForStart()
-    seeAllBtn.hidden = true
+    //seeAllBtn.hidden = true
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     scrollView.contentSize = CGSize(width: 320, height: 620)
+    
+    //let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 430, 320, 200))
+    //self.view.addSubview(graph)
     
     // add gesture recognizer
     let recognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
@@ -88,7 +93,8 @@ class itemDetailController: UIViewController {
     dayTextField.normalStyle("")
     timeTextField.normalStyle("")
     deleteBtn.normalStyle("Delete This Item")
-    seeAllBtn.normalStyle("See All")
+    //seeAllBtn.normalStyle("See All")
+    seeChart.normalStyle("See Chart")
     AMPMBtn.normalStyle("")
     trigSympControl.layer.borderColor = UIColor.appRed().CGColor
     trigSympControl.layer.borderWidth = 0
@@ -172,7 +178,7 @@ class itemDetailController: UIViewController {
         
         // set title
         self.daTitle.text = object.valueForKey("name") as NSString
-        
+        self.name = object.valueForKey("name") as NSString
         // set date
         let myDate :NSDate = object.valueForKey("myDateTime") as NSDate
         let dateFormatterAll = NSDateFormatter()
@@ -226,6 +232,7 @@ class itemDetailController: UIViewController {
         } else {
             self.trigSympControl.selectedSegmentIndex = 1
         }
+        
       }
     }
   }
@@ -396,23 +403,18 @@ class itemDetailController: UIViewController {
   }
   
 
-  @IBAction func seeAll(sender: AnyObject) {
+  @IBAction func seeChart(sender: AnyObject) {
     //println("Delete Me!")
     println("objID: \(objID)")
-    
-    var query = PFQuery(className:"Items")
-    query.getObjectInBackgroundWithId(objID) {
-      (theItem: PFObject!, error: NSError!) -> Void in
-      if (theItem != nil) {
-        theItem.deleteInBackground()
-        if let d = self.delegate {
-          d.closeMod()
-        }
-      } else {
-        println("error: \(error)")
-      }
-    }
-    self.navigationController?.popToRootViewControllerAnimated(true)
+  }
+  
+  @IBAction func goToSingleSymptomDetail(sender: AnyObject) {
+    //println("yo! gotossd")
+    let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("singleSymptomDataVC") as singleSymptomDataVC
+    secondViewController.objID = self.objID
+    secondViewController.name = self.name
+    //secondViewController.delegate = self
+    self.navigationController?.pushViewController(secondViewController, animated: true)
   }
   
 }

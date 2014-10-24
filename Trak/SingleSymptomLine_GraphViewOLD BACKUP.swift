@@ -32,7 +32,7 @@ class SingleSymptomLine_GraphView: UIView {
   var dataPoints :NSMutableArray = []
   
   required init(coder: NSCoder) {
-    fatalError("NSCoding not supported")
+      fatalError("NSCoding not supported")
   }
   
   
@@ -131,7 +131,7 @@ class SingleSymptomLine_GraphView: UIView {
     var today :NSDate = NSDate()
     var symptomEvent = sEvent()
     
-    var beforeEvents :NSMutableArray = symptomEvent.relatedEvents("Migraine", endDate: today, daysBack: 1)
+    var beforeEvents :NSArray = symptomEvent.relatedEvents("Migraine", endDate: today, daysBack: 1)
     //loadDataForDates(tenAgo, endDate: today)
     //relatedEvents(name: NSString, endDate: NSDate, daysBack: NSNumber)
     
@@ -184,7 +184,7 @@ class SingleSymptomLine_GraphView: UIView {
   }
   
   
- /* func loadDataForDates(beginDate: NSDate, endDate: NSDate) -> NSArray {
+  func loadDataForDates(beginDate: NSDate, endDate: NSDate) -> NSArray {     // THIS WORKS! Load data for dates
     
     // query parameters
     var findData:PFQuery = PFQuery(className: "Items")
@@ -194,10 +194,10 @@ class SingleSymptomLine_GraphView: UIView {
     findData.orderByDescending("myDateTime")
 
     // query
-    var theArray :NSArray = findData.findObjects()
+    var theArray :NSArray = findData.findObjects() // as AnyObject as [String]
     println(theArray)
     return theArray
-  } */
+  }
   
 
   func loadSymptoms(endDate: NSDate, name: NSString) -> NSArray {

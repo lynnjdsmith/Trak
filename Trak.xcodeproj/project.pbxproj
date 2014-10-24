@@ -31,6 +31,8 @@
 		5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4988C61980521A00873C6D /* timelineViewController.swift */; };
 		5C84DEDE1982A498009162CD /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C84DEDD1982A498009162CD /* signUpViewController.swift */; };
 		BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */; };
+		BA280D4E19FAC05E00874FD1 /* sEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280D4D19FAC05E00874FD1 /* sEvent.swift */; };
+		BA280D5019FAD0ED00874FD1 /* singleSymptomDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */; };
 		BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */; };
 		BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4AF874198DD02400FC10D2 /* itemDetailController.swift */; };
 		BA4DBE9F19CF4B7F00CFFBFA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA4DBE9D19CF4B7F00CFFBFA /* Info.plist */; };
@@ -98,6 +100,8 @@
 		5C84DEDB1982A456009162CD /* logInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = logInViewController.swift; sourceTree = "<group>"; };
 		5C84DEDD1982A498009162CD /* signUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = symptTrigListViewController.swift; sourceTree = "<group>"; };
+		BA280D4D19FAC05E00874FD1 /* sEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sEvent.swift; sourceTree = "<group>"; };
+		BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleSymptomDataVC.swift; sourceTree = "<group>"; };
 		BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
 		BA4AF874198DD02400FC10D2 /* itemDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemDetailController.swift; sourceTree = "<group>"; };
 		BA4DBE9D19CF4B7F00CFFBFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */,
 				BAE0DC9019A6BA2E00F02683 /* itemModel.swift */,
 				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
+				BA280D4D19FAC05E00874FD1 /* sEvent.swift */,
 				BA5B40AA19C8A03100794F13 /* Data Screens */,
 				BAEA6F3C19B01650002EC6E8 /* Progress Indicator */,
 				BAE626C3199FBBF800747932 /* Login and Signup */,
@@ -269,11 +274,12 @@
 		BA5B40AA19C8A03100794F13 /* Data Screens */ = {
 			isa = PBXGroup;
 			children = (
-				BA5B40A619C68DB300794F13 /* dataMainVC.swift */,
-				BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */,
-				BA5B40A819C7D64000794F13 /* dataMainCell.swift */,
+				BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */,
 				BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */,
+				BA5B40A819C7D64000794F13 /* dataMainCell.swift */,
 				BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */,
+				BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */,
+				BA5B40A619C68DB300794F13 /* dataMainVC.swift */,
 			);
 			name = "Data Screens";
 			sourceTree = "<group>";
@@ -416,6 +422,8 @@
 				BAE0DC9119A6BA2E00F02683 /* itemModel.swift in Sources */,
 				BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */,
 				BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */,
+				BA280D5019FAD0ED00874FD1 /* singleSymptomDataVC.swift in Sources */,
+				BA280D4E19FAC05E00874FD1 /* sEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

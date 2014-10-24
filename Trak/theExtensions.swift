@@ -34,6 +34,23 @@ extension UITextField {
   
 }
 
+extension NSString {
+  
+  func isSymptom(name: NSString) -> ObjCBool {
+    
+    var theSymptoms :NSMutableArray = ["Migraine","Headache"]
+    for strObj in theSymptoms {
+      if strObj.isEqualToString(name) {
+        println("SYMPTOM! \(name)")
+        return true
+      }
+    }
+    
+    return false
+  }
+  
+}
+
 
 extension Int  {
   var day: (Int, NSCalendarUnit) {
@@ -134,7 +151,7 @@ extension UIColor {
 @objc(regSeg) class regSeg: UIStoryboardSegue {
   
   override func perform() {
-    println("segue")
+    //println("segue")
     let sourceViewController = self.sourceViewController as UIViewController
     let destinationViewController = self.destinationViewController as UIViewController
     
