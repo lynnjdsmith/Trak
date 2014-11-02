@@ -77,7 +77,8 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     // empty text string
     self.text1.text = ""
   
-    self.tableView.reloadData()
+    //self.tableView.reloadData()
+    loadDataForDate(daDate)
     //println("vWA reloaded data")
   }
   
@@ -324,6 +325,9 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
       }
     }
+    //text1.resignFirstResponder()
+    text1.text = nil
+    text1.becomeFirstResponder()
   }
 
 
@@ -371,9 +375,9 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   /** Delegate Functions **/
   
   func closeMod() {
-    println("closeMod")
+    //println("closeMod")
     // reload data & table
-    loadDataForDate(daDate)
+    loadDataForDate(daDate) // FIX to-do, test this. We prob don't need, now that it's in viewillappear
   }
   
   
@@ -393,12 +397,10 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     cell.delegate = self
     
     // set the name
-    var daName: AnyObject! = items[indexPath.row]
-    cell.label1.text = daName.valueForKey("name") as NSString
+    cell.label1.text = items[indexPath.row].valueForKey("name") as NSString
     
     // set the time
-    var daDateName: AnyObject! = items[indexPath.row]
-    let daDateVal: AnyObject! = daDateName.valueForKey("myDateTime")
+    let daDateVal: AnyObject! = items[indexPath.row].valueForKey("myDateTime")
     if (daDateVal == nil) { println("*** YO! You have a blank myDateTime in the DB, probably!! ***") }
     let timeFormatter = NSDateFormatter()
     timeFormatter.dateFormat = "h:mm a" // "h:mm a"
@@ -413,6 +415,19 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     cell.timeTextField.layer.cornerRadius = 8
     cell.timeTextField.clipsToBounds = true
     
+    // set the vertical line color
+    var theType :NSString = items[indexPath.row].valueForKey("triggerOrSymptom") as NSString
+
+    switch theType { //== "trigger") {
+    //case "trigger":
+      case "symptom":
+          cell.cellVerticalBar.backgroundColor = UIColor.redColor()
+      case "treatment":
+          cell.cellVerticalBar.backgroundColor = UIColor.blueColor()
+      default:
+          cell.cellVerticalBar.backgroundColor = UIColor.appLightGray()
+    }
+    
     //set time field pattern
     var paddingView :UIView = UIView(frame: CGRectMake(0, 0, 7, 20))
     paddingView.backgroundColor = UIColor.clearColor()
@@ -424,7 +439,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   
   func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-    println("You selected cell #\(indexPath.row)!")
+    //println("You selected cell #\(indexPath.row)!")
     
     
     //ResultsTableViewController *childViewController = [[ResultsTableViewController alloc] init];
@@ -442,7 +457,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     s.delegate = self
     self.navigationController?.pushViewController(s, animated: true)
     //self.presentViewController(s, animated: true, completion: nil)
-    println("You selected cell #\(indexPath.row)!")
+    //println("You selected cell #\(indexPath.row)!")
   }
   
 } // END class timeline view controller

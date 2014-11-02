@@ -200,9 +200,9 @@
 			children = (
 				5C143DAB1980326B00B4F0E4 /* Main.storyboard */,
 				5C4988C61980521A00873C6D /* timelineViewController.swift */,
+				BA4AF874198DD02400FC10D2 /* itemDetailController.swift */,
 				BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */,
 				BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */,
-				BA4AF874198DD02400FC10D2 /* itemDetailController.swift */,
 				BAE626C1199FBB5500747932 /* calendarViewController.swift */,
 				BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */,
 				BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */,

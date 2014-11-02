@@ -12,6 +12,7 @@ protocol tCellDelegate {
 class timelineCell: UITableViewCell {
   @IBOutlet var   label1: UILabel!
   @IBOutlet var   timeTextField: UITextField!
+  @IBOutlet var cellVerticalBar: UIView!
   
   var delegate    :tCellDelegate? = nil
   

@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView contentMode="scaleToFill" id="WJS-vY-wMP">
-                                <rect key="frame" x="0.0" y="5" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="56" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" minimumFontSize="10" id="rKz-Yt-4aX" userLabel="Title">
@@ -154,6 +154,38 @@
                                 </subviews>
                                 <gestureRecognizers/>
                             </scrollView>
+                            <view contentMode="scaleToFill" id="oZ2-RA-wmU" userLabel="Top Back View">
+                                <rect key="frame" x="-5" y="-5" width="330" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pZZ-Ne-vEL" userLabel="list btn">
+                                        <rect key="frame" x="206" y="37" width="26" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="+" image="icon_notebook_44_transp">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5KC-a9-fNh" userLabel="data btn">
+                                        <rect key="frame" x="243" y="35" width="29" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="+" image="icon_data_44_transp">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6ZH-Yn-7oC" userLabel="profile btn">
+                                        <rect key="frame" x="285" y="35" width="29" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="+" image="icon_profile_44_transp">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="upCarat_20_12v3" id="LxT-69-umz">
+                                <rect key="frame" x="243" y="53" width="20" height="13"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                         <gestureRecognizers/>
@@ -169,6 +201,7 @@
                         <outlet property="scrollView" destination="WJS-vY-wMP" id="jiT-In-j54"/>
                         <outlet property="seeChart" destination="1bH-Q3-8DU" id="xWi-qs-XmY"/>
                         <outlet property="timeTextField" destination="8Jc-6B-4FV" id="lpe-v5-nPj"/>
+                        <outlet property="topBackView" destination="oZ2-RA-wmU" id="0DO-on-YNU"/>
                         <outlet property="trigSympControl" destination="023-IA-E4q" id="AeU-Mx-dGJ"/>
                     </connections>
                 </viewController>
@@ -341,7 +374,7 @@
                                     <action selector="startEditingEntryPanelTimeTF:" destination="ehw-Mo-YVx" eventType="editingDidBegin" id="2PO-zz-oyd"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter events here" clearsOnBeginEditing="YES" minimumFontSize="16" clearButtonMode="whileEditing" id="KFR-Lo-zrc">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter events here" clearsOnBeginEditing="YES" minimumFontSize="16" clearButtonMode="whileEditing" id="KFR-Lo-zrc" userLabel="text1">
                                 <rect key="frame" x="85" y="88" width="223" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -363,7 +396,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.80000001192092896" contentMode="scaleToFill" id="5pT-t2-oa5">
-                                <rect key="frame" x="74" y="80" width="4" height="50"/>
+                                <rect key="frame" x="77" y="80" width="2" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -445,7 +478,7 @@
                                                     </connections>
                                                 </textField>
                                                 <view alpha="0.80000001192092896" contentMode="scaleToFill" id="cWB-SJ-Yqm">
-                                                    <rect key="frame" x="74" y="0.0" width="4" height="44"/>
+                                                    <rect key="frame" x="77" y="0.0" width="2" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -458,6 +491,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.94117653369999998" green="0.96470594409999999" blue="0.97647064920000004" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
+                                            <outlet property="cellVerticalBar" destination="cWB-SJ-Yqm" id="3sA-DS-tSB"/>
                                             <outlet property="label1" destination="0j2-mF-hPK" id="eEH-BK-XY5"/>
                                             <outlet property="timeTextField" destination="rVJ-gR-lDS" id="fGS-Y8-Tcx"/>
                                         </connections>
@@ -736,15 +770,6 @@ When you sign up, please login after. </string>
                             <view contentMode="scaleToFill" id="WCw-mz-mv7" userLabel="Top Back View">
                                 <rect key="frame" x="-5" y="-5" width="330" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symptom Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZH3-GZ-eSq">
-                                        <rect key="frame" x="20" y="29" width="159" height="41"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                        <color key="textColor" red="0.92156862750000001" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cgw-Tn-myR" userLabel="list btn">
@@ -778,12 +803,27 @@ When you sign up, please login after. </string>
                                 <rect key="frame" x="242" y="53" width="20" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Symptom Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZH3-GZ-eSq">
+                                <rect key="frame" x="16" y="73" width="129" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.92156862750000001" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date  Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IPs-RT-wmn">
+                                <rect key="frame" x="153" y="73" width="151" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.92156862750000001" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="ajF-J5-nhI"/>
                     <connections>
-                        <outlet property="titleTop" destination="ZH3-GZ-eSq" id="iyA-Tj-0vI"/>
+                        <outlet property="dateTimeLabel" destination="IPs-RT-wmn" id="5RQ-iB-e3a"/>
+                        <outlet property="titleTopLabel" destination="ZH3-GZ-eSq" id="XCd-xa-8En"/>
                         <outlet property="topBackView" destination="WCw-mz-mv7" id="ouC-Vu-dmF"/>
                     </connections>
                 </viewController>
@@ -887,7 +927,7 @@ When you sign up, please login after. </string>
             <objects>
                 <navigationController restorationIdentifier="navViewController" storyboardIdentifier="navViewController" navigationBarHidden="YES" id="1Gd-da-pvQ" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="9T7-zQ-5Pz"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="trak_logo_70" backIndicatorTransitionMaskImage="trak_logo_70" id="gMS-dY-Rb2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gMS-dY-Rb2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -914,7 +954,6 @@ When you sign up, please login after. </string>
         <image name="icon_profile_44_transp" width="50" height="44"/>
         <image name="icon_settings_44_transp" width="50" height="44"/>
         <image name="indicator20" width="20" height="30"/>
-        <image name="trak_logo_70" width="198" height="70"/>
         <image name="upCarat_20_12v3" width="20" height="12"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -924,8 +963,8 @@ When you sign up, please login after. </string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="f7j-gs-bjM"/>
+        <segue reference="Ku3-uL-ndB"/>
         <segue reference="ems-e1-1l4"/>
-        <segue reference="2c0-Rm-CXH"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
 </document>

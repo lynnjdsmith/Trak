@@ -15,11 +15,15 @@ class singleSymptomDataVC: UIViewController, stlDelegate {
 
 
 @IBOutlet var topBackView: UIView!
-@IBOutlet var titleTop: UILabel!
-
-var items :NSMutableArray = []
+@IBOutlet var titleTopLabel: UILabel!
+@IBOutlet var dateTimeLabel: UILabel!
+  
+var items     :NSMutableArray = []
 var objID     :NSString! = ""
 var name      :NSString! = ""
+var daDate          :NSString!  /* NOTE: always use hh:mm - no seconds! */
+var daTime          :NSString! = ""
+var theItem   :PFObject!
   
 override func viewWillAppear(animated: Bool) {
   super.viewWillAppear(true)
@@ -31,17 +35,19 @@ override func viewDidLoad() {
   // general set stuff
   topBackView.layer.borderWidth = 0.3
   topBackView.layer.borderColor = UIColor.appLightGray().CGColor
-  titleTop.text = name
-  
+  titleTopLabel.text = name
+  dateTimeLabel.text = daDate + " " + daTime
+    
   // create back btn
   navigationController?.setNavigationBarHidden(true, animated:true)
-  //var myBackButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-  //myBackButton.addTarget(self, action: "popToRoot:", forControlEvents: UIControlEvents.TouchUpInside)
-  //myBackButton.setTitle("Back", forState: UIControlState.Normal)
-  //myBackButton.setTitleColor(UIColor.appLightGray(), forState: UIControlState.Normal)
-  //myBackButton.sizeToFit()
-  //var myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
-  //self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
+  let button   = UIButton() //UIButton.buttonWithType(UIButtonType.System) as UIButton
+  button.frame = CGRectMake(-15, 20, 100, 50)
+  button.backgroundColor = UIColor.clearColor()
+  button.titleLabel!.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+  button.setTitleColor(UIColor.appLightGray(), forState: .Normal)
+  button.setTitle("Back", forState: UIControlState.Normal)
+  button.addTarget(self, action: "goBack:", forControlEvents: UIControlEvents.TouchUpInside)
+  self.view.addSubview(button)
   
   
   let myData = []
@@ -55,11 +61,14 @@ override func viewDidLoad() {
   ["label" : "Red Wine",   "value" : NSNumber(int:45)],
   ] as NSArray */
   
-  let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 80, 320, 400), objID: objID)
+  let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 140, 320, 400), theItem: theItem)
   self.view.addSubview(graph)
   
 }
 
-
+  func goBack(sender: UIButton) {
+    navigationController?.popViewControllerAnimated(true)
+  }
+  
 }
 

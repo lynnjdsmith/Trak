@@ -5,7 +5,6 @@
 import UIKit
 import QuartzCore
 
-
 class SingleSymptomLine_GraphView: UIView {
 
   private var data = NSMutableArray()
@@ -21,7 +20,7 @@ class SingleSymptomLine_GraphView: UIView {
   // Graph Styles
   var showLines   = true
   var showPoints  = true
-  var linesColor  = UIColor.clearColor() //UIColor(white: 0.9, alpha: 1)
+  var linesColor  = UIColor.clearColor()
   var axisColor   = UIColor.grayColor()
   var graphColor  = UIColor.appRed()
   var labelFont   = UIFont.systemFontOfSize(12)
@@ -30,6 +29,7 @@ class SingleSymptomLine_GraphView: UIView {
   var fontBigger :UIFont = UIFont.systemFontOfSize(12)
   var fontMedium :UIFont = UIFont.systemFontOfSize(11)
   var dataPoints :NSMutableArray = []
+  var theItem   :PFObject!
   
   required init(coder: NSCoder) {
     fatalError("NSCoding not supported")
@@ -41,7 +41,7 @@ class SingleSymptomLine_GraphView: UIView {
   }
   
   
-  init(frame: CGRect, data: NSArray) {
+  init(frame: CGRect, theItem: PFObject) {
       super.init(frame: frame)
       backgroundColor = UIColor.clearColor()
       //self.data = data.mutableCopy() as NSMutableArray
@@ -140,65 +140,7 @@ class SingleSymptomLine_GraphView: UIView {
       yPos = yPos + 60
     }
     
-    
-    /* for theObject in theEvents {
-      if theObject.valueForKey("name").isEqual("Migraine") {
-        theSymptomEvents.addObject(theObject)
-      }
-    } */
-
-    
-    //var theSymptomEvents :NSArray = loadDataForSymptom(tenAgo, endDate:today)
-    
-    // get date of first object
-    //var theFirstObject :PFObject = theEvents[0] as PFObject
-    //var theFirstDate :NSDate = theFirstObject.valueForKey("myDateTime") as NSDate
-    //var theObject :PFObject
-    //var curObjects :NSMutableArray = []
-    
-    
-    
-    // see if the date of this point is the same or different?
-    //let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-
-
-    // get date of current object
-    //var theObjDate :NSDate = theObject.valueForKey("myDateTime") as NSDate
-    
-    //let theNewDate :NSDate = theObject.valueForKey("myDateTime") as NSDate
-    //let dif = calendar.compareDate(theNewDate, toDate: theCurDate, toUnitGranularity: NSCalendarUnit.HourCalendarUnit)
-    //var dateComparisionResult:NSComparisonResult = theObjDate.compare(theFirstDate)
-    
-    //if dateComparisionResult == NSComparisonResult.OrderedSame {
-    //  curObjects.addObject(theObject)
-    //} else {
-      // we have a new date, so send the old events
-      //drawIncidents(curObjects, theWord: "Migraine")
-      
-      // start a new set of events
-      //curObjects.removeAllObjects()
-      //curObjects.addObject(theObject)
-      //}
-
-    
   }
-  
-  
- /* func loadDataForDates(beginDate: NSDate, endDate: NSDate) -> NSArray {
-    
-    // query parameters
-    var findData:PFQuery = PFQuery(className: "Items")
-    findData.whereKey("username", equalTo:PFUser.currentUser().username)
-    findData.whereKey("myDateTime", greaterThan:beginDate)
-    findData.whereKey("myDateTime", lessThan:endDate)
-    findData.orderByDescending("myDateTime")
-
-    // query
-    var theArray :NSArray = findData.findObjects()
-    println(theArray)
-    return theArray
-  } */
-  
 
   func loadSymptoms(endDate: NSDate, name: NSString) -> NSArray {
     

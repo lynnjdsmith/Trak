@@ -24,6 +24,7 @@ class itemDetailController: UIViewController {
   //@IBOutlet var seeAllBtn       :UIButton!
   @IBOutlet var seeChart       :UIButton!
   @IBOutlet var scrollView      :UIScrollView!
+  @IBOutlet var topBackView: UIView!
   
   // Variables
   var delegate  :itemDetailDelegate? = nil
@@ -36,12 +37,18 @@ class itemDetailController: UIViewController {
   
   override func viewWillAppear(animated: Bool) {
     loadDataForStart()
+    navigationController?.setNavigationBarHidden(true, animated:true)
     //seeAllBtn.hidden = true
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     scrollView.contentSize = CGSize(width: 320, height: 620)
+    
+    // general set stuff
+    topBackView.layer.borderWidth = 0.3
+    topBackView.layer.borderColor = UIColor.appLightGray().CGColor
+    //titleTop.text = name
     
     //let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 430, 320, 200))
     //self.view.addSubview(graph)
@@ -68,26 +75,20 @@ class itemDetailController: UIViewController {
     paddingView.backgroundColor = UIColor.clearColor()
     daTitle.leftView = paddingView
     daTitle.leftViewMode = UITextFieldViewMode.Always
-    
-    // create back btn
-    navigationController?.setNavigationBarHidden(false, animated:true)
-    var myBackButton:UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-    myBackButton.addTarget(self, action: "popToRoot:", forControlEvents: UIControlEvents.TouchUpInside)
-    myBackButton.setTitle("Back", forState: UIControlState.Normal)
-    myBackButton.setTitleColor(UIColor.appLightGray(), forState: UIControlState.Normal)
-    myBackButton.sizeToFit()
-    var myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
-    self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
 
-    // place back button
-    let image = UIImage(named: "trak_logo_70.png") as UIImage
-    var button   = UIButton.buttonWithType(UIButtonType.System) as UIButton
-    button.frame = CGRectMake(125, 9, 71, 25)     //81, 67)
-    button .setBackgroundImage(image, forState: UIControlState.Normal)
-    self.navigationController?.navigationBar.addSubview(button)
+    // create back btn
+    navigationController?.setNavigationBarHidden(true, animated:true)
+    let b   = UIButton() //UIButton.buttonWithType(UIButtonType.System) as UIButton
+    b.frame = CGRectMake(-15, 20, 100, 50)
+    b.backgroundColor = UIColor.clearColor()
+    b.titleLabel!.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+    b.setTitleColor(UIColor.appLightGray(), forState: .Normal)
+    b.setTitle("Back", forState: UIControlState.Normal)
+    b.addTarget(self, action: "goBack:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.view.addSubview(b)
     
     // show nav bar
-    self.navigationController?.navigationBarHidden = false
+    //self.navigationController?.navigationBarHidden = false
 
     // style the buttons
     dayTextField.normalStyle("")
@@ -115,12 +116,37 @@ class itemDetailController: UIViewController {
     timeTextField.resignFirstResponder()
   }
   
+  override func viewDidDisappear(animated: Bool) {
+    super.viewDidDisappear(false)
+    // set data
+    theItem.setObject(NSString(format: "%2.02f", amountSlider.value), forKey: "amount")
+    // save name
+    theItem.setObject(daTitle.text, forKey: "name")
+    
+    println("dissapear. datitle: \(daTitle.text)")
+    
+    theItem.saveInBackgroundWithBlock {
+      (success: Bool!, error: NSError!) -> Void in
+      if (success != nil) {
+        if let d = self.delegate {
+          //d.closeMod()
+        }
+        //self.navigationController?.popToRootViewControllerAnimated(true)
+      } else {
+        println("%@", error)
+      }
+    }
+    
+  }
+  
+/*
   func popToRoot(sender:UIBarButtonItem){
       println("*** poptoroot ***")
     // set data
     theItem.setObject(NSString(format: "%2.02f", amountSlider.value), forKey: "amount")
     
-    // save myDateTime
+    // save myDateTime - FIX - needed? No. exiting these fields triggers save
+    /*
     var theDateWithTime: NSString! = "\(dayTextField.text) \(timeTextField.text) \(daAMPM)"
     println("day edited. theDateWithTime: |\(theDateWithTime)|")
     let dateStringFormatter = NSDateFormatter()
@@ -134,12 +160,12 @@ class itemDetailController: UIViewController {
       self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    theItem.setObject(d, forKey: "myDateTime")
+    theItem.setObject(d, forKey: "myDateTime") */
     
     // save name
     theItem.setObject(daTitle.text, forKey: "name")
     
-    println("day edited. poptoroot d: \(d)")
+    //println("day edited. poptoroot d: \(d)")
     
     theItem.saveInBackgroundWithBlock {
       (success: Bool!, error: NSError!) -> Void in
@@ -152,7 +178,7 @@ class itemDetailController: UIViewController {
         println("%@", error)
       }
     }
-  }
+  } */
   
   
   func loadDataForStart() {
@@ -227,12 +253,16 @@ class itemDetailController: UIViewController {
       
         //println("daTime, setting \(self.daTime)")
         // set the segmented control for trigger or symptom
-        if (object.valueForKey("triggerOrSymptom") as NSString == "trigger") {
+        switch object.valueForKey("triggerOrSymptom") as NSString { //== "trigger") {
+          case "trigger":
             self.trigSympControl.selectedSegmentIndex = 0
-        } else {
+          case "symptom":
             self.trigSympControl.selectedSegmentIndex = 1
+          case "treatment":
+            self.trigSympControl.selectedSegmentIndex = 2
+          default:
+            self.trigSympControl.selectedSegmentIndex = 0
         }
-        
       }
     }
   }
@@ -276,33 +306,27 @@ class itemDetailController: UIViewController {
     // resign first responder
     sender.resignFirstResponder()
     
+    // save myDateTime
     // set time into global page variable
     daTime = self.timeTextField.text
-    
-    // save myDateTime
     let theTime :NSString = sender.text as NSString
-    println("theTime edited \(theTime)")
+    saveMyDateTime(theTime)
+  }
+
+  func saveMyDateTime(theText :NSString) {
+    // save myDateTime
+    println("theTime edited \(theText)")
     var theDateWithTime: NSString! = "\(daDate) \(self.daTime) \(self.daAMPM)"
-    println("time edited. theDateWithTime: |\(theDateWithTime)|")
+    //println("time edited. theDateWithTime: |\(theDateWithTime)|")
     let dateStringFormatter = NSDateFormatter()
     dateStringFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
     let d = dateStringFormatter.dateFromString(theDateWithTime)
-    println("d in item detail: \(d)")
+    //println("d in item detail: \(d)")
     
     if (d == nil) {
-      //println("time edited. d: \(d)")
-      var alert = UIAlertController(title: "Alert", message: "Please use format: \n'11:11'", preferredStyle: UIAlertControllerStyle.Alert)
+      var alert = UIAlertController(title: "Alert", message: "Please use format: \n 'MM/DD/YYYY' for the date and \n'11:11' for the time.", preferredStyle: UIAlertControllerStyle.Alert)
       alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
       self.presentViewController(alert, animated: true, completion: nil)
-      
-      /*var HUD = MBProgressHUD.showHUDAddedTo(self.view, animated:true)
-      //HUD.delegate = self;
-      //HUD.customView = [[[UIImageView alloc] initWithImage:
-      //    [UIImage imageNamed:"X-Mark.png"]] autorelease];
-      HUD.mode = MBProgressHUDModeCustomView;
-      HUD.labelText = "An error occured";
-      HUD.showWhileExecuting(Selector("waitForTwoSeconds"), onTarget:self, withObject:nil, animated:true)
-      */
       
     } else {
       theItem.setObject(d, forKey: "myDateTime")
@@ -313,20 +337,21 @@ class itemDetailController: UIViewController {
       self.timeTextField.text = daTime
     }
   }
-
   
   @IBAction func touchAMPMBtn(sender: UIButton) {
-    //println("daAMPM \(daAMPM)")
+    println("start daAMPM \(daAMPM)")
     
     if (self.daAMPM == "PM") {
       println("in PM -- daAMPM \(daAMPM)")
       AMPMBtn.setTitle("AM", forState: .Normal)
       self.daAMPM = "AM"
+      saveMyDateTime(self.timeTextField.text)
     } else {
       if (self.daAMPM == "AM") {
         println("in AM -- daAMPM \(daAMPM)")
         AMPMBtn.setTitle("PM", forState: .Normal)
         self.daAMPM = "PM"
+        saveMyDateTime(self.timeTextField.text)
       }
     }
   }
@@ -342,36 +367,26 @@ class itemDetailController: UIViewController {
     daDate = self.dayTextField.text
     
     // save myDateTime
-    let theDate :NSString = sender.text as NSString
-    var theDateWithTime: NSString! = "\(daDate) \(daTime) \(daAMPM)"
-    println("day edited. theDateWithTime: |\(theDateWithTime)|")
-    let dateStringFormatter = NSDateFormatter()
-    dateStringFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-    let d = dateStringFormatter.dateFromString(theDateWithTime)
-    println("d: \(d)")
-    
-    println("day edited. d: \(d)")
-    if (d == nil) {
-        var alert = UIAlertController(title: "Alert", message: "Please use format: \n'MM/DD/YYYY'", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    } else {
-        theItem.setObject(d, forKey: "myDateTime")
-        theItem.saveInBackground()
-        dayTextField.text = daDate
-    }
+    // set time into global page variable
+    daTime = self.timeTextField.text
+    let theTime :NSString = sender.text as NSString
+    saveMyDateTime(theTime)
   }
   
   
   @IBAction func onTOSValueChanged(sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex  {
     case 0:
-      println("triggered")
+      //println("triggered")
       theItem.setObject("trigger", forKey:"triggerOrSymptom")
       theItem.saveInBackground()
     case 1:
-      println("sympt")
+      //println("sympt")
       theItem.setObject("symptom", forKey:"triggerOrSymptom")
+      theItem.saveInBackground()
+    case 2:
+      //println("treatment")
+      theItem.setObject("treatment", forKey:"triggerOrSymptom")
       theItem.saveInBackground()
     default: break;
     }
@@ -413,8 +428,16 @@ class itemDetailController: UIViewController {
     let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("singleSymptomDataVC") as singleSymptomDataVC
     secondViewController.objID = self.objID
     secondViewController.name = self.name
+    secondViewController.theItem = self.theItem
+    secondViewController.daDate = self.daDate
+    secondViewController.daTime = self.daTime
     //secondViewController.delegate = self
     self.navigationController?.pushViewController(secondViewController, animated: true)
+  }
+  
+  
+  func goBack(sender: UIButton) {
+    navigationController?.popViewControllerAnimated(true)
   }
   
 }
