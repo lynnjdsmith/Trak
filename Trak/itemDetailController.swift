@@ -19,12 +19,13 @@ class itemDetailController: UIViewController {
   @IBOutlet var timeTextField   :UITextField!
   @IBOutlet var noteTextField   :UITextView!
   @IBOutlet var trigSympControl :UISegmentedControl!
+  @IBOutlet var amountField     :UILabel!
   @IBOutlet var amountSlider    :UISlider!
   @IBOutlet var deleteBtn       :UIButton!
   //@IBOutlet var seeAllBtn       :UIButton!
-  @IBOutlet var seeChart       :UIButton!
+  @IBOutlet var seeChart        :UIButton!
   @IBOutlet var scrollView      :UIScrollView!
-  @IBOutlet var topBackView: UIView!
+  @IBOutlet var topBackView     :UIView!
   
   // Variables
   var delegate  :itemDetailDelegate? = nil
@@ -253,7 +254,7 @@ class itemDetailController: UIViewController {
       
         //println("daTime, setting \(self.daTime)")
         // set the segmented control for trigger or symptom
-        switch object.valueForKey("triggerOrSymptom") as NSString { //== "trigger") {
+        switch object.valueForKey("type") as NSString { //== "trigger") {
           case "trigger":
             self.trigSympControl.selectedSegmentIndex = 0
           case "symptom":
@@ -378,15 +379,15 @@ class itemDetailController: UIViewController {
     switch sender.selectedSegmentIndex  {
     case 0:
       //println("triggered")
-      theItem.setObject("trigger", forKey:"triggerOrSymptom")
+      theItem.setObject("trigger", forKey:"type")
       theItem.saveInBackground()
     case 1:
       //println("sympt")
-      theItem.setObject("symptom", forKey:"triggerOrSymptom")
+      theItem.setObject("symptom", forKey:"type")
       theItem.saveInBackground()
     case 2:
       //println("treatment")
-      theItem.setObject("treatment", forKey:"triggerOrSymptom")
+      theItem.setObject("treatment", forKey:"type")
       theItem.saveInBackground()
     default: break;
     }

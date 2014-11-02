@@ -12,13 +12,13 @@ class anItem: PFObject  {
   } */
   
   var name:NSString
-    var triggerOrSymptom: NSString
+    //var triggerOrSymptom: NSString
     var type: NSString
     
     init(name:NSString) {
         self.name = "name"
-        self.triggerOrSymptom = "trigger"
         self.type = "trigger"
+        //self.type = "trigger"
         super.init()
     }
     

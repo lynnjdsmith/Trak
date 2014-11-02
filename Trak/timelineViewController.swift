@@ -290,7 +290,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       newItem.setObject(PFUser.currentUser().username, forKey: "username")
     
       // add triggerOrSymptom
-      newItem.setObject("trigger", forKey: "triggerOrSymptom")
+      newItem.setObject("trigger", forKey: "type")
       
       // add type
       //newItem.setObject("trigger", forKey: "type")
@@ -416,7 +416,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     cell.timeTextField.clipsToBounds = true
     
     // set the vertical line color
-    var theType :NSString = items[indexPath.row].valueForKey("triggerOrSymptom") as NSString
+    var theType :NSString = items[indexPath.row].valueForKey("type") as NSString
 
     switch theType { //== "trigger") {
     //case "trigger":
