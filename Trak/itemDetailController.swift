@@ -36,6 +36,9 @@ class itemDetailController: UIViewController {
   var daAMPM    :NSString! = "AM"
   var name      :NSString! = ""
   
+  // first value is doubled, because 0 isn't really used.
+  var amountNames :NSArray = ["a tiny bit (a1)", "a tiny bit (a1)", "very little (a2)","a little (a3)", "just less than normal (a4)", "normal amount (a5)","a little extra (a6)","a lot (a7)", "a lot + (a8)", "double or more (a9)", "an extreme amount (a10)"]
+  
   override func viewWillAppear(animated: Bool) {
     loadDataForStart()
     navigationController?.setNavigationBarHidden(true, animated:true)
@@ -90,7 +93,10 @@ class itemDetailController: UIViewController {
     
     // show nav bar
     //self.navigationController?.navigationBarHidden = false
-
+    
+    // amountNames for amount field
+    amountField.text = amountNames[5] as NSString
+    
     // style the buttons
     dayTextField.normalStyle("")
     timeTextField.normalStyle("")
@@ -101,11 +107,12 @@ class itemDetailController: UIViewController {
     trigSympControl.layer.borderColor = UIColor.appRed().CGColor
     trigSympControl.layer.borderWidth = 0
     trigSympControl.layer.cornerRadius = 10
-    trigSympControl.transform = CGAffineTransformMakeScale(0.8, 0.8)
+    //trigSympControl.transform = CGAffineTransformMakeScale(0.88, 0.88)
     
     // style the text field
     noteTextField.layer.borderColor = UIColor.appRed().CGColor
     noteTextField.layer.borderWidth = 1
+    noteTextField.layer.cornerRadius = 10
     noteTextField.layer.cornerRadius = 10
   }
   
@@ -121,10 +128,11 @@ class itemDetailController: UIViewController {
     super.viewDidDisappear(false)
     // set data
     theItem.setObject(NSString(format: "%2.02f", amountSlider.value), forKey: "amount")
+    
     // save name
     theItem.setObject(daTitle.text, forKey: "name")
     
-    println("dissapear. datitle: \(daTitle.text)")
+    //println("dissapear. datitle: \(daTitle.text)")
     
     theItem.saveInBackgroundWithBlock {
       (success: Bool!, error: NSError!) -> Void in
@@ -251,7 +259,11 @@ class itemDetailController: UIViewController {
 
         // set amount slider
         self.amountSlider.value = object.valueForKey("amount").floatValue
-      
+        
+        // amountNames for amount field
+        var theAmount :Int = Int(object.valueForKey("amount").floatValue)
+        self.amountField.text = self.amountNames[theAmount] as NSString
+        
         //println("daTime, setting \(self.daTime)")
         // set the segmented control for trigger or symptom
         switch object.valueForKey("type") as NSString { //== "trigger") {
@@ -313,6 +325,14 @@ class itemDetailController: UIViewController {
     let theTime :NSString = sender.text as NSString
     saveMyDateTime(theTime)
   }
+  
+  @IBAction func changeAmountSlider(sender: UISlider) {
+    //println("changeAmountSlider")
+    //theItem.setObject(NSString(format: "%2.02f", amountSlider.value), forKey: "amount")
+    var theAmount :Int = Int(sender.value) //- 0.7
+    amountField.text = amountNames[theAmount] as NSString
+  }
+
 
   func saveMyDateTime(theText :NSString) {
     // save myDateTime

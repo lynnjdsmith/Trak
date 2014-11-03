@@ -14,15 +14,15 @@ import QuartzCore
 class singleSymptomDataVC: UIViewController, stlDelegate {
 
 
-@IBOutlet var topBackView: UIView!
-@IBOutlet var titleTopLabel: UILabel!
-@IBOutlet var dateTimeLabel: UILabel!
+@IBOutlet var topBackView     :UIView!
+@IBOutlet var titleTopLabel   :UILabel!
+@IBOutlet var dateTimeLabel   :UILabel!
   
 var items     :NSMutableArray = []
 var objID     :NSString! = ""
 var name      :NSString! = ""
-var daDate          :NSString!  /* NOTE: always use hh:mm - no seconds! */
-var daTime          :NSString! = ""
+var daDate    :NSString!  /* NOTE: always use hh:mm - no seconds! */
+var daTime    :NSString! = ""
 var theItem   :PFObject!
   
 override func viewWillAppear(animated: Bool) {
@@ -36,7 +36,7 @@ override func viewDidLoad() {
   topBackView.layer.borderWidth = 0.3
   topBackView.layer.borderColor = UIColor.appLightGray().CGColor
   titleTopLabel.text = name
-  dateTimeLabel.text = daDate + " " + daTime
+  dateTimeLabel.text = daDate  // + " " + daTime
     
   // create back btn
   navigationController?.setNavigationBarHidden(true, animated:true)
@@ -61,7 +61,7 @@ override func viewDidLoad() {
   ["label" : "Red Wine",   "value" : NSNumber(int:45)],
   ] as NSArray */
   
-  let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 140, 320, 400), theItem: theItem)
+  let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 140, 320, 200), theItem: theItem)
   self.view.addSubview(graph)
   
 }

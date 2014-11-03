@@ -8,14 +8,29 @@ import QuartzCore
 class SingleSymptomLine_GraphView: UIView {
 
   private var data = NSMutableArray()
-  private var context : CGContextRef?
+  //private var context : CGContextRef?
   
-  private let padding     : CGFloat = 0
-  private var graphWidth  : CGFloat = 0
-  private var graphHeight : CGFloat = 0
-  private var axisWidth   : CGFloat = 0
-  private var axisHeight  : CGFloat = 0
-  private var everest     : CGFloat = 0
+  //private let padding     : CGFloat = 0
+  //private var graphWidth  : CGFloat = 0
+  //private var graphHeight : CGFloat = 0
+  //private var axisWidth   : CGFloat = 0
+  //private var axisHeight  : CGFloat = 0
+  //private var everest     : CGFloat = 0
+  
+  // DRAW background setup
+  // set vars
+  var size :CGFloat = 16
+  var xPos :CGFloat = 5 //268
+  let daColorz = UIColor.appRed()
+  var sizeLabelDot :CGFloat = 30
+  var dotColor = UIColor.color4()
+  var graphWidth :CGFloat = 300
+ 
+  
+  var sizeLegendDot :CGFloat = 16
+  var xPosLegend :NSNumber = 35
+  var yPosLegend :NSNumber = 3
+  var yPos :NSNumber = 78
   
   // Graph Styles
   var showLines   = true
@@ -30,24 +45,26 @@ class SingleSymptomLine_GraphView: UIView {
   var fontMedium :UIFont = UIFont.systemFontOfSize(11)
   var dataPoints :NSMutableArray = []
   var theItem   :PFObject!
+  var symptomEvent :sEvent!
+  var beforeEvents :NSArray = []
+  var nameArray :NSArray = []
   
   required init(coder: NSCoder) {
     fatalError("NSCoding not supported")
   }
   
-  
-  override init(frame: CGRect) {
-      super.init(frame: frame)
-  }
-  
-  
   init(frame: CGRect, theItem: PFObject) {
-      super.init(frame: frame)
-      backgroundColor = UIColor.clearColor()
-      //self.data = data.mutableCopy() as NSMutableArray
-  
-    // add time markers/labels
-    let timeLabel1 = UILabel(frame: CGRectMake(5, 50, 100, 20))
+    super.init(frame: frame)
+    self.backgroundColor = UIColor.appLightBlue()
+    
+    // load data
+    self.symptomEvent = sEvent(theEvent:theItem)
+    self.beforeEvents = self.symptomEvent.relatedTriggerEvents(1)
+    self.nameArray = self.symptomEvent.mostCommonPrecedingTriggers(self.beforeEvents)
+    
+    //println("nameArray: \(nameArray)")
+    /* add time markers/labels
+    let timeLabel1 = UILabel(frame: CGRectMake(15, 50, 100, 20))
     timeLabel1.text = "Incident"
     timeLabel1.font = fontMedium
     timeLabel1.backgroundColor = backgroundColor
@@ -55,9 +72,9 @@ class SingleSymptomLine_GraphView: UIView {
     timeLabel1.layer.borderColor = UIColor.blackColor().CGColor
     timeLabel1.layer.borderWidth = 0
     timeLabel1.textColor = UIColor.blackColor()
-    addSubview(timeLabel1)
+    //addSubview(timeLabel1) */
 
-    // 1 day
+    // label 2
     let timeLabel2 = UILabel(frame: CGRectMake(90, 50, 100, 20))
     timeLabel2.text = "2 hrs"
     timeLabel2.font = fontMedium
@@ -68,7 +85,7 @@ class SingleSymptomLine_GraphView: UIView {
     timeLabel2.textColor = UIColor.blackColor()
     addSubview(timeLabel2)
     
-    // 12 hours
+    // label 3
     let timeLabel3 = UILabel(frame: CGRectMake(190, 50, 100, 20))
     timeLabel3.text = "12 hrs"
     timeLabel3.font = fontMedium
@@ -79,8 +96,8 @@ class SingleSymptomLine_GraphView: UIView {
     timeLabel3.textColor = UIColor.blackColor()
     addSubview(timeLabel3)
     
-    // 2 hours
-    let timeLabel4 = UILabel(frame: CGRectMake(280, 50, 100, 20))
+    // label 4
+    let timeLabel4 = UILabel(frame: CGRectMake(268, 50, 100, 20))
     timeLabel4.text = "24 hrs"
     timeLabel4.font = fontMedium
     timeLabel4.backgroundColor = backgroundColor
@@ -89,22 +106,11 @@ class SingleSymptomLine_GraphView: UIView {
     timeLabel4.layer.borderWidth = 0
     timeLabel4.textColor = UIColor.blackColor()
     addSubview(timeLabel4)
-  }
-  
-  
-  // This function draws everything
-  override func drawRect(rect: CGRect) {
     
-    // set variables - reference circles
-    super.drawRect(rect)
-    context = UIGraphicsGetCurrentContext()
-    var sizeLegendDot :CGFloat = 16
-    var xPosLegend :NSNumber = 35
-    var yPosLegend :NSNumber = 3
-    var yPos :NSNumber = 78
+
+    // draw legend
     
-    // draw legend circles
-    let labelList :NSArray = ["Red Wine", "Bacon", "Cheese", "Tea", "+"]
+    let labelList :NSArray = nameArray //["Wine", "Bacon", "Cheese", "Tea", "Milk"]
     let colorz :NSArray = [UIColor.color1(), UIColor.color2(), UIColor.color3(), UIColor.color4(), UIColor.color5()]
     
     for (index, value) in enumerate(labelList) {
@@ -126,38 +132,83 @@ class SingleSymptomLine_GraphView: UIView {
       xPosLegend = xPosLegend + 58
     }
     
+
+    // draw line chart
+    // draw line
+    let m1 = CALayer()
+    m1.frame = CGRectMake(20, yPos + (sizeLabelDot/2) - 1, 320, 2)
+    m1.masksToBounds = true
+    m1.backgroundColor = UIColor.redColor().CGColor
+    layer.addSublayer(m1)
     
-    // loading data for last 50 incidents      // THIS WORKS
-    var today :NSDate = NSDate()
-    var symptomEvent = sEvent()
+    // draw bigDot
+    let obj1 :Dictionary<String, AnyObject> = ["size" : sizeLabelDot, "xPos" : xPos, "yPos" : yPos, "color" : daColorz] as Dictionary
+    var bl :CALayer = placeCircle(obj1)
+    layer.addSublayer(bl)
     
-    var beforeEvents :NSMutableArray = symptomEvent.relatedEvents("Migraine", endDate: today, daysBack: 1)
-    //loadDataForDates(tenAgo, endDate: today)
-    //relatedEvents(name: NSString, endDate: NSDate, daysBack: NSNumber)
-    
-    for obj in beforeEvents {
-      drawIncident(obj as PFObject, yPos: yPos)
-      yPos = yPos + 60
+    for obj in self.beforeEvents {
+      drawTrigger(obj as PFObject) //, xPos: xPos)
+      //xPos = xPos + 60
+      println(obj.valueForKey("name"))
     }
     
   }
+  
+  
+  /* override func drawRect(rect: CGRect) {
+  } */
+  
+  func drawTrigger(theObj: PFObject) { //, yPos: NSNumber) {
 
-  func loadSymptoms(endDate: NSDate, name: NSString) -> NSArray {
+      //println(it)
+      //var itObject :PFObject = theObj as PFObject
+      // set incident time
+      //var incidentTime :NSDate = theEvent.valueForKey("myDateTime") as NSDate
+      var triggerEventTime :NSDate = theObj.valueForKey("myDateTime") as NSDate
+      var minutesBetween :Float = Float(triggerEventTime.minutesBeforeDate(symptomEvent.dateTime()))
+      println("minutesBetween \(minutesBetween)")
     
-    // query parameters
-    var findData:PFQuery = PFQuery(className: "Items")
-    findData.whereKey("username", equalTo:PFUser.currentUser().username)
-    findData.whereKey("name", equalTo:name)
-    //query.skip = 50
-    findData.limit = 50
-    //findData.whereKey("myDateTime", greaterThan:beginDate)
-    //findData.whereKey("myDateTime", lessThan:endDate)
-    findData.orderByDescending("myDateTime")
+      // set vars -- ALL NEEDED?
+      //var size :CGFloat = 16
+      //var xPos :NSNumber = 5 //268
+      //let daColorz = UIColor.appRed()
+      //var sizeLabelDot :CGFloat = 38
+      //var dotColor = UIColor.color3()
+      //var graphWidth = 300
     
-    // query
-    var theArray :NSArray = findData.findObjects() // as AnyObject as [String]
-    //println(theArray)
-    return theArray
+      // within the last day
+    //var theName :NSString = theObj.valueForKey("name") as NSString
+    
+    var count = 1
+    for theName in nameArray {
+      //var theName :NSString = nameArray.valueForKey("name") as NSString
+      var theObjName :NSString = theObj.valueForKey("name") as NSString
+      if theName as NSString == theObjName {
+        if (count == 1) { dotColor = UIColor.color1() }
+        if (count == 2) { dotColor = UIColor.color2() }
+        if (count == 3) { dotColor = UIColor.color3() }
+        if (count == 4) { dotColor = UIColor.color4() }
+        if (count == 5) { dotColor = UIColor.color5() }
+      }
+      count++
+    }
+    
+      if (minutesBetween < 1440) {
+        //if (theName == self.nameArray[0]) { dotColor = UIColor.color1() }
+        //if (theName == self.nameArray[1]) { dotColor = UIColor.color2() }
+        //if (theName == self.nameArray[2]) { dotColor = UIColor.color3() }
+        
+        //var dotColor = UIColor.color4()
+        
+        // this works for 24 hours, 300 width graph
+        var myXPos = Int((minutesBetween * 60)) / Int(graphWidth)
+        myXPos = Int(myXPos) + Int(xPos) + Int(sizeLabelDot)
+        
+        println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
+        let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : yPos + (sizeLabelDot/2) - (size/2), "color" : dotColor] as Dictionary
+        var dl :CALayer = placeCircle(objDot)
+        layer.addSublayer(dl)
+    }
   }
   
   
@@ -226,7 +277,7 @@ class SingleSymptomLine_GraphView: UIView {
         if (itObject.valueForKey("name") as NSString == "Cheese") { dotColor = UIColor.color4() }
       
         var myXPos = minutesBetween + 40 //* 0.25
-        println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
+        //println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
         let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : yPos + (sizeLabelDot/2) - (size/2), "color" : dotColor] as Dictionary
         var dl :CALayer = placeCircle(objDot)
         layer.addSublayer(dl)
@@ -260,9 +311,10 @@ class SingleSymptomLine_GraphView: UIView {
       placeCircle(objDot)
       yPos = yPos + 60
     }  */
-
-  
   }
+    
+  
+  
   // Places a point
   func placeCircle(point : Dictionary<String, AnyObject>) -> CALayer {
     
@@ -317,6 +369,28 @@ class SingleSymptomLine_GraphView: UIView {
     
     return pointMarker
   }
-
     
 }
+
+
+
+
+
+
+/* func loadSymptoms(endDate: NSDate, name: NSString) -> NSArray {
+
+// query parameters
+var findData:PFQuery = PFQuery(className: "Items")
+findData.whereKey("username", equalTo:PFUser.currentUser().username)
+findData.whereKey("name", equalTo:name)
+//query.skip = 50
+findData.limit = 50
+//findData.whereKey("myDateTime", greaterThan:beginDate)
+//findData.whereKey("myDateTime", lessThan:endDate)
+findData.orderByDescending("myDateTime")
+
+// query
+var theArray :NSArray = findData.findObjects() // as AnyObject as [String]
+//println(theArray)
+return theArray
+} */

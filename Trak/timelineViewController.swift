@@ -41,19 +41,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     //if (theLaunchedVal == "t") {
      // println("ONCE TRUE")
       // not logged in - present login controller
-      if (PFUser.currentUser() == nil) {
-        println("current user nil")
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
-        let svc = signUpViewController()
-        vc.delegate = self
-        vc.signUpController = svc
-        svc.delegate = self
-        self.presentViewController(vc, animated: true, completion: nil)
-      } else {
-        //println("current username \(PFUser.currentUser().username)")
-        loadDataForDate(daDate)
-      }
+  
       
     /* } else {
       
@@ -78,12 +66,21 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     self.text1.text = ""
   
     //self.tableView.reloadData()
-    loadDataForDate(daDate)
+    
+    //loadDataForDate(daDate)
+    
     //println("vWA reloaded data")
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+ 
+    
+    // set daDate
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "MM/dd/yyyy"
+    let d :NSString = formatter.stringFromDate(NSDate())
+    daDate = d
     
     // general set stuff
     topBackView.layer.borderWidth = 0.3
@@ -93,13 +90,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     //tableView.autoresizingMask = UIViewAutoresizing.FlexibleBottomMargin
     //tableView.autoresizingMask = UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleHeight
-    
-    
-    // set daDate
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "MM/dd/yyyy"
-    let d :NSString = formatter.stringFromDate(NSDate())
-    daDate = d
 
     // set time
     let timeFormatter = NSDateFormatter()
@@ -127,6 +117,23 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     let str = dateFormatter.stringFromDate(NSDate())
     dayBtn.setTitle(str, forState: UIControlState.Normal)
     dayBtn.setTitle(str, forState: UIControlState.Highlighted)
+    
+    if PFUser.currentUser() != nil
+    {
+      //if (PFUser.currentUser() == nil) {
+      loadDataForDate(daDate)
+    } else {
+      println("current user nil")
+      let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+      let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
+      let svc = signUpViewController()
+      vc.delegate = self
+      vc.signUpController = svc
+      svc.delegate = self
+      self.presentViewController(vc, animated: true, completion: nil)
+      
+      //println("current username \(PFUser.currentUser().username)")
+    }
     
     /* not logged in - present login controller
     if (PFUser.currentUser() == nil) {
@@ -310,7 +317,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       }
     
       // add amount
-      newItem.setObject("3", forKey: "amount")
+      newItem.setObject("5", forKey: "amount")
     
       // save item
       //self.saveObject(newItem)

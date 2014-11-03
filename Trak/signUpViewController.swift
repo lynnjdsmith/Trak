@@ -133,7 +133,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
     
   }
   
-  override func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+  override func textFieldShouldReturn(textField: (UITextField!)) -> Bool {   //delegate method
     super.textFieldShouldReturn(textField)
     println("return go")
     //self.logInView.passwordField.resignFirstResponder()

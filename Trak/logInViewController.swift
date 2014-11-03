@@ -88,7 +88,7 @@ class logInViewController: PFLogInViewController, UITextFieldDelegate {
       
     }
   
-  override func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+  override func textFieldShouldReturn(textField: (UITextField!)) -> Bool {   //delegate method
     super.textFieldShouldReturn(textField)
     //self.logInView.passwordField.resignFirstResponder()
     self.showMain()
