@@ -32,6 +32,7 @@
 		5C84DEDE1982A498009162CD /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C84DEDD1982A498009162CD /* signUpViewController.swift */; };
 		BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */; };
 		BA16FA641A06CC61000B1D01 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA16FA631A06CC61000B1D01 /* LaunchScreen.xib */; };
+		BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */; };
 		BA280D4E19FAC05E00874FD1 /* sEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280D4D19FAC05E00874FD1 /* sEvent.swift */; };
 		BA280D5019FAD0ED00874FD1 /* singleSymptomDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */; };
 		BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */; };
@@ -102,6 +103,7 @@
 		5C84DEDD1982A498009162CD /* signUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = symptTrigListViewController.swift; sourceTree = "<group>"; };
 		BA16FA631A06CC61000B1D01 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleSymptomHorizontalGraphView.swift; sourceTree = "<group>"; };
 		BA280D4D19FAC05E00874FD1 /* sEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sEvent.swift; sourceTree = "<group>"; };
 		BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleSymptomDataVC.swift; sourceTree = "<group>"; };
 		BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 		BA5B40AA19C8A03100794F13 /* Data Screens */ = {
 			isa = PBXGroup;
 			children = (
+				BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */,
 				BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */,
 				BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */,
 				BA5B40A819C7D64000794F13 /* dataMainCell.swift */,
@@ -418,6 +421,7 @@
 				5C84DEDE1982A498009162CD /* signUpViewController.swift in Sources */,
 				BA4DBEAF19CF563F00CFFBFA /* GraphView.swift in Sources */,
 				BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */,
+				BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */,
 				5C143DA81980326B00B4F0E4 /* AppDelegate.swift in Sources */,
 				BAE626C2199FBB5500747932 /* calendarViewController.swift in Sources */,
 				BA51669219B2218900E44717 /* logInViewController.swift in Sources */,

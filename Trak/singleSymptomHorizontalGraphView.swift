@@ -5,10 +5,10 @@
 import UIKit
 import QuartzCore
 
-class SingleSymptomLine_GraphView: UIView {
-
+class singleSymptomHorizontalGraphView: UIView {
+  
   private var data = NSMutableArray()
-
+  
   // set vars
   var size :CGFloat = 16
   var xPos :CGFloat = 5 //268
@@ -16,7 +16,8 @@ class SingleSymptomLine_GraphView: UIView {
   var sizeLabelDot :CGFloat = 25
   var dotColor = UIColor.color4()
   var graphWidth :CGFloat = 300
- 
+  
+  
   var sizeLegendDot :CGFloat = 16
   var xPosLegend :NSNumber = 35
   var yPosLegend :NSNumber = 3
@@ -125,7 +126,7 @@ class SingleSymptomLine_GraphView: UIView {
     // draw legend
     let labelList :NSArray = nameArray
     self.colorz = [UIColor.color1(), UIColor.color2(), UIColor.color3(), UIColor.color4(), UIColor.color5()]
-  
+    
     // limit to 5
     var count = 1
     for (index, value) in enumerate(labelList) {
@@ -149,7 +150,7 @@ class SingleSymptomLine_GraphView: UIView {
       count = count + 1
     }
     
-
+    
     // draw line chart
     // draw line
     let m1 = CALayer()
@@ -173,7 +174,7 @@ class SingleSymptomLine_GraphView: UIView {
   
   
   func drawTrigger(theObj: PFObject) { //, yPos: NSNumber) {
-
+    
     var triggerEventTime :NSDate = theObj.valueForKey("myDateTime") as NSDate
     var minutesBetween :Float = Float(triggerEventTime.minutesBeforeDate(symptomEvent.dateTime()))
     //println("minutesBetween \(minutesBetween)")
@@ -188,27 +189,27 @@ class SingleSymptomLine_GraphView: UIView {
           dotColor = colorz[count] as UIColor
         }
       }
-        count++
+      count++
     }
     
-      if (minutesBetween < 1440) {
-        //if (theName == self.nameArray[0]) { dotColor = UIColor.color1() }
-        //if (theName == self.nameArray[1]) { dotColor = UIColor.color2() }
-        //if (theName == self.nameArray[2]) { dotColor = UIColor.color3() }
-        
-        //var dotColor = UIColor.color4()
-        
-        // this works for 24 hours, 300 width graph
-        var myXPos = Int((minutesBetween * 60)) / Int(graphWidth)
-        myXPos = Int(myXPos) + Int(xPos) + Int(sizeLabelDot)
-        
-        //println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
-        
-        var yOffset = randomInt(-15, 15)
-        println("xoffset \(yOffset)")
-        let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : (yPos + yOffset), "color" : dotColor] as Dictionary
-        var dl :CALayer = placeCircle(objDot)
-        layer.addSublayer(dl)
+    if (minutesBetween < 1440) {
+      //if (theName == self.nameArray[0]) { dotColor = UIColor.color1() }
+      //if (theName == self.nameArray[1]) { dotColor = UIColor.color2() }
+      //if (theName == self.nameArray[2]) { dotColor = UIColor.color3() }
+      
+      //var dotColor = UIColor.color4()
+      
+      // this works for 24 hours, 300 width graph
+      var myXPos = Int((minutesBetween * 60)) / Int(graphWidth)
+      myXPos = Int(myXPos) + Int(xPos) + Int(sizeLabelDot)
+      
+      //println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
+      
+      var yOffset = randomInt(-15, 15)
+      println("xoffset \(yOffset)")
+      let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : (yPos + yOffset), "color" : dotColor] as Dictionary
+      var dl :CALayer = placeCircle(objDot)
+      layer.addSublayer(dl)
     }
   }
   
@@ -223,10 +224,10 @@ class SingleSymptomLine_GraphView: UIView {
     var yPos :CGFloat = point["yPos"] as AnyObject? as CGFloat
     var color :UIColor = point["color"] as AnyObject? as UIColor
     
-
+    
     // holder for circle and label
     let pointMarker = CALayer()
-
+    
     // draw circle
     let markerInner = CALayer()
     markerInner.frame = CGRectMake(0, 0, size, size)
@@ -236,10 +237,10 @@ class SingleSymptomLine_GraphView: UIView {
     
     pointMarker.addSublayer(markerInner)
     pointMarker.frame = CGRectMake(xPos, yPos, 50, 50)
-
+    
     return pointMarker
   }
-    
+  
 }
 
 
@@ -340,5 +341,5 @@ findData.orderByDescending("myDateTime")
 var theArray :NSArray = findData.findObjects() // as AnyObject as [String]
 //println(theArray)
 return theArray
-} 
+}
 */  */

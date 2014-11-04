@@ -61,7 +61,7 @@ override func viewDidLoad() {
   ["label" : "Red Wine",   "value" : NSNumber(int:45)],
   ] as NSArray */
   
-  let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 140, 320, 200), theItem: theItem)
+  let graph = singleSymptomHorizontalGraphView(frame: CGRectMake(0, 140, 320, 200), theItem: theItem)
   self.view.addSubview(graph)
   
 }

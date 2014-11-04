@@ -146,7 +146,9 @@ extension UIColor {
   
 }
 
-
+func randomInt(min: Int, max:Int) -> Int {
+  return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+}
 
 @objc(regSeg) class regSeg: UIStoryboardSegue {
   
