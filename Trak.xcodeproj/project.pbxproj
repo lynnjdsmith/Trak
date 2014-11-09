@@ -33,6 +33,7 @@
 		BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */; };
 		BA16FA641A06CC61000B1D01 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA16FA631A06CC61000B1D01 /* LaunchScreen.xib */; };
 		BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */; };
+		BA16FA6A1A085537000B1D01 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA16FA691A085537000B1D01 /* CoreText.framework */; };
 		BA280D4E19FAC05E00874FD1 /* sEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280D4D19FAC05E00874FD1 /* sEvent.swift */; };
 		BA280D5019FAD0ED00874FD1 /* singleSymptomDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */; };
 		BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */; };
@@ -104,6 +105,7 @@
 		BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = symptTrigListViewController.swift; sourceTree = "<group>"; };
 		BA16FA631A06CC61000B1D01 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleSymptomHorizontalGraphView.swift; sourceTree = "<group>"; };
+		BA16FA691A085537000B1D01 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		BA280D4D19FAC05E00874FD1 /* sEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sEvent.swift; sourceTree = "<group>"; };
 		BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleSymptomDataVC.swift; sourceTree = "<group>"; };
 		BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
@@ -139,12 +141,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA5A9A4B19D3DCB800A410DF /* MessageUI.framework in Frameworks */,
+				BA16FA6A1A085537000B1D01 /* CoreText.framework in Frameworks */,
 				5C143DEB19803A0800B4F0E4 /* Foundation.framework in Frameworks */,
 				BA5A9A5119D3DCEB00A410DF /* CoreFoundation.framework in Frameworks */,
 				5C143DED19803A0800B4F0E4 /* UIKit.framework in Frameworks */,
 				BA5A9A4F19D3DCCA00A410DF /* GLKit.framework in Frameworks */,
 				BA5A9A4D19D3DCBF00A410DF /* OpenGLES.framework in Frameworks */,
-				BA5A9A4B19D3DCB800A410DF /* MessageUI.framework in Frameworks */,
 				BA5A9A4919D3DCAB00A410DF /* libc++.dylib in Frameworks */,
 				5C143DD5198032E100B4F0E4 /* QuartzCore.framework in Frameworks */,
 				5C143DDB198032E100B4F0E4 /* AudioToolbox.framework in Frameworks */,
@@ -235,6 +238,7 @@
 		5C143DDC198032E600B4F0E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA16FA691A085537000B1D01 /* CoreText.framework */,
 				BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */,
 				BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */,
 				BA5A9A4C19D3DCBF00A410DF /* OpenGLES.framework */,
@@ -279,8 +283,8 @@
 		BA5B40AA19C8A03100794F13 /* Data Screens */ = {
 			isa = PBXGroup;
 			children = (
-				BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */,
 				BA280D4F19FAD0ED00874FD1 /* singleSymptomDataVC.swift */,
+				BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */,
 				BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */,
 				BA5B40A819C7D64000794F13 /* dataMainCell.swift */,
 				BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */,

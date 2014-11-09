@@ -58,7 +58,16 @@ extension Int  {
   }
 }
 
- func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
+extension NSArray {
+
+  func get12Colors() -> NSArray {
+    var colorArray :NSArray = [UIColor.c1(),UIColor.c2(),UIColor.c3(),UIColor.c4(),UIColor.c5(),UIColor.c6(),UIColor.c7(),UIColor.c8(),UIColor.c9(),UIColor.c10(),UIColor.c11(),UIColor.c12()]
+    return colorArray
+  }
+  
+}
+
+func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
   return NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: tuple.value, toDate: date, options: NSCalendarOptions.SearchBackwards)
 }
 
@@ -107,21 +116,61 @@ extension UIColor {
     return UIColor(red: 246/255, green: 251/255, blue: 255/255, alpha: 1)
   }
   
-  class func color1() -> UIColor {      // blue
+  class func color1() -> UIColor {
     return UIColor(red: 53/255, green: 144/255, blue: 211/255, alpha: 1)
   }
-  class func color2() -> UIColor {      // blue
+  class func color2() -> UIColor {
     return UIColor(red: 101/255, green: 188/255, blue: 130/255, alpha: 1)
   }
-  class func color3() -> UIColor {      // blue
+  class func color3() -> UIColor {
     return UIColor(red: 248/255, green: 168/255, blue: 131/255, alpha: 1)
   }
-  class func color4() -> UIColor {      // blue
+  class func color4() -> UIColor {
     return UIColor(red: 113/255, green: 75/255, blue: 154/255, alpha: 1)
   }
-  class func color5() -> UIColor {      // blue
+  class func color5() -> UIColor {
     return UIColor(red: 209/255, green: 81/255, blue: 216/255, alpha: 1)
   }
+  
+  // colors for dots
+  class func c1() -> UIColor {
+    return UIColor(red: 233/255, green: 52/255, blue: 149/255, alpha: 1)
+  }
+  class func c2() -> UIColor {
+    return UIColor(red: 219/255, green: 54/255, blue: 58/255, alpha: 1)
+  }
+  class func c3() -> UIColor {
+    return UIColor(red: 142/255, green: 34/255, blue: 66/255, alpha: 1)
+  }
+  class func c4() -> UIColor {
+    return UIColor(red: 78/255, green: 90/255, blue: 183/255, alpha: 1)
+  }
+  class func c5() -> UIColor {
+    return UIColor(red: 52/255, green: 157/255, blue: 158/255, alpha: 1)
+  }
+  class func c6() -> UIColor {
+    return UIColor(red: 85/255, green: 181/255, blue: 91/255, alpha: 1)
+  }
+  class func c7() -> UIColor {
+    return UIColor(red: 250/255, green: 120/255, blue: 5/255, alpha: 1)
+  }
+  class func c8() -> UIColor {
+    return UIColor(red: 129/255, green: 69/255, blue: 123/255, alpha: 1)
+  }
+  class func c9() -> UIColor {
+    return UIColor(red: 28/255, green: 130/255, blue: 214/255, alpha: 1)
+  }
+  class func c10() -> UIColor {
+    return UIColor(red: 161/255, green: 228/255, blue: 61/255, alpha: 1)    //195, 255, 105
+  }
+  class func c11() -> UIColor {
+    return UIColor(red: 251/255, green: 232/255, blue: 17/255, alpha: 1)
+  }
+  class func c12() -> UIColor {
+    return UIColor(red: 118/255, green: 88/255, blue: 75/255, alpha: 1)
+  }
+  
+  
 /*  class func color6() -> UIColor {      // blue
     return UIColor(red: /255, green: /255, blue: /255, alpha: 1)
   }

@@ -167,7 +167,7 @@ class singleSymptomHorizontalGraphView: UIView {
     for obj in self.beforeEvents {
       drawTrigger(obj as PFObject) //, xPos: xPos)
       //xPos = xPos + 60
-      println(obj.valueForKey("name"))
+      //println(obj.valueForKey("name"))
     }
     
   }
@@ -206,7 +206,7 @@ class singleSymptomHorizontalGraphView: UIView {
       //println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
       
       var yOffset = randomInt(-15, 15)
-      println("xoffset \(yOffset)")
+      //println("xoffset \(yOffset)")
       let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : (yPos + yOffset), "color" : dotColor] as Dictionary
       var dl :CALayer = placeCircle(objDot)
       layer.addSublayer(dl)

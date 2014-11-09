@@ -205,7 +205,7 @@ class SingleSymptomLine_GraphView: UIView {
         //println("time Between: \(minutesBetween) || myXPos: \(myXPos)")
         
         var yOffset = randomInt(-15, 15)
-        println("xoffset \(yOffset)")
+        //println("xoffset \(yOffset)")
         let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : (yPos + yOffset), "color" : dotColor] as Dictionary
         var dl :CALayer = placeCircle(objDot)
         layer.addSublayer(dl)

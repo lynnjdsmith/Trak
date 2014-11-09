@@ -57,7 +57,7 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         for object in objects as [PFObject] {
                   println("return2")
           self.items.addObject(object)
-          println(object)
+          //println(object)
         }
         self.tableViewData.reloadData()
       } else {

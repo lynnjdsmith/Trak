@@ -10,5 +10,8 @@
 
 #import <Instabug/Instabug.h>
 
+#import <CoreText/CoreText.h>
+
+//#import <MessageUI/MFMailComposeViewController.h>
 
 //#import <Instabug/Instabug.h>

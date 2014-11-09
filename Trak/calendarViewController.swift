@@ -14,7 +14,8 @@ protocol calDelegate {
 
 class calendarViewController: UIViewController {
 
-  var delegate: calDelegate?  // The delegate that the parent view controller will conform to
+  var delegate: calDelegate?
+  // The delegate that the parent view controller will conform to
   @IBOutlet var doneBtn: UIButton?
   
   var calWidth :CGFloat!
