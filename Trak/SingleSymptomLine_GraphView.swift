@@ -15,12 +15,12 @@ class SingleSymptomLine_GraphView: UIView {
   let daColorz = UIColor.appRed()
   var sizeLabelDot :CGFloat = 25
   var dotColor = UIColor.color4()
-  var graphWidth :CGFloat = 300
+  var graphWidth :CGFloat = 300 //self.frame.width
  
   var sizeLegendDot :CGFloat = 16
   var xPosLegend :NSNumber = 35
   var yPosLegend :NSNumber = 3
-  var yPos :NSNumber = 78
+  var yPos :CGFloat = 78
   
   // Graph Styles
   var showLines   = true
@@ -134,7 +134,9 @@ class SingleSymptomLine_GraphView: UIView {
       var l :CALayer = placeCircle(obj1)
       layer.addSublayer(l)
       
-      let theLabel = UILabel(frame: CGRectMake(xPosLegend - sizeLegendDot, yPosLegend + sizeLegendDot, sizeLegendDot * 3, sizeLegendDot))
+      var x = CGFloat(xPosLegend) - CGFloat(sizeLegendDot)
+      var y = CGFloat(yPosLegend) + CGFloat(sizeLegendDot)
+      let theLabel = UILabel(frame: CGRectMake(x, y, sizeLegendDot * 3, sizeLegendDot))
       theLabel.text = value as NSString
       theLabel.font = labelFont
       theLabel.backgroundColor = backgroundColor
@@ -144,7 +146,7 @@ class SingleSymptomLine_GraphView: UIView {
       theLabel.textColor = UIColor.blackColor()
       addSubview(theLabel)
       
-      xPosLegend = xPosLegend + 58
+      xPosLegend = Int(xPosLegend) + 58
       if (count == 5) { break }     // control number of legend items here.
       count = count + 1
     }
@@ -153,7 +155,8 @@ class SingleSymptomLine_GraphView: UIView {
     // draw line chart
     // draw line
     let m1 = CALayer()
-    m1.frame = CGRectMake(20, yPos + (sizeLabelDot/2) - 1, 285, 2)
+    let y :CGFloat = CGFloat(yPos) + sizeLabelDot/2.0 - 1.0
+    m1.frame = CGRectMake(20, y, 285, 2)
     m1.masksToBounds = true
     m1.backgroundColor = UIColor.redColor().CGColor
     layer.addSublayer(m1)
@@ -206,7 +209,8 @@ class SingleSymptomLine_GraphView: UIView {
         
         var yOffset = randomInt(-15, 15)
         //println("xoffset \(yOffset)")
-        let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : (yPos + yOffset), "color" : dotColor] as Dictionary
+        let y :CGFloat = yPos + CGFloat(yOffset)
+        let objDot :Dictionary<String, AnyObject> = ["size" : size, "xPos" : myXPos, "yPos" : y, "color" : dotColor] as Dictionary
         var dl :CALayer = placeCircle(objDot)
         layer.addSublayer(dl)
     }

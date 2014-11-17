@@ -1,32 +1,29 @@
 //
-//  sEvent.swift
-//  Trak MODEL
-//
-//  Created by Lynn Smith on 10/24/14.
-//  Copyright (c) 2014 Lynn Smith. All rights reserved.
-//
+//  anEvent.swift
+//  Model
 
 import UIKit
 
-class sEvent :anEvent
+class anEvent
 {
-
-  /* var name  :NSString = ""
+  
+  var name  :NSString = ""
   var date  :NSDate = NSDate()
   var objID         :NSString! = ""
   var theItem       :PFObject!
   var dateString    :NSString!
   var beforeEvents  :NSArray = []
+  var type          :NSString = ""
   
   init(theEvent:PFObject) {
     self.name = theEvent.valueForKey("name") as NSString
     self.date = theEvent.valueForKey("myDateTime") as NSDate
   }
-
+  
   func dateTime() -> NSDate {
     return self.date
   }
-
+  
   
   // get most common triggers as a list of names   // FIX TODO to-do improve here. no frequency treated here right now.
   func mostCommonPrecedingTriggers(theArray :NSArray) -> NSArray {
@@ -43,23 +40,23 @@ class sEvent :anEvent
       nameArray.addObject(theName)
     }
     //println("nameArray: \(nameArray)")
-
+    
     return nameArray as NSArray
   }
   
-    
-  func relatedTriggerEvents(daysBack: NSNumber) -> NSArray {
+  
+  func relatedTriggerEvents(hoursBack: CGFloat) -> NSArray {
     
     // load data
-    var endDate :NSDate = self.date //NSDate()
-    var beginDate :NSDate = self.date.dateByAddingTimeInterval(-100*24*60*60*daysBack) // daysback usually = 1
+    var endDate :NSDate = self.date
+    var daysBack :CGFloat = hoursBack / 24
+    var it :NSTimeInterval = NSTimeInterval(-100*24*60*60*daysBack)
+    var beginDate :NSDate = self.date.dateByAddingTimeInterval(it)
     var findData:PFQuery = PFQuery(className: "Items")
     findData.whereKey("username", equalTo:PFUser.currentUser().username)
-    //findData.whereKey("name", equalTo:name)
     findData.whereKey("type",equalTo:"trigger")
     findData.whereKey("myDateTime", greaterThan:beginDate)
     findData.whereKey("myDateTime", lessThan:endDate)
-    //findData.limit = 50
     findData.orderByDescending("myDateTime")
     
     // query
@@ -68,9 +65,7 @@ class sEvent :anEvent
     return theArray
   }
   
-
-//func doneFindObj() {}
-
+  
   func relatedEventsOLD(timePeriodHours :Int, offsetForTime :Int, theName :NSString) -> NSMutableArray {
     var theArray :NSMutableArray = []
     
@@ -86,25 +81,25 @@ class sEvent :anEvent
     
     // send query
     /* findData.findObjectsInBackgroundWithBlock {
-      (objects:[AnyObject]!, error:NSError!)->Void in
-      
-      if (error == nil) {
-        println("return")
-        self.items = []
-        for object in objects as [PFObject] {
-          println("return2")
-          self.items.addObject(object)
-          println(object)
-        }
-        self.tableViewData.reloadData()
-      } else {
-        println("error: \(error)")
-      }
+    (objects:[AnyObject]!, error:NSError!)->Void in
+    
+    if (error == nil) {
+    println("return")
+    self.items = []
+    for object in objects as [PFObject] {
+    println("return2")
+    self.items.addObject(object)
+    println(object)
+    }
+    self.tableViewData.reloadData()
+    } else {
+    println("error: \(error)")
+    }
     }
     
     
     for item in ... {
-      theArray.addObject(item) ...
+    theArray.addObject(item) ...
     } */
     
     return theArray
@@ -114,7 +109,7 @@ class sEvent :anEvent
     var theArray :NSMutableArray = []
     
     return theArray
-  } */
+  }
   
   
 }

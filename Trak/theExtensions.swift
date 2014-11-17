@@ -19,6 +19,12 @@ extension UIButton {
   
 }
 
+/* extension CGRect {
+  var wh: (w: CGFloat, h: CGFloat) {
+    return (size.width, size.height)
+  }
+} */
+
 extension UITextField {
   
   func normalStyle(name: NSString) -> UITextField {
@@ -58,30 +64,45 @@ extension Int  {
   }
 }
 
-extension NSArray {
+extension NSMutableArray {
 
-  func get12Colors() -> NSArray {
-    var colorArray :NSArray = [UIColor.c1(),UIColor.c2(),UIColor.c3(),UIColor.c4(),UIColor.c5(),UIColor.c6(),UIColor.c7(),UIColor.c8(),UIColor.c9(),UIColor.c10(),UIColor.c11(),UIColor.c12()]
-    return colorArray
+  func get12Colors() -> NSMutableArray {
+    println("get12Colors")
+    //var colorArray :NSMutableArray = [UIColor.c1(),UIColor.c2(),UIColor.c3(),UIColor.c4(),UIColor.c5(),
+    //  UIColor.c6(),UIColor.c7(),UIColor.c8(),UIColor.c9(),UIColor.c10(),UIColor.c11(),UIColor.c12()]
+    self.addObject(UIColor.c1())
+    self.addObject(UIColor.c2())
+    self.addObject(UIColor.c3())
+    self.addObject(UIColor.c4())
+    self.addObject(UIColor.c5())
+    self.addObject(UIColor.c6())
+    self.addObject(UIColor.c7())
+    self.addObject(UIColor.c8())
+    self.addObject(UIColor.c9())
+    self.addObject(UIColor.c10())
+    self.addObject(UIColor.c11())
+    self.addObject(UIColor.c12())
+    return self
   }
   
 }
 
+/*
 func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
-  return NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: tuple.value, toDate: date, options: NSCalendarOptions.SearchBackwards)
+  return NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: tuple.value, toDate: date, options: NSCalendarOptions.SearchBackwards)!
 }
 
 func - (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
-  return NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: (-tuple.value), toDate: date, options: NSCalendarOptions.SearchBackwards)
+  return NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: (-tuple.value), toDate: date, options: NSCalendarOptions.SearchBackwards)!
 }
 
 func += (inout date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) {
-  date = NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: tuple.value, toDate: date, options: NSCalendarOptions.SearchBackwards)
+  date = NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: tuple.value, toDate: date, options: NSCalendarOptions.SearchBackwards)!
 }
 
 func -= (inout date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) {
-  date = NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: -tuple.value, toDate: date, options: NSCalendarOptions.SearchBackwards)
-}
+  date = NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: -tuple.value, toDate: date, options: NSCalendarOptions.SearchBackwards)!
+} */
 
 extension UIColor {
   class func appGreen() -> UIColor {
@@ -115,6 +136,9 @@ extension UIColor {
     //return UIColor(red: 236/255, green: 243/255, blue: 248/255, alpha: 1)
     return UIColor(red: 246/255, green: 251/255, blue: 255/255, alpha: 1)
   }
+  class func darkBlue() -> UIColor {
+    return UIColor(red: 3/255, green: 63/255, blue: 108/255, alpha: 1)
+  }
   
   class func color1() -> UIColor {
     return UIColor(red: 53/255, green: 144/255, blue: 211/255, alpha: 1)
@@ -132,15 +156,16 @@ extension UIColor {
     return UIColor(red: 209/255, green: 81/255, blue: 216/255, alpha: 1)
   }
   
+  
   // colors for dots
   class func c1() -> UIColor {
-    return UIColor(red: 233/255, green: 52/255, blue: 149/255, alpha: 1)
+    return UIColor(red: 155/255, green: 219/255, blue: 59/255, alpha: 1)    //195, 255, 105
   }
   class func c2() -> UIColor {
-    return UIColor(red: 219/255, green: 54/255, blue: 58/255, alpha: 1)
+    return UIColor(red: 176/255, green: 92/255, blue: 207/255, alpha: 1)
   }
   class func c3() -> UIColor {
-    return UIColor(red: 142/255, green: 34/255, blue: 66/255, alpha: 1)
+    return UIColor(red: 237/255, green: 102/255, blue: 84/255, alpha: 1)
   }
   class func c4() -> UIColor {
     return UIColor(red: 78/255, green: 90/255, blue: 183/255, alpha: 1)
@@ -161,7 +186,7 @@ extension UIColor {
     return UIColor(red: 28/255, green: 130/255, blue: 214/255, alpha: 1)
   }
   class func c10() -> UIColor {
-    return UIColor(red: 161/255, green: 228/255, blue: 61/255, alpha: 1)    //195, 255, 105
+    return UIColor(red: 233/255, green: 52/255, blue: 149/255, alpha: 1)
   }
   class func c11() -> UIColor {
     return UIColor(red: 251/255, green: 232/255, blue: 17/255, alpha: 1)
@@ -209,6 +234,33 @@ func randomInt(min: Int, max:Int) -> Int {
     sourceViewController.presentViewController(destinationViewController, animated: false, completion: nil)
   }
   
+}
+
+
+
+func placeCircle(point : Dictionary<String, AnyObject>) -> CALayer {
+  
+  // unwrap variables
+  let size :CGFloat = point["size"] as AnyObject? as CGFloat
+  var xPos :CGFloat = point["xPos"] as AnyObject? as CGFloat
+  var yPos :CGFloat = point["yPos"] as AnyObject? as CGFloat
+  var color :UIColor = point["color"] as AnyObject? as UIColor
+  
+  
+  // holder for circle and label
+  let pointMarker = CALayer()
+  
+  // draw circle
+  let markerInner = CALayer()
+  markerInner.frame = CGRectMake(0, 0, size, size)
+  markerInner.cornerRadius = size / 2
+  markerInner.masksToBounds = true
+  markerInner.backgroundColor = color.CGColor
+  
+  pointMarker.addSublayer(markerInner)
+  pointMarker.frame = CGRectMake(xPos, yPos, 50, 50)
+  
+  return pointMarker
 }
 
 

@@ -17,7 +17,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   @IBOutlet var timeTF: UITextField!
   
   var items           :NSMutableArray = []
-  var daDate          :NSString!  /* NOTE: always use hh:mm - no seconds! */
+  var daDate          :NSString!
   var daTime          :NSString! = ""
   var leftTextMargin  :CGFloat = 25.0
   var selectedRow     = 0
@@ -25,7 +25,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
-    //println("viewWillAppear")
+    
     helloView.hidden = true
     helperView.hidden = true
     helperView.layer.borderColor = UIColor.appLightGray().CGColor
@@ -65,17 +65,18 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     // empty text string
     self.text1.text = ""
   
-    //self.tableView.reloadData()
+    self.tableView.reloadData()
     
-    //loadDataForDate(daDate)
-    
-    //println("vWA reloaded data")
+    if PFUser.currentUser() != nil {
+      loadDataForDate(daDate) // breaks first load? if no user logged in
+    } else {
+      showLogin()
+    }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
  
-    
     // set daDate
     let formatter = NSDateFormatter()
     formatter.dateFormat = "MM/dd/yyyy"
@@ -120,37 +121,24 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     if PFUser.currentUser() != nil
     {
-      //if (PFUser.currentUser() == nil) {
-      loadDataForDate(daDate)
+      println("current username \(PFUser.currentUser().username)")
+      //loadDataForDate(daDate)
     } else {
-      println("current user nil")
-      let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
-      let svc = signUpViewController()
-      vc.delegate = self
-      vc.signUpController = svc
-      svc.delegate = self
-      self.presentViewController(vc, animated: true, completion: nil)
-      
+      showLogin()
       //println("current username \(PFUser.currentUser().username)")
     }
-    
-    /* not logged in - present login controller
-    if (PFUser.currentUser() == nil) {
-      //println("current user nil")
-      let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
-      let svc = signUpViewController()
-      vc.delegate = self
-      vc.signUpController = svc
-      svc.delegate = self
-      self.presentViewController(vc, animated: true, completion: nil)
-    } else {
-      //println("current username \(PFUser.currentUser().username)")
-      loadDataForDate(daDate)
-    } */
   }
 
+  func showLogin() {
+    println("current user nil")
+    let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
+    let svc = signUpViewController()
+    vc.delegate = self
+    vc.signUpController = svc
+    svc.delegate = self
+    self.presentViewController(vc, animated: true, completion: nil)
+  }
   
   /****   Load Data Functions   ****/
   
@@ -184,7 +172,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // create query
     var findData:PFQuery = PFQuery(className: "Items")
-    findData.whereKey("username", equalTo:PFUser.currentUser().username)
+    findData.whereKey("username", equalTo:PFUser.currentUser().username!)
     findData.whereKey("myDateTime", greaterThan:date1)
     findData.whereKey("myDateTime", lessThan:date2)
     findData.orderByDescending("myDateTime")
@@ -231,7 +219,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       svc.delegate = self
       self.presentViewController(vc, animated: true, completion: nil)
     } else {
-      //println("current username \(PFUser.currentUser().username)")
+      println("current username \(PFUser.currentUser().username)")
       loadDataForDate(daDate)
     }
     

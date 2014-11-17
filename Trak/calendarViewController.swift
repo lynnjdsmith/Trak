@@ -43,59 +43,57 @@ class calendarViewController: UIViewController {
   }
   
   func loadDataForStart() {
-      
-      //back of top
-      var bT = UIView()
-      bT.frame = CGRectMake(0, -1000, 320, 1088)   // cover the calendar that scrolls above with -1000
-      bT.backgroundColor = UIColor.whiteColor()
-      self.view.addSubview(bT)
-      
-      // SET INITIAL VALUES
-      daDay = NSDate()
-      
-      //scrollView =(UIScrollView *)[self.view viewWithTag:1000];
-      scrollView.contentSize=CGSizeMake(320,2950);
-      
-      let dateFormatterAll = NSDateFormatter()
-      dateFormatterAll.dateFormat = "yyyy"
-      strYear = dateFormatterAll.stringFromDate(daDay)
-      
-      let dateFormatterMonth = NSDateFormatter()
-      dateFormatterMonth.dateFormat = "MMMM"
-      strMonth = dateFormatterMonth.stringFromDate(daDay)
-      //println("month: \(strMonth)")
-      
-      let dfmn = NSDateFormatter()
-      dfmn.dateFormat = "MM"
-      var strMonthNum = dfmn.stringFromDate(daDay)
-      //println("month: \(strMonthNum)")
-      
-      // sizing variables
-      self.margin = 20
-      self.spacerW = 5
-      self.spacerH = 5
-      
-      var screenSize: CGRect = UIScreen.mainScreen().bounds
-      self.calWidth = screenSize.width - (margin * 2)
-      var widthMinusSpacers = calWidth - (spacerW * 6)
-      self.boxW = widthMinusSpacers / 7
-      self.screenHeight = screenSize.height
-      self.posX = margin
-      self.monthH = (boxH * 5) + (spacerH * 5)
-      
-      // year
-      //theYear.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-      var theYear = UIButton()
-      theYear.setTitle("< \(strYear)", forState: UIControlState.Normal)
-      theYear.setTitleColor(UIColor.appRed(), forState: UIControlState.Normal)
-      theYear.frame = CGRectMake(130, 20, 250, 50)
-      theYear.backgroundColor = UIColor.whiteColor()
-      theYear.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-      theYear.addTarget(self, action: "yearPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-      self.view.addSubview(theYear)
+    
+    // sizing variables
+    var screenSize: CGRect = UIScreen.mainScreen().bounds
+    self.margin = 20
+    self.spacerW = 5
+    self.spacerH = 5
+    self.calWidth = screenSize.width - (margin * 2)
+    var widthMinusSpacers = calWidth - (spacerW * 6)
+    self.boxW = widthMinusSpacers / 7
+    self.screenHeight = screenSize.height
+    self.posX = margin
+    self.monthH = (boxH * 5) + (spacerH * 5)
+  
+    //white back of top area
+    var bT = UIView()
+    bT.frame = CGRectMake(0, 0, screenSize.width, 70)
+    bT.backgroundColor = UIColor.whiteColor()
+    self.view.addSubview(bT)
+    
+    // set initial values
+    daDay = NSDate()
+    //scrollView =(UIScrollView *)[self.view viewWithTag:1000];
+    scrollView.contentSize=CGSizeMake(320,3070);
+    
+    let dateFormatterAll = NSDateFormatter()
+    dateFormatterAll.dateFormat = "yyyy"
+    strYear = dateFormatterAll.stringFromDate(daDay)
+    
+    let dateFormatterMonth = NSDateFormatter()
+    dateFormatterMonth.dateFormat = "MMMM"
+    strMonth = dateFormatterMonth.stringFromDate(daDay)
+    //println("month: \(strMonth)")
+    
+    let dfmn = NSDateFormatter()
+    dfmn.dateFormat = "MM"
+    var strMonthNum = dfmn.stringFromDate(daDay)
+    //println("month: \(strMonthNum)")
 
-      
-      layoutMonths(strMonthNum)
+    // year
+    //theYear.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+    var theYear = UIButton()
+    theYear.setTitle("< \(strYear)", forState: UIControlState.Normal)
+    theYear.setTitleColor(UIColor.appRed(), forState: UIControlState.Normal)
+    theYear.frame = CGRectMake(30, screenSize.height * 0.035, self.calWidth / 2, 50)
+    theYear.backgroundColor = UIColor.clearColor()
+    theYear.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+    theYear.addTarget(self, action: "yearPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+    self.view.addSubview(theYear)
+
+    
+    layoutMonths(strMonthNum)
   }
 
   
@@ -144,8 +142,9 @@ class calendarViewController: UIViewController {
     // the month
     var theMonthB = UIButton()
     theMonthB.setTitle(dMonth, forState: UIControlState.Normal)
+    theMonthB.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
     theMonthB.setTitleColor(UIColor.appRed(), forState: UIControlState.Normal)
-    theMonthB.frame = CGRectMake(20, top - 40, 100, 50)
+    theMonthB.frame = CGRectMake(30, top - 40, 100, 50)
     theMonthB.backgroundColor = UIColor.whiteColor()
     self.scrollView.addSubview(theMonthB)
     //theMonth.textAlignment = UITextAlignment.Center()

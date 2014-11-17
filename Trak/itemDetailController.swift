@@ -22,7 +22,6 @@ class itemDetailController: UIViewController {
   @IBOutlet var amountField     :UILabel!
   @IBOutlet var amountSlider    :UISlider!
   @IBOutlet var deleteBtn       :UIButton!
-  //@IBOutlet var seeAllBtn       :UIButton!
   @IBOutlet var seeChart        :UIButton!
   @IBOutlet var scrollView      :UIScrollView!
   @IBOutlet var topBackView     :UIView!
@@ -147,48 +146,7 @@ class itemDetailController: UIViewController {
     }
     
   }
-  
-/*
-  func popToRoot(sender:UIBarButtonItem){
-      println("*** poptoroot ***")
-    // set data
-    theItem.setObject(NSString(format: "%2.02f", amountSlider.value), forKey: "amount")
-    
-    // save myDateTime - FIX - needed? No. exiting these fields triggers save
-    /*
-    var theDateWithTime: NSString! = "\(dayTextField.text) \(timeTextField.text) \(daAMPM)"
-    println("day edited. theDateWithTime: |\(theDateWithTime)|")
-    let dateStringFormatter = NSDateFormatter()
-    dateStringFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-    let d = dateStringFormatter.dateFromString(theDateWithTime)
-    
-    // check for correct date format
-    if (d == nil) {
-      var alert = UIAlertController(title: "Alert", message: "Please use format: \n'MM/DD/YYYY'", preferredStyle: UIAlertControllerStyle.Alert)
-      alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
-      self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    theItem.setObject(d, forKey: "myDateTime") */
-    
-    // save name
-    theItem.setObject(daTitle.text, forKey: "name")
-    
-    //println("day edited. poptoroot d: \(d)")
-    
-    theItem.saveInBackgroundWithBlock {
-      (success: Bool!, error: NSError!) -> Void in
-      if (success != nil) {
-        if let d = self.delegate {
-          d.closeMod()
-        }
-        self.navigationController?.popToRootViewControllerAnimated(true)
-      } else {
-        println("%@", error)
-      }
-    }
-  } */
-  
+
   
   func loadDataForStart() {
     // send query
@@ -258,12 +216,16 @@ class itemDetailController: UIViewController {
         self.timeTextField.text = mT //.setTitle(mT, forState: .Normal)
 
         // set amount slider
-        self.amountSlider.value = object.valueForKey("amount").floatValue
-        
-        // amountNames for amount field
-        var theAmount :Int = Int(object.valueForKey("amount").floatValue)
+        //var theVal = object.valueForKey("amount")
+println(object.valueForKey("amount") as NSString)
+        var theS :String = object.valueForKey("amount") as String
+        self.amountSlider.value = (object.valueForKey("amount") as NSString).floatValue
+println("theS: \(theS)")
+        // amountNames for amount field 
+        var theAmount :Int = Int((object.valueForKey("amount") as NSString).floatValue)
+println("the amount: \(theAmount)")
         self.amountField.text = self.amountNames[theAmount] as NSString
-        
+        //println("3")
         //println("daTime, setting \(self.daTime)")
         // set the segmented control for trigger or symptom
         switch object.valueForKey("type") as NSString { //== "trigger") {
@@ -276,6 +238,7 @@ class itemDetailController: UIViewController {
           default:
             self.trigSympControl.selectedSegmentIndex = 0
         }
+
       }
     }
   }
@@ -422,12 +385,7 @@ class itemDetailController: UIViewController {
     query.getObjectInBackgroundWithId(objID) {
         (theItem: PFObject!, error: NSError!) -> Void in
         if (theItem != nil) {
-            //NSLog("deleted - %@", theItem)
             theItem.deleteInBackground()
-            //if let d = self.delegate {
-              //  self.delegate.closeMod(theItem)
-            //}
-          
           if let d = self.delegate {
             d.closeMod()
           }
@@ -446,7 +404,7 @@ class itemDetailController: UIViewController {
   
   @IBAction func goToSingleSymptomDetail(sender: AnyObject) {
     //println("yo! gotossd")
-    let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("singleSymptomDataVC") as singleSymptomDataVC
+    let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("symptomHistoryVC") as symptomHistoryVC
     secondViewController.objID = self.objID
     secondViewController.name = self.name
     secondViewController.theItem = self.theItem
