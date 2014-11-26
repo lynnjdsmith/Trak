@@ -17,9 +17,10 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
 
   @IBOutlet var topBackView         :UIView!
   @IBOutlet var titleTopLabel       :UILabel!
-  //@IBOutlet var dateTimeLabel       :UILabel!
+  @IBOutlet var chartLabel          :UILabel!
   @IBOutlet var generateReportBtn   :UIButton!
-    
+  @IBOutlet var scrollView          :UIScrollView!
+  
   var items     :NSMutableArray = []
   var objID     :NSString! = ""
   var name      :NSString! = ""
@@ -30,22 +31,24 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
   var colorz    :NSMutableArray = []
   var margin    :CGFloat!
   var screenSize :CGRect!
+  var graphHeight :CGFloat = 40
   
-  var symptomEvent :sEvent!
-  var beforeEvents :NSArray = []
-  var nameArray :NSArray = []
+  //var symptomEvent  :sEvent!
+  var symptomEvents :NSArray = []
+  var beforeEvents  :NSArray = []
+  var nameArray     :NSArray = []
   
   // legend
-  var sizeLegendDot :CGFloat = 16
-  var xPosLegend    :CGFloat = 35
-  var yPosLegend    :CGFloat = 140
+  //var sizeLegendDot :CGFloat = 15
+  var xPosLegend    :CGFloat = 15
+  var yPosLegend    :CGFloat = 118
   
   var dotSize       :CGFloat = 15
   var dotColor      :UIColor = UIColor.clearColor()
   
-  var labelFont   = UIFont.systemFontOfSize(12)
-  var fontMedium :UIFont = UIFont.systemFontOfSize(11)
-  var fontLarge   = UIFont.systemFontOfSize(14)
+  var labelFont     :UIFont = UIFont.systemFontOfSize(12)
+  var fontMedium    :UIFont = UIFont.systemFontOfSize(11.5)
+  var fontLarge     :UIFont = UIFont.systemFontOfSize(14)
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
@@ -57,78 +60,115 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
     screenSize = UIScreen.mainScreen().bounds
     self.margin = 10
     var graphWidth = screenSize.width - (margin * 2)
-    
+    scrollView.backgroundColor = UIColor.clearColor()
+      
     // set things
-    generateReportBtn.normalStyle("Create Report (PDF)")
+    generateReportBtn.normalStyle("Send Report")
     topBackView.layer.borderWidth = 0.3
     topBackView.layer.borderColor = UIColor.appLightGray().CGColor
     titleTopLabel.text = name
+    chartLabel.text = name
     //dateTimeLabel.text = daDate  // + " " + daTime
       
     // create back btn
     navigationController?.setNavigationBarHidden(true, animated:true)
     let button   = UIButton()
-    button.frame = CGRectMake(-15, 20, 100, 50)
+    button.frame = CGRectMake(-15, 20, 50, 50)
     button.backgroundColor = UIColor.clearColor()
     button.titleLabel!.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
     button.setTitleColor(UIColor.appLightGray(), forState: .Normal)
-    button.setTitle("Back", forState: UIControlState.Normal)
+    button.setTitle("<", forState: UIControlState.Normal)
     button.addTarget(self, action: "goBack:", forControlEvents: UIControlEvents.TouchUpInside)
     self.view.addSubview(button)
     
-    // load data
-    self.symptomEvent = sEvent(theEvent:theItem)
-    self.beforeEvents = self.symptomEvent.relatedTriggerEvents(24)
-    self.nameArray = self.symptomEvent.mostCommonPrecedingTriggers(self.beforeEvents)
+    // load past symptoms relative to current item
+    var baseSymptomEvent = sEvent(theEvent:theItem)
+    symptomEvents = baseSymptomEvent.precedingSymptomEvents(name)
     
     // draw legend
+    var befoEvents = baseSymptomEvent.relatedTriggerEvents(24)
+    self.nameArray = baseSymptomEvent.mostCommonPrecedingTriggers(befoEvents)
     drawLegend(nameArray)
     
-    //if () {
+    // draw graphs
+    var position :CGFloat = -20
+    for obj in symptomEvents as [PFObject] {
+    
+      var theEvent = sEvent(theEvent:obj)
+      var theBeforeEvents = theEvent.relatedTriggerEvents(24)
+    
       // draw date
-      let myDate :NSDate = theItem.valueForKey("myDateTime") as NSDate
+      let myDate :NSDate = obj.valueForKey("myDateTime") as NSDate
       let dateFormatterAll = NSDateFormatter()
       dateFormatterAll.dateFormat = "MM/dd"
-      let d1 = UILabel(frame: CGRectMake(10, 180, 60, 20))
+      let d1 = UILabel(frame: CGRectMake(graphWidth - 32, position, 45, 20))
       d1.text = dateFormatterAll.stringFromDate(myDate)
-      d1.font = fontLarge
+      d1.font = fontMedium
       d1.backgroundColor = UIColor.clearColor()
-      d1.textAlignment = NSTextAlignment.Left
+      d1.textAlignment = NSTextAlignment.Center
       d1.textColor = UIColor.blackColor()
-      self.view.addSubview(d1)
+      scrollView.addSubview(d1)
+
+      // draw Time
+      let dateFormatTime = NSDateFormatter()
+      dateFormatTime.dateFormat = "h:mm a"
+      let d2 = UILabel(frame: CGRectMake(graphWidth - 32, position + 14, 45, 20))
+      d2.text = dateFormatTime.stringFromDate(myDate)
+      d2.font = fontMedium
+      d2.backgroundColor = UIColor.clearColor()
+      d2.textAlignment = NSTextAlignment.Center
+      d2.textColor = UIColor.blackColor()
+      scrollView.addSubview(d2)
       
       // draw graph
-      let graph = singleSymptomHorizontalGraphView(frame: CGRectMake(10, 210, graphWidth, 40), theItem: theItem)
+      let graph = singleSymptomHorizontalGraphView(frame: CGRectMake(10, position + 35, graphWidth, graphHeight), theItem: obj)
       graph.backgroundColor = UIColor.appLightBlue()
-      self.view.addSubview(graph)
-    //}
+      scrollView.addSubview(graph)
+    
+      position = position + 100
+    }
+    
+    scrollView.contentSize=CGSizeMake(screenSize.width,position + 20)
   }
   
   
   func drawLegend(names: NSArray) {
 
     var count = 1
-    var spaceAmt = (screenSize.width - (margin*2)) / 5
+    var spaceAmt = (screenSize.width - (margin*2)) / 3
     println("spaceAmt \(spaceAmt)")
-    //println("no of names \(names.count)")
+    println("num of names \(names.count)")
+    var currentX = xPosLegend
+    var currentY = yPosLegend
     
     for (index, value) in enumerate(names) {
-      //println("Item \(index + 1): \(value)")
-      let obj1 :Dictionary<String, AnyObject> = ["size" : sizeLegendDot, "xPos" : xPosLegend, "yPos" : yPosLegend, "color" : self.colorz[index]] as Dictionary
+
+      let obj1 :Dictionary<String, AnyObject> = ["size" : dotSize, "xPos" : currentX, "yPos" : currentY, "color" : self.colorz[index]] as Dictionary
       var l :CALayer = placeCircle(obj1)
       self.view.layer.addSublayer(l)
       
-      let theLabel :UILabel = UILabel(frame: CGRectMake(CGFloat(xPosLegend - (spaceAmt/2) + (sizeLegendDot/2)), yPosLegend + sizeLegendDot, spaceAmt, sizeLegendDot))
+      let theLabel :UILabel = UILabel(frame: CGRectMake(currentX + 20, currentY, spaceAmt - 20, 15))
+      //UILabel(frame: CGRectMake(CGFloat(xPosLegend - (spaceAmt/2) + (dotSize/2)), yPosLegend + dotSize, spaceAmt, 30))
       theLabel.text = value as NSString
+      theLabel.lineBreakMode = .ByWordWrapping
+      theLabel.numberOfLines = 0
       theLabel.font = labelFont
-      theLabel.textAlignment = NSTextAlignment.Center
+      //theLabel.textAlignment = NSTextAlignment.left
       theLabel.layer.borderColor = UIColor.blackColor().CGColor
       theLabel.layer.borderWidth = 0
       theLabel.textColor = UIColor.blackColor()
       self.view.addSubview(theLabel)
+
+      // even number
+      if count % 2 == 0 {
+        currentY = yPosLegend
+        currentX = currentX + spaceAmt
+      } else {  // odd number
+        currentY = currentY + 23
+      }
       
-      xPosLegend = xPosLegend + spaceAmt
-      if (count == 5) { break }
+      //xPosLegend = xPosLegend + spaceAmt
+      if (count == 6) { break }
       count = count + 1
     }
   }

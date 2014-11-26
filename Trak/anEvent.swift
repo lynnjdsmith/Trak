@@ -64,6 +64,29 @@ class anEvent
     println("findData.findObjects() in sEvent   ** - Warning OK. Ignore. - **  ")
     return theArray
   }
+
+  func precedingSymptomEvents(name :NSString) -> NSArray {
+    println("name: \(name)")
+    
+    // load data
+    var endDate :NSDate = self.date
+    var daysBack :CGFloat = 365 // go back a year
+    var it :NSTimeInterval = NSTimeInterval(-100*24*60*60*daysBack)
+    var beginDate :NSDate = self.date.dateByAddingTimeInterval(it)
+    var findData:PFQuery = PFQuery(className: "Items")
+    findData.whereKey("username", equalTo:PFUser.currentUser().username)
+    //findData.whereKey("type",equalTo:"symptom")
+    findData.whereKey("name",equalTo:name)
+    findData.whereKey("myDateTime", greaterThan:beginDate)
+    findData.whereKey("myDateTime", lessThan:endDate)
+    findData.limit = 10
+    findData.orderByDescending("myDateTime")
+    
+    // query
+    var theArray = findData.findObjects()
+    println("findData.findObjects() in sEvent   ** - Warning OK. Ignore. - **  ")
+    return theArray
+  }
   
   
   func relatedEventsOLD(timePeriodHours :Int, offsetForTime :Int, theName :NSString) -> NSMutableArray {

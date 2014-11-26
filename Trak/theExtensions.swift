@@ -67,9 +67,6 @@ extension Int  {
 extension NSMutableArray {
 
   func get12Colors() -> NSMutableArray {
-    println("get12Colors")
-    //var colorArray :NSMutableArray = [UIColor.c1(),UIColor.c2(),UIColor.c3(),UIColor.c4(),UIColor.c5(),
-    //  UIColor.c6(),UIColor.c7(),UIColor.c8(),UIColor.c9(),UIColor.c10(),UIColor.c11(),UIColor.c12()]
     self.addObject(UIColor.c1())
     self.addObject(UIColor.c2())
     self.addObject(UIColor.c3())
