@@ -53,9 +53,7 @@
 		BA5A9A4F19D3DCCA00A410DF /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */; };
 		BA5A9A5119D3DCEB00A410DF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */; };
 		BA5B23391A9592900017E1F3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5B23381A9592900017E1F3 /* CoreData.framework */; };
-		BA5B233C1A95941E0017E1F3 /* ItemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA5B233A1A95941E0017E1F3 /* ItemModel.xcdatamodeld */; };
 		BA5B23411A95993E0017E1F3 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B233F1A9599320017E1F3 /* Date.swift */; };
-		BA5B23431A959B170017E1F3 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B23421A959B170017E1F3 /* ItemModel.swift */; };
 		BA5B40A719C68DB300794F13 /* dataMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A619C68DB300794F13 /* dataMainVC.swift */; };
 		BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A819C7D64000794F13 /* dataMainCell.swift */; };
 		BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */; };
@@ -132,9 +130,7 @@
 		BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		BA5B23381A9592900017E1F3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		BA5B233B1A95941E0017E1F3 /* ItemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ItemModel.xcdatamodel; sourceTree = "<group>"; };
 		BA5B233F1A9599320017E1F3 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		BA5B23421A959B170017E1F3 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemModel.swift; path = ../ItemModel.swift; sourceTree = "<group>"; };
 		BA5B40A619C68DB300794F13 /* dataMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainVC.swift; sourceTree = "<group>"; };
 		BA5B40A819C7D64000794F13 /* dataMainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainCell.swift; sourceTree = "<group>"; };
 		BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timelineCell.swift; sourceTree = "<group>"; };
@@ -233,8 +229,6 @@
 				BA280D4D19FAC05E00874FD1 /* sEvent.swift */,
 				BA5B233F1A9599320017E1F3 /* Date.swift */,
 				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
-				BA5B233A1A95941E0017E1F3 /* ItemModel.xcdatamodeld */,
-				BA5B23421A959B170017E1F3 /* ItemModel.swift */,
 				BA05C5811A91688B00FC18CE /* Menu */,
 				BA5B40AA19C8A03100794F13 /* Data Screens */,
 				BAEA6F3C19B01650002EC6E8 /* Progress Indicator */,
@@ -455,7 +449,6 @@
 				BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */,
 				BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */,
 				5C84DEDE1982A498009162CD /* signUpViewController.swift in Sources */,
-				BA5B233C1A95941E0017E1F3 /* ItemModel.xcdatamodeld in Sources */,
 				BA4DBEAF19CF563F00CFFBFA /* GraphView.swift in Sources */,
 				BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */,
 				BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */,
@@ -468,7 +461,6 @@
 				BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */,
 				BA40C16B1A106035002CB7EE /* anEvent.swift in Sources */,
 				5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */,
-				BA5B23431A959B170017E1F3 /* ItemModel.swift in Sources */,
 				BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */,
 				BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */,
 				BA280D5019FAD0ED00874FD1 /* symptomHistoryVC.swift in Sources */,
@@ -695,19 +687,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		BA5B233A1A95941E0017E1F3 /* ItemModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				BA5B233B1A95941E0017E1F3 /* ItemModel.xcdatamodel */,
-			);
-			currentVersion = BA5B233B1A95941E0017E1F3 /* ItemModel.xcdatamodel */;
-			path = ItemModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5C143D9A1980326B00B4F0E4 /* Project object */;
 }
