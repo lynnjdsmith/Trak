@@ -4,9 +4,19 @@
 
 import UIKit
 import QuartzCore
+import CoreData
 
-class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate, itemDetailDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, tCellDelegate {
+class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate, itemDetailDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, tCellDelegate, NSFetchedResultsControllerDelegate {
   
+    
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+    var fetchedResultsController:NSFetchedResultsController = NSFetchedResultsController()
+    
+    //var taskArray:[Dictionary<String, String>] = []
+    //var taskArray:[TaskModel] = []
+    
+    //var baseArray:[[ItemModel]] = []
+
   // set variables
   @IBOutlet var helloView: UIView!
   @IBOutlet var helperView: UIView!
@@ -15,6 +25,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   @IBOutlet var dayBtn: UIButton!
   @IBOutlet var topBackView: UIView!
   @IBOutlet var timeTF: UITextField!
+  @IBOutlet weak var menuButton: UIButton!
   
   var items           :NSMutableArray = []
   var daDate          :NSString!
@@ -25,38 +36,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
-    
-    helloView.hidden = true
-    helperView.hidden = true
-    helperView.layer.borderColor = UIColor.appLightGray().CGColor
-    helperView.layer.borderWidth = 1
-    helperView.layer.cornerRadius = 8
-    
-    //var path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-    //var dict :NSMutableDictionary = NSMutableDictionary(contentsOfFile: path!)
-    //var theLaunchedVal :NSString = dict.objectForKey("hasLaunchedOnce") as NSString
-    //var theLaunchedVal :Bool = true;
-    
-    // First time? Show Hello!
-    //if (theLaunchedVal == "t") {
-     // println("ONCE TRUE")
-      // not logged in - present login controller
-  
-      
-    /* } else {
-      
-      println("ONCE FALSE")
-      text1.resignFirstResponder()
-      helloView.hidden = false
-
-      dict.setValue("t", forKey: "hasLaunchedOnce")  //("t" as NSString, forKey: "hasLaunchedOnce")
-      dict.writeToFile(path!, atomically: true)
-      
-      //NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLaunchedOnce")
-      //NSUserDefaults.standardUserDefaults().synchronize()
-    } */
-
-    
     
     // setup nav bar
     self.navigationController?.navigationBarHidden = true
@@ -77,6 +56,12 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   override func viewDidLoad() {
     super.viewDidLoad()
  
+    fetchedResultsController = getFetchResultsController()
+    fetchedResultsController.delegate = self
+    fetchedResultsController.performFetch(nil)
+    
+    //menuButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
+    
     // set daDate
     let formatter = NSDateFormatter()
     formatter.dateFormat = "MM/dd/yyyy"
@@ -129,6 +114,14 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
   }
 
+  
+  @IBAction func menuPressed(sender: AnyObject) {
+    //[self.revealViewController, revealToggle]
+    self.revealViewController()?.rightRevealToggle(sender)
+    //println("menuP")
+    self.view.endEditing(true)
+  }
+  
   func showLogin() {
     println("current user nil")
     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -171,12 +164,14 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     var date2: NSDate! = formatter.dateFromString(date2String)
     
     // create query
+    println("create query")
     var findData:PFQuery = PFQuery(className: "Items")
     findData.whereKey("username", equalTo:PFUser.currentUser().username!)
     findData.whereKey("myDateTime", greaterThan:date1)
     findData.whereKey("myDateTime", lessThan:date2)
     findData.orderByDescending("myDateTime")
     var lastMyDate = NSDate()
+    println("end create query")
     
     // send query
     var HUD = MBProgressHUD.showHUDAddedTo(self.view, animated:true)
@@ -202,7 +197,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   @IBAction func closeHelper(sender: AnyObject) {
     println("closeHelper")
-    helperView.hidden = true
+    //helperView.hidden = true
   }
 
   @IBAction func closeHello(sender: AnyObject) {
@@ -265,7 +260,14 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     // resign first responder. NAH.
     //text1.becomeFirstResponder()
 
-    closeHelper(sender)
+    //closeHelper(sender)
+    
+    // from TaskIt
+    let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+    
+    let managedObjectContext = appDelegate.managedObjectContext
+    let entityDescription = NSEntityDescription.entityForName("ItemModel", inManagedObjectContext: managedObjectContext!)
+    
     
     // split into items
     var theText :NSString = text1.text.stringByTrimmingCharactersInSet(NSCharacterSet (charactersInString: "., "))
@@ -276,7 +278,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       
       // trim characters
       var itemText = daNewItem.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-  
+
       // create Item
       var newItem:PFObject = PFObject(className: "Items")
       newItem.setObject("\(itemText)", forKey: "name")
@@ -304,6 +306,26 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
         println("*** YO!! nil on datetime - In process input, saving nil to DB! ***")
       }
     
+      
+      
+      // from TaskIt
+      let task = ItemModel(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
+      task.name = itemText
+      task.myDateTime = d
+      task.amount = 5
+      task.type = "trigger"
+      appDelegate.saveContext()
+      
+      var request = NSFetchRequest(entityName: "ItemModel")
+      var error:NSError? = nil
+      var results:NSArray = managedObjectContext!.executeFetchRequest(request, error: &error)!
+      
+      for res in results
+      {
+        println("RESULTS - ***")
+        println(res)
+      }
+      
       // add amount
       newItem.setObject("5", forKey: "amount")
     
@@ -320,6 +342,8 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
       }
     }
+    
+    
     //text1.resignFirstResponder()
     text1.text = nil
     text1.becomeFirstResponder()
@@ -379,23 +403,40 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   /**  Table Info and Functions  **/
   
   
+   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    //println("Num sections: \(fetchedResultsController.sections!.count)")
+    return fetchedResultsController.sections!.count
+    //return self.baseArray.count
+  }
+
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return items.count;
+    return fetchedResultsController.sections![section].numberOfObjects
+    //return fetchedResultsController.sections[0].count
+    //return items.count;
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     //println("tableloading cell")
     
+
     // setup cell
     var cell = tableView.dequeueReusableCellWithIdentifier("cell1") as timelineCell
     cell.selectionStyle = UITableViewCellSelectionStyle.None;
     cell.delegate = self
     
+    // from TrackIt
+    let thisItem = fetchedResultsController.objectAtIndexPath(indexPath) as ItemModel
+    
+    //var cell:TaskCell = tableView.dequeueReusableCellWithIdentifier("myCell") as TaskCell
+    cell.label1.text = thisItem.name
+    cell.timeTextField.text = Date.toString(date: thisItem.myDateTime)
+    
+    
     // set the name
-    cell.label1.text = items[indexPath.row].valueForKey("name") as NSString
+    //cell.label1.text = items[indexPath.row].valueForKey("name") as NSString
     
     // set the time
-    let daDateVal: AnyObject! = items[indexPath.row].valueForKey("myDateTime")
+    let daDateVal: AnyObject! = thisItem.myDateTime  //items[indexPath.row].valueForKey("myDateTime")
     if (daDateVal == nil) { println("*** YO! You have a blank myDateTime in the DB, probably!! ***") }
     let timeFormatter = NSDateFormatter()
     timeFormatter.dateFormat = "h:mm a" // "h:mm a"
@@ -405,14 +446,15 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     //cell.timeTextField.layer.borderColor = UIColor.appLightestGray().CGColor
     cell.timeTextField.layer.borderColor = UIColor.clearColor().CGColor
     cell.timeTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-    cell.timeTextField.text = str2
+    //cell.timeTextField.text = str2
     cell.timeTextField.layer.borderWidth = 1
     cell.timeTextField.layer.cornerRadius = 8
     cell.timeTextField.clipsToBounds = true
     
     // set the vertical line color
-    var theType :NSString = items[indexPath.row].valueForKey("type") as NSString
-
+    //var theType :NSString = items[indexPath.row].valueForKey("type") as NSString
+    var theType :NSString = thisItem.type as NSString
+    
     switch theType { //== "trigger") {
     //case "trigger":
       case "symptom":
@@ -434,7 +476,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   
   func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-    //println("You selected cell #\(indexPath.row)!")
+    println("You selected cell #\(indexPath.row)!")
     
     
     //ResultsTableViewController *childViewController = [[ResultsTableViewController alloc] init];
@@ -455,64 +497,45 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     //println("You selected cell #\(indexPath.row)!")
   }
   
+  // DONT NEED?
+  
+  func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return nil
+    /* if section == 0
+    {
+      return "To Do"
+    }
+    else
+    {
+      return "Completed"
+    } */
+  }
+  
+  
+  
+  //Helper
+  
+  func itemFetchRequest() -> NSFetchRequest
+  {
+    let fetchRequest = NSFetchRequest(entityName: "ItemModel")
+    //let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+    let sortDescriptor = NSSortDescriptor(key: "myDateTime", ascending: true)
+    //let completedDescriptor = NSSortDescriptor(key: "completed", ascending: true)
+    let completedDescriptor = NSSortDescriptor(key: "name", ascending: true)
+    fetchRequest.sortDescriptors = [completedDescriptor, sortDescriptor]
+    
+    return fetchRequest
+  }
+  
+  func getFetchResultsController() -> NSFetchedResultsController
+  {
+    // fetchedResultsController = NSFetchedResultsController(fetchRequest: taskFetchRequest(), managedObjectContext: managedObjectContext, sectionNameKeyPath: "completed", cacheName: nil)
+    fetchedResultsController = NSFetchedResultsController(fetchRequest: itemFetchRequest(), managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+    return fetchedResultsController
+    
+  }
+  
+  
 } // END class timeline view controller
 
-
-
-/* override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-
-// pass item objectID to item detail page
-let index = tableView.indexPathForSelectedRow()
-
-println("segue.identifier1: \(segue.identifier)")
-
-if (segue.identifier != "") {    //todo FIX, need this check.  WAS ACTIVE -- ?
-println("segue.identifier: \(segue.identifier)")
-if (segue.identifier == "toDetails") {
-let vc = segue.destinationViewController as itemDetailController
-vc.objID = items[selectedRow + 1].objectId
-}
-}
-} */
-
-
-/*  @IBAction func setTime(sender: UIButton!) {
-
-// set time into global page variable
-//var daTime = self.timeTextField.text
-//var daDate = NSDate()
-
-// save myDateTime
-
-let theTime :NSString! = sender.titleLabel.text as NSString //getTitle(forState: UIControlState.Normal) as NSString
-println("theTime edited \(theTime)")
-var theDateWithTime: NSString! = "\(daDate) \(self.daTime):00 PM"
-println("time edited. theDateWithTime: |\(theDateWithTime)|")
-let dateStringFormatter = NSDateFormatter()
-dateStringFormatter.dateFormat = "MM/dd/yyyy hh:mm:ss a"
-let d = dateStringFormatter.dateFromString(theDateWithTime)
-println("d: \(d)")
-
-
-//set time title
-let timeFormatter = NSDateFormatter()
-timeFormatter.dateFormat = "h:mm a" // works for +10pm?
-let str2 = timeFormatter.stringFromDate(NSDate())
-sender.setTitle(str2, forState: UIControlState.Normal)
-sender.hidden = false
-//self.timeTextField.hidden = true
-} */
-
-
-// ADD SUBVIEW
-//customPicker!.backgroundColor = UIColor.redColor()
-//var cdp : UIView = CustomDatePicker() as UIView
-//self.view.addSubview(cdp) //(cdp, animated: true, completion: nil)
-
-/* This is when you have the time in the string. Don't need it anymore.
-var firstPart = theText.substringToIndex(8)
-var newString = theText.substringFromIndex(8).stringByTrimmingCharactersInSet(NSCharacterSet (charactersInString: "., "))      //trim
-*/
-
-// http://www.weheartswift.com/how-to-make-a-simple-table-view-with-ios-8-and-swift/
 

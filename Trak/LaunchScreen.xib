@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,14 +10,28 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" image="bkg1_320" translatesAutoresizingMaskIntoConstraints="NO" id="Q5H-zn-W9K">
-                    <rect key="frame" x="48" y="19" width="385" height="679"/>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" misplaced="YES" image="bkg1_320" translatesAutoresizingMaskIntoConstraints="NO" id="Q5H-zn-W9K">
+                    <rect key="frame" x="0.0" y="0.0" width="385" height="679"/>
                     <color key="tintColor" red="0.94117653369999998" green="0.96470594409999999" blue="0.97647064920000004" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="679" id="SEL-qV-IoS"/>
+                        <constraint firstAttribute="width" constant="320" id="mNs-sg-3n1"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="Q5H-zn-W9K" secondAttribute="centerX" id="Wjf-uZ-ZgR"/>
+                <constraint firstItem="Q5H-zn-W9K" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="enk-Kc-U6E"/>
+                <constraint firstAttribute="centerY" secondItem="Q5H-zn-W9K" secondAttribute="centerY" id="u9K-YO-3bS"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="u9K-YO-3bS"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="404" y="445"/>
         </view>
     </objects>

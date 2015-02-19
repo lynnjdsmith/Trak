@@ -58,7 +58,7 @@ class calendarViewController: UIViewController {
   
     //white back of top area
     var bT = UIView()
-    bT.frame = CGRectMake(0, 0, screenSize.width, 70)
+    bT.frame = CGRectMake(0, -800, screenSize.width, 870)
     bT.backgroundColor = UIColor.whiteColor()
     self.view.addSubview(bT)
     

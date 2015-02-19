@@ -52,15 +52,20 @@
 		BA5A9A4D19D3DCBF00A410DF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4C19D3DCBF00A410DF /* OpenGLES.framework */; };
 		BA5A9A4F19D3DCCA00A410DF /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */; };
 		BA5A9A5119D3DCEB00A410DF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */; };
+		BA5B23391A9592900017E1F3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5B23381A9592900017E1F3 /* CoreData.framework */; };
+		BA5B233C1A95941E0017E1F3 /* ItemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA5B233A1A95941E0017E1F3 /* ItemModel.xcdatamodeld */; };
+		BA5B23411A95993E0017E1F3 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B233F1A9599320017E1F3 /* Date.swift */; };
+		BA5B23431A959B170017E1F3 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B23421A959B170017E1F3 /* ItemModel.swift */; };
 		BA5B40A719C68DB300794F13 /* dataMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A619C68DB300794F13 /* dataMainVC.swift */; };
 		BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A819C7D64000794F13 /* dataMainCell.swift */; };
 		BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */; };
+		BA8876CF1A832B1F009E1446 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8876CE1A832B1F009E1446 /* MenuViewController.swift */; };
+		BA94DD811A81D1E8004D374E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA94DD801A81D1E8004D374E /* SWRevealViewController.m */; };
 		BAA8C9481A11D50500C7CAC6 /* reportBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40C1681A0F07E1002CB7EE /* reportBasicView.swift */; };
 		BABFA3FF19CF402900434B51 /* dataMigraineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */; };
 		BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BACBCCCA19AEC17900C79000 /* MBProgressHUD.m */; };
 		BACF75BC19D3D60600E2540D /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BACF75BB19D3D60600E2540D /* Instabug.bundle */; };
 		BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */; };
-		BAE0DC9119A6BA2E00F02683 /* itemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE0DC9019A6BA2E00F02683 /* itemModel.swift */; };
 		BAE626C2199FBB5500747932 /* calendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE626C1199FBB5500747932 /* calendarViewController.swift */; };
 		BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -126,16 +131,22 @@
 		BA5A9A4C19D3DCBF00A410DF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		BA5B23381A9592900017E1F3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BA5B233B1A95941E0017E1F3 /* ItemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ItemModel.xcdatamodel; sourceTree = "<group>"; };
+		BA5B233F1A9599320017E1F3 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		BA5B23421A959B170017E1F3 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemModel.swift; path = ../ItemModel.swift; sourceTree = "<group>"; };
 		BA5B40A619C68DB300794F13 /* dataMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainVC.swift; sourceTree = "<group>"; };
 		BA5B40A819C7D64000794F13 /* dataMainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainCell.swift; sourceTree = "<group>"; };
 		BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timelineCell.swift; sourceTree = "<group>"; };
+		BA8876CE1A832B1F009E1446 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		BA94DD801A81D1E8004D374E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		BA94DD821A81D1F3004D374E /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMigraineVC.swift; sourceTree = "<group>"; };
 		BACBCCC919AEC17900C79000 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BACBCCCA19AEC17900C79000 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		BACF75B919D3D51A00E2540D /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
 		BACF75BB19D3D60600E2540D /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Instabug.bundle; sourceTree = "<group>"; };
 		BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = theExtensions.swift; sourceTree = "<group>"; };
-		BAE0DC9019A6BA2E00F02683 /* itemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemModel.swift; sourceTree = "<group>"; };
 		BAE626C1199FBB5500747932 /* calendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarViewController.swift; sourceTree = "<group>"; };
 		BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AF+Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA5B23391A9592900017E1F3 /* CoreData.framework in Frameworks */,
 				BA5A9A4B19D3DCB800A410DF /* MessageUI.framework in Frameworks */,
 				BA16FA6A1A085537000B1D01 /* CoreText.framework in Frameworks */,
 				5C143DEB19803A0800B4F0E4 /* Foundation.framework in Frameworks */,
@@ -217,10 +229,13 @@
 				BAE626C1199FBB5500747932 /* calendarViewController.swift */,
 				BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */,
 				BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */,
-				BAE0DC9019A6BA2E00F02683 /* itemModel.swift */,
-				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
 				BA40C16A1A106035002CB7EE /* anEvent.swift */,
 				BA280D4D19FAC05E00874FD1 /* sEvent.swift */,
+				BA5B233F1A9599320017E1F3 /* Date.swift */,
+				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
+				BA5B233A1A95941E0017E1F3 /* ItemModel.xcdatamodeld */,
+				BA5B23421A959B170017E1F3 /* ItemModel.swift */,
+				BA05C5811A91688B00FC18CE /* Menu */,
 				BA5B40AA19C8A03100794F13 /* Data Screens */,
 				BAEA6F3C19B01650002EC6E8 /* Progress Indicator */,
 				BAE626C3199FBBF800747932 /* Login and Signup */,
@@ -243,6 +258,7 @@
 		5C143DDC198032E600B4F0E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA5B23381A9592900017E1F3 /* CoreData.framework */,
 				BA16FA691A085537000B1D01 /* CoreText.framework */,
 				BA5A9A5019D3DCEB00A410DF /* CoreFoundation.framework */,
 				BA5A9A4E19D3DCCA00A410DF /* GLKit.framework */,
@@ -274,6 +290,16 @@
 				5C143DC6198032D200B4F0E4 /* Parse.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA05C5811A91688B00FC18CE /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				BA8876CE1A832B1F009E1446 /* MenuViewController.swift */,
+				BA94DD821A81D1F3004D374E /* SWRevealViewController.h */,
+				BA94DD801A81D1E8004D374E /* SWRevealViewController.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		BA4DBE9C19CF4B7F00CFFBFA /* TrakTests */ = {
@@ -429,20 +455,24 @@
 				BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */,
 				BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */,
 				5C84DEDE1982A498009162CD /* signUpViewController.swift in Sources */,
+				BA5B233C1A95941E0017E1F3 /* ItemModel.xcdatamodeld in Sources */,
 				BA4DBEAF19CF563F00CFFBFA /* GraphView.swift in Sources */,
 				BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */,
 				BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */,
+				BA94DD811A81D1E8004D374E /* SWRevealViewController.m in Sources */,
 				5C143DA81980326B00B4F0E4 /* AppDelegate.swift in Sources */,
 				BAE626C2199FBB5500747932 /* calendarViewController.swift in Sources */,
 				BA51669219B2218900E44717 /* logInViewController.swift in Sources */,
 				BAA8C9481A11D50500C7CAC6 /* reportBasicView.swift in Sources */,
+				BA8876CF1A832B1F009E1446 /* MenuViewController.swift in Sources */,
 				BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */,
 				BA40C16B1A106035002CB7EE /* anEvent.swift in Sources */,
 				5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */,
-				BAE0DC9119A6BA2E00F02683 /* itemModel.swift in Sources */,
+				BA5B23431A959B170017E1F3 /* ItemModel.swift in Sources */,
 				BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */,
 				BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */,
 				BA280D5019FAD0ED00874FD1 /* symptomHistoryVC.swift in Sources */,
+				BA5B23411A95993E0017E1F3 /* Date.swift in Sources */,
 				BA280D4E19FAC05E00874FD1 /* sEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +695,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BA5B233A1A95941E0017E1F3 /* ItemModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BA5B233B1A95941E0017E1F3 /* ItemModel.xcdatamodel */,
+			);
+			currentVersion = BA5B233B1A95941E0017E1F3 /* ItemModel.xcdatamodel */;
+			path = ItemModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5C143D9A1980326B00B4F0E4 /* Project object */;
 }

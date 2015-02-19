@@ -23,7 +23,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
         super.viewDidLayoutSubviews()
         
         self.signUpView.logo.layer.frame = CGRectMake(66.5, 60.0, 187.0, 58.5)
-        self.signUpView.logo.backgroundColor = UIColor(patternImage:(UIImage(named:"logo_470x130.png"))!)
+        //self.signUpView.logo.backgroundColor = UIColor(patternImage:(UIImage(named:"logo_470x130.png"))!)
         
         self.signUpView.dismissButton.layer.frame = CGRectMake(275.0, 8.0, 45.5, 45.5)
         self.signUpView.dismissButton.hidden = false;

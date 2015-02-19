@@ -46,7 +46,10 @@ class itemDetailController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    scrollView.contentSize = CGSize(width: 320, height: 620)
+    
+    println(" ** setting size \(self.scrollView.frame.size.width)        **")
+    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width, height: 568)
+    //scrollView.contentSize=CGSizeMake(screenSize.width,position + 20)
     
     // general set stuff
     topBackView.layer.borderWidth = 0.3

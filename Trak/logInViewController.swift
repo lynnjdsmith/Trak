@@ -80,10 +80,12 @@ class logInViewController: PFLogInViewController, UITextFieldDelegate {
       }
       else {
         println("user exists")
-        var mainView: UIStoryboard!
+       /* var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "Main", bundle: nil)
         var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
-        self.presentViewController(viewcontroller, animated: true, completion: nil)
+        self.presentViewController(viewcontroller, animated: true, completion: nil) */
+        
+          performSegueWithIdentifier("sw_main", sender: self)
       }
       
     }
