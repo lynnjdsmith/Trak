@@ -260,7 +260,7 @@ println("the amount: \(theAmount)")
     daTitle.layer.backgroundColor = UIColor.clearColor().CGColor
     self.resignFirstResponder()
     theItem.setObject(sender.text, forKey: "name")
-    theItem.saveInBackground()
+    theItem.saveEventually() //saveInBackground()
   }
 
   
@@ -317,7 +317,7 @@ println("the amount: \(theAmount)")
       
     } else {
       theItem.setObject(d, forKey: "myDateTime")
-      theItem.saveInBackground()
+      theItem.saveEventually() //saveInBackground()
       println("time edited. d: \(d)")
       
       // put the new time on the button
@@ -366,15 +366,15 @@ println("the amount: \(theAmount)")
     case 0:
       //println("triggered")
       theItem.setObject("trigger", forKey:"type")
-      theItem.saveInBackground()
+      theItem.saveEventually() //saveInBackground()
     case 1:
       //println("sympt")
       theItem.setObject("symptom", forKey:"type")
-      theItem.saveInBackground()
+      theItem.saveEventually() //saveInBackground()
     case 2:
       //println("treatment")
       theItem.setObject("treatment", forKey:"type")
-      theItem.saveInBackground()
+      theItem.saveEventually() //saveInBackground()
     default: break;
     }
   }

@@ -5,7 +5,7 @@
 import UIKit
 import QuartzCore
 
-class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate, itemDetailDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, tCellDelegate {
+class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate, itemDetailDelegate, tCellDelegate {
   
   // set variables
   @IBOutlet var helloView: UIView!
@@ -27,38 +27,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
     
-    //helloView.hidden = true
-    //helperView.hidden = true
-    //helperView.layer.borderColor = UIColor.appLightGray().CGColor
-    //helperView.layer.borderWidth = 1
-    //helperView.layer.cornerRadius = 8
-    
-    //var path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-    //var dict :NSMutableDictionary = NSMutableDictionary(contentsOfFile: path!)
-    //var theLaunchedVal :NSString = dict.objectForKey("hasLaunchedOnce") as NSString
-    //var theLaunchedVal :Bool = true;
-    
-    // First time? Show Hello!
-    //if (theLaunchedVal == "t") {
-     // println("ONCE TRUE")
-      // not logged in - present login controller
-  
-      
-    /* } else {
-      
-      println("ONCE FALSE")
-      text1.resignFirstResponder()
-      helloView.hidden = false
-
-      dict.setValue("t", forKey: "hasLaunchedOnce")  //("t" as NSString, forKey: "hasLaunchedOnce")
-      dict.writeToFile(path!, atomically: true)
-      
-      //NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLaunchedOnce")
-      //NSUserDefaults.standardUserDefaults().synchronize()
-    } */
-
-    
-    
     // setup nav bar
     self.navigationController?.navigationBarHidden = true
     tableView.allowsSelection = true
@@ -68,19 +36,16 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
     self.tableView.reloadData()
     
-    if PFUser.currentUser() != nil {
+    /* if PFUser.currentUser() != nil {
       loadDataForDate(daDate) // breaks first load? if no user logged in
     } else {
-      showLogin()
-    }
+      goLogin()
+    } */
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
  
-    
-    //menuButton.addTarget(self.revealViewController(), action: "revealToggle:", forControlEvents: UIControlEvents.TouchUpInside)
-    
     // set daDate
     let formatter = NSDateFormatter()
     formatter.dateFormat = "MM/dd/yyyy"
@@ -93,8 +58,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     self.navigationController?.navigationBarHidden = true
     text1.becomeFirstResponder()
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-    //tableView.autoresizingMask = UIViewAutoresizing.FlexibleBottomMargin
-    //tableView.autoresizingMask = UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleHeight
 
     // set time
     let timeFormatter = NSDateFormatter()
@@ -123,34 +86,37 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     dayBtn.setTitle(str, forState: UIControlState.Normal)
     dayBtn.setTitle(str, forState: UIControlState.Highlighted)
     
+    
     if PFUser.currentUser() != nil
     {
-      println("current username \(PFUser.currentUser().username)")
-      //loadDataForDate(daDate)
-    } else {
-      showLogin()
       //println("current username \(PFUser.currentUser().username)")
+      loadDataForDate(daDate)
+    } else {
+      goLogin()
     }
-  }
-
-  
-  @IBAction func menuPressed(sender: AnyObject) {
-    //[self.revealViewController, revealToggle]
-    self.revealViewController()?.rightRevealToggle(sender)
-    //println("menuP")
-    self.view.endEditing(true)
+    
   }
   
-  func showLogin() {
-    println("current user nil")
+  func goLogin() {
+    println("logging in")
+    PFUser.logInWithUsernameInBackground("l", password:"l") {
+      (user: PFUser!, error: NSError!) -> Void in
+      if user != nil {
+        loadDataForDate(self.daDate)
+        // Do stuff after successful login.
+      } else {
+        // The login failed. Check error to see why.
+      }
+    }/*
     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
     let svc = signUpViewController()
     vc.delegate = self
     vc.signUpController = svc
     svc.delegate = self
-    self.presentViewController(vc, animated: true, completion: nil)
+    self.presentViewController(vc, animated: true, completion: nil) */
   }
+  
   
   /****   Load Data Functions   ****/
   
@@ -182,12 +148,14 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     var date1: NSDate! = formatter.dateFromString(date1String)
     var date2: NSDate! = formatter.dateFromString(date2String)
     
+    println("current username \(PFUser.currentUser().username)")
     // create query
     var findData:PFQuery = PFQuery(className: "Items")
     findData.whereKey("username", equalTo:PFUser.currentUser().username!)
     findData.whereKey("myDateTime", greaterThan:date1)
     findData.whereKey("myDateTime", lessThan:date2)
     findData.orderByDescending("myDateTime")
+    
     var lastMyDate = NSDate()
     
     // send query
@@ -204,39 +172,13 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
           self.items = []
             for object in objects as [PFObject] {
                 self.items.addObject(object)
-                //println(object)
+                println(object)
             }
             self.tableView.reloadData()
         }
     }
   }
 
-  
-  @IBAction func closeHelper(sender: AnyObject) {
-    println("closeHelper")
-    //helperView.hidden = true
-  }
-
-  @IBAction func closeHello(sender: AnyObject) {
-    println("closeHello")
-    
-    // not logged in - present login controller
-    if (PFUser.currentUser() == nil) {
-      //println("current user nil")
-      let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
-      let svc = signUpViewController()
-      vc.delegate = self
-      vc.signUpController = svc
-      svc.delegate = self
-      self.presentViewController(vc, animated: true, completion: nil)
-    } else {
-      println("current username \(PFUser.currentUser().username)")
-      loadDataForDate(daDate)
-    }
-    
-    helloView.hidden = true
-  }
   
   @IBAction func typeText(sender: AnyObject) {
     if (text1.text.hasSuffix(" ")) { text1.text = text1.text + sender.titleForState(.Highlighted)!
@@ -262,15 +204,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     timeTF.layer.backgroundColor = UIColor.clearColor().CGColor
   }
   
-  
-  @IBAction func showCalendar(sender: AnyObject) {
-    // setup view controller
-    let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let vc : calendarViewController = storyboard.instantiateViewControllerWithIdentifier("calendarViewController") as calendarViewController
-    vc.delegate = self
-    self.presentViewController(vc, animated: true, completion: nil)
-  }
- 
   
   @IBAction func processInput(sender: AnyObject) {
     //println("process input")
@@ -324,7 +257,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       newItem.saveInBackgroundWithBlock {
         (success: Bool!, error: NSError!) -> Void in
         if (success != nil) {
-          println("\n ** Object created: \(sender.objectId)")
+          //println("\n ** Object created: \(sender.objectId)")
           self.items.insertObject(newItem, atIndex: 0)
           self.tableView.reloadData();                 // todo fix - move this later?
         } else {
@@ -378,12 +311,25 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     done(self) */
   }
   
+  @IBAction func menuPressed(sender: AnyObject) {
+    //println("menuP")
+    self.revealViewController()?.rightRevealToggle(sender)
+    self.view.endEditing(true)
+  }
+  
+  @IBAction func showCalendar(sender: AnyObject) {
+    // setup view controller
+    let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc : calendarViewController = storyboard.instantiateViewControllerWithIdentifier("calendarViewController") as calendarViewController
+    vc.delegate = self
+    self.presentViewController(vc, animated: true, completion: nil)
+  }
+ 
   
   /** Delegate Functions **/
   
   func closeMod() {
-    //println("closeMod")
-    // reload data & table
+    println("closeMod")
     loadDataForDate(daDate) // FIX to-do, test this. We prob don't need, now that it's in viewillappear
   }
   
@@ -468,6 +414,68 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   }
   
 } // END class timeline view controller
+
+
+
+// OLD view will appear
+//helloView.hidden = true
+//helperView.hidden = true
+//helperView.layer.borderColor = UIColor.appLightGray().CGColor
+//helperView.layer.borderWidth = 1
+//helperView.layer.cornerRadius = 8
+
+//var path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+//var dict :NSMutableDictionary = NSMutableDictionary(contentsOfFile: path!)
+//var theLaunchedVal :NSString = dict.objectForKey("hasLaunchedOnce") as NSString
+//var theLaunchedVal :Bool = true;
+
+// First time? Show Hello!
+//if (theLaunchedVal == "t") {
+// println("ONCE TRUE")
+// not logged in - present login controller
+
+
+/* } else {
+
+println("ONCE FALSE")
+text1.resignFirstResponder()
+helloView.hidden = false
+
+dict.setValue("t", forKey: "hasLaunchedOnce")  //("t" as NSString, forKey: "hasLaunchedOnce")
+dict.writeToFile(path!, atomically: true)
+
+//NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLaunchedOnce")
+//NSUserDefaults.standardUserDefaults().synchronize()
+} */
+
+
+
+
+/*@IBAction func closeHelper(sender: AnyObject) {
+println("closeHelper")
+//helperView.hidden = true
+}
+
+@IBAction func closeHello(sender: AnyObject) {
+println("closeHello")
+
+// not logged in - present login controller
+if (PFUser.currentUser() == nil) {
+//println("current user nil")
+let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
+let svc = signUpViewController()
+vc.delegate = self
+vc.signUpController = svc
+svc.delegate = self
+self.presentViewController(vc, animated: true, completion: nil)
+} else {
+println("current username \(PFUser.currentUser().username)")
+loadDataForDate(daDate)
+}
+
+helloView.hidden = true
+} */
 
 
 

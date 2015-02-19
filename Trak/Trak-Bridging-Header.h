@@ -12,7 +12,9 @@
 
 #import <Instabug/Instabug.h>
 
-#import <CoreText/CoreText.h>
+#import <CoreText/CoreText.h> // needed?
+
+#import <Bolts/Bolts.h>
 
 //#import <MessageUI/MFMailComposeViewController.h>
 
