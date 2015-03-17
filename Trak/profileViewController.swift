@@ -14,12 +14,18 @@ class profileViewController: UIViewController {
   @IBOutlet var logout: UIButton!
   //@IBOutlet var migraineTrak: UIButton!
   @IBOutlet var menuButton: UIButton!
+  @IBOutlet var topBackView: UIView!
   
     override func viewDidLoad() {
       super.viewDidLoad()
       username.text = PFUser.currentUser().username
       deleteMyAccount.normalStyle("Delete My Account")
       logout.normalStyle("Logout")
+      
+      // general set stuff
+      topBackView.layer.borderWidth = 0.3
+      topBackView.layer.borderColor = UIColor.appLightGray().CGColor
+
       //migraineTrak.normalStyle("Your Traks")
     }
 

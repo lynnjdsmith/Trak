@@ -34,6 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication!) {
     }
-
+  
 }
 

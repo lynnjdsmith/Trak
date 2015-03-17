@@ -236,7 +236,7 @@ class calendarViewController: UIViewController {
   }
 
   func yearPressed(sender: UIButton!) {
-      println("yearPressed")
+      //println("yearPressed")
   }
   
   @IBAction func done(sender: AnyObject) {

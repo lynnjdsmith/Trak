@@ -35,12 +35,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     self.text1.text = ""
   
     self.tableView.reloadData()
-    
-    /* if PFUser.currentUser() != nil {
-      loadDataForDate(daDate) // breaks first load? if no user logged in
-    } else {
-      goLogin()
-    } */
   }
   
   override func viewDidLoad() {
@@ -102,7 +96,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     PFUser.logInWithUsernameInBackground("l", password:"l") {
       (user: PFUser!, error: NSError!) -> Void in
       if user != nil {
-        loadDataForDate(self.daDate)
+        self.loadDataForDate(self.daDate)
         // Do stuff after successful login.
       } else {
         // The login failed. Check error to see why.

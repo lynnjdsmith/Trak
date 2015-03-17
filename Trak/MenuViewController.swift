@@ -13,6 +13,7 @@ class MenuViewController: UIViewController {
   @IBOutlet weak var mainButton: UIButton!
   @IBOutlet weak var profileButton: UIButton!
   @IBOutlet weak var logoutButton: UIButton!
+  @IBOutlet weak var tourButton: UIButton!
   
   @IBAction func mainButtonPressed(sender: AnyObject) {
     //self.revealViewController()?.rightRevealToggle(sender)
@@ -22,7 +23,7 @@ class MenuViewController: UIViewController {
   @IBAction func profileButtonPressed(sender: AnyObject) {
       performSegueWithIdentifier("sw_profile", sender: self)
   }
-  
+
   @IBAction func logoutButtonPressed(sender: AnyObject) {
     //println("loggedout Current User: \(PFUser.currentUser())")
     PFUser.logOut()
