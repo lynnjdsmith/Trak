@@ -43,8 +43,7 @@
 		BA4932771ABA11CF008BE825 /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C84DEDD1982A498009162CD /* signUpViewController.swift */; };
 		BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4AF874198DD02400FC10D2 /* itemDetailController.swift */; };
 		BA4DBE9F19CF4B7F00CFFBFA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA4DBE9D19CF4B7F00CFFBFA /* Info.plist */; };
-		BA4DBEAF19CF563F00CFFBFA /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */; };
-		BA4DBEB119CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */; };
+		BA4DBEAF19CF563F00CFFBFA /* GraphViewOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4DBEAE19CF563F00CFFBFA /* GraphViewOLD.swift */; };
 		BA5A9A4119D3DC0F00A410DF /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BACF75B919D3D51A00E2540D /* Instabug.framework */; };
 		BA5A9A4319D3DC4400A410DF /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4219D3DC4400A410DF /* CoreMotion.framework */; };
 		BA5A9A4519D3DC5E00A410DF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5A9A4419D3DC5E00A410DF /* CoreTelephony.framework */; };
@@ -61,8 +60,8 @@
 		BA5B234B1A9688250017E1F3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5B23461A9688250017E1F3 /* Parse.framework */; };
 		BA5B234C1A9688250017E1F3 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5B23471A9688250017E1F3 /* ParseFacebookUtils.framework */; };
 		BA5B234D1A9688250017E1F3 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5B23481A9688250017E1F3 /* ParseUI.framework */; };
-		BA5B40A719C68DB300794F13 /* dataMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A619C68DB300794F13 /* dataMainVC.swift */; };
-		BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A819C7D64000794F13 /* dataMainCell.swift */; };
+		BA5B40A719C68DB300794F13 /* dataMainVCOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A619C68DB300794F13 /* dataMainVCOLD.swift */; };
+		BA5B40A919C7D64000794F13 /* dataMainCellOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B40A819C7D64000794F13 /* dataMainCellOLD.swift */; };
 		BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */; };
 		BA6AF9A91A96E14C000F10EF /* AddTrakVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AF9A81A96E14C000F10EF /* AddTrakVC.swift */; };
 		BA6AF9AB1A9AD6E1000F10EF /* TourVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AF9AA1A9AD6E1000F10EF /* TourVC.swift */; };
@@ -136,8 +135,7 @@
 		BA4AF874198DD02400FC10D2 /* itemDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemDetailController.swift; sourceTree = "<group>"; };
 		BA4DBE9D19CF4B7F00CFFBFA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA4DBE9E19CF4B7F00CFFBFA /* TrakTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrakTests.swift; sourceTree = "<group>"; };
-		BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSymptomLine_GraphView.swift; sourceTree = "<group>"; };
+		BA4DBEAE19CF563F00CFFBFA /* GraphViewOLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewOLD.swift; sourceTree = "<group>"; };
 		BA5A9A4219D3DC4400A410DF /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		BA5A9A4419D3DC5E00A410DF /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BA5A9A4619D3DC7300A410DF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -153,8 +151,8 @@
 		BA5B23461A9688250017E1F3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
 		BA5B23471A9688250017E1F3 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		BA5B23481A9688250017E1F3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = Frameworks/ParseUI.framework; sourceTree = "<group>"; };
-		BA5B40A619C68DB300794F13 /* dataMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainVC.swift; sourceTree = "<group>"; };
-		BA5B40A819C7D64000794F13 /* dataMainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainCell.swift; sourceTree = "<group>"; };
+		BA5B40A619C68DB300794F13 /* dataMainVCOLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainVCOLD.swift; sourceTree = "<group>"; };
+		BA5B40A819C7D64000794F13 /* dataMainCellOLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMainCellOLD.swift; sourceTree = "<group>"; };
 		BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timelineCell.swift; sourceTree = "<group>"; };
 		BA6AF9A81A96E14C000F10EF /* AddTrakVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTrakVC.swift; sourceTree = "<group>"; };
 		BA6AF9AA1A9AD6E1000F10EF /* TourVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourVC.swift; sourceTree = "<group>"; };
@@ -269,7 +267,7 @@
 				BA347DDE1ABE3F0100C14C72 /* lightboxView.swift */,
 				BA16D0B11AC500460017D3DF /* subnavView.swift */,
 				BA05C5811A91688B00FC18CE /* Menu */,
-				BA5B40AA19C8A03100794F13 /* Data Screens */,
+				BA5B40AA19C8A03100794F13 /* Data Screens and Report */,
 				BAEA6F3C19B01650002EC6E8 /* Progress Indicator */,
 				BAE626C3199FBBF800747932 /* Login and Signup */,
 				5C143DA51980326B00B4F0E4 /* Supporting Files */,
@@ -354,19 +352,18 @@
 			path = TrakTests;
 			sourceTree = "<group>";
 		};
-		BA5B40AA19C8A03100794F13 /* Data Screens */ = {
+		BA5B40AA19C8A03100794F13 /* Data Screens and Report */ = {
 			isa = PBXGroup;
 			children = (
 				BA280D4F19FAD0ED00874FD1 /* symptomHistoryVC.swift */,
-				BA5B40A619C68DB300794F13 /* dataMainVC.swift */,
 				BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */,
-				BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */,
-				BA5B40A819C7D64000794F13 /* dataMainCell.swift */,
-				BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */,
-				BABFA3FE19CF402900434B51 /* dataMigraineVCOLD.swift */,
 				BA40C1681A0F07E1002CB7EE /* reportBasicView.swift */,
+				BA5B40A819C7D64000794F13 /* dataMainCellOLD.swift */,
+				BABFA3FE19CF402900434B51 /* dataMigraineVCOLD.swift */,
+				BA4DBEAE19CF563F00CFFBFA /* GraphViewOLD.swift */,
+				BA5B40A619C68DB300794F13 /* dataMainVCOLD.swift */,
 			);
-			name = "Data Screens";
+			name = "Data Screens and Report";
 			sourceTree = "<group>";
 		};
 		BAE626C3199FBBF800747932 /* Login and Signup */ = {
@@ -499,14 +496,13 @@
 				BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */,
 				BA4932761ABA11CC008BE825 /* logInViewController.swift in Sources */,
 				BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */,
-				BA4DBEB119CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift in Sources */,
 				BABFA3FF19CF402900434B51 /* dataMigraineVCOLD.swift in Sources */,
-				BA5B40A719C68DB300794F13 /* dataMainVC.swift in Sources */,
+				BA5B40A719C68DB300794F13 /* dataMainVCOLD.swift in Sources */,
 				BA6AF9AB1A9AD6E1000F10EF /* TourVC.swift in Sources */,
 				BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */,
 				BA6AF9AD1A9AD8E4000F10EF /* PageItemController.swift in Sources */,
 				BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */,
-				BA4DBEAF19CF563F00CFFBFA /* GraphView.swift in Sources */,
+				BA4DBEAF19CF563F00CFFBFA /* GraphViewOLD.swift in Sources */,
 				BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */,
 				BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */,
 				BA94DD811A81D1E8004D374E /* SWRevealViewController.m in Sources */,
@@ -520,7 +516,7 @@
 				BA40C16B1A106035002CB7EE /* anEvent.swift in Sources */,
 				5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */,
 				BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */,
-				BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */,
+				BA5B40A919C7D64000794F13 /* dataMainCellOLD.swift in Sources */,
 				BA280D5019FAD0ED00874FD1 /* symptomHistoryVC.swift in Sources */,
 				BA5B23411A95993E0017E1F3 /* Date.swift in Sources */,
 				BA347DDF1ABE3F0100C14C72 /* lightboxView.swift in Sources */,
