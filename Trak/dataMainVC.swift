@@ -26,7 +26,7 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //helpView.hidden = true
     tableViewData.separatorStyle = UITableViewCellSeparatorStyle.None
 
-    loadData("Potato")
+    loadData("Coffee")
     
   }
   
@@ -74,7 +74,7 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    //println("tableloading cell")
+    println("datamainvc tableloading cell")
     
     // setup cell
     var cell = tableView.dequeueReusableCellWithIdentifier("cell1") as timelineCell
@@ -92,7 +92,7 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let timeFormatter = NSDateFormatter()
     timeFormatter.dateFormat = "h:mm a" // "h:mm a"
     let str2 = timeFormatter.stringFromDate(daDateVal as NSDate)
-    
+    println("str2: \(str2)")
     // set time field look
     //cell.timeTextField.layer.borderColor = UIColor.appLightestGray().CGColor
     cell.timeTextField.layer.borderColor = UIColor.clearColor().CGColor

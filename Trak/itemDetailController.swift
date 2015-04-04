@@ -36,7 +36,9 @@ class itemDetailController: UIViewController {
   var name      :NSString! = ""
   
   // first value is doubled, because 0 isn't really used.
-  var amountNames :NSArray = ["a tiny bit (a1)", "a tiny bit (a1)", "very little (a2)","a little (a3)", "just less than normal (a4)", "normal amount (a5)","a little extra (a6)","a lot (a7)", "a lot + (a8)", "double or more (a9)", "an extreme amount (a10)"]
+  //var amountNames :NSArray = ["a tiny bit (a1)", "a tiny bit (a1)", "very little (a2)","a little (a3)", "just less than normal (a4)", "normal amount (a5)","a little extra (a6)","a lot (a7)", "a lot + (a8)", "double or more (a9)", "an extreme amount (a10)"]
+
+    var amountNames :NSArray = ["1 - very little", "1 - very little", "2 - a little","3 - normal", "4 - a lot", "lots of (a5)"]
   
   override func viewWillAppear(animated: Bool) {
     loadDataForStart()
@@ -47,8 +49,8 @@ class itemDetailController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    println(" ** setting size \(self.scrollView.frame.size.width)        **")
-    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width, height: 568)
+    //println(" ** setting size \(self.scrollView.frame.size.width)        **")
+    //self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width, height: 568)
     //scrollView.contentSize=CGSizeMake(screenSize.width,position + 20)
     
     // general set stuff
@@ -85,7 +87,7 @@ class itemDetailController: UIViewController {
     // create back btn
     navigationController?.setNavigationBarHidden(true, animated:true)
     let b   = UIButton() //UIButton.buttonWithType(UIButtonType.System) as UIButton
-    b.frame = CGRectMake(-15, 20, 100, 50)
+    b.frame = CGRectMake(-10, 22, 100, 50)
     b.backgroundColor = UIColor.clearColor()
     b.titleLabel!.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
     b.setTitleColor(UIColor.appLightGray(), forState: .Normal)
@@ -97,7 +99,7 @@ class itemDetailController: UIViewController {
     //self.navigationController?.navigationBarHidden = false
     
     // amountNames for amount field
-    amountField.text = amountNames[5] as NSString
+    amountField.text = amountNames[3] as NSString
     
     // style the buttons
     dayTextField.normalStyle("")
@@ -112,10 +114,10 @@ class itemDetailController: UIViewController {
     //trigSympControl.transform = CGAffineTransformMakeScale(0.88, 0.88)
     
     // style the text field
-    noteTextField.layer.borderColor = UIColor.appRed().CGColor
-    noteTextField.layer.borderWidth = 1
-    noteTextField.layer.cornerRadius = 10
-    noteTextField.layer.cornerRadius = 10
+    //noteTextField.layer.borderColor = UIColor.appRed().CGColor
+    //noteTextField.layer.borderWidth = 1
+    //noteTextField.layer.cornerRadius = 10
+    //noteTextField.layer.cornerRadius = 10
   }
   
   func handleTap(recognizer: UITapGestureRecognizer) {
@@ -220,13 +222,13 @@ class itemDetailController: UIViewController {
 
         // set amount slider
         //var theVal = object.valueForKey("amount")
-println(object.valueForKey("amount") as NSString)
+//println(object.valueForKey("amount") as NSString)
         var theS :String = object.valueForKey("amount") as String
         self.amountSlider.value = (object.valueForKey("amount") as NSString).floatValue
-println("theS: \(theS)")
+//println("theS: \(theS)")
         // amountNames for amount field 
         var theAmount :Int = Int((object.valueForKey("amount") as NSString).floatValue)
-println("the amount: \(theAmount)")
+//println("the amount: \(theAmount)")
         self.amountField.text = self.amountNames[theAmount] as NSString
         //println("3")
         //println("daTime, setting \(self.daTime)")

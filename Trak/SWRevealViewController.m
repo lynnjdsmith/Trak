@@ -626,7 +626,7 @@ const int FrontViewPositionNone = 0xff;
     _rearViewRevealWidth = 200.0f;
     _rearViewRevealOverdraw = 60.0f;
     _rearViewRevealDisplacement = 40.0f;
-    _rightViewRevealWidth = 200.0f;
+    _rightViewRevealWidth = 300.0f;
     _rightViewRevealOverdraw = 60.0f;
     _rightViewRevealDisplacement = 40.0f;
     _bounceBackOnOverdraw = YES;
@@ -933,7 +933,7 @@ const int FrontViewPositionNone = 0xff;
 
 - (IBAction)rightRevealToggle:(id)sender
 {    
-  NSLog(@"here2");
+  //NSLog(@"here2");
   [self rightRevealToggleAnimated:YES];
 }
 

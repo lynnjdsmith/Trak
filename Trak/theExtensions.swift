@@ -108,6 +108,9 @@ extension UIColor {
   class func appBlue() -> UIColor {
     return UIColor(red: 0.333, green: 0.784, blue: 1, alpha: 1)
   }
+  class func appLightBlue2() -> UIColor {
+    return UIColor(red: 155/255, green: 217/255, blue: 247/255, alpha: 1)
+  }
   class func appPurple() -> UIColor {
     return UIColor(red: 0.659, green: 0.271, blue: 0.988, alpha: 1)
   }
@@ -128,6 +131,9 @@ extension UIColor {
   }
   class func appRed() -> UIColor {
     return UIColor(red: 235/255, green: 68/255, blue: 68/255, alpha: 1)
+  }
+  class func appColorA() -> UIColor {
+    return UIColor(red: 30/255, green: 166/255, blue: 122/255, alpha: 1)
   }
   class func appLightBlue() -> UIColor {
     //return UIColor(red: 236/255, green: 243/255, blue: 248/255, alpha: 1)

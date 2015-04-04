@@ -36,6 +36,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>CorbelBoldItalic.ttf</string>
+		<string>CorbelBold.ttf</string>
+		<string>Corbel.ttf</string>
+		<string>CorbelItalic.ttf</string>
+	</array>
 	<key>hasLaunchedOnce</key>
 	<string>f</string>
 </dict>

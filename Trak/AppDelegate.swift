@@ -12,12 +12,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
       
-        // set parse and instabug
-        Parse.enableLocalDatastore()
-        Parse.setApplicationId("fYKgQaZQVXiHaPF4CqpTpYCUHrgjcdTd0mUg6EZX", clientKey: "anNgZkMlFrFNOVFIMgJJs1BmZUgTBm4Zkie00oUB")
-        Instabug.startWithToken("dcea2ba4a815b84590074f75715ae8b9", captureSource:IBGCaptureSourceUIKit, invocationEvent:IBGInvocationEventShake)
-        
-        return true
+      // set parse and instabug
+      Parse.enableLocalDatastore()
+      Parse.setApplicationId("fYKgQaZQVXiHaPF4CqpTpYCUHrgjcdTd0mUg6EZX", clientKey: "anNgZkMlFrFNOVFIMgJJs1BmZUgTBm4Zkie00oUB")
+      Instabug.startWithToken("dcea2ba4a815b84590074f75715ae8b9", captureSource:IBGCaptureSourceUIKit, invocationEvent:IBGInvocationEventShake)
+    
+      // reroute to parse login if user is not logged in
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      
+      if self.window != nil {
+
+        if PFUser.currentUser() == nil {
+          self.window!.rootViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as PFLogInViewController
+        }
+        else {
+          self.window!.rootViewController = storyboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as SWRevealViewController
+        }
+      }
+      
+      return true
+      
+  
     }
 
     func applicationWillResignActive(application: UIApplication!) {

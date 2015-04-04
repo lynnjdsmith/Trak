@@ -8,8 +8,6 @@ import QuartzCore
 class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate, itemDetailDelegate, tCellDelegate {
   
   // set variables
-  @IBOutlet var helloView: UIView!
-  @IBOutlet var helperView: UIView!
   @IBOutlet var tableView: UITableView!
   @IBOutlet var text1: UITextField!
   @IBOutlet var dayBtn: UIButton!
@@ -40,6 +38,9 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   override func viewDidLoad() {
     super.viewDidLoad()
  
+    var lb :lightboxView = lightboxView(filename: "howto")
+    //self.view.addSubview(lb)
+    
     // set daDate
     let formatter = NSDateFormatter()
     formatter.dateFormat = "MM/dd/yyyy"
@@ -93,7 +94,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   func goLogin() {
     println("logging in")
-    PFUser.logInWithUsernameInBackground("l", password:"l") {
+    /* PFUser.logInWithUsernameInBackground("l", password:"l") {
       (user: PFUser!, error: NSError!) -> Void in
       if user != nil {
         self.loadDataForDate(self.daDate)
@@ -101,14 +102,14 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       } else {
         // The login failed. Check error to see why.
       }
-    }/*
+    }*/
     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let vc : logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
+    let vc :logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
     let svc = signUpViewController()
-    vc.delegate = self
+    //vc.delegate = self
     vc.signUpController = svc
-    svc.delegate = self
-    self.presentViewController(vc, animated: true, completion: nil) */
+    //svc.delegate = self
+    self.presentViewController(vc, animated: true, completion: nil) 
   }
   
   
@@ -142,7 +143,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     var date1: NSDate! = formatter.dateFromString(date1String)
     var date2: NSDate! = formatter.dateFromString(date2String)
     
-    println("current username \(PFUser.currentUser().username)")
+    //println("current username \(PFUser.currentUser().username)")
     // create query
     var findData:PFQuery = PFQuery(className: "Items")
     findData.whereKey("username", equalTo:PFUser.currentUser().username!)
@@ -166,7 +167,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
           self.items = []
             for object in objects as [PFObject] {
                 self.items.addObject(object)
-                println(object)
+                //println(object)
             }
             self.tableView.reloadData()
         }
@@ -244,7 +245,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       }
     
       // add amount
-      newItem.setObject("5", forKey: "amount")
+      newItem.setObject("3", forKey: "amount")
     
       // save item
       //self.saveObject(newItem)

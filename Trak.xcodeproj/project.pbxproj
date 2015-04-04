@@ -29,13 +29,18 @@
 		5C143DED19803A0800B4F0E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C143DE719803A0800B4F0E4 /* UIKit.framework */; };
 		5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4988C61980521A00873C6D /* timelineViewController.swift */; };
 		BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */; };
+		BA16D0B21AC500460017D3DF /* subnavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA16D0B11AC500460017D3DF /* subnavView.swift */; };
 		BA16FA641A06CC61000B1D01 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA16FA631A06CC61000B1D01 /* LaunchScreen.xib */; };
 		BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */; };
 		BA16FA6A1A085537000B1D01 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA16FA691A085537000B1D01 /* CoreText.framework */; };
 		BA280D4E19FAC05E00874FD1 /* sEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280D4D19FAC05E00874FD1 /* sEvent.swift */; };
 		BA280D5019FAD0ED00874FD1 /* symptomHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA280D4F19FAD0ED00874FD1 /* symptomHistoryVC.swift */; };
 		BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */; };
+		BA347DDD1ABA5DFD00C14C72 /* MigraineStopDeets.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA347DDC1ABA5DFD00C14C72 /* MigraineStopDeets.plist */; };
+		BA347DDF1ABE3F0100C14C72 /* lightboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA347DDE1ABE3F0100C14C72 /* lightboxView.swift */; };
 		BA40C16B1A106035002CB7EE /* anEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40C16A1A106035002CB7EE /* anEvent.swift */; };
+		BA4932761ABA11CC008BE825 /* logInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C84DEDB1982A456009162CD /* logInViewController.swift */; };
+		BA4932771ABA11CF008BE825 /* signUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C84DEDD1982A498009162CD /* signUpViewController.swift */; };
 		BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4AF874198DD02400FC10D2 /* itemDetailController.swift */; };
 		BA4DBE9F19CF4B7F00CFFBFA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA4DBE9D19CF4B7F00CFFBFA /* Info.plist */; };
 		BA4DBEAF19CF563F00CFFBFA /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */; };
@@ -65,7 +70,12 @@
 		BA8876CF1A832B1F009E1446 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8876CE1A832B1F009E1446 /* MenuViewController.swift */; };
 		BA94DD811A81D1E8004D374E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA94DD801A81D1E8004D374E /* SWRevealViewController.m */; };
 		BAA8C9481A11D50500C7CAC6 /* reportBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40C1681A0F07E1002CB7EE /* reportBasicView.swift */; };
-		BABFA3FF19CF402900434B51 /* dataMigraineVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */; };
+		BAB9243D1ABE54A7002EA0BD /* CorbelBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAB924391ABE54A1002EA0BD /* CorbelBoldItalic.ttf */; };
+		BAB9243E1ABE54A9002EA0BD /* CorbelBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAB9243A1ABE54A1002EA0BD /* CorbelBold.ttf */; };
+		BAB9243F1ABE54A9002EA0BD /* CorbelItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAB9243B1ABE54A1002EA0BD /* CorbelItalic.ttf */; };
+		BAB924401ABE54A9002EA0BD /* Corbel.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAB9243C1ABE54A1002EA0BD /* Corbel.ttf */; };
+		BAB924421ABE7EF2002EA0BD /* howto.html in Resources */ = {isa = PBXBuildFile; fileRef = BAB924411ABE7EF2002EA0BD /* howto.html */; };
+		BABFA3FF19CF402900434B51 /* dataMigraineVCOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFA3FE19CF402900434B51 /* dataMigraineVCOLD.swift */; };
 		BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BACBCCCA19AEC17900C79000 /* MBProgressHUD.m */; };
 		BACF75BC19D3D60600E2540D /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BACF75BB19D3D60600E2540D /* Instabug.bundle */; };
 		BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */; };
@@ -112,12 +122,15 @@
 		5C84DEDB1982A456009162CD /* logInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = logInViewController.swift; sourceTree = "<group>"; };
 		5C84DEDD1982A498009162CD /* signUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = symptTrigListViewController.swift; sourceTree = "<group>"; };
+		BA16D0B11AC500460017D3DF /* subnavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = subnavView.swift; sourceTree = "<group>"; };
 		BA16FA631A06CC61000B1D01 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleSymptomHorizontalGraphView.swift; sourceTree = "<group>"; };
 		BA16FA691A085537000B1D01 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		BA280D4D19FAC05E00874FD1 /* sEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sEvent.swift; sourceTree = "<group>"; };
 		BA280D4F19FAD0ED00874FD1 /* symptomHistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = symptomHistoryVC.swift; sourceTree = "<group>"; };
 		BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
+		BA347DDC1ABA5DFD00C14C72 /* MigraineStopDeets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MigraineStopDeets.plist; sourceTree = "<group>"; };
+		BA347DDE1ABE3F0100C14C72 /* lightboxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lightboxView.swift; sourceTree = "<group>"; };
 		BA40C1681A0F07E1002CB7EE /* reportBasicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reportBasicView.swift; sourceTree = "<group>"; };
 		BA40C16A1A106035002CB7EE /* anEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = anEvent.swift; sourceTree = "<group>"; };
 		BA4AF874198DD02400FC10D2 /* itemDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemDetailController.swift; sourceTree = "<group>"; };
@@ -149,7 +162,12 @@
 		BA8876CE1A832B1F009E1446 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BA94DD801A81D1E8004D374E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		BA94DD821A81D1F3004D374E /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMigraineVC.swift; sourceTree = "<group>"; };
+		BAB924391ABE54A1002EA0BD /* CorbelBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CorbelBoldItalic.ttf; sourceTree = "<group>"; };
+		BAB9243A1ABE54A1002EA0BD /* CorbelBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CorbelBold.ttf; sourceTree = "<group>"; };
+		BAB9243B1ABE54A1002EA0BD /* CorbelItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CorbelItalic.ttf; sourceTree = "<group>"; };
+		BAB9243C1ABE54A1002EA0BD /* Corbel.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Corbel.ttf; sourceTree = "<group>"; };
+		BAB924411ABE7EF2002EA0BD /* howto.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = howto.html; sourceTree = "<group>"; };
+		BABFA3FE19CF402900434B51 /* dataMigraineVCOLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataMigraineVCOLD.swift; sourceTree = "<group>"; };
 		BACBCCC919AEC17900C79000 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BACBCCCA19AEC17900C79000 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		BACF75B919D3D51A00E2540D /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
@@ -248,6 +266,8 @@
 				BA280D4D19FAC05E00874FD1 /* sEvent.swift */,
 				BA5B233F1A9599320017E1F3 /* Date.swift */,
 				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
+				BA347DDE1ABE3F0100C14C72 /* lightboxView.swift */,
+				BA16D0B11AC500460017D3DF /* subnavView.swift */,
 				BA05C5811A91688B00FC18CE /* Menu */,
 				BA5B40AA19C8A03100794F13 /* Data Screens */,
 				BAEA6F3C19B01650002EC6E8 /* Progress Indicator */,
@@ -263,6 +283,12 @@
 			children = (
 				5C143DA71980326B00B4F0E4 /* AppDelegate.swift */,
 				5C143DDD198033AA00B4F0E4 /* Trak-Bridging-Header.h */,
+				BA347DDC1ABA5DFD00C14C72 /* MigraineStopDeets.plist */,
+				BAB924391ABE54A1002EA0BD /* CorbelBoldItalic.ttf */,
+				BAB9243A1ABE54A1002EA0BD /* CorbelBold.ttf */,
+				BAB9243B1ABE54A1002EA0BD /* CorbelItalic.ttf */,
+				BAB9243C1ABE54A1002EA0BD /* Corbel.ttf */,
+				BAB924411ABE7EF2002EA0BD /* howto.html */,
 				5C143DA61980326B00B4F0E4 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -332,12 +358,12 @@
 			isa = PBXGroup;
 			children = (
 				BA280D4F19FAD0ED00874FD1 /* symptomHistoryVC.swift */,
+				BA5B40A619C68DB300794F13 /* dataMainVC.swift */,
 				BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */,
 				BA4DBEB019CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift */,
 				BA5B40A819C7D64000794F13 /* dataMainCell.swift */,
 				BA4DBEAE19CF563F00CFFBFA /* GraphView.swift */,
-				BABFA3FE19CF402900434B51 /* dataMigraineVC.swift */,
-				BA5B40A619C68DB300794F13 /* dataMainVC.swift */,
+				BABFA3FE19CF402900434B51 /* dataMigraineVCOLD.swift */,
 				BA40C1681A0F07E1002CB7EE /* reportBasicView.swift */,
 			);
 			name = "Data Screens";
@@ -346,8 +372,8 @@
 		BAE626C3199FBBF800747932 /* Login and Signup */ = {
 			isa = PBXGroup;
 			children = (
-				5C84DEDD1982A498009162CD /* signUpViewController.swift */,
 				5C84DEDB1982A456009162CD /* logInViewController.swift */,
+				5C84DEDD1982A498009162CD /* signUpViewController.swift */,
 			);
 			name = "Login and Signup";
 			sourceTree = "<group>";
@@ -444,7 +470,13 @@
 			files = (
 				BACF75BC19D3D60600E2540D /* Instabug.bundle in Resources */,
 				5C143DAD1980326B00B4F0E4 /* Main.storyboard in Resources */,
+				BA347DDD1ABA5DFD00C14C72 /* MigraineStopDeets.plist in Resources */,
+				BAB924401ABE54A9002EA0BD /* Corbel.ttf in Resources */,
+				BAB9243E1ABE54A9002EA0BD /* CorbelBold.ttf in Resources */,
+				BAB9243D1ABE54A7002EA0BD /* CorbelBoldItalic.ttf in Resources */,
+				BAB924421ABE7EF2002EA0BD /* howto.html in Resources */,
 				5C143DAF1980326B00B4F0E4 /* Images.xcassets in Resources */,
+				BAB9243F1ABE54A9002EA0BD /* CorbelItalic.ttf in Resources */,
 				BA4DBE9F19CF4B7F00CFFBFA /* Info.plist in Resources */,
 				BA16FA641A06CC61000B1D01 /* LaunchScreen.xib in Resources */,
 			);
@@ -465,9 +497,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */,
+				BA4932761ABA11CC008BE825 /* logInViewController.swift in Sources */,
 				BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */,
 				BA4DBEB119CF5D8800CFFBFA /* SingleSymptomLine_GraphView.swift in Sources */,
-				BABFA3FF19CF402900434B51 /* dataMigraineVC.swift in Sources */,
+				BABFA3FF19CF402900434B51 /* dataMigraineVCOLD.swift in Sources */,
 				BA5B40A719C68DB300794F13 /* dataMainVC.swift in Sources */,
 				BA6AF9AB1A9AD6E1000F10EF /* TourVC.swift in Sources */,
 				BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */,
@@ -477,8 +510,10 @@
 				BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */,
 				BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */,
 				BA94DD811A81D1E8004D374E /* SWRevealViewController.m in Sources */,
+				BA4932771ABA11CF008BE825 /* signUpViewController.swift in Sources */,
 				5C143DA81980326B00B4F0E4 /* AppDelegate.swift in Sources */,
 				BAE626C2199FBB5500747932 /* calendarViewController.swift in Sources */,
+				BA16D0B21AC500460017D3DF /* subnavView.swift in Sources */,
 				BAA8C9481A11D50500C7CAC6 /* reportBasicView.swift in Sources */,
 				BA8876CF1A832B1F009E1446 /* MenuViewController.swift in Sources */,
 				BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */,
@@ -488,6 +523,7 @@
 				BA5B40A919C7D64000794F13 /* dataMainCell.swift in Sources */,
 				BA280D5019FAD0ED00874FD1 /* symptomHistoryVC.swift in Sources */,
 				BA5B23411A95993E0017E1F3 /* Date.swift in Sources */,
+				BA347DDF1ABE3F0100C14C72 /* lightboxView.swift in Sources */,
 				BA6AF9A91A96E14C000F10EF /* AddTrakVC.swift in Sources */,
 				BA280D4E19FAC05E00874FD1 /* sEvent.swift in Sources */,
 			);

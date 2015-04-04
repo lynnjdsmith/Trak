@@ -8,6 +8,8 @@
 
 #import <Parse/Parse.h>
 
+#import <ParseUI/ParseUI.h>
+
 #import "MBProgressHUD.h"
 
 #import <Instabug/Instabug.h>
