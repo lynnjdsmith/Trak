@@ -32,6 +32,11 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     // empty text string
     self.text1.text = ""
   
+    // add nav
+    var nav :navView = navView()
+    nav.myparent = self
+    self.view.addSubview(nav)
+    
     self.tableView.reloadData()
   }
   
@@ -138,10 +143,13 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     // create dates for beginning and end of day
     var date1String: NSString! = "\(theDate) 12:00 AM"
     var date2String: NSString! = "\(theDate) 11:59 PM"
+    //println("******  date1String: \(date1String) date2String: \(date2String)")
     let formatter = NSDateFormatter()
     formatter.dateFormat = "MM/dd/yyyy hh:mm a"
     var date1: NSDate! = formatter.dateFromString(date1String)
     var date2: NSDate! = formatter.dateFromString(date2String)
+
+    println("date1: \(date1) date2: \(date2)")
     
     //println("current username \(PFUser.currentUser().username)")
     // create query
@@ -406,6 +414,11 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     self.navigationController?.pushViewController(s, animated: true)
     //self.presentViewController(s, animated: true, completion: nil)
     //println("You selected cell #\(indexPath.row)!")
+  }
+  
+  func revealTheToggle() {
+    self.revealViewController()?.rightRevealToggle(self)
+    self.view.endEditing(true)
   }
   
 } // END class timeline view controller

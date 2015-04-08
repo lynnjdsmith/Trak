@@ -121,9 +121,10 @@ class calendarViewController: UIViewController {
   func layoutAMonth(strMonthNum: NSString, top: CGFloat) {
     //println("in layoutMonth. strMonthNum: \(strMonthNum)")
     
+    // FIX TODO BEFORE LAUNCH - get the 2015 out of there. *********** FIX
     let dffd = NSDateFormatter()
     dffd.dateFormat = "MM/dd/yyyy"
-    let firstDay :NSDate = dffd.dateFromString("\(strMonthNum)/01/2014")!
+    let firstDay :NSDate = dffd.dateFromString("\(strMonthNum)/01/2015")!
     
     let dfmn = NSDateFormatter()
     dfmn.dateFormat = "MM"
@@ -164,8 +165,9 @@ class calendarViewController: UIViewController {
     
       thePosX = (boxWWSpacer * (theDayOfWeek - 1)) + self.margin
       // -1 because you want the first to be 0
-
-      let strAll = "\(strMonthNum)/\(index)/2014"
+      
+      // FIX TODO
+      let strAll = "\(strMonthNum)/\(index)/2015"
       
       let todayF = NSDateFormatter()
       todayF.dateFormat = "MM/dd/yyyy"

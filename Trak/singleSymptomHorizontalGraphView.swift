@@ -61,8 +61,8 @@ class singleSymptomHorizontalGraphView: UIView {
     
     // draw big dot
     let obj1 :Dictionary<String, AnyObject> = ["size" : height, "xPos" : graphWidth - height, "yPos" : 0, "color" : UIColor.appRed()] as Dictionary
-    var bl :CALayer = placeCircle(obj1)
-    self.layer.addSublayer(bl)
+    var bl :UIView = placeCircle(obj1)
+    self.addSubview(bl)
     
     //println(beforeEvents)
     
@@ -142,8 +142,8 @@ class singleSymptomHorizontalGraphView: UIView {
       var yOffset = randomInt(0, (Int(height) - Int(dotSize/2)))
       //println("xoffset \(yOffset)")
       let objDot :Dictionary<String, AnyObject> = ["size" : dotSize, "xPos" : myXPos, "yPos" : CGFloat(yOffset), "color" : dotColor] as Dictionary
-      var dl :CALayer = placeCircle(objDot)
-      layer.addSublayer(dl)
+      var dl :UIView = placeCircle(objDot)
+      self.addSubview(dl)
     }
   }
   

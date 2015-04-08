@@ -24,7 +24,7 @@ class lightboxView: UIView {
   init (filename :NSString) {
     super.init()
     theFileName = filename
-    println("lightbox loaded")
+    //println("lightbox loaded")
     setup()
   }
   

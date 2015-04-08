@@ -144,8 +144,8 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
     for (index, value) in enumerate(names) {
 
       let obj1 :Dictionary<String, AnyObject> = ["size" : dotSize, "xPos" : currentX, "yPos" : currentY, "color" : self.colorz[index]] as Dictionary
-      var l :CALayer = placeCircle(obj1)
-      self.view.layer.addSublayer(l)
+      //var l :CALayer = placeCircle(obj1)
+      //self.view.layer.addSublayer(l)
       
       let theLabel :UILabel = UILabel(frame: CGRectMake(currentX + 20, currentY, spaceAmt - 20, 15))
       //UILabel(frame: CGRectMake(CGFloat(xPosLegend - (spaceAmt/2) + (dotSize/2)), yPosLegend + dotSize, spaceAmt, 30))

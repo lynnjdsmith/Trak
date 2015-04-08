@@ -40,11 +40,9 @@ class GraphView: UIView {
     }
     
     init(frame: CGRect, data: NSArray) {
-
         super.init(frame: frame)
         backgroundColor = UIColor.whiteColor()
         self.data = data.mutableCopy() as NSMutableArray
-        
     }
     
     override func drawRect(rect: CGRect) {

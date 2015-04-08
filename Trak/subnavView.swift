@@ -11,48 +11,61 @@ import QuartzCore
 
 class subnavView: UIView {
 
-    var theTitle    :UILabel!
-    var topHeight   :CGFloat!
-    var webView     :UIWebView!
-    var theFileName :NSString!
+  var myparent    :UIViewController!
   
   override init (frame : CGRect) {
     super.init(frame : frame)
-    //println("a")
-  }
-  
-  init (filename :NSString) {
-    super.init()
-    theFileName = filename
-    //println("b")
+    //println("snv")
     setup()
   }
   
   func setup() {
     var screenSize: CGRect = UIScreen.mainScreen().bounds
-    topHeight = 70  //screenSize.width / 20.0
+    var myHeight :CGFloat = 50.0
+    var spacing :CGFloat = 8.0
+    var theFont = UIFont(name: "Corbel-Bold", size: 17)
     
-    self.frame = CGRectMake(0, topHeight, screenSize.width, 40)
-    var myHeight = self.frame.size.height
-    self.backgroundColor = UIColor.appLightBlue2()
-    self.layer.cornerRadius = 25;
-    self.layer.masksToBounds = true;
+    // draw background. The -10 and + 20 are so the shadow looks correct.
+    self.frame = CGRectMake(-10, screenSize.height - 100, screenSize.width + 20, myHeight)
+    self.backgroundColor = UIColor.appColorA()
+    self.layer.cornerRadius = 0;
+    self.layer.shadowOpacity = 0.3
+    self.layer.shadowRadius = 2.0
+    self.layer.shadowOffset = CGSizeMake(0, -3)
     
-    //let imageName = "icon_close.png"
-    //let image = UIImage(named: imageName)
-    let btn1:UIButton = UIButton(frame: CGRect(x: 0, y: screenSize.width/3, width: screenSize.width/3, height: 40))
+    // set button width.
+    var btnWidth :CGFloat = (screenSize.width / 3.0) - spacing * 2.0
+
+    // make buttons. add 10 to x for the shadow adjustment above.
+    let btn1:UIButton = UIButton(frame: CGRect(x: spacing + 2 + 10, y: 12, width: btnWidth, height: 35))
     btn1.setTitle("Migraines", forState: UIControlState.Normal)
+    btn1.backgroundColor = UIColor.btnColorB()
+    btn1.titleLabel!.font = theFont
+    btn1.layer.cornerRadius = 15
     btn1.addTarget(self, action: "btn1Press", forControlEvents: UIControlEvents.TouchUpInside)
     //btn1.setImage(image, forState: .Normal)
     self.addSubview(btn1)
-  }
-  
-  func setTitle(theString:NSString){
-    theTitle.text = theString
+
+    let btn2:UIButton = UIButton(frame: CGRect(x: screenSize.width/3 + spacing + 10, y: 12, width: btnWidth, height: 35))
+    btn2.setTitle("Day By Day", forState: UIControlState.Normal)
+    btn2.backgroundColor = UIColor.btnColorHighlight()
+    btn2.titleLabel!.font = theFont
+    btn2.layer.cornerRadius = 15
+    btn2.addTarget(self, action: "btn1Press", forControlEvents: UIControlEvents.TouchUpInside)
+    self.addSubview(btn2)
+    
+    let btn3:UIButton = UIButton(frame: CGRect(x: (screenSize.width/3 * 2) + spacing - 2 + 10, y: 12, width: btnWidth, height: 35))
+    btn3.setTitle("By Trigger", forState: UIControlState.Normal)
+    btn3.titleLabel!.font = theFont
+    btn3.backgroundColor = UIColor.btnColorB()
+    btn3.layer.cornerRadius = 15
+    btn3.addTarget(self, action: "btn1Press", forControlEvents: UIControlEvents.TouchUpInside)
+    self.addSubview(btn3)
   }
   
   func btn1Press() {
-    self.hidden = true
+    println("btn pressed")
+    //self.hidden = true
   }
   
   override init () {

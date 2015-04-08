@@ -29,6 +29,7 @@
 		5C143DED19803A0800B4F0E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C143DE719803A0800B4F0E4 /* UIKit.framework */; };
 		5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4988C61980521A00873C6D /* timelineViewController.swift */; };
 		BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */; };
+		BA12190D1AD1ADC3001F2930 /* navView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12190C1AD1ADC3001F2930 /* navView.swift */; };
 		BA16D0B21AC500460017D3DF /* subnavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA16D0B11AC500460017D3DF /* subnavView.swift */; };
 		BA16FA641A06CC61000B1D01 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA16FA631A06CC61000B1D01 /* LaunchScreen.xib */; };
 		BA16FA661A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */; };
@@ -78,6 +79,8 @@
 		BACBCCCB19AEC17900C79000 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BACBCCCA19AEC17900C79000 /* MBProgressHUD.m */; };
 		BACF75BC19D3D60600E2540D /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BACF75BB19D3D60600E2540D /* Instabug.bundle */; };
 		BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */; };
+		BAE2543B1AD06F1400E01DDD /* chartPastDaysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2543A1AD06F1400E01DDD /* chartPastDaysVC.swift */; };
+		BAE2543D1AD07FFE00E01DDD /* aGraphTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE2543C1AD07FFE00E01DDD /* aGraphTimelineView.swift */; };
 		BAE626C2199FBB5500747932 /* calendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE626C1199FBB5500747932 /* calendarViewController.swift */; };
 		BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -121,6 +124,7 @@
 		5C84DEDB1982A456009162CD /* logInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = logInViewController.swift; sourceTree = "<group>"; };
 		5C84DEDD1982A498009162CD /* signUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signUpViewController.swift; sourceTree = "<group>"; };
 		BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = symptTrigListViewController.swift; sourceTree = "<group>"; };
+		BA12190C1AD1ADC3001F2930 /* navView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = navView.swift; sourceTree = "<group>"; };
 		BA16D0B11AC500460017D3DF /* subnavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = subnavView.swift; sourceTree = "<group>"; };
 		BA16FA631A06CC61000B1D01 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleSymptomHorizontalGraphView.swift; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 		BACF75B919D3D51A00E2540D /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
 		BACF75BB19D3D60600E2540D /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Instabug.bundle; sourceTree = "<group>"; };
 		BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = theExtensions.swift; sourceTree = "<group>"; };
+		BAE2543A1AD06F1400E01DDD /* chartPastDaysVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chartPastDaysVC.swift; sourceTree = "<group>"; };
+		BAE2543C1AD07FFE00E01DDD /* aGraphTimelineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aGraphTimelineView.swift; sourceTree = "<group>"; };
 		BAE626C1199FBB5500747932 /* calendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarViewController.swift; sourceTree = "<group>"; };
 		BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AF+Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -265,9 +271,9 @@
 				BA5B233F1A9599320017E1F3 /* Date.swift */,
 				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
 				BA347DDE1ABE3F0100C14C72 /* lightboxView.swift */,
-				BA16D0B11AC500460017D3DF /* subnavView.swift */,
+				BA12190E1AD1ADD0001F2930 /* Nav and Subnav */,
 				BA05C5811A91688B00FC18CE /* Menu */,
-				BA5B40AA19C8A03100794F13 /* Data Screens and Report */,
+				BA5B40AA19C8A03100794F13 /* Charts */,
 				BAEA6F3C19B01650002EC6E8 /* Progress Indicator */,
 				BAE626C3199FBBF800747932 /* Login and Signup */,
 				5C143DA51980326B00B4F0E4 /* Supporting Files */,
@@ -343,6 +349,15 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		BA12190E1AD1ADD0001F2930 /* Nav and Subnav */ = {
+			isa = PBXGroup;
+			children = (
+				BA12190C1AD1ADC3001F2930 /* navView.swift */,
+				BA16D0B11AC500460017D3DF /* subnavView.swift */,
+			);
+			name = "Nav and Subnav";
+			sourceTree = "<group>";
+		};
 		BA4DBE9C19CF4B7F00CFFBFA /* TrakTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,18 +367,20 @@
 			path = TrakTests;
 			sourceTree = "<group>";
 		};
-		BA5B40AA19C8A03100794F13 /* Data Screens and Report */ = {
+		BA5B40AA19C8A03100794F13 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				BAE2543A1AD06F1400E01DDD /* chartPastDaysVC.swift */,
+				BAE2543C1AD07FFE00E01DDD /* aGraphTimelineView.swift */,
+				BA40C1681A0F07E1002CB7EE /* reportBasicView.swift */,
 				BA280D4F19FAD0ED00874FD1 /* symptomHistoryVC.swift */,
 				BA16FA651A0850BD000B1D01 /* singleSymptomHorizontalGraphView.swift */,
-				BA40C1681A0F07E1002CB7EE /* reportBasicView.swift */,
 				BA5B40A819C7D64000794F13 /* dataMainCellOLD.swift */,
 				BABFA3FE19CF402900434B51 /* dataMigraineVCOLD.swift */,
 				BA4DBEAE19CF563F00CFFBFA /* GraphViewOLD.swift */,
 				BA5B40A619C68DB300794F13 /* dataMainVCOLD.swift */,
 			);
-			name = "Data Screens and Report";
+			name = Charts;
 			sourceTree = "<group>";
 		};
 		BAE626C3199FBBF800747932 /* Login and Signup */ = {
@@ -494,12 +511,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA08515619F577BD00BACD87 /* symptTrigListViewController.swift in Sources */,
+				BAE2543D1AD07FFE00E01DDD /* aGraphTimelineView.swift in Sources */,
 				BA4932761ABA11CC008BE825 /* logInViewController.swift in Sources */,
 				BAD85E3119BCFAFA00E2EB9B /* theExtensions.swift in Sources */,
 				BABFA3FF19CF402900434B51 /* dataMigraineVCOLD.swift in Sources */,
 				BA5B40A719C68DB300794F13 /* dataMainVCOLD.swift in Sources */,
 				BA6AF9AB1A9AD6E1000F10EF /* TourVC.swift in Sources */,
 				BAF74EDD19E5B8E800956CF8 /* AF+Date+Extension.swift in Sources */,
+				BA12190D1AD1ADC3001F2930 /* navView.swift in Sources */,
 				BA6AF9AD1A9AD8E4000F10EF /* PageItemController.swift in Sources */,
 				BA6AA40C19C4CDEB00D64369 /* timelineCell.swift in Sources */,
 				BA4DBEAF19CF563F00CFFBFA /* GraphViewOLD.swift in Sources */,
@@ -515,6 +534,7 @@
 				BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */,
 				BA40C16B1A106035002CB7EE /* anEvent.swift in Sources */,
 				5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */,
+				BAE2543B1AD06F1400E01DDD /* chartPastDaysVC.swift in Sources */,
 				BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */,
 				BA5B40A919C7D64000794F13 /* dataMainCellOLD.swift in Sources */,
 				BA280D5019FAD0ED00874FD1 /* symptomHistoryVC.swift in Sources */,

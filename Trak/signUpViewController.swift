@@ -90,7 +90,31 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
   // Parse login signup swift http://www.veasoftware.com/tutorials/2015/2/28/twitter-login-with-parse-in-swift-xcode-6-ios-8-tutorial
   
   func signUpViewController(signUpController: PFSignUpViewController!, didSignUpUser user: PFUser!) {
-      println("**** didSignUpUser ***")
+    
+    println("**** didSignUpUser ***")
+    
+    var error: NSError?
+    
+    //var theUser = PFUser.logInWithUsername(self.logInView.usernameField.text, password: self.logInView.passwordField.text, error: &error)
+    
+    if let actualError = error {
+      println("An Error Occurred: \(actualError)")
+    }
+    else {
+      println("user signed up, logged in.")
+      var mainView: UIStoryboard!
+      //mainView = UIStoryboard(name: "Main", bundle: nil)
+      //var viewcontroller : SWRevealViewController = mainView.instantiateViewControllerWithIdentifier("SWRevealViewController") as SWRevealViewController
+      //self.presentViewController(viewcontroller, animated: true, completion: nil)
+      
+      mainView = UIStoryboard(name: "Main", bundle: nil)
+      var viewcontroller :UIViewController = mainView.instantiateViewControllerWithIdentifier("Tour1") as UIViewController
+      self.presentViewController(viewcontroller, animated: false, completion: nil)
+      
+      //performSegueWithIdentifier("sw_tour1", sender: self)
+    }
+    
+
   }
   
   func signUpViewController(signUpController: PFSignUpViewController!, didFailToSignUpWithError error: NSError!) {

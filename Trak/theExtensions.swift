@@ -82,6 +82,12 @@ extension NSMutableArray {
     return self
   }
   
+  func dotImageNames() -> NSMutableArray {
+    var dotNames :NSMutableArray = ["dot_green.png", "dot_yellow.png", "dot_blue1.png", "dot_blue2.png", "dot_purple1.png", "dot_pink.png",]
+    return dotNames
+  }
+
+  
 }
 
 /*
@@ -134,6 +140,12 @@ extension UIColor {
   }
   class func appColorA() -> UIColor {
     return UIColor(red: 30/255, green: 166/255, blue: 122/255, alpha: 1)
+  }
+  class func btnColorB() -> UIColor {
+    return UIColor(red: 132/255, green: 198/255, blue: 176/255, alpha: 1)
+  }
+  class func btnColorHighlight() -> UIColor {
+    return UIColor(red: 18/255, green: 221/255, blue: 159/255, alpha: 1)
   }
   class func appLightBlue() -> UIColor {
     //return UIColor(red: 236/255, green: 243/255, blue: 248/255, alpha: 1)
@@ -227,6 +239,8 @@ func randomInt(min: Int, max:Int) -> Int {
   return min + Int(arc4random_uniform(UInt32(max - min + 1)))
 }
 
+
+
 @objc(regSeg) class regSeg: UIStoryboardSegue {
   
   override func perform() {
@@ -239,9 +253,29 @@ func randomInt(min: Int, max:Int) -> Int {
   
 }
 
+// Look here for transitions http://www.thinkandbuild.it/how-to-create-custom-viewcontroller-transitions/
 
 
-func placeCircle(point : Dictionary<String, AnyObject>) -> CALayer {
+@objc(segOne) class segOne: UIStoryboardSegue {
+  override func perform() {
+    //println("segue")
+    let sourceViewController = self.sourceViewController as UIViewController
+    let destinationViewController = self.destinationViewController as UIViewController
+
+    sourceViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+    sourceViewController.presentViewController(destinationViewController, animated: false, completion: nil)
+  }
+}
+
+
+func addDaysToDate(daysToAdd: Int, originalDate: NSDate) -> NSDate? {
+  let newDate = NSCalendar.currentCalendar().dateByAddingUnit(NSCalendarUnit.DayCalendarUnit, value: daysToAdd, toDate: originalDate, options: nil)
+  return newDate
+}
+
+func placeCircle(point : Dictionary<String, AnyObject>) -> UIView {
+  
+  var aView :UIView = UIView()
   
   // unwrap variables
   let size :CGFloat = point["size"] as AnyObject? as CGFloat
@@ -262,10 +296,24 @@ func placeCircle(point : Dictionary<String, AnyObject>) -> CALayer {
   
   pointMarker.addSublayer(markerInner)
   pointMarker.frame = CGRectMake(xPos, yPos, 50, 50)
+  aView.frame = CGRectMake(xPos, yPos, 50, 50)
   
-  return pointMarker
+  return aView
 }
 
+
+/* extension UIView {
+  func parentViewController() -> UIViewController? {
+    var parentResponder: UIResponder? = self
+    while parentResponder != nil {
+      parentResponder = parentResponder!.nextResponder()
+      if parentResponder is UIViewController {
+        return parentResponder as UIViewController!
+      }
+    }
+    return nil
+  }
+} */
 
 
 // http://stackoverflow.com/questions/24590604/changing-button-text-from-modal-view-controller-in-swift
