@@ -13,7 +13,13 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   @IBOutlet var dayBtn: UIButton!
   @IBOutlet var topBackView: UIView!
   @IBOutlet var timeTF: UITextField!
+  @IBOutlet var hiddenTF: UITextField!
   @IBOutlet weak var menuButton: UIButton!
+  
+  var timePicker :UIView!
+  //var inputPicker :UIView = UIView()
+  var currentTag :Int = 0
+  //var selectedIndexPath: NSIndexPath?
   
   var items           :NSMutableArray = []
   var daDate          :NSString!
@@ -31,11 +37,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // empty text string
     self.text1.text = ""
-  
-    // add nav
-    var nav :navView = navView()
-    nav.myparent = self
-    self.view.addSubview(nav)
     
     self.tableView.reloadData()
   }
@@ -43,6 +44,8 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   override func viewDidLoad() {
     super.viewDidLoad()
  
+    
+    // add lightbox
     var lb :lightboxView = lightboxView(filename: "howto")
     //self.view.addSubview(lb)
     
@@ -86,6 +89,17 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     dayBtn.setTitle(str, forState: UIControlState.Normal)
     dayBtn.setTitle(str, forState: UIControlState.Highlighted)
     
+    // add nav
+    var nav :navView = navView()
+    nav.myparent = self
+    self.view.addSubview(nav)
+    
+    // add time picker
+    timePicker = myTimePicker(frame: CGRectMake(0, self.view.frame.height - 240, self.view.frame.width, 240), myP: self) as myTimePicker
+    self.view.addSubview(timePicker)
+    timePicker.hidden = true
+    hiddenTF.inputView = timePicker
+
     
     if PFUser.currentUser() != nil
     {
@@ -117,6 +131,12 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     self.presentViewController(vc, animated: true, completion: nil) 
   }
   
+  @IBAction func datePickerAction(sender: AnyObject) {
+    var dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+    //var strDate = dateFormatter.stringFromDate(myDatePicker.date)
+    //self.selectedDate.text = strDate
+  }
   
   /****   Load Data Functions   ****/
   
@@ -190,22 +210,21 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
   }
   
-  
   @IBAction func startEditingEntryPanelTimeTF(sender: AnyObject) {
-    //println("startEditingEntryPanelTimeTF")
+    println("startEditingEntryPanelTimeTF")
     timeTF.layer.borderColor = UIColor.appBlue().CGColor
     timeTF.layer.backgroundColor = UIColor.whiteColor().CGColor
   }
   
   
   @IBAction func endEditingEntryPanelTimeTF(sender: UITextField) {
-    //println("endEditingEntryPanelTimeTF \(sender.text)")
+    println("endEditingEntryPanelTimeTF \(sender.text)")
     
     // set time
     daTime = "\(sender.text)"
     timeTF.layer.borderColor = UIColor.clearColor().CGColor
     timeTF.layer.backgroundColor = UIColor.clearColor().CGColor
-  }
+  } 
   
   
   @IBAction func processInput(sender: AnyObject) {
@@ -370,6 +389,32 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     cell.timeTextField.layer.borderWidth = 1
     cell.timeTextField.layer.cornerRadius = 8
     cell.timeTextField.clipsToBounds = true
+    cell.timeTextField.inputView = timePicker
+    //cell.timeTextField.tag = indexPath.row + 1
+    cell.timeTextField.addTarget(self, action: "timeCellInputPress:", forControlEvents: UIControlEvents.EditingDidBegin)
+
+    
+    cell.timeBtn.layer.borderColor = UIColor.clearColor().CGColor
+    cell.timeBtn.layer.backgroundColor = UIColor.clearColor().CGColor
+    cell.timeBtn.setTitle(str2,forState: UIControlState.Normal)
+    cell.timeBtn.layer.borderWidth = 1
+    cell.timeBtn.layer.cornerRadius = 8
+    cell.timeBtn.clipsToBounds = true
+    //cell.timeBtn.inputView = inputPicker
+    cell.timeBtn.tag = indexPath.row + 1
+    cell.timeBtn.addTarget(self, action: "timeBtnPress:", forControlEvents: UIControlEvents.TouchUpInside)
+    
+    
+    //Add dot
+    var circle :UIImageView = UIImageView(frame:CGRectMake(85, (cell.frame.height / 2) - 6, 12, 12))
+    circle.image = UIImage(named: "dot_green.png")
+    cell.addSubview(circle)
+
+    //Add carat
+    var carat :UIImageView = UIImageView(frame:CGRectMake(self.view.frame.width - 30, (cell.frame.height / 2) - 8, 12, 16))
+    carat.image = UIImage(named: "indicator20.png")
+    carat.alpha = 0.4
+    cell.addSubview(carat)
     
     // set the vertical line color
     var theType :NSString = items[indexPath.row].valueForKey("type") as NSString
@@ -396,7 +441,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
     println("You selected cell #\(indexPath.row)!")
-    
+    //selectedIndexPath = tableView.indexPathForSelectedRow()!
     
     //ResultsTableViewController *childViewController = [[ResultsTableViewController alloc] init];
     //childViewController.tableView.delegate = self.results;
@@ -404,7 +449,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     //select row, show item detail
-    self.selectedRow = indexPath.row
+    //self.selectedRow = indexPath.row
     
     var mainView: UIStoryboard!
     mainView = UIStoryboard(name: "Main", bundle: nil)
@@ -420,6 +465,63 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     self.revealViewController()?.rightRevealToggle(self)
     self.view.endEditing(true)
   }
+  
+  
+  
+  /* @IBAction func timeTFInputPressed(sender: UITextField) {
+    println("timeTFInputPressed tag: \(sender.tag)")
+    //selectedIndexPath = indexPath
+    //handleDatePicker(datePickerView) // Set the date on start.
+  } */
+
+  func timeCellInputPress(sender: UITextField) {
+    //println("timeCellInputPressed tag")
+    println("timeCellInputPressed tag: \(sender.tag)")
+    currentTag = sender.tag
+  }
+  /*
+  func handleDatePicker(sender: UIDatePicker) {
+    println("handle! currentTag: \(currentTag)")
+    let myField = self.tableView.viewWithTag(currentTag) as UITextField
+    println("handle!2")
+    var dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "h:mm a"
+    var theDate :NSString = dateFormatter.stringFromDate(sender.date)
+    println("handle!3 date: \(theDate)")
+    myField.text = theDate
+  }
+   */
+  
+  
+  /*** TOMORROW - add a hidden field for the UIText field. And, then do the time button thing. ***/
+  @IBAction func timeBtnPress(sender: UIButton) {
+    println("timeBtn tag: \(sender.tag)")
+    currentTag = sender.tag
+    hiddenTF.becomeFirstResponder()
+    timePicker.hidden = false
+  }
+  
+  func handleDatePicker(sender: UIDatePicker) {
+    println("handle! currentTag: \(currentTag)")
+    let myBtn = self.tableView.viewWithTag(currentTag) as UIButton
+    var dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "h:mm a"
+    var theDate :NSString = dateFormatter.stringFromDate(sender.date)
+    //myField.text = theDate
+    myBtn.setTitle(theDate, forState: UIControlState.Normal)
+  }
+  
+  
+  func doneButton(sender:UIButton)
+  {
+    println("done pressed")
+    //let myBtn = self.tableView.viewWithTag(currentTag) as UIButton
+    //hiddenTF.resignFirstResponder()
+    timePicker.hidden = true
+    //self.view.endEditing(true)
+  }
+  
+  
   
 } // END class timeline view controller
 

@@ -12,11 +12,14 @@ protocol tCellDelegate {
 class timelineCell: UITableViewCell {
   @IBOutlet var   label1: UILabel!
   @IBOutlet var   timeTextField: UITextField!
+  @IBOutlet var   timeBtn: UIButton!
   @IBOutlet var cellVerticalBar: UIView!
+  var pickerView :UIPickerView
   
   var delegate    :tCellDelegate? = nil
   
-  /* NAH override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+  override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+    pickerView = UIPickerView()
     super.init(style: style, reuseIdentifier: reuseIdentifier)
 
   }
@@ -27,9 +30,10 @@ class timelineCell: UITableViewCell {
   
   required init(coder aDecoder: NSCoder)
   {
-    super.init(coder: aDecoder)
-        timeTextField.text = time
-  } */
+      pickerView = UIPickerView()
+      super.init(coder: aDecoder)
+      //timeTextField.text = time
+  }
   
   /* func datePressed(sender: UIButton!) {
     var btnSent:UIButton = sender
@@ -51,7 +55,17 @@ class timelineCell: UITableViewCell {
   
 
   @IBAction func timeStartEditing(sender: UITextField!) {
-    //println("a")
+    println("a")
+    
+    pickerView.frame = CGRectMake(0, 500, self.frame.size.width, pickerView.frame.size.height);
+    //[UIView beginAnimations:nil context:NULL];
+    //[UIView setAnimationDuration:.50];
+    //[UIView setAnimationDelegate:self];
+    //pickerView.frame = CGRectMake(0, 200, pickrView.frame.size.width, pickrView.frame.size.height);
+    self.addSubview(pickerView)
+    //[UIView commitAnimations];
+    //return NO;
+    
     //sender.layer.borderColor = UIColor.appBlue().CGColor
     //sender.layer.backgroundColor = UIColor.whiteColor().CGColor
   }
