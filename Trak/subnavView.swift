@@ -24,6 +24,7 @@ class subnavView: UIView {
     var myHeight :CGFloat = 50.0
     var spacing :CGFloat = 8.0
     var theFont = UIFont(name: "Corbel-Bold", size: 17)
+    var btnWidth :CGFloat = (screenSize.width / 3.0) - spacing * 2.0
     
     // draw background. The -10 and + 20 are so the shadow looks correct.
     self.frame = CGRectMake(-10, screenSize.height - 100, screenSize.width + 20, myHeight)
@@ -33,9 +34,7 @@ class subnavView: UIView {
     self.layer.shadowRadius = 2.0
     self.layer.shadowOffset = CGSizeMake(0, -3)
     
-    // set button width.
-    var btnWidth :CGFloat = (screenSize.width / 3.0) - spacing * 2.0
-
+  
     // make buttons. add 10 to x for the shadow adjustment above.
     let btn1:UIButton = UIButton(frame: CGRect(x: spacing + 2 + 10, y: 12, width: btnWidth, height: 35))
     btn1.setTitle("Migraines", forState: UIControlState.Normal)

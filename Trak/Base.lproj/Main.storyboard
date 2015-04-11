@@ -788,16 +788,6 @@
                                     <action selector="menuPressed:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="f8X-89-MWB"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="8MS-y0-65h" userLabel="time entry">
-                                <rect key="frame" x="15" y="83" width="66" height="30"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="mBP-vW-jZt"/>
-                                    <constraint firstAttribute="width" constant="66" id="odC-5y-Gyj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter events here" clearsOnBeginEditing="YES" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KFR-Lo-zrc" userLabel="text1">
                                 <rect key="frame" x="92" y="84" width="212" height="30"/>
                                 <constraints>
@@ -889,7 +879,7 @@
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRI-2a-wld">
-                                                    <rect key="frame" x="6" y="0.0" width="82" height="49.5"/>
+                                                    <rect key="frame" x="12" y="10" width="70" height="30"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -952,6 +942,16 @@
                                     <outlet property="delegate" destination="ehw-Mo-YVx" id="gRm-3j-hAz"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPu-NU-JXO" userLabel="topTimeBtn">
+                                <rect key="frame" x="15" y="84" width="70" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="topTimeBtnPress:" destination="ehw-Mo-YVx" eventType="touchUpInside" id="V2Y-1q-JCl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.98431372549999996" blue="1" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
@@ -968,9 +968,7 @@
                             <constraint firstItem="Bps-E3-CHI" firstAttribute="top" secondItem="FJ6-OR-PZz" secondAttribute="bottom" constant="10" id="QTZ-kU-cCB"/>
                             <constraint firstItem="Y58-c7-Rb5" firstAttribute="top" secondItem="FJ6-OR-PZz" secondAttribute="bottom" constant="-16" id="SbX-d8-n9C"/>
                             <constraint firstItem="M7L-xx-i0X" firstAttribute="leading" secondItem="Y58-c7-Rb5" secondAttribute="trailing" constant="-40" id="Sdg-2O-UMM"/>
-                            <constraint firstItem="8MS-y0-65h" firstAttribute="leading" secondItem="fRf-b2-sL2" secondAttribute="leadingMargin" constant="-1" id="TS7-lM-MXS"/>
                             <constraint firstItem="bda-Ij-ceO" firstAttribute="top" secondItem="KFR-Lo-zrc" secondAttribute="bottom" constant="16" id="WWs-eQ-3du"/>
-                            <constraint firstItem="8MS-y0-65h" firstAttribute="top" secondItem="FJ6-OR-PZz" secondAttribute="bottom" constant="63" id="n5A-pC-XrY"/>
                             <constraint firstAttribute="width" secondItem="Y58-c7-Rb5" secondAttribute="width" id="nuZ-Fu-Wi2"/>
                             <constraint firstItem="M7L-xx-i0X" firstAttribute="top" secondItem="Y58-c7-Rb5" secondAttribute="top" constant="35" id="oGK-SO-DFC"/>
                             <constraint firstItem="KFR-Lo-zrc" firstAttribute="leading" secondItem="fRf-b2-sL2" secondAttribute="leadingMargin" constant="76" id="ogN-uU-Yd0"/>
@@ -996,8 +994,8 @@
                         <outlet property="menuButton" destination="M7L-xx-i0X" id="JQu-Ti-X9r"/>
                         <outlet property="tableView" destination="bda-Ij-ceO" id="nOJ-Q3-seg"/>
                         <outlet property="text1" destination="KFR-Lo-zrc" id="7AC-Q4-PQB"/>
-                        <outlet property="timeTF" destination="8MS-y0-65h" id="kfU-Ck-FZS"/>
                         <outlet property="topBackView" destination="Y58-c7-Rb5" id="2WO-9i-WJm"/>
+                        <outlet property="topTimeBtn" destination="ZPu-NU-JXO" id="ZfN-8X-PzR"/>
                         <segue destination="ZcL-zW-Vet" kind="show" identifier="toDetails" id="4K5-gw-Xcp"/>
                     </connections>
                 </viewController>

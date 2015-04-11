@@ -4,19 +4,19 @@
 
 import UIKit
 
-protocol tCellDelegate {
+/* protocol tCellDelegate {   -- FUTURE remove this delegate
   func didChangeTime(val: NSString!)
-}
+} */
 
 // class daCell
-class timelineCell: UITableViewCell {
+class timelineCell: PFTableViewCell {
   @IBOutlet var   label1: UILabel!
   @IBOutlet var   timeTextField: UITextField!
   @IBOutlet var   timeBtn: UIButton!
   @IBOutlet var cellVerticalBar: UIView!
   var pickerView :UIPickerView
   
-  var delegate    :tCellDelegate? = nil
+  //var delegate    :tCellDelegate? = nil
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
     pickerView = UIPickerView()
@@ -71,7 +71,7 @@ class timelineCell: UITableViewCell {
   }
   
   
-  @IBAction func timeEdited(sender: UITextField!) {
+ /*  @IBAction func timeEdited(sender: UITextField!) {
     
     //sender.layer.borderColor = UIColor.appLightestGray().CGColor
     //sender.layer.backgroundColor = UIColor.clearColor().CGColor
@@ -80,7 +80,7 @@ class timelineCell: UITableViewCell {
       //delegate!.didChangeTime(sender.titleForState(.Normal))//(self, type: pizzaType, price: pizzaPrice)
       //delegate!.didChangeTime(sender.text)
     //}
-  }
+  } */
   
 }
   

@@ -64,7 +64,7 @@ class calendarViewController: UIViewController {
     
     // set initial values
     daDay = NSDate()
-    //scrollView =(UIScrollView *)[self.view viewWithTag:1000];
+    
     scrollView.contentSize=CGSizeMake(320,3070);
     
     let dateFormatterAll = NSDateFormatter()
@@ -124,7 +124,7 @@ class calendarViewController: UIViewController {
     // FIX TODO BEFORE LAUNCH - get the 2015 out of there. *********** FIX
     let dffd = NSDateFormatter()
     dffd.dateFormat = "MM/dd/yyyy"
-    let firstDay :NSDate = dffd.dateFromString("\(strMonthNum)/01/2015")!
+    let firstDay :NSDate = dffd.dateFromString("\(strMonthNum)/01/\(strYear)")!
     
     let dfmn = NSDateFormatter()
     dfmn.dateFormat = "MM"
@@ -140,7 +140,7 @@ class calendarViewController: UIViewController {
     let theDayOfWeekForFirst :NSString! = df.stringFromDate(firstDay)
 
   
-    // the month
+    // add the month label
     var theMonthB = UIButton()
     theMonthB.setTitle(dMonth, forState: UIControlState.Normal)
     theMonthB.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
@@ -148,8 +148,8 @@ class calendarViewController: UIViewController {
     theMonthB.frame = CGRectMake(30, top - 40, 100, 50)
     theMonthB.backgroundColor = UIColor.whiteColor()
     self.scrollView.addSubview(theMonthB)
-    //theMonth.textAlignment = UITextAlignment.Center()
 
+    // add the days
     let i: Int = theDayOfWeekForFirst.integerValue
     var theDayOfWeek :CGFloat! = CGFloat(i)
     var thePosX = self.margin

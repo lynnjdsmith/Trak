@@ -301,6 +301,43 @@ func placeCircle(point : Dictionary<String, AnyObject>) -> UIView {
   return aView
 }
 
+func getUTCDateFromString(theDT :NSString) -> NSDate {
+  let dateFormatter = NSDateFormatter()
+  dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+  let d :NSDate = dateFormatter.dateFromString(theDT)!
+  if let checkedVal = d.dateByAddingTimeInterval(5.0) { }// if this works, d is a date
+  else { println("** YO! You probably have an empty value!") } // this means d is nil
+  return d
+}
+
+
+func getTimeStringFromDate(theDT :NSDate) -> NSString {
+  let dateFormatter = NSDateFormatter()
+  dateFormatter.dateFormat = "hh:mm a"
+  let d :NSString = dateFormatter.stringFromDate(theDT)
+  return d
+}
+
+func getTimeFromString(theDT :NSString) -> NSDate {
+  let dateFormatter = NSDateFormatter()
+  dateFormatter.dateFormat = "hh:mm a"
+  //var d = dateFormatter.stringFromDate(theDT)
+  let d :NSDate = dateFormatter.dateFromString(theDT)!
+  //if let checkedVal = d.dateByAddingTimeInterval(5.0) { }// if this works, d is a date
+  //else { println("** YO! You probably have an empty value!") } // this means d is nil
+  return d
+}
+
+func getDateDescriptiveStringFromString(val :NSString) -> NSString {
+  println("getDateDescriptiveStringFromString val: \(val)")
+  let dateFormatter = NSDateFormatter()
+  dateFormatter.dateFormat = "MM/dd/yyyy"
+  let str1 :NSDate = dateFormatter.dateFromString(val)!
+  let dateFormatter2 = NSDateFormatter()
+  dateFormatter2.dateFormat = "EEEE, MMM d "
+  let str2 :NSString = dateFormatter2.stringFromDate(str1)
+  return str2
+}
 
 /* extension UIView {
   func parentViewController() -> UIViewController? {

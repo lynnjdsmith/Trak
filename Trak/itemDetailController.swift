@@ -306,24 +306,23 @@ class itemDetailController: UIViewController {
     // save myDateTime
     println("theTime edited \(theText)")
     var theDateWithTime: NSString! = "\(daDate) \(self.daTime) \(self.daAMPM)"
+    var d = getUTCDateFromString(theDateWithTime)
     //println("time edited. theDateWithTime: |\(theDateWithTime)|")
-    let dateStringFormatter = NSDateFormatter()
-    dateStringFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-    let d = dateStringFormatter.dateFromString(theDateWithTime)
+    //let dateStringFormatter = NSDateFormatter()
+    //dateStringFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+    //let d = dateStringFormatter.dateFromString(theDateWithTime)
     //println("d in item detail: \(d)")
     
-    if (d == nil) {
-      var alert = UIAlertController(title: "Alert", message: "Please use format: \n 'MM/DD/YYYY' for the date and \n'11:11' for the time.", preferredStyle: UIAlertControllerStyle.Alert)
-      alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-      self.presentViewController(alert, animated: true, completion: nil)
-      
-    } else {
+    if let checkedVal = d.dateByAddingTimeInterval(5.0) { // if this works, d is a date
       theItem.setObject(d, forKey: "myDateTime")
       theItem.saveEventually() //saveInBackground()
       println("time edited. d: \(d)")
-      
       // put the new time on the button
       self.timeTextField.text = daTime
+    } else {
+      var alert = UIAlertController(title: "Alert", message: "Please use format: \n 'MM/DD/YYYY' for the date and \n'11:11' for the time.", preferredStyle: UIAlertControllerStyle.Alert)
+      alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+      self.presentViewController(alert, animated: true, completion: nil)
     }
   }
   

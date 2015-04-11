@@ -11,7 +11,7 @@ import UIKit
 // class daCell
 class dataMainCell: UITableViewCell {
   @IBOutlet var   label1: UILabel!
-  var delegate    :tCellDelegate? = nil
+  //var delegate    :tCellDelegate? = nil
   
   
   /* NAH override init(style: UITableViewCellStyle, reuseIdentifier: String!) {

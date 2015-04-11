@@ -70,6 +70,7 @@
 		BA6AF9AD1A9AD8E4000F10EF /* PageItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AF9AC1A9AD8E4000F10EF /* PageItemController.swift */; };
 		BA8876CF1A832B1F009E1446 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8876CE1A832B1F009E1446 /* MenuViewController.swift */; };
 		BA94DD811A81D1E8004D374E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA94DD801A81D1E8004D374E /* SWRevealViewController.m */; };
+		BA9E81621AD84F9D006217AD /* textBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9E81601AD73AB2006217AD /* textBot.swift */; };
 		BAA8C9481A11D50500C7CAC6 /* reportBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40C1681A0F07E1002CB7EE /* reportBasicView.swift */; };
 		BAB9243D1ABE54A7002EA0BD /* CorbelBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAB924391ABE54A1002EA0BD /* CorbelBoldItalic.ttf */; };
 		BAB9243E1ABE54A9002EA0BD /* CorbelBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAB9243A1ABE54A1002EA0BD /* CorbelBold.ttf */; };
@@ -166,6 +167,7 @@
 		BA8876CE1A832B1F009E1446 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BA94DD801A81D1E8004D374E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		BA94DD821A81D1F3004D374E /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		BA9E81601AD73AB2006217AD /* textBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = textBot.swift; sourceTree = "<group>"; };
 		BAB924391ABE54A1002EA0BD /* CorbelBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CorbelBoldItalic.ttf; sourceTree = "<group>"; };
 		BAB9243A1ABE54A1002EA0BD /* CorbelBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CorbelBold.ttf; sourceTree = "<group>"; };
 		BAB9243B1ABE54A1002EA0BD /* CorbelItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CorbelItalic.ttf; sourceTree = "<group>"; };
@@ -259,10 +261,8 @@
 			children = (
 				5C143DAB1980326B00B4F0E4 /* Main.storyboard */,
 				5C4988C61980521A00873C6D /* timelineViewController.swift */,
-				BA2B799B1AD5DF5700EE79BF /* myTimePicker.swift */,
 				BA4AF874198DD02400FC10D2 /* itemDetailController.swift */,
 				BA6AA40B19C4CDEB00D64369 /* timelineCell.swift */,
-				BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */,
 				BAE626C1199FBB5500747932 /* calendarViewController.swift */,
 				BA08515519F577BD00BACD87 /* symptTrigListViewController.swift */,
 				BA281AAA19AACC0B00ACC3BB /* profileViewController.swift */,
@@ -273,7 +273,10 @@
 				BA280D4D19FAC05E00874FD1 /* sEvent.swift */,
 				BA5B233F1A9599320017E1F3 /* Date.swift */,
 				BAF74EDC19E5B8E700956CF8 /* AF+Date+Extension.swift */,
+				BA2B799B1AD5DF5700EE79BF /* myTimePicker.swift */,
 				BA347DDE1ABE3F0100C14C72 /* lightboxView.swift */,
+				BAD85E3019BCFAFA00E2EB9B /* theExtensions.swift */,
+				BA9E81601AD73AB2006217AD /* textBot.swift */,
 				BA12190E1AD1ADD0001F2930 /* Nav and Subnav */,
 				BA05C5811A91688B00FC18CE /* Menu */,
 				BA5B40AA19C8A03100794F13 /* Charts */,
@@ -539,6 +542,7 @@
 				BA40C16B1A106035002CB7EE /* anEvent.swift in Sources */,
 				5C4988C71980521A00873C6D /* timelineViewController.swift in Sources */,
 				BAE2543B1AD06F1400E01DDD /* chartPastDaysVC.swift in Sources */,
+				BA9E81621AD84F9D006217AD /* textBot.swift in Sources */,
 				BA281AAB19AACC0B00ACC3BB /* profileViewController.swift in Sources */,
 				BA5B40A919C7D64000794F13 /* dataMainCellOLD.swift in Sources */,
 				BA280D5019FAD0ED00874FD1 /* symptomHistoryVC.swift in Sources */,
