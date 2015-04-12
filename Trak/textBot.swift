@@ -46,9 +46,6 @@ class textBot :NSObject
       // add triggerOrSymptom
       newItem.setObject("trigger", forKey: "type")
       
-      // add type
-      //newItem.setObject("trigger", forKey: "type")
-      
       var d = daDateTime
       
       //if (d != nil) {
@@ -59,7 +56,7 @@ class textBot :NSObject
       //}
       
       // add amount
-      newItem.setObject("3", forKey: "amount")
+      newItem.setObject("2", forKey: "amount")
       
       // save item
       //self.saveObject(newItem)

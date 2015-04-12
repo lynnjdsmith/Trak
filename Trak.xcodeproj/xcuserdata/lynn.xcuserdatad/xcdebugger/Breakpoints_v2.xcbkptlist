@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/timelineViewController.swift"
-            timestampString = "450479013.952999"
+            timestampString = "450489274.819679"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/timelineViewController.swift"
-            timestampString = "450478338.43023"
+            timestampString = "450482622.230912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "timelineViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -186,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Trak/itemDetailController.swift"
-            timestampString = "448399564.274317"
+            timestampString = "450492312.651368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "loadDataForStart()"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "loadDataForItem()"
             landmarkType = "5">
             <Locations>
                <Location

@@ -18,7 +18,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   var timePicker :myTimePicker!
   var currentTag :Int = -1
-  
   var items           :NSMutableArray = []
   var daDate          :NSString!
   var daTime          :NSString! = ""
@@ -213,9 +212,8 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   /** Delegate Functions **/
   
-  //sent from item detail - FIX DON'T NEED
+  //sent from item detail - FIX DON'T NEED?
   func closeMod() {
-    println("closeMod")
     loadDataForDate(daDate) // We prob don't need, now that it's in viewillappear
   }
   
@@ -311,13 +309,13 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   
   func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-    println("You selected cell #\(indexPath.row)!")
+    //println("You selected cell #\(indexPath.row)!")
     //selectedIndexPath = tableView.indexPathForSelectedRow()!
     
     var mainView: UIStoryboard!
     mainView = UIStoryboard(name: "Main", bundle: nil)
     let s = mainView.instantiateViewControllerWithIdentifier("itemDetailController") as itemDetailController
-    s.objID = items[selectedRow].objectId
+    s.objID = items[indexPath.row].objectId
     s.delegate = self
     self.navigationController?.pushViewController(s, animated: true)
     //self.presentViewController(s, animated: true, completion: nil)

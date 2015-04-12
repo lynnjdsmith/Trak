@@ -14,56 +14,38 @@ class itemDetailController: UIViewController {
   
   // IBOutlets
   @IBOutlet var daTitle         :UITextField!
-  @IBOutlet var dayTextField    :UITextField!
-  @IBOutlet var AMPMBtn         :UIButton!
-  @IBOutlet var timeTextField   :UITextField!
+  @IBOutlet var timeBtn         :UIButton!
   @IBOutlet var noteTextField   :UITextView!
   @IBOutlet var trigSympControl :UISegmentedControl!
-  @IBOutlet var amountField     :UILabel!
-  @IBOutlet var amountSlider    :UISlider!
   @IBOutlet var deleteBtn       :UIButton!
-  @IBOutlet var seeChart        :UIButton!
-  @IBOutlet var scrollView      :UIScrollView!
   @IBOutlet var topBackView     :UIView!
+  @IBOutlet var amountSegment   :UISegmentedControl!
   
   // Variables
   var delegate  :itemDetailDelegate? = nil
-  var objID     :NSString! = ""
+  var timePicker :myTimePicker!
   var theItem   :PFObject!
+  var objID     :NSString! = ""
   var daDate    :NSString!
   var daTime    :NSString! = ""
-  var daAMPM    :NSString! = "AM"
   var name      :NSString! = ""
   
-  // first value is doubled, because 0 isn't really used.
-  //var amountNames :NSArray = ["a tiny bit (a1)", "a tiny bit (a1)", "very little (a2)","a little (a3)", "just less than normal (a4)", "normal amount (a5)","a little extra (a6)","a lot (a7)", "a lot + (a8)", "double or more (a9)", "an extreme amount (a10)"]
-
-    var amountNames :NSArray = ["1 - very little", "1 - very little", "2 - a little","3 - normal", "4 - a lot", "lots of (a5)"]
   
   override func viewWillAppear(animated: Bool) {
-    loadDataForStart()
     navigationController?.setNavigationBarHidden(true, animated:true)
-    //seeAllBtn.hidden = true
+    loadDataForItem()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //println(" ** setting size \(self.scrollView.frame.size.width)        **")
-    //self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width, height: 568)
-    //scrollView.contentSize=CGSizeMake(screenSize.width,position + 20)
-    
-    // general set stuff
+    // set top back view
     topBackView.layer.borderWidth = 0.3
     topBackView.layer.borderColor = UIColor.appLightGray().CGColor
     //titleTop.text = name
     
-    //let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 430, 320, 200))
-    //self.view.addSubview(graph)
-    
-    // add gesture recognizer
+    // add gesture recognizer to close keyboard on general tap
     let recognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
-    //recognizer.delegate = scrollView
     view.addGestureRecognizer(recognizer)
     
     // set time field look
@@ -71,12 +53,6 @@ class itemDetailController: UIViewController {
     daTitle.layer.backgroundColor = UIColor.clearColor().CGColor
     daTitle.layer.borderWidth = 1
     daTitle.layer.cornerRadius = 8
-
-    // set time field look
-    dayTextField.layer.borderColor = UIColor.appLightestGray().CGColor
-    dayTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-    dayTextField.layer.borderWidth = 1
-    dayTextField.layer.cornerRadius = 8
     
     //set time field pattern
     var paddingView :UIView = UIView(frame: CGRectMake(0, 0, 7, 20))
@@ -85,8 +61,8 @@ class itemDetailController: UIViewController {
     daTitle.leftViewMode = UITextFieldViewMode.Always
 
     // create back btn
-    navigationController?.setNavigationBarHidden(true, animated:true)
-    let b   = UIButton() //UIButton.buttonWithType(UIButtonType.System) as UIButton
+    //navigationController?.setNavigationBarHidden(true, animated:true)
+    let b = UIButton() //UIButton.buttonWithType(UIButtonType.System) as UIButton
     b.frame = CGRectMake(-10, 22, 100, 50)
     b.backgroundColor = UIColor.clearColor()
     b.titleLabel!.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
@@ -95,68 +71,59 @@ class itemDetailController: UIViewController {
     b.addTarget(self, action: "goBack:", forControlEvents: UIControlEvents.TouchUpInside)
     self.view.addSubview(b)
     
-    // show nav bar
-    //self.navigationController?.navigationBarHidden = false
-    
-    // amountNames for amount field
-    amountField.text = amountNames[3] as NSString
-    
-    // style the buttons
-    dayTextField.normalStyle("")
-    timeTextField.normalStyle("")
+    // style the buttons  // normalStyle is a good function to use!!
     deleteBtn.normalStyle("Delete This Item")
-    //seeAllBtn.normalStyle("See All")
-    seeChart.normalStyle("See Chart")
-    AMPMBtn.normalStyle("")
     trigSympControl.layer.borderColor = UIColor.appRed().CGColor
     trigSympControl.layer.borderWidth = 0
     trigSympControl.layer.cornerRadius = 10
-    //trigSympControl.transform = CGAffineTransformMakeScale(0.88, 0.88)
-    
-    // style the text field
-    //noteTextField.layer.borderColor = UIColor.appRed().CGColor
-    //noteTextField.layer.borderWidth = 1
-    //noteTextField.layer.cornerRadius = 10
-    //noteTextField.layer.cornerRadius = 10
-  }
+   }
   
-  func handleTap(recognizer: UITapGestureRecognizer) {
-    //println("a")
-    self.view.endEditing(true)
-    daTitle.resignFirstResponder()
-    dayTextField.resignFirstResponder()
-    timeTextField.resignFirstResponder()
-  }
   
   override func viewDidDisappear(animated: Bool) {
     super.viewDidDisappear(false)
-    // set data
-    theItem.setObject(NSString(format: "%2.02f", amountSlider.value), forKey: "amount")
     
-    // save name
+    // set name
     theItem.setObject(daTitle.text, forKey: "name")
     
-    //println("dissapear. datitle: \(daTitle.text)")
+    // set date
+    var theDateWithTime: NSString! = "\(daDate) \(daTime)"
+    var d = getUTCDateFromString(theDateWithTime)
+    //println("d: \(d)")
+    theItem.setObject(d, forKey:"myDateTime")
     
+    // set amount
+    switch amountSegment.selectedSegmentIndex as NSNumber {
+    case 0:
+      theItem.setObject("1", forKey:"amount")
+    case 1:
+      theItem.setObject("2", forKey:"amount")
+    case 2:
+      theItem.setObject("3", forKey:"amount")
+    default:
+      theItem.setObject("2", forKey:"amount")
+    }
+
+    // set type
+    switch trigSympControl.selectedSegmentIndex  {
+    case 0:
+      theItem.setObject("trigger", forKey:"type")
+    case 1:
+      theItem.setObject("symptom", forKey:"type")
+    case 2:
+      theItem.setObject("treatment", forKey:"type")
+    default: break;
+    }
+
     theItem.saveInBackgroundWithBlock {
       (success: Bool!, error: NSError!) -> Void in
-      if (success != nil) {
-        if let d = self.delegate {
-          //d.closeMod()
-        }
-        //self.navigationController?.popToRootViewControllerAnimated(true)
-      } else {
-        println("%@", error)
-      }
+      if (success == nil) { println("ERROR in Saving: %@", error) }
     }
     
   }
-
   
-  func loadDataForStart() {
+  func loadDataForItem() {
     // send query
     var HUD = MBProgressHUD.showHUDAddedTo(self.view, animated:true)
-    //HUD.delegate = self;
     HUD.labelText = "loading"
     //println("objID: \(objID)")
     var query:PFQuery = PFQuery(className: "Items")
@@ -169,7 +136,7 @@ class itemDetailController: UIViewController {
       HUD.hidden = true
       
       if (object == nil) {
-        println("The getFirstObject request failed.")
+        println("loadDataForItem - The getFirstObject request failed.")
       } else {
         // store the item
         self.theItem = object
@@ -177,16 +144,8 @@ class itemDetailController: UIViewController {
         // set title
         self.daTitle.text = object.valueForKey("name") as NSString
         self.name = object.valueForKey("name") as NSString
+
         // set date
-        let myDate :NSDate = object.valueForKey("myDateTime") as NSDate
-        let dateFormatterAll = NSDateFormatter()
-        //dateFormatterAll.dateFormat = "EEEE, MMM d"
-        dateFormatterAll.dateFormat = "MM/dd/yyyy"
-        let myStr :NSString = dateFormatterAll.stringFromDate(myDate)
-        //self.dayBtn.setTitle(myStr, forState: .Normal)
-        self.dayTextField.text = myStr
-        
-        // set date variable
         let date :NSDate = object.valueForKey("myDateTime") as NSDate
         let df = NSDateFormatter()
         df.dateFormat = "MM/dd/yyyy"
@@ -194,45 +153,26 @@ class itemDetailController: UIViewController {
         self.daDate = d as NSString
         
         // set daTime
+        let myDate :NSDate = object.valueForKey("myDateTime") as NSDate
         let timeFormatter = NSDateFormatter()
-        timeFormatter.dateFormat = "h:mm" //"h:mm:ss a "
+        timeFormatter.dateFormat = "h:mm a"
         let myTime :NSString = timeFormatter.stringFromDate(myDate)
         self.daTime = myTime as NSString
+        self.timeBtn.setTitle(myTime, forState: .Normal)
 
-        // set timeTextField
-        let timeFormatterB = NSDateFormatter()
-        timeFormatterB.dateFormat = "h:mm" //"h:mm:ss a "
-        let myTimeB :NSString = timeFormatterB.stringFromDate(myDate)
-        self.timeTextField.text = myTimeB
+        // set amount
+        switch object.valueForKey("amount") as NSString {
+        case "1":
+          self.amountSegment.selectedSegmentIndex = 0
+        case "2":
+          self.amountSegment.selectedSegmentIndex = 1
+        case "3":
+          self.amountSegment.selectedSegmentIndex = 2
+        default:
+          self.amountSegment.selectedSegmentIndex = 1
+        }
         
-        // set AM/PM
-        let ampmf = NSDateFormatter()
-        ampmf.dateFormat = "a" //"h:mm:ss a "
-        let myAMPM :NSString = ampmf.stringFromDate(myDate)
-        self.daAMPM = myAMPM
-        self.AMPMBtn.setTitle(myAMPM, forState: .Normal)
-
-        //self.timeTextField.text = self.daTime.stringByTrimmingCharactersInSet(NSCharacterSet (charactersInString: "AMP "))
-
-        // set time button
-        let tf = NSDateFormatter()
-        tf.dateFormat = "h:mm"
-        let mT :NSString = tf.stringFromDate(myDate)
-        self.timeTextField.text = mT //.setTitle(mT, forState: .Normal)
-
-        // set amount slider
-        //var theVal = object.valueForKey("amount")
-//println(object.valueForKey("amount") as NSString)
-        var theS :String = object.valueForKey("amount") as String
-        self.amountSlider.value = (object.valueForKey("amount") as NSString).floatValue
-//println("theS: \(theS)")
-        // amountNames for amount field 
-        var theAmount :Int = Int((object.valueForKey("amount") as NSString).floatValue)
-//println("the amount: \(theAmount)")
-        self.amountField.text = self.amountNames[theAmount] as NSString
-        //println("3")
-        //println("daTime, setting \(self.daTime)")
-        // set the segmented control for trigger or symptom
+        // set the trigger or symptom
         switch object.valueForKey("type") as NSString { //== "trigger") {
           case "trigger":
             self.trigSympControl.selectedSegmentIndex = 0
@@ -247,143 +187,24 @@ class itemDetailController: UIViewController {
       }
     }
   }
-  
-  
-  @IBAction func startEditTitle(sender: UITextField) {
-    println("startEdit")
-    daTitle.layer.borderColor = UIColor.appBlue().CGColor
-    daTitle.layer.backgroundColor = UIColor.whiteColor().CGColor
-  }
-  
+
   
   @IBAction func endEditTitle(sender: UITextField) {
     println("endEdit")
     daTitle.layer.borderColor = UIColor.clearColor().CGColor
     daTitle.layer.backgroundColor = UIColor.clearColor().CGColor
     self.resignFirstResponder()
-    theItem.setObject(sender.text, forKey: "name")
-    theItem.saveEventually() //saveInBackground()
   }
 
-  
-  @IBAction func startEditTime(sender: UITextField) {
-    println("startEdit")
-    timeTextField.layer.borderColor = UIColor.appBlue().CGColor
-    timeTextField.layer.backgroundColor = UIColor.whiteColor().CGColor
-  }
-  
-  
   @IBAction func startEdit(sender: UITextField) {
     println("startEdit")
     sender.layer.borderColor = UIColor.appBlue().CGColor
     sender.layer.backgroundColor = UIColor.whiteColor().CGColor
   }
   
-  @IBAction func endEditTime(sender: UITextField) {
-    println("endEdit")
-    timeTextField.layer.borderColor = UIColor.clearColor().CGColor
-    timeTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-    
-    // resign first responder
-    sender.resignFirstResponder()
-    
-    // save myDateTime
-    // set time into global page variable
-    daTime = self.timeTextField.text
-    let theTime :NSString = sender.text as NSString
-    saveMyDateTime(theTime)
-  }
-  
-  @IBAction func changeAmountSlider(sender: UISlider) {
-    //println("changeAmountSlider")
-    //theItem.setObject(NSString(format: "%2.02f", amountSlider.value), forKey: "amount")
-    var theAmount :Int = Int(sender.value) //- 0.7
-    amountField.text = amountNames[theAmount] as NSString
-  }
-
-
-  func saveMyDateTime(theText :NSString) {
-    // save myDateTime
-    println("theTime edited \(theText)")
-    var theDateWithTime: NSString! = "\(daDate) \(self.daTime) \(self.daAMPM)"
-    var d = getUTCDateFromString(theDateWithTime)
-    //println("time edited. theDateWithTime: |\(theDateWithTime)|")
-    //let dateStringFormatter = NSDateFormatter()
-    //dateStringFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-    //let d = dateStringFormatter.dateFromString(theDateWithTime)
-    //println("d in item detail: \(d)")
-    
-    if let checkedVal = d.dateByAddingTimeInterval(5.0) { // if this works, d is a date
-      theItem.setObject(d, forKey: "myDateTime")
-      theItem.saveEventually() //saveInBackground()
-      println("time edited. d: \(d)")
-      // put the new time on the button
-      self.timeTextField.text = daTime
-    } else {
-      var alert = UIAlertController(title: "Alert", message: "Please use format: \n 'MM/DD/YYYY' for the date and \n'11:11' for the time.", preferredStyle: UIAlertControllerStyle.Alert)
-      alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-      self.presentViewController(alert, animated: true, completion: nil)
-    }
-  }
-  
-  @IBAction func touchAMPMBtn(sender: UIButton) {
-    println("start daAMPM \(daAMPM)")
-    
-    if (self.daAMPM == "PM") {
-      println("in PM -- daAMPM \(daAMPM)")
-      AMPMBtn.setTitle("AM", forState: .Normal)
-      self.daAMPM = "AM"
-      saveMyDateTime(self.timeTextField.text)
-    } else {
-      if (self.daAMPM == "AM") {
-        println("in AM -- daAMPM \(daAMPM)")
-        AMPMBtn.setTitle("PM", forState: .Normal)
-        self.daAMPM = "PM"
-        saveMyDateTime(self.timeTextField.text)
-      }
-    }
-  }
-
-  
-  @IBAction func endEditDay(sender: UITextField) {    
-    println("endEdit")
-    sender.layer.borderColor = UIColor.clearColor().CGColor
-    sender.layer.backgroundColor = UIColor.clearColor().CGColor
-    self.resignFirstResponder()
-    
-    /**** Next up - make it so it updates main list. Also, editing date, mm/dd/yyyy needs to be shown to user   ****/
-    daDate = self.dayTextField.text
-    
-    // save myDateTime
-    // set time into global page variable
-    daTime = self.timeTextField.text
-    let theTime :NSString = sender.text as NSString
-    saveMyDateTime(theTime)
-  }
-  
-  
-  @IBAction func onTOSValueChanged(sender: UISegmentedControl) {
-    switch sender.selectedSegmentIndex  {
-    case 0:
-      //println("triggered")
-      theItem.setObject("trigger", forKey:"type")
-      theItem.saveEventually() //saveInBackground()
-    case 1:
-      //println("sympt")
-      theItem.setObject("symptom", forKey:"type")
-      theItem.saveEventually() //saveInBackground()
-    case 2:
-      //println("treatment")
-      theItem.setObject("treatment", forKey:"type")
-      theItem.saveEventually() //saveInBackground()
-    default: break;
-    }
-  }
-  
-  
   @IBAction func deleteMe(sender: AnyObject) {
     //println("Delete Me!")
-    println("objID: \(objID)")
+    //println("Deleting. objID: \(objID)")
     
     var query = PFQuery(className:"Items")
     query.getObjectInBackgroundWithId(objID) {
@@ -394,33 +215,76 @@ class itemDetailController: UIViewController {
             d.closeMod()
           }
         } else {
-            println("error: \(error)")
+            println("deleteMe error: \(error)")
         }
     }
     self.navigationController?.popToRootViewControllerAnimated(true)
   }
   
 
-  @IBAction func seeChart(sender: AnyObject) {
-    //println("Delete Me!")
-    println("objID: \(objID)")
+  /***   TIME FUNCTIONS   ***/
+  
+  @IBAction func timeBtnPress(sender: UIButton) {
+    println("timeBtn")
+    
+    //highlight the field
+    sender.layer.borderWidth = 3.0
+    sender.layer.borderColor = UIColor.appBlue().CGColor
+    
+    var theTimeString = sender.titleForState(UIControlState.Normal)
+    var theTime = getTimeFromString(theTimeString!)
+    timePicker.setTheTime(theTime)
+    timePicker.hidden = false
   }
   
-  @IBAction func goToSingleSymptomDetail(sender: AnyObject) {
-    //println("yo! gotossd")
-    let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("symptomHistoryVC") as symptomHistoryVC
-    secondViewController.objID = self.objID
-    secondViewController.name = self.name
-    secondViewController.theItem = self.theItem
-    secondViewController.daDate = self.daDate
-    secondViewController.daTime = self.daTime
-    //secondViewController.delegate = self
-    self.navigationController?.pushViewController(secondViewController, animated: true)
+  func handleTimePicker(sender: UIDatePicker) {
+    //println("handle!")
+    var dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "h:mm a"
+    var newTimeString :NSString = dateFormatter.stringFromDate(sender.date)
+    newTimeSelected(newTimeString)
   }
+  
+  func timePickerBack10(sender: UIButton) {
+    //println("handle! currentTag: \(currentTag)")
+    var dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "h:mm a"
+    var newTime = timePicker.datePickerView.date
+    newTime = newTime.dateBySubtractingMinutes(10)
+    timePicker.datePickerView.date = newTime
+    
+    // set button title
+    var newTimeString = getTimeStringFromDate(newTime)
+    newTimeSelected(newTimeString)
+  }
+  
+  func timePickerBack30(sender: UIButton) {
+    //println("handle! currentTag: \(currentTag)")
+    var dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "h:mm a"
+    var newTime = timePicker.datePickerView.date
+    newTime = newTime.dateBySubtractingMinutes(30)
+    timePicker.datePickerView.date = newTime
+    
+    // set button title
+    var newTimeString = getTimeStringFromDate(newTime)
+    newTimeSelected(newTimeString)
+  }
+  
+  func newTimeSelected(newTimeString :NSString) {
+      timeBtn.setTitle(newTimeString, forState: UIControlState.Normal)
+      daTime = newTimeString
+  }
+  
   
   
   func goBack(sender: UIButton) {
     navigationController?.popViewControllerAnimated(true)
+  }
+  
+  func handleTap(recognizer: UITapGestureRecognizer) {
+    self.view.endEditing(true)
+    daTitle.resignFirstResponder()
   }
   
 }
