@@ -154,7 +154,7 @@ class reportBasicView: UIView {
       layer.addSublayer(l)
       
       let theLabel = UILabel(frame: CGRectMake(xPosLegend - sizeLegendDot, yPosLegend + sizeLegendDot, sizeLegendDot * 3, sizeLegendDot))
-      theLabel.text = value as NSString
+      theLabel.text = value as! NSString
       theLabel.font = labelFont
       theLabel.backgroundColor = backgroundColor
       theLabel.textAlignment = NSTextAlignment.Center
@@ -183,7 +183,7 @@ class reportBasicView: UIView {
     layer.addSublayer(bl)
     
     for obj in self.beforeEvents {
-      drawTrigger(obj as PFObject) //, xPos: xPos)
+      drawTrigger(obj as! PFObject) //, xPos: xPos)
       //xPos = xPos + 60
       //println(obj.valueForKey("name"))
     }

@@ -43,7 +43,7 @@ class timelineCell: PFTableViewCell {
     // send the date
     var mainView: UIStoryboard!
     mainView = UIStoryboard(name: "Main", bundle: nil)
-    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
     
     if let d = self.delegate {
       d.didPressDate(s)

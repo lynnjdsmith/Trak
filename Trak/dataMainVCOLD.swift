@@ -54,7 +54,7 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
       if (error == nil) {
         println("return")
         self.items = []
-        for object in objects as [PFObject] {
+        for object in objects as! [PFObject] {
                   println("return2")
           self.items.addObject(object)
           //println(object)
@@ -77,13 +77,13 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     println("datamainvc tableloading cell")
     
     // setup cell
-    var cell = tableView.dequeueReusableCellWithIdentifier("cell1") as timelineCell
+    var cell = tableView.dequeueReusableCellWithIdentifier("cell1") as! timelineCell
     cell.selectionStyle = UITableViewCellSelectionStyle.None;
     //cell.delegate = self
     
     // set the name
     var daName: AnyObject! = items[indexPath.row]
-    cell.label1.text = daName.valueForKey("name") as NSString
+    cell.label1.text = daName.valueForKey("name") as! String
     
     // set the time
     var daDateName: AnyObject! = items[indexPath.row]
@@ -91,7 +91,7 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     if (daDateVal == nil) { println("*** YO! You have a blank myDateTime in the DB, probably!! ***") }
     let timeFormatter = NSDateFormatter()
     timeFormatter.dateFormat = "h:mm a" // "h:mm a"
-    let str2 = timeFormatter.stringFromDate(daDateVal as NSDate)
+    let str2 = timeFormatter.stringFromDate(daDateVal as! NSDate)
     println("str2: \(str2)")
     // set time field look
     //cell.timeTextField.layer.borderColor = UIColor.appLightestGray().CGColor
@@ -114,12 +114,12 @@ class dataMainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
   }
   
   
-  func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     //println("You selected cell #\(indexPath.row)!")
     
     //select row, show item detail
     //self.selectedRow = indexPath.row
-    let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("itemDetailController") as itemDetailController
+    let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("itemDetailController") as! itemDetailController
     secondViewController.objID = items[indexPath.row].objectId
     //secondViewController.delegate = self
     self.navigationController?.pushViewController(secondViewController, animated: true)

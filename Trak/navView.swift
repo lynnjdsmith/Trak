@@ -46,9 +46,9 @@ class navView: UIView {
   }
 
   
-  override init () {
-    super.init()
-  }
+  /* override init () {
+    super.init(style: .Plain)
+  } */
   
   required init(coder aDecoder: NSCoder) {
     fatalError("This class does not support NSCoding")

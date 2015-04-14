@@ -7,24 +7,16 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>40E55D49-77B1-404F-BD22-FA77BDB93D35</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Trak</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>35437E58CEA477B442667A45CA0DAAF68B67C7AD</key>
-		<string>https://github.com/CocoaPods/pod-template.git</string>
-		<key>712C12ADB8310B35AB25FDE8C4BA8F7B1C093BA0</key>
-		<string>https://github.com/lynnjdsmith/Bitz.git</string>
 		<key>A706B02824D87BD315FD1E63234F939EE9DEDB07</key>
 		<string>https://github.com/lynnjdsmith/Trak.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Trak.xcodeproj</string>
+	<string>Trak.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>35437E58CEA477B442667A45CA0DAAF68B67C7AD</key>
-		<string>../..Trak/Instabug</string>
-		<key>712C12ADB8310B35AB25FDE8C4BA8F7B1C093BA0</key>
-		<string>../../../Bitz</string>
 		<key>A706B02824D87BD315FD1E63234F939EE9DEDB07</key>
 		<string>../..</string>
 	</dict>
@@ -36,22 +28,6 @@
 	<string>A706B02824D87BD315FD1E63234F939EE9DEDB07</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>712C12ADB8310B35AB25FDE8C4BA8F7B1C093BA0</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Bitz</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>35437E58CEA477B442667A45CA0DAAF68B67C7AD</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Instabug</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

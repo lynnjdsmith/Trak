@@ -30,7 +30,7 @@ class TourVC: UIViewController, UIPageViewControllerDataSource {
   private func createPageViewController() {
     
     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let pageController = storyboard.instantiateViewControllerWithIdentifier("PageController") as UIPageViewController
+    let pageController = storyboard.instantiateViewControllerWithIdentifier("PageController") as! UIPageViewController
     
     
     //self.presentViewController(vc, animated: true, completion: nil)
@@ -41,7 +41,7 @@ class TourVC: UIViewController, UIPageViewControllerDataSource {
     if contentImages.count > 0 {
       let firstController = getItemController(0)!
       let startingViewControllers: NSArray = [firstController]
-      pageController.setViewControllers(startingViewControllers, direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+      pageController.setViewControllers(startingViewControllers as [AnyObject], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
     }
     
     pageViewController = pageController
@@ -61,7 +61,7 @@ class TourVC: UIViewController, UIPageViewControllerDataSource {
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
     
-    let itemController = viewController as PageItemController
+    let itemController = viewController as! PageItemController
     
     if itemController.itemIndex > 0 {
       return getItemController(itemController.itemIndex-1)
@@ -72,7 +72,7 @@ class TourVC: UIViewController, UIPageViewControllerDataSource {
   
   func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
     
-    let itemController = viewController as PageItemController
+    let itemController = viewController as! PageItemController
     
     if itemController.itemIndex+1 < contentImages.count {
       return getItemController(itemController.itemIndex+1)
@@ -84,7 +84,7 @@ class TourVC: UIViewController, UIPageViewControllerDataSource {
   private func getItemController(itemIndex: Int) -> PageItemController? {
     
     if itemIndex < contentImages.count {
-      let piController :PageItemController = self.storyboard?.instantiateViewControllerWithIdentifier("ItemController") as PageItemController
+      let piController :PageItemController = self.storyboard?.instantiateViewControllerWithIdentifier("ItemController") as! PageItemController
       piController.itemIndex = itemIndex
       piController.imageName = contentImages[itemIndex]
       return piController

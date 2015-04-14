@@ -45,7 +45,7 @@ class singleSymptomHorizontalGraphView: UIView {
     self.graphHeight = frame.width
     self.height = frame.height
 
-    //let myDate :NSDate = theItem.valueForKey("myDateTime") as NSDate
+    //let myDate :NSDate = theItem.valueForKey("myDateTime") as! NSDate
     //let dateFormatterAll = NSDateFormatter()
     //dateFormatterAll.dateFormat = "MM/dd"
     //dateText = dateFormatterAll.stringFromDate(myDate)
@@ -68,7 +68,7 @@ class singleSymptomHorizontalGraphView: UIView {
     
     // draw triggers
     for obj in self.beforeEvents {
-      drawTrigger(obj as PFObject)
+      drawTrigger(obj as! PFObject)
     }
   
   }
@@ -82,7 +82,7 @@ class singleSymptomHorizontalGraphView: UIView {
     for name in gridNames {
 
       let timeLabel1 = UILabel(frame: CGRectMake(xPos - 10, -20, 40, 20))
-      timeLabel1.text = name as NSString
+      timeLabel1.text = name as! NSString as String
       timeLabel1.font = fontMedium
       timeLabel1.backgroundColor = UIColor.clearColor()
       timeLabel1.textAlignment = NSTextAlignment.Center
@@ -113,7 +113,7 @@ class singleSymptomHorizontalGraphView: UIView {
 
   func drawTrigger(theObj: PFObject) {
     
-    var triggerEventTime :NSDate = theObj.valueForKey("myDateTime") as NSDate
+    var triggerEventTime :NSDate = theObj.valueForKey("myDateTime") as! NSDate
     var minutesBetween :Float = Float(triggerEventTime.minutesBeforeDate(symptomEvent.dateTime()))
     //println("minutesBetween \(minutesBetween)")
     //var multiplier :Float = Float(graphWidth)
@@ -121,10 +121,10 @@ class singleSymptomHorizontalGraphView: UIView {
     // set the UIColor. nameArray is the names in the legend
     var count = 1 // lets you know where you are in the nameArray. it's your index.
     for theName in nameArray {
-      var theObjName :NSString = theObj.valueForKey("name") as NSString
-      if theName as NSString == theObjName {
+      var theObjName :NSString = theObj.valueForKey("name") as! NSString
+      if theName as! NSString == theObjName {
          if count < colorz.count {
-          dotColor = colorz[count] as UIColor
+          dotColor = colorz[count] as! UIColor
         }
       }
       count++

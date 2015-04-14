@@ -69,7 +69,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
     
     var mainView: UIStoryboard!
     mainView = UIStoryboard(name: "Main", bundle: nil)
-    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
     self.presentViewController(viewcontroller, animated: true, completion: nil)
     
   } */
@@ -82,7 +82,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
       println("show main")
       var mainView: UIStoryboard!
       mainView = UIStoryboard(name: "Main", bundle: nil)
-      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
       self.presentViewController(viewcontroller, animated: true, completion: nil)
       
   } */
@@ -108,7 +108,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
       //self.presentViewController(viewcontroller, animated: true, completion: nil)
       
       mainView = UIStoryboard(name: "Main", bundle: nil)
-      var viewcontroller :UIViewController = mainView.instantiateViewControllerWithIdentifier("Tour1") as UIViewController
+      var viewcontroller :UIViewController = mainView.instantiateViewControllerWithIdentifier("Tour1") as! UIViewController
       self.presentViewController(viewcontroller, animated: false, completion: nil)
       
       //performSegueWithIdentifier("sw_tour1", sender: self)
@@ -144,7 +144,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
       println("user exists")
       var mainView: UIStoryboard!
       mainView = UIStoryboard(name: "Main", bundle: nil)
-      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
       self.presentViewController(viewcontroller, animated: true, completion: nil)
     }
     
@@ -163,7 +163,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
       /*  println("user exists")
       var mainView: UIStoryboard!
       mainView = UIStoryboard(name: "Main", bundle: nil)
-      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
       self.presentViewController(viewcontroller, animated: true, completion: nil) */
     } */
     //var theUser = PFUser.logInWithUsername(self.logInView.usernameField.text, password: self.logInView.passwordField.text, error: &error)
@@ -175,7 +175,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
       println("user exists")
       var mainView: UIStoryboard!
       mainView = UIStoryboard(name: "Main", bundle: nil)
-      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
       self.presentViewController(viewcontroller, animated: true, completion: nil)
     }*/
     
@@ -204,7 +204,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
     println("signupview done")
     var mainView: UIStoryboard!
     mainView = UIStoryboard(name: "Main", bundle: nil)
-    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
     self.presentViewController(viewcontroller, animated: true, completion: nil)
     //self.dismissModalViewControllerAnimated(true) //:YES]; // Dismiss the PFSignUpViewController
   }*/
@@ -227,7 +227,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
       if error == nil {
         // Hooray! Let them use the app now.
       } else {
-        //let errorString = error.userInfo["error"] as NSString
+        //let errorString = error.userInfo["error"] as! NSString
         // Show the errorString somewhere and let the user try again.
       }
     }
@@ -245,7 +245,7 @@ class signUpViewController: PFSignUpViewController, PFSignUpViewControllerDelega
     PFUser.signUp(<#PFUser#>) //WithUsername(self.signUpView.usernameField.text, password: self.signUpView.passwordField.text)
     var mainView: UIStoryboard!
     mainView = UIStoryboard(name: "Main", bundle: nil)
-    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
     self.presentViewController(viewcontroller, animated: true, completion: nil)
   } */
   

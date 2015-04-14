@@ -19,8 +19,8 @@ class sEvent :anEvent
   var beforeEvents  :NSArray = []
   
   init(theEvent:PFObject) {
-    self.name = theEvent.valueForKey("name") as NSString
-    self.date = theEvent.valueForKey("myDateTime") as NSDate
+    self.name = theEvent.valueForKey("name") as! NSString
+    self.date = theEvent.valueForKey("myDateTime") as! NSDate
   }
 
   func dateTime() -> NSDate {
@@ -38,13 +38,13 @@ class sEvent :anEvent
     var nameArray :NSMutableArray = []
     
     for theItem in theArray {
-      var theName :NSString! = theItem.valueForKey("name") as NSString
+      var theName :NSString! = theItem.valueForKey("name") as! NSString
       //println("theName: \(theName)")
       nameArray.addObject(theName)
     }
     //println("nameArray: \(nameArray)")
 
-    return nameArray as NSArray
+    return nameArray as! NSArray
   }
   
     

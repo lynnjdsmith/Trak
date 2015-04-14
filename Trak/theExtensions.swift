@@ -12,7 +12,7 @@ extension UIButton {
     self.layer.cornerRadius = 8
     self.layer.borderWidth = 0
     self.clipsToBounds = true;
-    self.setTitle(name, forState: .Normal)
+    self.setTitle(name as! String, forState: .Normal)
     self.setTitleColor(UIColor.btnText(), forState: .Normal)
     return self
   }
@@ -32,7 +32,7 @@ extension UITextField {
     self.layer.cornerRadius = 8
     self.layer.borderWidth = 0
     self.clipsToBounds = true;
-    self.text = name
+    self.text = name as! String
     self.textColor = UIColor.whiteColor()
     //self.setTitleColor(UIColor.btnText(), forState: .Normal)
     return self
@@ -46,7 +46,7 @@ extension NSString {
     
     var theSymptoms :NSMutableArray = ["Migraine","Headache"]
     for strObj in theSymptoms {
-      if strObj.isEqualToString(name) {
+      if strObj.isEqualToString(name as! String) {
         println("SYMPTOM! \(name)")
         return true
       }
@@ -245,8 +245,8 @@ func randomInt(min: Int, max:Int) -> Int {
   
   override func perform() {
     //println("segue")
-    let sourceViewController = self.sourceViewController as UIViewController
-    let destinationViewController = self.destinationViewController as UIViewController
+    let sourceViewController = self.sourceViewController as! UIViewController
+    let destinationViewController = self.destinationViewController as! UIViewController
     
     sourceViewController.presentViewController(destinationViewController, animated: false, completion: nil)
   }
@@ -259,8 +259,8 @@ func randomInt(min: Int, max:Int) -> Int {
 @objc(segOne) class segOne: UIStoryboardSegue {
   override func perform() {
     //println("segue")
-    let sourceViewController = self.sourceViewController as UIViewController
-    let destinationViewController = self.destinationViewController as UIViewController
+    let sourceViewController = self.sourceViewController as! UIViewController
+    let destinationViewController = self.destinationViewController as! UIViewController
 
     sourceViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
     sourceViewController.presentViewController(destinationViewController, animated: false, completion: nil)
@@ -278,10 +278,10 @@ func placeCircle(point : Dictionary<String, AnyObject>) -> UIView {
   var aView :UIView = UIView()
   
   // unwrap variables
-  let size :CGFloat = point["size"] as AnyObject? as CGFloat
-  var xPos :CGFloat = point["xPos"] as AnyObject? as CGFloat
-  var yPos :CGFloat = point["yPos"] as AnyObject? as CGFloat
-  var color :UIColor = point["color"] as AnyObject? as UIColor
+  let size :CGFloat = point["size"] as AnyObject? as! CGFloat
+  var xPos :CGFloat = point["xPos"] as AnyObject? as! CGFloat
+  var yPos :CGFloat = point["yPos"] as AnyObject? as! CGFloat
+  var color :UIColor = point["color"] as AnyObject? as! UIColor
   
   
   // holder for circle and label
@@ -304,17 +304,17 @@ func placeCircle(point : Dictionary<String, AnyObject>) -> UIView {
 func getUTCDateFromString(theDT :NSString) -> NSDate {
   let dateFormatter = NSDateFormatter()
   dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-  let d :NSDate = dateFormatter.dateFromString(theDT)!
-  if let checkedVal = d.dateByAddingTimeInterval(5.0) { }// if this works, d is a date
-  else { println("** YO! You probably have an empty value!") } // this means d is nil
+  let d :NSDate = dateFormatter.dateFromString(theDT as! String)!
+  //if let checkedVal = d.dateByAddingTimeInterval(5.0) { }// if this works, d is a date
+  //else { println("** YO! You probably have an empty value!") } // this means d is nil
   return d
 }
 
 
-func getTimeStringFromDate(theDT :NSDate) -> NSString {
+func getTimeStringFromDate(theDT :NSDate) -> String {
   let dateFormatter = NSDateFormatter()
   dateFormatter.dateFormat = "hh:mm a"
-  let d :NSString = dateFormatter.stringFromDate(theDT)
+  let d :String = dateFormatter.stringFromDate(theDT)
   return d
 }
 
@@ -322,7 +322,7 @@ func getTimeFromString(theDT :NSString) -> NSDate {
   let dateFormatter = NSDateFormatter()
   dateFormatter.dateFormat = "hh:mm a"
   //var d = dateFormatter.stringFromDate(theDT)
-  let d :NSDate = dateFormatter.dateFromString(theDT)!
+  let d :NSDate = dateFormatter.dateFromString(theDT as! String)!
   //if let checkedVal = d.dateByAddingTimeInterval(5.0) { }// if this works, d is a date
   //else { println("** YO! You probably have an empty value!") } // this means d is nil
   return d
@@ -332,7 +332,7 @@ func getDateDescriptiveStringFromString(val :NSString) -> NSString {
   println("getDateDescriptiveStringFromString val: \(val)")
   let dateFormatter = NSDateFormatter()
   dateFormatter.dateFormat = "MM/dd/yyyy"
-  let str1 :NSDate = dateFormatter.dateFromString(val)!
+  let str1 :NSDate = dateFormatter.dateFromString(val as! String)!
   let dateFormatter2 = NSDateFormatter()
   dateFormatter2.dateFormat = "EEEE, MMM d "
   let str2 :NSString = dateFormatter2.stringFromDate(str1)
@@ -345,7 +345,7 @@ func getDateDescriptiveStringFromString(val :NSString) -> NSString {
     while parentResponder != nil {
       parentResponder = parentResponder!.nextResponder()
       if parentResponder is UIViewController {
-        return parentResponder as UIViewController!
+        return parentResponder as! UIViewController!
       }
     }
     return nil

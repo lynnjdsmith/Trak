@@ -22,7 +22,7 @@ class lightboxView: UIView {
   }
   
   init (filename :NSString) {
-    super.init()
+    super.init(frame:CGRectZero)
     theFileName = filename
     //println("lightbox loaded")
     setup()
@@ -38,12 +38,12 @@ class lightboxView: UIView {
     self.layer.cornerRadius = 25;
     self.layer.masksToBounds = true;
     
-    let url = NSBundle.mainBundle().URLForResource(theFileName, withExtension:"html")
-    let myRequest = NSURLRequest(URL: url!);
+    let url = NSBundle.mainBundle().URLForResource(theFileName as String, withExtension:"html")
+    let myRequest = NSURLRequest(URL: url!)
     webView = UIWebView(frame:CGRectMake(gutter, gutter, gutter*16, myHeight - gutter))
     webView.opaque = false
     webView.backgroundColor = UIColor.clearColor()
-    webView.loadRequest(myRequest);
+    webView.loadRequest(myRequest)
     self.addSubview(webView)
     
     /* theTitle = UILabel(frame:CGRectMake(gutter*2, gutter*2, gutter*14, gutter*2))
@@ -60,7 +60,7 @@ class lightboxView: UIView {
     self.addSubview(closeBtn)
   }
   
-  func setTitle(theString:NSString){
+  func setTitle(theString:String){
     theTitle.text = theString
   }
   
@@ -68,9 +68,9 @@ class lightboxView: UIView {
     self.hidden = true
   }
   
-  override init () {
-    super.init()
-  }
+  /* override init () {
+    super.init(style: .Plain)
+  } */
   
   required init(coder aDecoder: NSCoder) {
     fatalError("This class does not support NSCoding")

@@ -33,7 +33,7 @@ class dataMigraineVC: UIViewController, stlDelegate {
       ["label" : "Butter",   "value" : NSNumber(int:30)],
       ["label" : "Coffee",   "value" : NSNumber(int:15)],
       ["label" : "Red Wine",   "value" : NSNumber(int:45)],
-      ] as NSArray */
+      ] as! NSArray */
     
     //let graph = SingleSymptomLine_GraphView(frame: CGRectMake(0, 80, 320, 400), data: myData)
     //self.view.addSubview(graph)
@@ -45,7 +45,7 @@ class dataMigraineVC: UIViewController, stlDelegate {
     // setup view controller
     println("sstl")
     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let vc : symptTrigListViewController = storyboard.instantiateViewControllerWithIdentifier("symptTrigListViewController") as symptTrigListViewController
+    let vc : symptTrigListViewController = storyboard.instantiateViewControllerWithIdentifier("symptTrigListViewController") as! symptTrigListViewController
     vc.delegate = self
     self.presentViewController(vc, animated: true, completion: nil)
   }

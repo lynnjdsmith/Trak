@@ -29,7 +29,7 @@ class logInViewController: PFLogInViewController, UITextFieldDelegate, PFLogInVi
     self.delegate = self
     
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    self.signUpController = storyboard.instantiateViewControllerWithIdentifier("signUpViewController") as PFSignUpViewController
+    self.signUpController = storyboard.instantiateViewControllerWithIdentifier("signUpViewController") as! PFSignUpViewController
 
   }
 
@@ -91,7 +91,7 @@ class logInViewController: PFLogInViewController, UITextFieldDelegate, PFLogInVi
       println("user exists")
       var mainView: UIStoryboard!
       mainView = UIStoryboard(name: "Main", bundle: nil)
-      var viewcontroller : SWRevealViewController = mainView.instantiateViewControllerWithIdentifier("SWRevealViewController") as SWRevealViewController
+      var viewcontroller : SWRevealViewController = mainView.instantiateViewControllerWithIdentifier("SWRevealViewController") as! SWRevealViewController
       self.presentViewController(viewcontroller, animated: true, completion: nil)
       
       performSegueWithIdentifier("sw_main", sender: self)
@@ -110,8 +110,8 @@ class logInViewController: PFLogInViewController, UITextFieldDelegate, PFLogInVi
 func loadPlistData() {
   
   // getting path to GameData.plist
-  let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
-  let documentsDirectory = paths[0] as String
+  let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! NSArray
+  let documentsDirectory = paths[0] as! String
   let path = documentsDirectory.stringByAppendingPathComponent("MigraineStopDeets.plist")
   
   let fileManager = NSFileManager.defaultManager()

@@ -180,7 +180,7 @@ class calendarViewController: UIViewController {
       //println("strAll: \(strAll)")
         
       let myB = UIButton()
-      myB.setTitle(NSString(format:"%i", index), forState: UIControlState.Normal)
+      myB.setTitle(NSString(format:"%i", index) as String, forState: UIControlState.Normal)
       myB.setTitle(strAll, forState: UIControlState.Highlighted)
       myB.setTitleColor(UIColor.appRed(), forState: UIControlState.Normal)
       myB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
@@ -227,7 +227,7 @@ class calendarViewController: UIViewController {
       // send the date
       var mainView: UIStoryboard!
       mainView = UIStoryboard(name: "Main", bundle: nil)
-      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+      var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
       
       if let d = self.delegate {
           d.didPressDate(s)

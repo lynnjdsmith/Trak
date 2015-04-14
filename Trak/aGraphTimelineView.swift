@@ -78,15 +78,15 @@ class aGraphTimelineView: UIView {
     var d :NSString = preformatter.stringFromDate(theDate)
     
     // create dates for beginning and end of day
-    var date1String: NSString! = "\(d) 12:00 AM"
-    var date2String: NSString! = "\(d) 11:59 PM"
+    var date1String: NSString = "\(d) 12:00 AM"
+    var date2String: NSString = "\(d) 11:59 PM"
     
     //println("CHART date1String: \(date1String) date2String: \(date2String)")
     
     let formatter = NSDateFormatter()
     formatter.dateFormat = "MM/dd/yyyy hh:mm a"
-    var date1: NSDate! = formatter.dateFromString(date1String)
-    var date2: NSDate! = formatter.dateFromString(date2String)
+    var date1: NSDate! = formatter.dateFromString(date1String as! String)
+    var date2: NSDate! = formatter.dateFromString(date2String as! String)
     
     //println("date1: \(date1) date2: \(date2)")
     //println("date1: \(date1)")
@@ -110,13 +110,13 @@ class aGraphTimelineView: UIView {
     findData.findObjectsInBackgroundWithBlock {
       (objects:[AnyObject]!, error:NSError!)->Void in
       if (error == nil) {
-        for object in objects as [PFObject] {
+        for object in objects as! [PFObject] {
           //println("CHART EVENT date1String: \(date1String) date2String: \(date2String)")
           //println(object)
           self.myDayEvents.addObject(object)
           //self.drawIt(object)
-            if (object.valueForKey("name") as NSString != "migraine") {
-             self.drawTrigger(object, endOfDay: date2, imageName: self.dotImages[num] as NSString)
+            if (object.valueForKey("name") as! NSString != "migraine") {
+             self.drawTrigger(object, endOfDay: date2, imageName: self.dotImages[num] as! NSString)
             }
             else {
               self.myMigraineEvents.addObject(object)
@@ -125,7 +125,7 @@ class aGraphTimelineView: UIView {
         }
       }
       for object in self.myMigraineEvents {
-        self.drawMigraine(object as PFObject, endOfDay: date2)
+        self.drawMigraine(object as! PFObject, endOfDay: date2)
         //println("CHART MIGRAINE date1String: \(date1String) date2String: \(date2String)")
         //println(object)
       }
@@ -137,7 +137,7 @@ class aGraphTimelineView: UIView {
 
   func drawTrigger(theObj: PFObject, endOfDay: NSDate, imageName: NSString) {
   
-    var triggerEventTime :NSDate = theObj.valueForKey("myDateTime") as NSDate
+    var triggerEventTime :NSDate = theObj.valueForKey("myDateTime") as! NSDate
     var minutesBetween :CGFloat = CGFloat(triggerEventTime.minutesBeforeDate(endOfDay))
 
     var smallBlock = myWidth / 1440
@@ -154,14 +154,14 @@ class aGraphTimelineView: UIView {
     
     var circleView :UIButton = UIButton(frame:CGRectMake(myXPos, 40, dotSize, dotSize))
     let imageName = imageName
-    let image = UIImage(named: imageName)
+    let image = UIImage(named: imageName as! String)
     circleView.setImage(image, forState: .Normal)
     self.addSubview(circleView)
   }
   
   func drawMigraine(theObj: PFObject, endOfDay: NSDate) {
     
-    var triggerEventTime :NSDate = theObj.valueForKey("myDateTime") as NSDate
+    var triggerEventTime :NSDate = theObj.valueForKey("myDateTime") as! NSDate
     var minutesBetween :CGFloat = CGFloat(triggerEventTime.minutesBeforeDate(endOfDay))
     
     //println("minutesBetween \(minutesBetween)")
@@ -186,7 +186,7 @@ class aGraphTimelineView: UIView {
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
     var timeZone :NSTimeZone = NSTimeZone(name:"UTC")!
     formatter.timeZone = timeZone
-    var d :NSString = formatter.stringFromDate(localDate)
+    var d :String = formatter.stringFromDate(localDate)
     var dateUTC: NSDate! = formatter.dateFromString(d)
     return dateUTC
   }
@@ -251,10 +251,10 @@ class aGraphTimelineView: UIView {
 //nameArray is the names in the legend
 /* var count = 1 // lets you know where you are in the nameArray. it's your index.
 for theName in nameArray {
-var theObjName :NSString = theObj.valueForKey("name") as NSString
-if theName as NSString == theObjName {
+var theObjName :NSString = theObj.valueForKey("name") as! NSString
+if theName as! NSString == theObjName {
 if count < colorz.count {
-dotColor = colorz[count] as UIColor
+dotColor = colorz[count] as! UIColor
 }
 }
 count++

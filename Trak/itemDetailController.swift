@@ -15,14 +15,13 @@ class itemDetailController: UIViewController {
   // IBOutlets
   @IBOutlet var daTitle         :UITextField!
   @IBOutlet var timeBtn         :UIButton!
-  @IBOutlet var noteTextField   :UITextView!
   @IBOutlet var trigSympControl :UISegmentedControl!
   @IBOutlet var deleteBtn       :UIButton!
-  @IBOutlet var topBackView     :UIView!
   @IBOutlet var amountSegment   :UISegmentedControl!
+  @IBOutlet weak var scrollView :UIScrollView!
   
   // Variables
-  var delegate  :itemDetailDelegate? = nil
+  var delegate  :timelineViewController? = nil
   var timePicker :myTimePicker!
   var theItem   :PFObject!
   var objID     :NSString! = ""
@@ -39,30 +38,11 @@ class itemDetailController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // set top back view
-    topBackView.layer.borderWidth = 0.3
-    topBackView.layer.borderColor = UIColor.appLightGray().CGColor
-    //titleTop.text = name
+    // set scroll view height
+    self.scrollView.contentSize.height = 580
     
-    // add gesture recognizer to close keyboard on general tap
-    let recognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
-    view.addGestureRecognizer(recognizer)
-    
-    // set time field look
-    daTitle.layer.borderColor = UIColor.clearColor().CGColor
-    daTitle.layer.backgroundColor = UIColor.clearColor().CGColor
-    daTitle.layer.borderWidth = 1
-    daTitle.layer.cornerRadius = 8
-    
-    //set time field pattern
-    var paddingView :UIView = UIView(frame: CGRectMake(0, 0, 7, 20))
-    paddingView.backgroundColor = UIColor.clearColor()
-    daTitle.leftView = paddingView
-    daTitle.leftViewMode = UITextFieldViewMode.Always
-
     // create back btn
-    //navigationController?.setNavigationBarHidden(true, animated:true)
-    let b = UIButton() //UIButton.buttonWithType(UIButtonType.System) as UIButton
+    let b = UIButton()
     b.frame = CGRectMake(-10, 22, 100, 50)
     b.backgroundColor = UIColor.clearColor()
     b.titleLabel!.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
@@ -71,16 +51,37 @@ class itemDetailController: UIViewController {
     b.addTarget(self, action: "goBack:", forControlEvents: UIControlEvents.TouchUpInside)
     self.view.addSubview(b)
     
-    // style the buttons  // normalStyle is a good function to use!!
-    deleteBtn.normalStyle("Delete This Item")
+    // add time picker
+    timePicker = myTimePicker(frame: CGRectMake(0, self.view.frame.height - 240, self.view.frame.width, 240), myparent2: self) as myTimePicker
+    self.view.addSubview(timePicker)
+    timePicker.hidden = true
+    
+    //set time field pattern
+    var paddingView :UIView = UIView(frame: CGRectMake(0, 0, 7, 20))
+    paddingView.backgroundColor = UIColor.clearColor()
+    daTitle.leftView = paddingView
+    daTitle.leftViewMode = UITextFieldViewMode.Always
+
+    amountSegment.layer.borderColor = UIColor.appRed().CGColor
+    amountSegment.layer.borderWidth = 0
+    amountSegment.layer.cornerRadius = 15
+    
     trigSympControl.layer.borderColor = UIColor.appRed().CGColor
     trigSympControl.layer.borderWidth = 0
-    trigSympControl.layer.cornerRadius = 10
+    trigSympControl.layer.cornerRadius = 15
+    
+    // style the buttons
+    deleteBtn.normalStyle("Delete This Item")
+    
+    // add gesture recognizer to close keyboard on general tap
+    let recognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
+    view.addGestureRecognizer(recognizer)
    }
   
   
-  override func viewDidDisappear(animated: Bool) {
-    super.viewDidDisappear(false)
+  //override func viewDidDisappear(animated: Bool) {
+  func saveTheItem() {
+  //super.viewDidDisappear(false)
     
     // set name
     theItem.setObject(daTitle.text, forKey: "name")
@@ -92,7 +93,7 @@ class itemDetailController: UIViewController {
     theItem.setObject(d, forKey:"myDateTime")
     
     // set amount
-    switch amountSegment.selectedSegmentIndex as NSNumber {
+    switch amountSegment.selectedSegmentIndex {
     case 0:
       theItem.setObject("1", forKey:"amount")
     case 1:
@@ -114,11 +115,15 @@ class itemDetailController: UIViewController {
     default: break;
     }
 
-    theItem.saveInBackgroundWithBlock {
-      (success: Bool!, error: NSError!) -> Void in
-      if (success == nil) { println("ERROR in Saving: %@", error) }
+    theItem.saveInBackgroundWithBlock {           // LYNN - really?
+      (success, error) -> Void in
+      if (success == false) { println("ERROR in Saving: %@", error) }
+      else {
+        if let d = self.delegate {
+          d.detailSaveDone()
+        }
     }
-    
+    }
   }
   
   func loadDataForItem() {
@@ -142,26 +147,26 @@ class itemDetailController: UIViewController {
         self.theItem = object
         
         // set title
-        self.daTitle.text = object.valueForKey("name") as NSString
-        self.name = object.valueForKey("name") as NSString
+        self.daTitle.text = object.valueForKey("name") as! NSString as! String
+        self.name = object.valueForKey("name") as! NSString
 
         // set date
-        let date :NSDate = object.valueForKey("myDateTime") as NSDate
+        let date :NSDate = object.valueForKey("myDateTime") as! NSDate
         let df = NSDateFormatter()
         df.dateFormat = "MM/dd/yyyy"
-        let d :NSString = df.stringFromDate(date)
-        self.daDate = d as NSString
+        let d :String = df.stringFromDate(date)
+        self.daDate = d
         
         // set daTime
-        let myDate :NSDate = object.valueForKey("myDateTime") as NSDate
+        let myDate :NSDate = object.valueForKey("myDateTime") as! NSDate
         let timeFormatter = NSDateFormatter()
         timeFormatter.dateFormat = "h:mm a"
-        let myTime :NSString = timeFormatter.stringFromDate(myDate)
-        self.daTime = myTime as NSString
-        self.timeBtn.setTitle(myTime, forState: .Normal)
+        let myTime :String = timeFormatter.stringFromDate(myDate)
+        self.daTime = myTime
+        self.timeBtn.setTitle((myTime as! String), forState: .Normal)
 
         // set amount
-        switch object.valueForKey("amount") as NSString {
+        switch object.valueForKey("amount") as! NSString {
         case "1":
           self.amountSegment.selectedSegmentIndex = 0
         case "2":
@@ -173,7 +178,7 @@ class itemDetailController: UIViewController {
         }
         
         // set the trigger or symptom
-        switch object.valueForKey("type") as NSString { //== "trigger") {
+        switch object.valueForKey("type") as! NSString { //== "trigger") {
           case "trigger":
             self.trigSympControl.selectedSegmentIndex = 0
           case "symptom":
@@ -198,8 +203,8 @@ class itemDetailController: UIViewController {
 
   @IBAction func startEdit(sender: UITextField) {
     println("startEdit")
-    sender.layer.borderColor = UIColor.appBlue().CGColor
-    sender.layer.backgroundColor = UIColor.whiteColor().CGColor
+    //sender.layer.borderColor = UIColor.appBlue().CGColor
+    //sender.layer.backgroundColor = UIColor.whiteColor().CGColor
   }
   
   @IBAction func deleteMe(sender: AnyObject) {
@@ -207,7 +212,7 @@ class itemDetailController: UIViewController {
     //println("Deleting. objID: \(objID)")
     
     var query = PFQuery(className:"Items")
-    query.getObjectInBackgroundWithId(objID) {
+    query.getObjectInBackgroundWithId(objID! as! String) {
         (theItem: PFObject!, error: NSError!) -> Void in
         if (theItem != nil) {
             theItem.deleteInBackground()
@@ -225,67 +230,49 @@ class itemDetailController: UIViewController {
   /***   TIME FUNCTIONS   ***/
   
   @IBAction func timeBtnPress(sender: UIButton) {
-    println("timeBtn")
-    
-    //highlight the field
-    sender.layer.borderWidth = 3.0
-    sender.layer.borderColor = UIColor.appBlue().CGColor
-    
-    var theTimeString = sender.titleForState(UIControlState.Normal)
-    var theTime = getTimeFromString(theTimeString!)
+    //println("timeBtn")
+    var theTime :NSDate = getTimeFromString(daTime)
     timePicker.setTheTime(theTime)
     timePicker.hidden = false
   }
   
-  func handleTimePicker(sender: UIDatePicker) {
+  func timePickerTimeChanged(sender: UIDatePicker) {
     //println("handle!")
     var dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "h:mm a"
-    var newTimeString :NSString = dateFormatter.stringFromDate(sender.date)
+    var newTimeString :String = dateFormatter.stringFromDate(sender.date)
     newTimeSelected(newTimeString)
   }
   
-  func timePickerBack10(sender: UIButton) {
-    //println("handle! currentTag: \(currentTag)")
-    var dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "h:mm a"
-    var newTime = timePicker.datePickerView.date
-    newTime = newTime.dateBySubtractingMinutes(10)
-    timePicker.datePickerView.date = newTime
-    
-    // set button title
-    var newTimeString = getTimeStringFromDate(newTime)
-    newTimeSelected(newTimeString)
-  }
-  
-  func timePickerBack30(sender: UIButton) {
-    //println("handle! currentTag: \(currentTag)")
-    var dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "h:mm a"
-    var newTime = timePicker.datePickerView.date
-    newTime = newTime.dateBySubtractingMinutes(30)
-    timePicker.datePickerView.date = newTime
-    
-    // set button title
-    var newTimeString = getTimeStringFromDate(newTime)
-    newTimeSelected(newTimeString)
-  }
-  
-  func newTimeSelected(newTimeString :NSString) {
+
+  func newTimeSelected(newTimeString :String) {
       timeBtn.setTitle(newTimeString, forState: UIControlState.Normal)
       daTime = newTimeString
   }
   
-  
-  
-  func goBack(sender: UIButton) {
-    navigationController?.popViewControllerAnimated(true)
+  func closePicker()
+  {
+    timePicker.hidden = true
   }
   
-  func handleTap(recognizer: UITapGestureRecognizer) {
+  /* func doneButton(sender:UIButton)
+  {
+    timePicker.hidden = true
+    timeBtn.layer.borderWidth = 0.0
+  } */
+  
+  func goBack(sender: UIButton) {                           // go back top nav
+    navigationController?.popViewControllerAnimated(true)
+    saveTheItem()
+  }
+  
+  func handleTap(recognizer: UITapGestureRecognizer) {      // global tap to close keyboard - todo add picker
     self.view.endEditing(true)
     daTitle.resignFirstResponder()
   }
+  
+
+  
   
 }
 

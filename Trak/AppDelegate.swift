@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
     
-    func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       
       // set parse and instabug
       Parse.enableLocalDatastore()
@@ -23,10 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       if self.window != nil {
 
         if PFUser.currentUser() == nil {
-          self.window!.rootViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as PFLogInViewController
+          self.window!.rootViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as! PFLogInViewController
         }
         else {
-          self.window!.rootViewController = storyboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as SWRevealViewController
+          self.window!.rootViewController = storyboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as! SWRevealViewController
         }
       }
       
@@ -35,19 +35,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
     }
 
-    func applicationWillResignActive(application: UIApplication!) {
+    func applicationWillResignActive(application: UIApplication) {
     }
 
-    func applicationDidEnterBackground(application: UIApplication!) {
+    func applicationDidEnterBackground(application: UIApplication) {
     }
 
-    func applicationWillEnterForeground(application: UIApplication!) {
+    func applicationWillEnterForeground(application: UIApplication) {
     }
 
-    func applicationDidBecomeActive(application: UIApplication!) {
+    func applicationDidBecomeActive(application: UIApplication) {
     }
 
-    func applicationWillTerminate(application: UIApplication!) {
+    func applicationWillTerminate(application: UIApplication) {
     }
   
 }

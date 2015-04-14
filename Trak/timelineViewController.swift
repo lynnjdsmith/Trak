@@ -5,7 +5,7 @@
 import UIKit
 import QuartzCore
 
-class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate, itemDetailDelegate { //tCellDelegate
+class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate, itemDetailDelegate  {
   
   // set variables
   @IBOutlet var tableView: UITableView!
@@ -35,11 +35,15 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     // empty text string
     self.text1.text = ""
     
+    loadDataForDate(daDate)
     self.tableView.reloadData()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // add focus event on main entry box
+    text1.addTarget(self, action:"focusMainText", forControlEvents:.EditingDidBegin)
     
     // add lightbox
     var lb :lightboxView = lightboxView(filename: "howto")
@@ -58,11 +62,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     text1.becomeFirstResponder()
     tableView.separatorStyle = UITableViewCellSeparatorStyle.None
 
-    // set time
-    //let timeFormatter = NSDateFormatter()
-    //timeFormatter.dateFormat = "h:mm a" // works for +10pm?
-    //daTime = timeFormatter.stringFromDate(NSDate())
-    
     // set top time field
     let tf = NSDateFormatter()
     tf.dateFormat = "h:mm a"
@@ -88,7 +87,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     self.view.addSubview(nav)
     
     // add time picker
-    timePicker = myTimePicker(frame: CGRectMake(0, self.view.frame.height - 240, self.view.frame.width, 240), myP: self) as myTimePicker
+    timePicker = myTimePicker(frame: CGRectMake(0, self.view.frame.height - 240, self.view.frame.width, 240), myparent: self) as myTimePicker
     self.view.addSubview(timePicker)
     timePicker.hidden = true
     //hiddenTF.inputView = timePicker
@@ -100,7 +99,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     } else {
       println("logging in")
       let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc :logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as logInViewController
+      let vc :logInViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as! logInViewController
       let svc = signUpViewController()
       vc.signUpController = svc
       self.presentViewController(vc, animated: true, completion: nil)
@@ -126,18 +125,18 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     findData.orderByDescending("myDateTime")
     
     // send query
-    var HUD = MBProgressHUD.showHUDAddedTo(self.view, animated:true)
+    //var HUD = MBProgressHUD.showHUDAddedTo(self.view, animated:true)
     //HUD.delegate = self;
-    HUD.labelText = "loading"
+    //HUD.labelText = "loading"
     
     findData.findObjectsInBackgroundWithBlock {
         (objects:[AnyObject]!, error:NSError!)->Void in
         
-        HUD.hidden = true
+        //HUD.hidden = true
         
         if (error == nil) {
           self.items = []
-            for object in objects as [PFObject] {
+            for object in objects as! [PFObject] {
                 self.items.addObject(object)
                 //println(object)
             }
@@ -185,7 +184,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     // send the date
     var mainView: UIStoryboard!
     mainView = UIStoryboard(name: "Main", bundle: nil)
-    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as UIViewController
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("navViewController") as! UIViewController
     
     if let d = self.delegate {
       d.didPressDate(s)
@@ -204,7 +203,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   @IBAction func showCalendar(sender: AnyObject) {
     // setup view controller
     let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let vc : calendarViewController = storyboard.instantiateViewControllerWithIdentifier("calendarViewController") as calendarViewController
+    let vc : calendarViewController = storyboard.instantiateViewControllerWithIdentifier("calendarViewController") as! calendarViewController
     vc.delegate = self
     self.presentViewController(vc, animated: true, completion: nil)
   }
@@ -226,8 +225,8 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // day button at top of page, change
     let str = getDateDescriptiveStringFromString(val)
-    dayBtn.setTitle(str, forState: UIControlState.Normal)
-    dayBtn.setTitle(str, forState: UIControlState.Highlighted)
+    dayBtn.setTitle(str as! String, forState: UIControlState.Normal)
+    dayBtn.setTitle(str as! String, forState: UIControlState.Highlighted)
   }
   
   /**  Table Info and Functions  **/
@@ -239,19 +238,19 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     //println("tableloading cell")
     
     // setup cell
-    var cell = tableView.dequeueReusableCellWithIdentifier("cell1") as timelineCell
+    var cell = tableView.dequeueReusableCellWithIdentifier("cell1") as! timelineCell
     cell.selectionStyle = UITableViewCellSelectionStyle.None;
     // cell.delegate = self remove in future cleanup of tCellDelegate
     
     // set the name
-    cell.label1.text = items[indexPath.row].valueForKey("name") as NSString
+    cell.label1.text = items[indexPath.row].valueForKey("name") as! String
     
     // set the time
     let daDateVal: AnyObject! = items[indexPath.row].valueForKey("myDateTime")
     if (daDateVal == nil) { println("*** YO! You have a blank myDateTime in the DB, probably!! ***") }
     let timeFormatter = NSDateFormatter()
     timeFormatter.dateFormat = "h:mm a" // "h:mm a"
-    let str2 = timeFormatter.stringFromDate(daDateVal as NSDate)
+    let str2 = timeFormatter.stringFromDate(daDateVal as! NSDate)
     
     // set time field look
     //cell.timeTextField.layer.borderColor = UIColor.appLightestGray().CGColor
@@ -286,7 +285,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     cell.addSubview(carat)
     
     // set the vertical line color
-    var theType :NSString = items[indexPath.row].valueForKey("type") as NSString
+    var theType :NSString = items[indexPath.row].valueForKey("type") as! NSString
 
     switch theType { //== "trigger") {
     //case "trigger":
@@ -314,14 +313,13 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     var mainView: UIStoryboard!
     mainView = UIStoryboard(name: "Main", bundle: nil)
-    let s = mainView.instantiateViewControllerWithIdentifier("itemDetailController") as itemDetailController
+    let s = mainView.instantiateViewControllerWithIdentifier("itemDetailController") as! itemDetailController
     s.objID = items[indexPath.row].objectId
     s.delegate = self
     self.navigationController?.pushViewController(s, animated: true)
     //self.presentViewController(s, animated: true, completion: nil)
     //println("You selected cell #\(indexPath.row)!")
   }
-  
 
 
   @IBAction func topTimeBtnPress(sender: UIButton) {
@@ -329,7 +327,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // turn off current time btn if one is selected (-1 means nothing selected yet or top time button selected)
     if (currentTag != -1) {
-      let oldBtn = self.tableView.viewWithTag(currentTag) as UIButton
+      let oldBtn = self.tableView.viewWithTag(currentTag) as! UIButton
       oldBtn.layer.borderWidth = 1.0
       oldBtn.layer.borderColor = UIColor.clearColor().CGColor
     }
@@ -337,7 +335,8 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     var theTimeString = topTimeBtn.titleForState(UIControlState.Normal)
     var theTime = getTimeFromString(theTimeString!)
     timePicker.setTheTime(theTime)
-    hiddenTF.becomeFirstResponder()
+    //hiddenTF.becomeFirstResponder()
+    self.view.endEditing(true)
     timePicker.hidden = false
     topTimeBtn.layer.borderWidth = 3.0
     currentTag = -1
@@ -351,7 +350,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       topTimeBtn.layer.borderWidth = 1.0
       //topTimeBtn.layer.borderColor = UIColor.clearColor().CGColor
     } else {        // turn off table's time btn if one is selected
-      let oldBtn = self.tableView.viewWithTag(currentTag) as UIButton
+      let oldBtn = self.tableView.viewWithTag(currentTag) as! UIButton
       oldBtn.layer.borderWidth = 1.0
       oldBtn.layer.borderColor = UIColor.clearColor().CGColor
     }
@@ -360,21 +359,21 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     sender.layer.borderWidth = 3.0
     sender.layer.borderColor = UIColor.appBlue().CGColor
     
-    //let myBtn = self.tableView.viewWithTag(currentTag) as UIButton
+    //let myBtn = self.tableView.viewWithTag(currentTag) as! UIButton
     var theTimeString = sender.titleForState(UIControlState.Normal)
     var theTime = getTimeFromString(theTimeString!)
     timePicker.setTheTime(theTime)
-    hiddenTF.becomeFirstResponder()
+    //hiddenTF.becomeFirstResponder()
+    self.view.endEditing(true)
     timePicker.hidden = false
     currentTag = sender.tag
   }
   
-  func handleTimePicker(sender: UIDatePicker) {
-    println("handle! currentTag: \(currentTag)")
+  func timePickerTimeChanged(sender: UIDatePicker) {
+    println("timepickertimechanged currentTag: \(currentTag)")
     var dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "h:mm a"
     var newTimeString :NSString = dateFormatter.stringFromDate(sender.date)
-
     newTimeSelected(newTimeString)
   }
   
@@ -406,26 +405,39 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   
   func newTimeSelected(newTimeString :NSString) {
     if (currentTag != -1) {
-      let myBtn = self.tableView.viewWithTag(currentTag) as UIButton
-      myBtn.setTitle(newTimeString, forState: UIControlState.Normal)
+      let myBtn = self.tableView.viewWithTag(currentTag) as! UIButton
+      myBtn.setTitle(newTimeString as String, forState: UIControlState.Normal)
     } else {
-      topTimeBtn.setTitle(newTimeString, forState: UIControlState.Normal)
+      topTimeBtn.setTitle(newTimeString as String, forState: UIControlState.Normal)
       daTime = newTimeString
     }
   }
   
-  func doneButton(sender:UIButton)
+  func focusMainText() {
+    closePicker()
+  }
+  
+  func closePicker()
   {
     timePicker.hidden = true
 
     if (currentTag != -1) {
-      let myBtn = self.tableView.viewWithTag(currentTag) as UIButton
+      let myBtn = self.tableView.viewWithTag(currentTag) as! UIButton
       myBtn.layer.borderWidth = 0.0
     } else {
       topTimeBtn.layer.borderWidth = 1.0
     }
   }
   
+  /* func closePicker() {
+      timePicker.hidden = false
+  } */
+  
+  func detailSaveDone() {
+    loadDataForDate(daDate)
+    self.tableView.reloadData()
+    //println("detailSaveDone")
+  }
   
   func revealTheToggle() {
     self.revealViewController()?.rightRevealToggle(self)

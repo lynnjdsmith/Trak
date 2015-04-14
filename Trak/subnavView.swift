@@ -50,7 +50,7 @@ class subnavView: UIView {
     btn2.backgroundColor = UIColor.btnColorHighlight()
     btn2.titleLabel!.font = theFont
     btn2.layer.cornerRadius = 15
-    btn2.addTarget(self, action: "btn1Press", forControlEvents: UIControlEvents.TouchUpInside)
+    btn2.addTarget(self, action: "btn2Press", forControlEvents: UIControlEvents.TouchUpInside)
     self.addSubview(btn2)
     
     let btn3:UIButton = UIButton(frame: CGRect(x: (screenSize.width/3 * 2) + spacing - 2 + 10, y: 12, width: btnWidth, height: 35))
@@ -58,7 +58,7 @@ class subnavView: UIView {
     btn3.titleLabel!.font = theFont
     btn3.backgroundColor = UIColor.btnColorB()
     btn3.layer.cornerRadius = 15
-    btn3.addTarget(self, action: "btn1Press", forControlEvents: UIControlEvents.TouchUpInside)
+    btn3.addTarget(self, action: "btn3Press", forControlEvents: UIControlEvents.TouchUpInside)
     self.addSubview(btn3)
   }
   
@@ -67,9 +67,9 @@ class subnavView: UIView {
     //self.hidden = true
   }
   
-  override init () {
-    super.init()
-  }
+  /* override init () {
+    super.init(style: .Plain)
+  } */
   
   required init(coder aDecoder: NSCoder) {
     fatalError("This class does not support NSCoding")

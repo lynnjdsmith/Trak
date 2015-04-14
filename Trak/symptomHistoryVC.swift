@@ -23,7 +23,7 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
   
   var items     :NSMutableArray = []
   var objID     :NSString! = ""
-  var name      :NSString! = ""
+  var name      :String! = ""
   var daDate    :NSString!
   var daTime    :NSString! = ""
   var theItem   :PFObject!
@@ -92,13 +92,13 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
     
     // draw graphs
     var position :CGFloat = -20
-    for obj in symptomEvents as [PFObject] {
+    for obj in symptomEvents as! [PFObject] {
     
       var theEvent = sEvent(theEvent:obj)
       var theBeforeEvents = theEvent.relatedTriggerEvents(24)
     
       // draw date
-      let myDate :NSDate = obj.valueForKey("myDateTime") as NSDate
+      let myDate :NSDate = obj.valueForKey("myDateTime") as! NSDate
       let dateFormatterAll = NSDateFormatter()
       dateFormatterAll.dateFormat = "MM/dd"
       let d1 = UILabel(frame: CGRectMake(graphWidth - 32, position, 45, 20))
@@ -149,7 +149,7 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
       
       let theLabel :UILabel = UILabel(frame: CGRectMake(currentX + 20, currentY, spaceAmt - 20, 15))
       //UILabel(frame: CGRectMake(CGFloat(xPosLegend - (spaceAmt/2) + (dotSize/2)), yPosLegend + dotSize, spaceAmt, 30))
-      theLabel.text = value as NSString
+      theLabel.text = value as! String
       theLabel.lineBreakMode = .ByWordWrapping
       theLabel.numberOfLines = 0
       theLabel.font = labelFont
@@ -183,7 +183,7 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
     
     // Create the PDF context using the default page size of 612 x 792.
     // 612 x 792 points = 8.5 x 11 inch = 215.9 mm x 279.4 mm = US Letter
-    UIGraphicsBeginPDFContextToFile(pdfFileName, CGRectZero, nil)
+    UIGraphicsBeginPDFContextToFile(pdfFileName as String, CGRectZero, nil)
     UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
     var context :CGContextRef = UIGraphicsGetCurrentContext()
     
@@ -201,7 +201,7 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
     // Close the PDF context and write the contents out.
     UIGraphicsEndPDFContext()
   
-    self.fileData = NSData(contentsOfFile:pdfFileName)
+    self.fileData = NSData(contentsOfFile:pdfFileName as String)
     
     println("pdfFileName: \(pdfFileName)")
   }
