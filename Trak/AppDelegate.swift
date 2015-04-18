@@ -4,13 +4,19 @@
 //
 // http://blog.parse.com/2014/12/09/parse-local-datastore-for-ios/
 import UIKit
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+      
+      //mixpanel
+      //Mixpanel.sharedInstanceWithToken("0b438b51e33091163dc132a4094c241e")
+      //var mixPanel = Mixpanel.sharedInstance()
+      
+      //mixPanel.track("Finished Launching", properties: ["name1":"property1","name2":"property2"])
+
       
       // set parse and instabug
       Parse.enableLocalDatastore()
