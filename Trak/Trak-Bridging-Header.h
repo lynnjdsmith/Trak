@@ -18,7 +18,8 @@
 
 #import <Bolts/Bolts.h>
 
-//#import "Mixpanel.h"
+#import "Mixpanel.h"
+//http://stackoverflow.com/questions/28016246/mixpanel-does-not-work-with-swift
 
 //#import <MessageUI/MFMailComposeViewController.h>
 
