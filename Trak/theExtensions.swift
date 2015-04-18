@@ -46,7 +46,9 @@ extension NSString {
     
     var theSymptoms :NSMutableArray = ["Migraine","Headache"]
     for strObj in theSymptoms {
-      if strObj.isEqualToString(name as! String) {
+      var strObjNSS :NSString = (strObj as? NSString)!
+      //if strObjNSS.compare(name) { // works with a new string
+        if strObj.isEqualToString(name as! String) {
         println("SYMPTOM! \(name)")
         return true
       }
@@ -301,10 +303,10 @@ func placeCircle(point : Dictionary<String, AnyObject>) -> UIView {
   return aView
 }
 
-func getUTCDateFromString(theDT :NSString) -> NSDate {
+func getUTCDateFromString(theDT :String) -> NSDate {
   let dateFormatter = NSDateFormatter()
   dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-  let d :NSDate = dateFormatter.dateFromString(theDT as! String)!
+  let d :NSDate = dateFormatter.dateFromString(theDT)!
   //if let checkedVal = d.dateByAddingTimeInterval(5.0) { }// if this works, d is a date
   //else { println("** YO! You probably have an empty value!") } // this means d is nil
   return d

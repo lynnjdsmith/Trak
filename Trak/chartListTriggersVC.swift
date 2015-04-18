@@ -13,7 +13,7 @@ import UIKit
 import QuartzCore
 import MessageUI
 
-class chartByTriggersVC: UIViewController, stlDelegate, MFMailComposeViewControllerDelegate {
+class chartListTriggersVC: UIViewController, stlDelegate, MFMailComposeViewControllerDelegate {
 
   //@IBOutlet var topBackView         :UIView!
   //@IBOutlet var titleTopLabel       :UILabel!
@@ -57,7 +57,7 @@ class chartByTriggersVC: UIViewController, stlDelegate, MFMailComposeViewControl
     
     // create all the timelines
     for i in 1 ... 20 {
-      var aTimeline :aGraphTimelineView = aGraphTimelineView(
+      var aTimeline :aDayTimelineTrigger = aDayTimelineTrigger(
                 frame: CGRectMake(0, position, screenSize.width, graphHeight),
                 theDate: myDate)
       myDate = addDaysToDate(-1, myDate)!
@@ -76,17 +76,18 @@ class chartByTriggersVC: UIViewController, stlDelegate, MFMailComposeViewControl
     self.view.addSubview(nav)
     
     // add subnav
-    var snv :subnavView = subnavView()
+    var snv :subnavView = subnavView(myBtnInt: 3)
     snv.myparent = self
+    //snv.myBtnInt = 3
     self.view.addSubview(snv)
     
     drawTimeLegend()
   }
   
-  func revealTheToggle() {
+  /* func revealTheToggle() {      // need?
     self.revealViewController()?.rightRevealToggle(self)
     self.view.endEditing(true)
-  }
+  } */
   
   func drawTimeLegend() {
     

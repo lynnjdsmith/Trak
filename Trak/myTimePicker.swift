@@ -27,7 +27,7 @@ class myTimePicker :UIView {
   
   // don't need this separation of parents? todo fix
   init (frame : CGRect, myparent :timelineViewController) {
-    println("tvc init")
+    //println("tvc init")
     self.myparent = myparent
     self.myparenttype = "tvc"
     super.init(frame : frame)
@@ -35,7 +35,7 @@ class myTimePicker :UIView {
   }
 
   init (frame : CGRect, myparent2 :itemDetailController) {
-    println("idc init")
+    //println("idc init")
     self.myparent2 = myparent2
     self.myparenttype = "idc"
     super.init(frame : frame)
@@ -84,8 +84,11 @@ class myTimePicker :UIView {
     self.addSubview(btn3)
   }
   
-  func setTheTime(theDate :NSDate) {
-    datePickerView.setDate(theDate, animated: false)
+  func startWithTime(theTimeString :String) {
+    var theTime = getTimeFromString(theTimeString)
+    datePickerView.setDate(theTime, animated: false)
+    self.hidden = false
+    myparent.view.endEditing(true)
   }
   
   func timePickerBack10(sender: UIButton) {
@@ -96,15 +99,11 @@ class myTimePicker :UIView {
     newTime = newTime.dateBySubtractingMinutes(10)
     datePickerView.date = newTime
     
-    //myparent2.timePickerTimeChanged(datePickerView)
-    
     // set button title
     var newTimeString = getTimeStringFromDate(newTime)
     if(myparenttype == "tvc") {
-      println("do 1!")
       myparent.timePickerTimeChanged(datePickerView)
     } else {
-      println("do 2!")
       myparent2.timePickerTimeChanged(datePickerView)
     }
 
@@ -116,13 +115,15 @@ class myTimePicker :UIView {
     var newTime = datePickerView.date
     newTime = newTime.dateBySubtractingMinutes(30)
     datePickerView.date = newTime
+    
+    // set button title
+    var newTimeString = getTimeStringFromDate(newTime)
+    if(myparenttype == "tvc") {
+      myparent.timePickerTimeChanged(datePickerView)
+    } else {
+      myparent2.timePickerTimeChanged(datePickerView)
+    }
   }
-  
-  
- /*  @IBAction func menuButtonPressed(sender: AnyObject) {
-    self.revealViewController()?.rightRevealToggle(sender)
-    self.view.endEditing(true)
-  } */
   
   
 }

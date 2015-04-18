@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import QuartzCore
 
-class aGraphTimelineView: UIView {
+class aDayTimelineMigraine: UIView {
 
   var myDate :NSDate
   var myWidth :CGFloat
@@ -35,21 +35,9 @@ class aGraphTimelineView: UIView {
     setup()
   }
   
-  /* override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(true)
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    var symptomEvents :NSArray = getEventsForADay(myStartingDate)//baseSymptomEvent.precedingSymptomEvents(name)
-    
-  }*/ 
-  
   func setup() {
     var theFont = UIFont(name: "Corbel-Bold", size: 17)
-    //self.layer.cornerRadius=5
     self.layer.borderWidth=0
-    //self.layer.borderColor = UIColor.redColor().CGColor
     dotImages = dotImages.dotImageNames()
     
     var midLine :UIView = UIView(frame: CGRectMake(0, myHeight - 35, myWidth, 35))
@@ -111,14 +99,15 @@ class aGraphTimelineView: UIView {
       (objects:[AnyObject]!, error:NSError!)->Void in
       if (error == nil) {
         for object in objects as! [PFObject] {
-          //println("CHART EVENT date1String: \(date1String) date2String: \(date2String)")
-          //println(object)
+          //println("CHART EVENT date1String: \(date1String)")
           self.myDayEvents.addObject(object)
-          //self.drawIt(object)
-            if (object.valueForKey("name") as! NSString != "migraine") {
+          var theName :String = object.valueForKey("name") as! String
+          var theSymptom :String = "migraine"
+          if theName.lowercaseString != theSymptom.lowercaseString {
              self.drawTrigger(object, endOfDay: date2, imageName: self.dotImages[num] as! NSString)
             }
             else {
+              //println("Migraine!")
               self.myMigraineEvents.addObject(object)
             }
           num = num + 1
@@ -126,14 +115,10 @@ class aGraphTimelineView: UIView {
       }
       for object in self.myMigraineEvents {
         self.drawMigraine(object as! PFObject, endOfDay: date2)
-        //println("CHART MIGRAINE date1String: \(date1String) date2String: \(date2String)")
         //println(object)
       }
     }
-
-
   }
-
 
   func drawTrigger(theObj: PFObject, endOfDay: NSDate, imageName: NSString) {
   
@@ -146,11 +131,6 @@ class aGraphTimelineView: UIView {
     //println("myWidth \(myWidth)")
     //println("myPosX \(myXPos)")
     //println(".")
-    
-    // put dot into dictionary
-    //let objDot :Dictionary<String, AnyObject> =
-    //["size" : dotSize, "xPos" : 100, "yPos" : CGFloat(100), "color" : UIColor.redColor()] as Dictionary
-    //println("myWidth: \(myWidth) || minutesBetween: \(minutesBetween) || myXPos: \(myXPos)") //" || myXPos: \(myXPos)")
     
     var circleView :UIButton = UIButton(frame:CGRectMake(myXPos, 40, dotSize, dotSize))
     let imageName = imageName
@@ -168,10 +148,6 @@ class aGraphTimelineView: UIView {
     
     var smallBlock = myWidth / 1440
     var myXPos :CGFloat = (smallBlock * (1400 - minutesBetween)) // THIS GETS 24hr's XPOS,
-    println("smallBlock \(smallBlock)")
-    println("myWidth \(myWidth)")
-    println("myPosX \(myXPos)")
-    println(".")
   
     var circleView :UIButton = UIButton(frame:CGRectMake(myXPos, 16, 50, 50))
     let imageName = "dot_migraine_head_full_100.png"
@@ -181,7 +157,7 @@ class aGraphTimelineView: UIView {
   }
   
   
-  func getUTCFormatDate(localDate: NSDate) -> NSDate {
+  /* func getUTCFormatDate(localDate: NSDate) -> NSDate {
     let formatter = NSDateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
     var timeZone :NSTimeZone = NSTimeZone(name:"UTC")!
@@ -189,10 +165,10 @@ class aGraphTimelineView: UIView {
     var d :String = formatter.stringFromDate(localDate)
     var dateUTC: NSDate! = formatter.dateFromString(d)
     return dateUTC
-  }
+  } */
   
   
-  // Use this if you're doing layers.
+  /* Use this if you're doing layers.
   func drawIt(theObject :PFObject) {
     println(theObject)
     
@@ -239,7 +215,7 @@ class aGraphTimelineView: UIView {
     circle.addAnimation(drawAnimation, forKey: "drawCircleAnimation")
     println("Load data for string")
     
-  }
+  } */
 
 }
 
@@ -265,4 +241,11 @@ count++
 
 
 //var dl :UIView = placeCircle(objDot)
+
+
+
+// put dot into dictionary
+//let objDot :Dictionary<String, AnyObject> =
+//["size" : dotSize, "xPos" : 100, "yPos" : CGFloat(100), "color" : UIColor.redColor()] as Dictionary
+//println("myWidth: \(myWidth) || minutesBetween: \(minutesBetween) || myXPos: \(myXPos)") //" || myXPos: \(myXPos)")
 

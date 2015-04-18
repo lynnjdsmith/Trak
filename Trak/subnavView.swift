@@ -12,10 +12,19 @@ import QuartzCore
 class subnavView: UIView {
 
   var myparent    :UIViewController!
-  
+  var btn1 :UIButton!
+  var btn2 :UIButton!
+  var btn3 :UIButton!
+  var myBtnInt :Int! = 0
+
   override init (frame : CGRect) {
     super.init(frame : frame)
-    //println("snv")
+    setup()
+  }
+
+  init (myBtnInt :Int) {
+    var myBtnInt = myBtnInt
+    super.init(frame: CGRectMake(0,0,0,0))
     setup()
   }
   
@@ -36,36 +45,69 @@ class subnavView: UIView {
     
   
     // make buttons. add 10 to x for the shadow adjustment above.
-    let btn1:UIButton = UIButton(frame: CGRect(x: spacing + 2 + 10, y: 12, width: btnWidth, height: 35))
+    btn1 = UIButton(frame: CGRect(x: spacing + 2 + 10, y: 12, width: btnWidth, height: 35))
     btn1.setTitle("Migraines", forState: UIControlState.Normal)
     btn1.backgroundColor = UIColor.btnColorB()
     btn1.titleLabel!.font = theFont
     btn1.layer.cornerRadius = 15
     btn1.addTarget(self, action: "btn1Press", forControlEvents: UIControlEvents.TouchUpInside)
-    //btn1.setImage(image, forState: .Normal)
+    if (myBtnInt == 1) { println("btn1"); btn1.backgroundColor = UIColor.btnColorHighlight() }
     self.addSubview(btn1)
 
-    let btn2:UIButton = UIButton(frame: CGRect(x: screenSize.width/3 + spacing + 10, y: 12, width: btnWidth, height: 35))
+
+    btn2 = UIButton(frame: CGRect(x: screenSize.width/3 + spacing + 10, y: 12, width: btnWidth, height: 35))
     btn2.setTitle("Day By Day", forState: UIControlState.Normal)
-    btn2.backgroundColor = UIColor.btnColorHighlight()
+    btn2.backgroundColor = UIColor.btnColorB()
     btn2.titleLabel!.font = theFont
     btn2.layer.cornerRadius = 15
     btn2.addTarget(self, action: "btn2Press", forControlEvents: UIControlEvents.TouchUpInside)
+    if (myBtnInt == 2) { println("btn2"); btn2.backgroundColor = UIColor.btnColorHighlight() }
     self.addSubview(btn2)
+
     
-    let btn3:UIButton = UIButton(frame: CGRect(x: (screenSize.width/3 * 2) + spacing - 2 + 10, y: 12, width: btnWidth, height: 35))
+    btn3 = UIButton(frame: CGRect(x: (screenSize.width/3 * 2) + spacing - 2 + 10, y: 12, width: btnWidth, height: 35))
     btn3.setTitle("By Trigger", forState: UIControlState.Normal)
     btn3.titleLabel!.font = theFont
     btn3.backgroundColor = UIColor.btnColorB()
     btn3.layer.cornerRadius = 15
     btn3.addTarget(self, action: "btn3Press", forControlEvents: UIControlEvents.TouchUpInside)
+    if (myBtnInt == 3) { btn3.backgroundColor = UIColor.btnColorHighlight() }
     self.addSubview(btn3)
+
+    
   }
   
   func btn1Press() {
     println("btn pressed")
-    //self.hidden = true
+    var mainView: UIStoryboard!
+    mainView = UIStoryboard(name: "Main", bundle: nil)
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("chartListMigrainesVC") as! UIViewController
+    myparent.presentViewController(viewcontroller, animated: false, completion: nil)
   }
+
+  func btn2Press() {
+    println("btn pressed")
+    var mainView: UIStoryboard!
+    mainView = UIStoryboard(name: "Main", bundle: nil)
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("chartListDaysVC") as! UIViewController
+    myparent.presentViewController(viewcontroller, animated: false, completion: nil)
+  }
+
+  func btn3Press() {
+    println("btn3 pressed")
+    var mainView: UIStoryboard!
+    mainView = UIStoryboard(name: "Main", bundle: nil)
+    var viewcontroller : UIViewController = mainView.instantiateViewControllerWithIdentifier("chartListTriggersVC") as! UIViewController
+    myparent.presentViewController(viewcontroller, animated: false, completion: nil)
+  }
+  
+  func highlightMe() {
+    // change highlight
+    btn2.backgroundColor = UIColor.btnColorHighlight()
+    btn1.backgroundColor = UIColor.btnColorB()
+    btn3.backgroundColor = UIColor.btnColorB()
+  }
+  
   
   /* override init () {
     super.init(style: .Plain)

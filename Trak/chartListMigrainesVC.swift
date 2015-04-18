@@ -4,8 +4,6 @@
 //  Created by Lynn Smith on 10/24/14.
 //  Copyright (c) 2014 Lynn Smith. All rights reserved.
 //
-//http://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/
-//http://stackoverflow.com/questions/25567214/send-file-by-e-mail-in-swift
 
 import Foundation
 
@@ -13,7 +11,7 @@ import UIKit
 import QuartzCore
 import MessageUI
 
-class chartPastDaysVC: UIViewController, stlDelegate, MFMailComposeViewControllerDelegate {
+class chartListMigrainesVC: UIViewController, stlDelegate, MFMailComposeViewControllerDelegate {
 
   //@IBOutlet var topBackView         :UIView!
   //@IBOutlet var titleTopLabel       :UILabel!
@@ -57,18 +55,48 @@ class chartPastDaysVC: UIViewController, stlDelegate, MFMailComposeViewControlle
     
     // create all the timelines
     for i in 1 ... 20 {
-      var aTimeline :aGraphTimelineView = aGraphTimelineView(
-                frame: CGRectMake(0, position, screenSize.width, graphHeight),
-                theDate: myDate)
+      
+      // create dates for beginning and end of day
+      let preformatter = NSDateFormatter()
+      preformatter.dateFormat = "MM/dd/yyyy"
+      var d :NSString = preformatter.stringFromDate(myDate)
+      var date1String: NSString = "\(d) 12:00 AM"
+      var date2String: NSString = "\(d) 11:59 PM"
+      let formatter = NSDateFormatter()
+      formatter.dateFormat = "MM/dd/yyyy hh:mm a"
+      var date1: NSDate! = formatter.dateFromString(date1String as! String)
+      var date2: NSDate! = formatter.dateFromString(date2String as! String)
+      
+      // create query
+      var findData:PFQuery = PFQuery(className: "Items")
+      findData.whereKey("username", equalTo:PFUser.currentUser().username!)
+      findData.whereKey("myDateTime", greaterThan:date1)
+      findData.whereKey("myDateTime", lessThan:date2)
+      findData.orderByDescending("myDateTime")
       myDate = addDaysToDate(-1, myDate)!
-      //aTimeline.backgroundColor = UIColor.appLightBlue()
-      scrollView.addSubview(aTimeline)
-      position = position + graphHeight + margin
+      
+      // this is each day
+      findData.findObjectsInBackgroundWithBlock {
+        (objects:[AnyObject]!, error:NSError!)->Void in
+        if (error == nil) {
+          for object in objects as! [PFObject] {
+            var theName :String = object.valueForKey("name") as! String
+            var theSymptom :String = "migraine"
+            if theName.lowercaseString == theSymptom.lowercaseString {
+              println("Migraine! theName = \(theName)")
+              var theD :NSDate = object.valueForKey("myDateTime") as! NSDate
+              println("date: \(theD)")
+              var aTimeline :aDayTimelineMigraine = aDayTimelineMigraine(
+                frame: CGRectMake(0, position, self.screenSize.width, self.graphHeight), theDate: theD)
+              self.scrollView.addSubview(aTimeline)
+              position = position + self.graphHeight + self.margin
+              self.scrollView.contentSize.height = position
+              break
+            }
+          }
+        }
+      }
     }
-    
-    scrollView.contentSize.height = position
-    //contentSize=CGSizeMake(self.view.bounds.width, position + 20)
-    //drawLegend()
     
     // add nav
     var nav :navView = navView()
@@ -76,17 +104,17 @@ class chartPastDaysVC: UIViewController, stlDelegate, MFMailComposeViewControlle
     self.view.addSubview(nav)
     
     // add subnav
-    var snv :subnavView = subnavView()
+    var snv :subnavView = subnavView(myBtnInt: 1)
     snv.myparent = self
     self.view.addSubview(snv)
     
-    drawTimeLegend()
+    //drawTimeLegend()
   }
   
-  func revealTheToggle() {
+ /*  func revealTheToggle() {    // need?
     self.revealViewController()?.rightRevealToggle(self)
     self.view.endEditing(true)
-  }
+  } */
   
   func drawTimeLegend() {
     

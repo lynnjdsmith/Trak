@@ -9,7 +9,7 @@ import UIKit
 import QuartzCore
 
 protocol calDelegate {
-    func didPressDate(val: NSString)
+    func didPressDate(val :String)
 }
 
 class calendarViewController: UIViewController {
@@ -222,7 +222,7 @@ class calendarViewController: UIViewController {
   func datePressed(sender: UIButton!) {
       var btnSent:UIButton = sender
       //println("the strDay: \(btnSent.titleForState(.Highlighted))")
-      let s :NSString = btnSent.titleForState(.Highlighted)!
+      let s :String = btnSent.titleForState(.Highlighted)!
       
       // send the date
       var mainView: UIStoryboard!

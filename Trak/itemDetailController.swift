@@ -5,10 +5,10 @@
 import UIKit
 import QuartzCore
 
-protocol itemDetailDelegate {
+/* protocol itemDetailDelegate {
     func closeMod()
     //func reloadMainData()
-}
+} */
 
 class itemDetailController: UIViewController {
   
@@ -26,7 +26,7 @@ class itemDetailController: UIViewController {
   var theItem   :PFObject!
   var objID     :NSString! = ""
   var daDate    :NSString!
-  var daTime    :NSString! = ""
+  var daTime    :String! = ""
   var name      :NSString! = ""
   
   
@@ -87,7 +87,7 @@ class itemDetailController: UIViewController {
     theItem.setObject(daTitle.text, forKey: "name")
     
     // set date
-    var theDateWithTime: NSString! = "\(daDate) \(daTime)"
+    var theDateWithTime :String! = "\(daDate) \(daTime)"
     var d = getUTCDateFromString(theDateWithTime)
     //println("d: \(d)")
     theItem.setObject(d, forKey:"myDateTime")
@@ -120,7 +120,7 @@ class itemDetailController: UIViewController {
       if (success == false) { println("ERROR in Saving: %@", error) }
       else {
         if let d = self.delegate {
-          d.detailSaveDone()
+          d.detailSave()
         }
     }
     }
@@ -217,7 +217,7 @@ class itemDetailController: UIViewController {
         if (theItem != nil) {
             theItem.deleteInBackground()
           if let d = self.delegate {
-            d.closeMod()
+            d.detailSave()
           }
         } else {
             println("deleteMe error: \(error)")
@@ -230,10 +230,7 @@ class itemDetailController: UIViewController {
   /***   TIME FUNCTIONS   ***/
   
   @IBAction func timeBtnPress(sender: UIButton) {
-    //println("timeBtn")
-    var theTime :NSDate = getTimeFromString(daTime)
-    timePicker.setTheTime(theTime)
-    timePicker.hidden = false
+    timePicker.startWithTime(daTime)
   }
   
   func timePickerTimeChanged(sender: UIDatePicker) {
