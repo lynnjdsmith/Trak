@@ -33,8 +33,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIAppFonts</key>
 	<array>
@@ -45,5 +43,7 @@
 	</array>
 	<key>hasLaunchedOnce</key>
 	<string>f</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow Trak to use your location while in app?</string>
 </dict>
 </plist>

@@ -146,6 +146,7 @@
 		BA7D95B01AE2077C00FA599B /* UIImage+MPAverageColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7D95681AE2077C00FA599B /* UIImage+MPAverageColor.m */; };
 		BA7D95B11AE2077C00FA599B /* UIImage+MPImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7D956A1AE2077C00FA599B /* UIImage+MPImageEffects.m */; };
 		BA7D95B21AE2077C00FA599B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = BA7D956B1AE2077C00FA599B /* README.md */; };
+		BA83374B1AE5A43100551642 /* Sweather_Underground.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83374A1AE5A43000551642 /* Sweather_Underground.swift */; };
 		BA8876CF1A832B1F009E1446 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8876CE1A832B1F009E1446 /* MenuViewController.swift */; };
 		BA94DD811A81D1E8004D374E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA94DD801A81D1E8004D374E /* SWRevealViewController.m */; };
 		BA9E81621AD84F9D006217AD /* textBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9E81601AD73AB2006217AD /* textBot.swift */; };
@@ -376,6 +377,7 @@
 		BA7D95691AE2077C00FA599B /* UIImage+MPImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MPImageEffects.h"; sourceTree = "<group>"; };
 		BA7D956A1AE2077C00FA599B /* UIImage+MPImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MPImageEffects.m"; sourceTree = "<group>"; };
 		BA7D956B1AE2077C00FA599B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BA83374A1AE5A43000551642 /* Sweather_Underground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sweather_Underground.swift; sourceTree = "<group>"; };
 		BA8876CE1A832B1F009E1446 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BA94DD801A81D1E8004D374E /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		BA94DD821A81D1F3004D374E /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 		BA07266B1AE1D89200988113 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				BA83374A1AE5A43000551642 /* Sweather_Underground.swift */,
 				BA07266C1AE1D8AC00988113 /* Sweather.swift */,
 			);
 			name = Weather;
@@ -969,6 +972,7 @@
 				BA7D956D1AE2077C00FA599B /* _MPTweakBindObserver.m in Sources */,
 				BA7D959B1AE2077C00FA599B /* MPSurvey.m in Sources */,
 				BA8876CF1A832B1F009E1446 /* MenuViewController.swift in Sources */,
+				BA83374B1AE5A43100551642 /* Sweather_Underground.swift in Sources */,
 				BA7D957C1AE2077C00FA599B /* MPABTestDesignerTweakRequestMessage.m in Sources */,
 				BA7D957D1AE2077C00FA599B /* MPABTestDesignerTweakResponseMessage.m in Sources */,
 				BA4AF875198DD02400FC10D2 /* itemDetailController.swift in Sources */,

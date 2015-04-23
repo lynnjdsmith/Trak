@@ -57,7 +57,9 @@ public class Sweather {
     private struct Const {
         static let basePath = "http://api.openweathermap.org/data/"
     }
-    
+  
+  
+  
     // MARK: -
     // MARK: Initialization
     
@@ -96,7 +98,21 @@ public class Sweather {
     public func currentWeather(cityId: Int, callback: (Result) -> ()) {
         call("/weather?id=\(cityId)", callback: callback);
     }
+  
+    //http://api.openweathermap.org/data/2.5/history/station?id=2885679&type=hour&APPID=9e0cabd83c8615c7f232ad172c032585&lang=en&units=imperial
+
+  //http://api.openweathermap.org/data/2.5/history/city?id=2885679&type=hour
+    //http://api.openweathermap.org/data/2.5/history/station?id=5091&type=hour
+    // /2.1/history/city/2885679?type=hour
+    // MARK: -
+    // MARK: Retrieving current weather data
     
+    public func historyWeather(cityId: Int, callback: (Result) -> ()) {
+      call("2.5/history/station?id=\(cityId)&type=hour", callback: callback);
+      //call("2.5/history/station?id=\(cityId)&type=hour", callback: callback);
+      //call2("2.1/history/city/\(cityId)?type=hour", callback: callback);
+    }
+  
     // MARK: -
     // MARK: Retrieving daily forecast
     
@@ -144,6 +160,7 @@ public class Sweather {
     
     private func call(method: String, callback: (Result) -> ()) {
         let url = Const.basePath + apiVersion + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.rawValue)"
+        println(url)
         let request = NSURLRequest(URL: NSURL(string: url)!)
         let currentQueue = NSOperationQueue.currentQueue();
         
@@ -163,4 +180,28 @@ public class Sweather {
             }
         }
     }
+
+  // used for history calling 2.1 API
+  private func call2(method: String, callback: (Result) -> ()) {
+    let url = Const.basePath + method + "&APPID=\(apiKey)&lang=\(language)&units=\(temperatureFormat.rawValue)"
+    println(url)
+    let request = NSURLRequest(URL: NSURL(string: url)!)
+    let currentQueue = NSOperationQueue.currentQueue();
+    
+    NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!, data: NSData!, error: NSError?) -> Void in
+      var error: NSError? = error
+      var dictionary: NSDictionary?
+      
+      if let data = data {
+        dictionary = NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers, error: &error) as? NSDictionary;
+      }
+      currentQueue?.addOperationWithBlock {
+        var result = Result.Success(response, dictionary)
+        if error != nil {
+          result = Result.Error(response, error)
+        }
+        callback(result)
+      }
+    }
+  }
 }

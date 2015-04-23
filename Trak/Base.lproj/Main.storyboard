@@ -378,7 +378,7 @@
                                             <constraint firstAttribute="height" constant="60" id="2cs-EU-Z1Y"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6I-X1-S5k" userLabel="Time Back View">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v6I-X1-S5k" userLabel="Time Back View">
                                         <rect key="frame" x="0.0" y="90" width="320" height="60"/>
                                         <subviews>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999998807907104" contentMode="scaleToFill" fixedFrame="YES" image="icon_edit" translatesAutoresizingMaskIntoConstraints="NO" id="gnA-vW-ebP">
@@ -401,7 +401,7 @@
                                             <constraint firstAttribute="height" constant="60" id="KTs-MP-SbO"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sf1-yf-tgd">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sf1-yf-tgd">
                                         <rect key="frame" x="0.0" y="160" width="320" height="110"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="dDQ-Qn-zI3">
@@ -630,7 +630,7 @@
                                 <color key="textColor" red="0.92156862750000001" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Weather Results" translatesAutoresizingMaskIntoConstraints="NO" id="nfV-Rh-lKX">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nfV-Rh-lKX">
                                 <rect key="frame" x="40" y="278" width="240" height="282"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

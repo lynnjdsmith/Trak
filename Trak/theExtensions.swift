@@ -66,6 +66,41 @@ extension Int  {
   }
 }
 
+
+
+extension Double {
+  
+  //Barometric Pressure Info
+  //1086 mb (32.08 inches of mercury): Highest Ever Recorded
+  //1030 mb (30.42 inches of mercury): Strong High Pressure System
+  //1013 mb (29.92 inches of mercury): Average Sea Level Pressure
+  //1000 mb (29.54 inches of mercury): Typical Low Pressure System
+  //980 mb (28.95 inches of mercury): CAT 1 Hurricane or a very intense mid-latitude cyclone
+  //950 mb (28.06 inches of mercury): CAT 3 Hurricane
+  //870 mb (25.70 inches of mercury): Lowest Ever Recorded (not including tornadoes)
+
+  // example: var barPisHigh :Bool = seaLevelInches.getBarP_High()   println("barPisHigh: \(barPisHigh)")
+  
+  func getBarP_High() -> Bool {
+    if (self >= 30.42) { return false
+    } else { return true }
+  }
+
+  func getBarP_Low() -> Bool {
+    if (self <= 29.54) { return false
+    } else { return true }
+  }
+  
+  func getBarP_Status() -> String {
+    if (self < 29.54) { return "Low"
+      } else {
+      if (self > 30.42) { return "High"
+        } else { return "Average"
+      }
+    }
+  }
+}
+
 extension NSMutableArray {
 
   func get12Colors() -> NSMutableArray {
