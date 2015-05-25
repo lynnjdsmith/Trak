@@ -3,32 +3,26 @@
 // Created by Lynn Smith Trak copyright tm May 2014
 //
 // http://blog.parse.com/2014/12/09/parse-local-datastore-for-ios/
+// todo - prevent duplicate entries , especially the weather ones below.
+
 import UIKit
 import CoreLocation
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
-                            
-    var window: UIWindow?
-    var client: Sweather_Underground?
+ 
+    // MARK: - Variables
+  
+    var window          :UIWindow?
     let locationManager = CLLocationManager()
-    var locationDone : Bool = false
-    var locationObj :CLLocation = CLLocation()
+    var locationDone    :Bool = false
+    var locationObj     :CLLocation = CLLocation()
+    var myWeatherBot    :weatherBot = weatherBot()
+  
+    // MARK: - Functions
   
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-      
-      // core location permission - OPENWEATHERMAP not working, use weather underground
-      //client = Sweather(apiKey: "9e0cabd83c8615c7f232ad172c032585")
-      client = Sweather_Underground(apiKey: "9e0cabd83c8615c7f232ad172c032585") // you can take this api key out later
-      
-      if (CLLocationManager.locationServicesEnabled()) {
-        locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
-      } else {
-        println("Location services are not enabled")
-      }
       
       //mixpanel
       Mixpanel.sharedInstanceWithToken("0b438b51e33091163dc132a4094c241e")
@@ -44,45 +38,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
       // reroute to parse login if user is not logged in
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      
       if self.window != nil {
-
         if PFUser.currentUser() == nil {
           self.window!.rootViewController = storyboard.instantiateViewControllerWithIdentifier("logInViewController") as! PFLogInViewController
         }
         else {
+          
+          // if we are logged in, start the location / weather trigger checking process
+          if (CLLocationManager.locationServicesEnabled()) {
+            locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            self.locationManager.startUpdatingLocation()
+          } else {
+            println("Location services are not enabled")
+          }
+          
+          // navigate to main screen
           self.window!.rootViewController = storyboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as! SWRevealViewController
         }
       }
       
       return true
-      
-  
     }
 
   
-  /****  MARK: - CoreLocation Methods  ****/
+  // MARK: - Core Location
   
   func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-    locationManager.stopUpdatingLocation()
-    if ((error) != nil) {
-      print(error)
-    }
+    //locationManager.stopUpdatingLocation()
+    //p("loc manager ERROR! *** *** ***")
+    if ((error) != nil) { print(error) }
   }
   
-  //http://api.openweathermap.org/data/2.5/history/city?id=2885679&type=hour
   func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
     locationManager.stopUpdatingLocation()
+    //p("loc manager NO ERROR! *** *** *** NO ERROR!")
     if !locationDone {
+      self.locationDone = true
+      //p("DO EEET!")
+      
+      // get your coordinates
       var locationArray = locations as NSArray
       var locationObj = locationArray.lastObject as! CLLocation
       var coord :CLLocationCoordinate2D = locationObj.coordinate
-      //var theCity :AnyObject! = locationManager.findCity(coord)
-      //getHistoryWeather(Int(5043193))
-      //getCurrentWeather(coord)
-      //getForecast(coord)
-      updateWeatherInfo(coord)
-      self.locationDone = true
+      
+      // have we checked for weather triggers today?
+      var todayDateString :String = getDateStringForYYYYMMDD(NSDate()) as String
+      if (todayDateString != NSUserDefaults.standardUserDefaults().stringForKey("lastDayWeatherDone")) {
+        
+        // check for and add weather triggers
+        // todo TURN THIS ON myWeatherBot.checkWeatherForTriggers(coord, theDate: NSDate())
+      }
+      NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "lastDayWeatherDone")
     }
   }
   
@@ -93,177 +101,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
   }
   
-  /**** Weather Underground *****/
-  func updateWeatherInfo(theCoord: CLLocationCoordinate2D) {
-    //println(params)
-    client?.findCity(theCoord) { result in
-      //println("result time!")
-      switch result {
-      case .Error(let response, let error):
-        println("Some error occured. Try again.")
-      case .Success(let response, let dictionary):
-        let city = dictionary["location"]!["city"] as! String
-        let state = dictionary["location"]!["state"] as! String
-        self.client?.forecast(city, state: state, dateVal: "20150411") { result in
-          println("result time 2!")
-          switch result {
-          case .Error(let response, let error):
-            println("Some error occured. Try again.")
-          case .Success(let response, let dictionary2):
-          
-            var results: NSArray = dictionary2["history"]!["observations"] as! NSArray
-            //println(results)
-            var theHour :Int = 0
-            var theMins :Int = 0
-            var currentMinutesIntoDay :Int = 0
-            
-            for item in results {
-              let obj = item as! NSDictionary
-              for (key, value) in obj {
-                if (key as! String == "date") {
-                  let valObj = value as! NSDictionary
-                  for (key2, value2) in valObj {
-                    if (key2 as! String == "hour") {
-                      let theVal = value2 as! NSString
-                      theHour = theVal.integerValue
-                    }
-                    if (key2 as! String == "min") {
-                      let theVal = value2 as! NSString
-                      theMins = theVal.integerValue
-                    }
-                    currentMinutesIntoDay = (theHour * 60) + theMins
-                  }
-                }
-                if (key as! String == "pressurei") {
-                  println("currentMinsIntoDay: \(currentMinutesIntoDay)")
-                  println("\(key) : \(value)")
-                }
-              }
-            }
-            
-            //println(dictionary2)
-            NSUserDefaults.standardUserDefaults().setObject(dictionary2, forKey: "weatherForecast")
-            NSUserDefaults.standardUserDefaults().synchronize()
-          }
-        }
-      }
-    }
-  }
- 
-  func findCity(theCoord: CLLocationCoordinate2D) {
-    client?.findCity(theCoord) { result in
-      //println("result time!")
-      switch result {
-      case .Error(let response, let error):
-        println("Some error occured. Try again.")
-      case .Success(let response, let dictionary):
-        println("got City... \n \(dictionary)")
-        //var city :NSArray = dictionary["list"] as! NSArray
-        //var main :AnyObject? = list.valueForKey("main")
-        //NSUserDefaults.standardUserDefaults().setObject(dictionary, forKey: "weatherForecast")
-        //NSUserDefaults.standardUserDefaults().synchronize()
-      }
-    }
-  }
+  /*
+  // MARK: - Core Data - todo remove later?
   
-  /**** OLD Open Weather Map stuff *****/
- /*  func getHistoryWeather(theCityID :Int) {
-    client?.historyWeather(theCityID) { result in
-      println("in Get History Weather")
-      switch result {
-      case .Error(let response, let error):
-        println("***** history weather error -- \(error)")
-      case .Success(let response, let dictionary):
-        println(dictionary)
-        
-        /* var list :NSArray = dictionary["list"] as! NSArray
-        var main :AnyObject? = list.valueForKey("main")
-        var seaLevelBarP_Group :AnyObject? = main!.valueForKey("sea_level")
-        var main1 :AnyObject? = list.valueForKey("main")   // this makes it just the first one
-        var seaLevelBarP :Double = (main1!.valueForKey("sea_level") as? Double)!
-        var seaLevelInches :Double = seaLevelBarP * 0.02953
-        println("Bar Inches: \(seaLevelInches)")
-        var barPStatus = seaLevelInches.getBarP_Status()
-        println("Bar Status: \(barPStatus)") */
-      }
-    }
-  }
+  lazy var applicationDocumentsDirectory: NSURL = {
+    let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+    return urls[urls.count-1] as! NSURL
+    }()
   
-  func getCurrentWeather(theCoord: CLLocationCoordinate2D) {
-    client?.currentWeather(theCoord) { result in
-      switch result {
-      case .Error(let response, let error):
-        println("Some error occured. Try again.")
-        println("Error: \(error)")
-      case .Success(let response, let dictionary):
-        //println("Received data: \(dictionary)")
-        
-        // Get temperature
-        let city = dictionary["name"] as? String
-        //println("City: \(city)")
-        
-        let temperature = dictionary["main"]!["temp"] as! Int
-        //println("Current Temperature: \(temperature)")
-        //self.weatherInfo.text = "\(self.weatherInfo.text) Temp: \(temperature) \n"
-        
-        /* weatherReading.saveInBackgroundWithBlock {
-          (success: Bool, error: NSError?) -> Void in
-          if (success) {
-            // The object has been saved.
-          } else {
-            // There was a problem, check error.description
-          }
-        } */
-
-        
-        /* example from https://github.com/bfolder/Sweather/blob/master/Example/Example/ViewController.swift
-        let city = dictionary["name"] as? String;
-        let temperature = dictionary["main"]!["temp"] as Int;
-        println("City: \(city) Temperature: \(temperature)")
-        */
-      }
-    }
-  }
+  lazy var managedObjectModel: NSManagedObjectModel = {
+    let modelURL = NSBundle.mainBundle().URLForResource("Trak", withExtension: "momd")!
+    return NSManagedObjectModel(contentsOfURL: modelURL)!
+    }()
   
-  func getForecast(theCoord: CLLocationCoordinate2D) {
-    client?.forecast(theCoord) { result in
-      //println("result time!")
-      switch result {
-      case .Error(let response, let error):
-        println("Some error occured. Try again.")
-      case .Success(let response, let dictionary):
-        println("setting weather forecast")
-        NSUserDefaults.standardUserDefaults().setObject(dictionary, forKey: "weatherForecast")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        var list :NSArray = dictionary["list"] as! NSArray
-        var main :AnyObject? = list.valueForKey("main")
-        var seaLevelBarP_Group :AnyObject? = main!.valueForKey("sea_level")
-        var main1 :AnyObject? = list[1].valueForKey("main")   // this makes it just the first one
-        var seaLevelBarP :Double = (main1!.valueForKey("sea_level") as? Double)!
-        var seaLevelInches :Double = seaLevelBarP * 0.02953
-        //println("Bar Inches: \(seaLevelInches)")
-        var barPStatus = seaLevelInches.getBarP_Status()
-        //println("Bar Status: \(barPStatus)")
-      }
+  lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+    var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+    let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Trak.sqlite")
+    var error: NSError? = nil
+    var failureReason = "There was an error creating or loading the application's saved data."
+    if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+      coordinator = nil
+      
+      // Report any error we got.
+      let dict = NSMutableDictionary()
+      dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+      dict[NSLocalizedFailureReasonErrorKey] = failureReason
+      dict[NSUnderlyingErrorKey] = error
+      error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
+
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog("Unresolved error \(error), \(error!.userInfo)")
+      //abort()
     }
-  } */
+    return coordinator
+    }()
   
-    /****  END: - CoreLocation  ****/
+
+  lazy var managedObjectContext: NSManagedObjectContext? = {
+    let coordinator = self.persistentStoreCoordinator
+    if coordinator == nil {
+      return nil
+    }
+    var managedObjectContext = NSManagedObjectContext()
+    managedObjectContext.persistentStoreCoordinator = coordinator
+    return managedObjectContext
+    }()
   
-    func applicationWillResignActive(application: UIApplication) {
-    }
-
-    func applicationDidEnterBackground(application: UIApplication) {
-    }
-
-    func applicationWillEnterForeground(application: UIApplication) {
-    }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-    }
-
-    func applicationWillTerminate(application: UIApplication) {
-    }
+  
+    // Core Data Saving Support
+  
+  func saveContext () {
+    if let moc = self.managedObjectContext {
+      var error: NSError? = nil
+      if moc.hasChanges && !moc.save(&error) {
+        NSLog("Unresolved error \(error), \(error!.userInfo)")
+        abort()
+  } } }
+*/
+  
+  
+    // MARK: - Empty Functions for App Delegate
+  
+  func applicationWillResignActive(application: UIApplication) { }
+  
+  func applicationDidEnterBackground(application: UIApplication) { }
+  
+  func applicationWillEnterForeground(application: UIApplication) { }
+  
+  func applicationDidBecomeActive(application: UIApplication) { }
+  
+  func applicationWillTerminate(application: UIApplication) { }
   
 }
 

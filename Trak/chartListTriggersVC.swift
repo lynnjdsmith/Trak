@@ -13,7 +13,7 @@ import UIKit
 import QuartzCore
 import MessageUI
 
-class chartListTriggersVC: UIViewController, stlDelegate, MFMailComposeViewControllerDelegate {
+class chartListTriggersVC: UIViewController, MFMailComposeViewControllerDelegate {
 
   //@IBOutlet var topBackView         :UIView!
   //@IBOutlet var titleTopLabel       :UILabel!

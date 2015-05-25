@@ -5,22 +5,16 @@
 import UIKit
 import QuartzCore
 
-/* protocol itemDetailDelegate {
-    func closeMod()
-    //func reloadMainData()
-} */
-
 class itemDetailController: UIViewController {
   
-  // IBOutlets
+  // MARK: Variables
+  
   @IBOutlet var daTitle         :UITextField!
   @IBOutlet var timeBtn         :UIButton!
   @IBOutlet var trigSympControl :UISegmentedControl!
   @IBOutlet var deleteBtn       :UIButton!
   @IBOutlet var amountSegment   :UISegmentedControl!
   @IBOutlet weak var scrollView :UIScrollView!
-  
-  // Variables
   var delegate  :timelineViewController? = nil
   var timePicker :myTimePicker!
   var theItem   :PFObject!
@@ -29,6 +23,8 @@ class itemDetailController: UIViewController {
   var daTime    :String! = ""
   var name      :NSString! = ""
   
+  
+  // MARK: - Functions
   
   override func viewWillAppear(animated: Bool) {
     navigationController?.setNavigationBarHidden(true, animated:true)
@@ -79,7 +75,47 @@ class itemDetailController: UIViewController {
    }
   
   
-  //override func viewDidDisappear(animated: Bool) {
+  @IBAction func timeBtnPress(sender: UIButton) {
+    timePicker.startWithTime(daTime)
+  }
+  
+  
+  
+  @IBAction func endEditTitle(sender: UITextField) {
+    println("endEdit")
+    daTitle.layer.borderColor = UIColor.clearColor().CGColor
+    daTitle.layer.backgroundColor = UIColor.clearColor().CGColor
+    self.resignFirstResponder()
+  }
+  
+  @IBAction func startEdit(sender: UITextField) {
+    println("startEdit")
+    //sender.layer.borderColor = UIColor.appBlue().CGColor
+    //sender.layer.backgroundColor = UIColor.whiteColor().CGColor
+  }
+  
+  @IBAction func deleteMe(sender: AnyObject) {
+    //println("Delete Me!")
+    //println("Deleting. objID: \(objID)")
+    
+    var query = PFQuery(className:"Items")
+    query.getObjectInBackgroundWithId(objID! as! String) {
+      (theItem: PFObject!, error: NSError!) -> Void in
+      if (theItem != nil) {
+        theItem.deleteInBackground()
+        if let d = self.delegate {
+          d.detailSave()
+        }
+      } else {
+        println("deleteMe error: \(error)")
+      }
+    }
+    self.navigationController?.popToRootViewControllerAnimated(true)
+  }
+  
+    // MARK: - Helpers
+  
+  // SAVE an item that already exists. FIX To do ?? no UTC stuff here ?? test how these save
   func saveTheItem() {
   //super.viewDidDisappear(false)
     
@@ -126,6 +162,8 @@ class itemDetailController: UIViewController {
     }
   }
   
+  // FIX to do - should we load the item detail stuff from memory and not Parse?
+  
   func loadDataForItem() {
     // send query
     var HUD = MBProgressHUD.showHUDAddedTo(self.view, animated:true)
@@ -163,7 +201,7 @@ class itemDetailController: UIViewController {
         timeFormatter.dateFormat = "h:mm a"
         let myTime :String = timeFormatter.stringFromDate(myDate)
         self.daTime = myTime
-        self.timeBtn.setTitle((myTime as! String), forState: .Normal)
+        self.timeBtn.setTitle((myTime as String), forState: .Normal)
 
         // set amount
         switch object.valueForKey("amount") as! NSString {
@@ -193,45 +231,18 @@ class itemDetailController: UIViewController {
     }
   }
 
-  
-  @IBAction func endEditTitle(sender: UITextField) {
-    println("endEdit")
-    daTitle.layer.borderColor = UIColor.clearColor().CGColor
-    daTitle.layer.backgroundColor = UIColor.clearColor().CGColor
-    self.resignFirstResponder()
-  }
-
-  @IBAction func startEdit(sender: UITextField) {
-    println("startEdit")
-    //sender.layer.borderColor = UIColor.appBlue().CGColor
-    //sender.layer.backgroundColor = UIColor.whiteColor().CGColor
+  func goBack(sender: UIButton) {                           // go back top nav
+    navigationController?.popViewControllerAnimated(true)
+    saveTheItem()
   }
   
-  @IBAction func deleteMe(sender: AnyObject) {
-    //println("Delete Me!")
-    //println("Deleting. objID: \(objID)")
-    
-    var query = PFQuery(className:"Items")
-    query.getObjectInBackgroundWithId(objID! as! String) {
-        (theItem: PFObject!, error: NSError!) -> Void in
-        if (theItem != nil) {
-            theItem.deleteInBackground()
-          if let d = self.delegate {
-            d.detailSave()
-          }
-        } else {
-            println("deleteMe error: \(error)")
-        }
-    }
-    self.navigationController?.popToRootViewControllerAnimated(true)
+  func handleTap(recognizer: UITapGestureRecognizer) {      // global tap to close keyboard - todo add picker
+    self.view.endEditing(true)
+    daTitle.resignFirstResponder()
   }
   
 
-  /***   TIME FUNCTIONS   ***/
-  
-  @IBAction func timeBtnPress(sender: UIButton) {
-    timePicker.startWithTime(daTime)
-  }
+    // MARK: - Time
   
   func timePickerTimeChanged(sender: UIDatePicker) {
     //println("handle!")
@@ -251,25 +262,6 @@ class itemDetailController: UIViewController {
   {
     timePicker.hidden = true
   }
-  
-  /* func doneButton(sender:UIButton)
-  {
-    timePicker.hidden = true
-    timeBtn.layer.borderWidth = 0.0
-  } */
-  
-  func goBack(sender: UIButton) {                           // go back top nav
-    navigationController?.popViewControllerAnimated(true)
-    saveTheItem()
-  }
-  
-  func handleTap(recognizer: UITapGestureRecognizer) {      // global tap to close keyboard - todo add picker
-    self.view.endEditing(true)
-    daTitle.resignFirstResponder()
-  }
-  
-
-  
   
 }
 

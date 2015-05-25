@@ -35,16 +35,6 @@ class aDayTimelineTrigger: UIView {
     setup()
   }
   
-  /* override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(true)
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    var symptomEvents :NSArray = getEventsForADay(myStartingDate)//baseSymptomEvent.precedingSymptomEvents(name)
-    
-  }*/ 
-  
   func setup() {
     var theFont = UIFont(name: "Corbel-Bold", size: 17)
     self.layer.borderWidth=0
@@ -97,13 +87,7 @@ class aDayTimelineTrigger: UIView {
     findData.whereKey("myDateTime", lessThan:date2)
     findData.orderByDescending("myDateTime")
   
-    // query
-    //theArray = findData.findObjects()
-    //println("findData.findObjects() in sEvent   ** - Warning OK. Ignore. - **  ")
-
-  
     // send query
-    
     var num = 1
     
     findData.findObjectsInBackgroundWithBlock {

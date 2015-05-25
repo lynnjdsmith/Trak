@@ -13,7 +13,7 @@ import UIKit
 import QuartzCore
 import MessageUI
 
-class chartListDaysVC: UIViewController, stlDelegate, MFMailComposeViewControllerDelegate {
+class chartListDaysVC: UIViewController, MFMailComposeViewControllerDelegate {
 
   //@IBOutlet var topBackView         :UIView!
   //@IBOutlet var titleTopLabel       :UILabel!

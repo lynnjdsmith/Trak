@@ -4,10 +4,12 @@
 
 import UIKit
 import QuartzCore
+import CoreData
 
 class timelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, calDelegate {
   
-  // set variables
+  // MARK: Variables
+  
   @IBOutlet var tableView: UITableView!
   @IBOutlet var text1: UITextField!
   @IBOutlet var dayBtn: UIButton!
@@ -24,6 +26,11 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   var leftTextMargin  :CGFloat = 25.0
   var selectedRow     = 0
   var daDateAndTime   :NSDate!
+  var myWeatherBot    :weatherBot = weatherBot()
+  var theMO = [NSManagedObject]()
+  
+  
+  // MARK: - Functions
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
@@ -37,6 +44,28 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     loadDataForDate(daDate)
     self.tableView.reloadData()
+  
+    /*    
+    // TESTING how to save things - with core data. Don't need? Use localstore from parse.
+    //1
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let managedContext = appDelegate.managedObjectContext!
+    
+    //2
+    let entity =  NSEntityDescription.entityForName("TestString", inManagedObjectContext: managedContext)
+    let ts = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+    
+    //3
+    ts.setValue("name", forKey: "string1")
+    
+    var error: NSError?
+    if !managedContext.save(&error) {
+      println("Could not save \(error), \(error?.userInfo)")
+    }
+    //5
+    theMO.append(ts)
+    */
+    //p("appended")
   }
   
   override func viewDidLoad() {
@@ -105,9 +134,69 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
       self.presentViewController(vc, animated: true, completion: nil)
     }
   }
-
   
-  /****  Functions for this class ****/
+  @IBAction func menuPressed(sender: AnyObject) {
+    //println("menuP")
+    self.revealViewController()?.rightRevealToggle(sender)
+    self.view.endEditing(true)
+  }
+  
+  @IBAction func showCalendar(sender: AnyObject) {
+    // setup view controller
+    let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+    let vc : calendarViewController = storyboard.instantiateViewControllerWithIdentifier("calendarViewController") as! calendarViewController
+    vc.delegate = self
+    self.presentViewController(vc, animated: true, completion: nil)
+  }
+  
+  @IBAction func processInput(sender: AnyObject) {
+    // split entries
+    var myItemBot :itemBot = itemBot()
+    var newItems = myItemBot.splitIntoEntries(text1.text)
+    
+    // add entries
+    var datetime :String! = "\(daDate) \(daTime)"
+    let d :NSDate! = getUTCDateFromString(datetime)
+    myItemBot.makeNewEntries(newItems, daDateTime: d)
+    text1.text = nil
+    text1.becomeFirstResponder()
+    
+    // reload table
+    loadDataForDate(daDate)
+    self.tableView.reloadData()
+  }
+  
+  
+  @IBAction func topTimeBtnPress(sender: UIButton) {
+    // highlight the field
+    highlightOff()
+    topTimeBtn.layer.borderWidth = 3.0
+    
+    //println("timeBtn tag: \(sender.tag)")
+    saveTheItem() // save other if one was selected
+    
+    // set the time on the picker
+    timePicker.startWithTime(topTimeBtn.titleForState(UIControlState.Normal)!)
+    
+    currentTag = -1
+  }
+  
+  @IBAction func timeBtnPress(sender: UIButton) {
+    //highlight the field
+    highlightOff()
+    sender.layer.borderWidth = 3.0
+    sender.layer.borderColor = UIColor.appBlue().CGColor
+    
+    println("timeBtn tag: \(sender.tag)")
+    //saveTheItem() // save other if one was selected
+    
+    // set the time on the picker and show it
+    timePicker.startWithTime(sender.titleForState(UIControlState.Normal)!)
+    
+    currentTag = sender.tag
+  }
+  
+      // MARK: - Helpers
   
   func loadDataForDate(theDate :String) {
     //println("Load data for date - string: \(theDate)")
@@ -143,23 +232,6 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.reloadData()
         }
     }
-  }
-  
-  @IBAction func processInput(sender: AnyObject) {
-    // split entries
-    var myTextBot :textBot = textBot()
-    var newItems = myTextBot.splitIntoEntries(text1.text)
-    
-    // add entries
-    var datetime :String! = "\(daDate) \(daTime)"
-    let d :NSDate! = getUTCDateFromString(datetime)
-    myTextBot.makeNewEntries(newItems, daDateTime: d)
-    text1.text = nil
-    text1.becomeFirstResponder()
-    
-    // reload table
-    loadDataForDate(daDate)
-    self.tableView.reloadData()
   }
   
   func focusMainText() {
@@ -199,108 +271,12 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
   }
-  
-  @IBAction func menuPressed(sender: AnyObject) {
-    //println("menuP")
-    self.revealViewController()?.rightRevealToggle(sender)
-    self.view.endEditing(true)
-  }
-  
-  @IBAction func showCalendar(sender: AnyObject) {
-    // setup view controller
-    let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let vc : calendarViewController = storyboard.instantiateViewControllerWithIdentifier("calendarViewController") as! calendarViewController
-    vc.delegate = self
-    self.presentViewController(vc, animated: true, completion: nil)
-  }
- 
-  
-  /** Delegate Functions - Calendar **/
-  
-  func didPressDate(val :String) {
-    println("didPressDate val: \(val)")
-    daDate = val
-    loadDataForDate(daDate)
-    
-    // day button at top of page, change
-    let str = getDateDescriptiveStringFromString(val)
-    dayBtn.setTitle(str as? String, forState: UIControlState.Normal)
-    dayBtn.setTitle(str as? String, forState: UIControlState.Highlighted)
-  }
-  
-  
-  /****   Delegate functions for Time Picker   ****/
-  
-  func timePickerTimeChanged(sender: UIDatePicker) {
-    //println("timepickertimechanged currentTag: \(currentTag)")
-    var dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "h:mm a"
-    var newTimeString :NSString = dateFormatter.stringFromDate(sender.date)
-    newTimeSelected(newTimeString)
-  }
 
   
-  func newTimeSelected(newTimeString :NSString) {
-    //println("newtimeselected")
-    if (currentTag != -1) {
-      let myBtn = self.tableView.viewWithTag(currentTag) as! UIButton
-      myBtn.setTitle(newTimeString as String, forState: UIControlState.Normal)
-    } else {
-      topTimeBtn.setTitle(newTimeString as String, forState: UIControlState.Normal)
-      daTime = newTimeString
-    }
-  }
-  
-  func getCurrentButton() -> UIButton {
-    var myBtn :UIButton = UIButton()
-    if (currentTag != -1) {
-      myBtn = self.tableView.viewWithTag(currentTag) as! UIButton
-    } else {
-      myBtn = topTimeBtn
-    }
-    return myBtn
-  }
-  
-  func closePicker() {      // called from done button
-    timePicker.hidden = true
-    saveTheItem()
-    highlightOff()
-  }
-  
-  @IBAction func topTimeBtnPress(sender: UIButton) {
-    // highlight the field
-    highlightOff()
-    topTimeBtn.layer.borderWidth = 3.0
-    
-    //println("timeBtn tag: \(sender.tag)")
-    saveTheItem() // save other if one was selected
-    
-    // set the time on the picker
-    timePicker.startWithTime(topTimeBtn.titleForState(UIControlState.Normal)!)
-    
-    currentTag = -1
-  }
-  
-  @IBAction func timeBtnPress(sender: UIButton) {
-    //highlight the field
-    highlightOff()
-    sender.layer.borderWidth = 3.0
-    sender.layer.borderColor = UIColor.appBlue().CGColor
-    
-    println("timeBtn tag: \(sender.tag)")
-    //saveTheItem() // save other if one was selected
-    
-    // set the time on the picker and show it
-    timePicker.startWithTime(sender.titleForState(UIControlState.Normal)!)
-
-    currentTag = sender.tag
-  }
-  
-  
-  /**  Table Info and Functions  **/
+  // MARK: - Table View
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return items.count;
+    return items.count;
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -346,7 +322,7 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     var circle :UIImageView = UIImageView(frame:CGRectMake(85, (cell.frame.height / 2) - 6, 12, 12))
     circle.image = UIImage(named: "dot_green.png")
     cell.addSubview(circle)
-
+    
     //Add carat
     var carat :UIImageView = UIImageView(frame:CGRectMake(self.view.frame.width - 30, (cell.frame.height / 2) - 8, 12, 16))
     carat.image = UIImage(named: "indicator20.png")
@@ -355,15 +331,15 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     // set the vertical line color
     var theType :NSString = items[indexPath.row].valueForKey("type") as! NSString
-
+    
     switch theType { //== "trigger") {
-    //case "trigger":
-      case "symptom":
-          cell.cellVerticalBar.backgroundColor = UIColor.redColor()
-      case "treatment":
-          cell.cellVerticalBar.backgroundColor = UIColor.blueColor()
-      default:
-          cell.cellVerticalBar.backgroundColor = UIColor.appLightGray()
+      //case "trigger":
+    case "symptom":
+      cell.cellVerticalBar.backgroundColor = UIColor.redColor()
+    case "treatment":
+      cell.cellVerticalBar.backgroundColor = UIColor.blueColor()
+    default:
+      cell.cellVerticalBar.backgroundColor = UIColor.appLightGray()
     }
     
     //set time field pattern
@@ -391,12 +367,73 @@ class timelineViewController: UIViewController, UITableViewDelegate, UITableView
   }
   
   
-  /****   Delegate functions for itemDetail Controller   ****/
+  // MARK: - Calendar Delegate
+  
+  func didPressDate(val :String) {
+    println("didPressDate val: \(val)")
+    
+    var dateString :String = getDateStringYYYYMMDDFromString(val) as String
+    
+    //var locationArray = NSUserDefaults.standardUserDefaults().objectForKey("coordLogArray") as! NSArray
+    //NSData *data = [NSPropertyListSerialization dataFromPropertyList:array format:NSPropertyListBinaryFormat_v1_0 errorDescription:&error];
+    //var locationObj = locationArray.lastObject as! CLLocation
+    //var coord :CLLocationCoordinate2D = locationObj.coordinate
+    //myWeatherBot.checkWeatherForTriggers(coord, dateString: dateString)
+      
+    daDate = val
+    loadDataForDate(daDate)
+    
+    // day button at top of page, change
+    let str = getDateDescriptiveStringFromString(val)
+    dayBtn.setTitle(str as? String, forState: UIControlState.Normal)
+    dayBtn.setTitle(str as? String, forState: UIControlState.Highlighted)
+  }
+  
+  
+      // MARK: - Time Picker
+  
+  func timePickerTimeChanged(sender: UIDatePicker) {
+    //println("timepickertimechanged currentTag: \(currentTag)")
+    var dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "h:mm a"
+    var newTimeString :NSString = dateFormatter.stringFromDate(sender.date)
+    newTimeSelected(newTimeString)
+  }
+
+  
+  func newTimeSelected(newTimeString :NSString) {
+    //println("newtimeselected")
+    if (currentTag != -1) {
+      let myBtn = self.tableView.viewWithTag(currentTag) as! UIButton
+      myBtn.setTitle(newTimeString as String, forState: UIControlState.Normal)
+    } else {
+      topTimeBtn.setTitle(newTimeString as String, forState: UIControlState.Normal)
+      daTime = newTimeString
+    }
+  }
+  
+  func getCurrentButton() -> UIButton {
+    var myBtn :UIButton = UIButton()
+    if (currentTag != -1) {
+      myBtn = self.tableView.viewWithTag(currentTag) as! UIButton
+    } else {
+      myBtn = topTimeBtn
+    }
+    return myBtn
+  }
+  
+  func closePicker() {      // called from done button
+    timePicker.hidden = true
+    saveTheItem()
+    highlightOff()
+  }
+  
+  // MARK - Item Detail Delegate
   
   func detailSave() {
     loadDataForDate(daDate)
     self.tableView.reloadData()
   }
   
-}  // END
+}
 

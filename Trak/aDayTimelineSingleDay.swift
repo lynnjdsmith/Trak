@@ -35,16 +35,6 @@ class aDayTimelineSingleDay: UIView {
     setup()
   }
   
-  /* override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(true)
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    var symptomEvents :NSArray = getEventsForADay(myStartingDate)//baseSymptomEvent.precedingSymptomEvents(name)
-    
-  }*/ 
-  
   func setup() {
     var theFont = UIFont(name: "Corbel-Bold", size: 17)
     self.layer.borderWidth=0
@@ -97,13 +87,7 @@ class aDayTimelineSingleDay: UIView {
     findData.whereKey("myDateTime", lessThan:date2)
     findData.orderByDescending("myDateTime")
   
-    // query
-    //theArray = findData.findObjects()
-    //println("findData.findObjects() in sEvent   ** - Warning OK. Ignore. - **  ")
-
-  
     // send query
-    
     var num = 1
     
     findData.findObjectsInBackgroundWithBlock {
@@ -166,97 +150,5 @@ class aDayTimelineSingleDay: UIView {
     circleView.setImage(image, forState: .Normal)
     self.addSubview(circleView)
   }
-  
-  
-  /* func getUTCFormatDate(localDate: NSDate) -> NSDate {
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm"
-    var timeZone :NSTimeZone = NSTimeZone(name:"UTC")!
-    formatter.timeZone = timeZone
-    var d :String = formatter.stringFromDate(localDate)
-    var dateUTC: NSDate! = formatter.dateFromString(d)
-    return dateUTC
-  } */
-  
-  
-  /* Use this if you're doing layers.
-  func drawIt(theObject :PFObject) {
-    println(theObject)
-    
-    let radius = 100.0
-    
-    // Create the circle layer
-    var circle = CAShapeLayer()
-    
-    // Set the center of the circle to be the center of the view
-    //let theCenter = CGPointMake(CGRectGetMidX(self.frame) - radius, CGRectGetMidY(self.frame) - radius)
-    
-    let fractionOfCircle = 3.0 / 4.0
-    
-    let twoPi = 2.0 * Double(M_PI)
-    let startAngle = Double(fractionOfCircle) / Double(twoPi) - Double(M_PI_2)
-    let endAngle = 0.0 - Double(M_PI_2)
-    let clockwise: Bool = true
-    
-    // `clockwise` tells the circle whether to animate in a clockwise or anti clockwise direction
-    circle.path = UIBezierPath(arcCenter: center, radius: 30, startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: clockwise).CGPath
-    
-    // Configure the circle
-    circle.fillColor = UIColor.blackColor().CGColor
-    //circle.strokeColor = UIColor.redColor().CGColor
-    circle.lineWidth = 5
-    
-    // When it gets to the end of its animation, leave it at 0% stroke filled
-    circle.strokeEnd = 0.0
-    
-    // Add the circle to the parent layer
-    self.layer.addSublayer(circle)
-    
-    // Configure the animation
-    var drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
-    drawAnimation.repeatCount = 1.0
-    
-    // Animate from the full stroke being drawn to none of the stroke being drawn
-    drawAnimation.fromValue = NSNumber(double: fractionOfCircle)
-    drawAnimation.toValue = NSNumber(float: 0.0)
-    drawAnimation.duration = 30.0
-    drawAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-    
-    // Add the animation to the circle
-    circle.addAnimation(drawAnimation, forKey: "drawCircleAnimation")
-    println("Load data for string")
-    
-  } */
-
 }
-
-
-//println("minutesBetween \(minutesBetween)")
-//var multiplier :Float = Float(graphWidth)
-
-// set the UIColor.
-//nameArray is the names in the legend
-/* var count = 1 // lets you know where you are in the nameArray. it's your index.
-for theName in nameArray {
-var theObjName :NSString = theObj.valueForKey("name") as! NSString
-if theName as! NSString == theObjName {
-if count < colorz.count {
-dotColor = colorz[count] as! UIColor
-}
-}
-count++
-} */
-
-//var yOffset :CGFloat = CGFloat(randomInt(0, (Int(myHeight) - Int(dotSize/2))))
-//println("xoffset \(yOffset)")
-
-
-//var dl :UIView = placeCircle(objDot)
-
-
-
-// put dot into dictionary
-//let objDot :Dictionary<String, AnyObject> =
-//["size" : dotSize, "xPos" : 100, "yPos" : CGFloat(100), "color" : UIColor.redColor()] as Dictionary
-//println("myWidth: \(myWidth) || minutesBetween: \(minutesBetween) || myXPos: \(myXPos)") //" || myXPos: \(myXPos)")
-
+  

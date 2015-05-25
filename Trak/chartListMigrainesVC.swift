@@ -11,12 +11,8 @@ import UIKit
 import QuartzCore
 import MessageUI
 
-class chartListMigrainesVC: UIViewController, stlDelegate, MFMailComposeViewControllerDelegate {
+class chartListMigrainesVC: UIViewController, MFMailComposeViewControllerDelegate {
 
-  //@IBOutlet var topBackView         :UIView!
-  //@IBOutlet var titleTopLabel       :UILabel!
-  //@IBOutlet var chartLabel          :UILabel!
-  //@IBOutlet var generateReportBtn   :UIButton!
   @IBOutlet var scrollView            :UIScrollView!
   
   var items     :NSMutableArray = []

@@ -149,7 +149,7 @@ class symptomHistoryVC: UIViewController, stlDelegate, MFMailComposeViewControll
       
       let theLabel :UILabel = UILabel(frame: CGRectMake(currentX + 20, currentY, spaceAmt - 20, 15))
       //UILabel(frame: CGRectMake(CGFloat(xPosLegend - (spaceAmt/2) + (dotSize/2)), yPosLegend + dotSize, spaceAmt, 30))
-      theLabel.text = value as! String
+      theLabel.text = value as? String
       theLabel.lineBreakMode = .ByWordWrapping
       theLabel.numberOfLines = 0
       theLabel.font = labelFont

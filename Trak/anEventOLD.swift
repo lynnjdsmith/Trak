@@ -61,7 +61,7 @@ class anEvent
     
     // query
     var theArray = findData.findObjects()
-    println("findData.findObjects() in sEvent   ** - Warning OK. Ignore. - **  ")
+    println("findData.findObjects() ** - Warning OK. Ignore. - **  ")
     return theArray
   }
 
@@ -84,7 +84,7 @@ class anEvent
     
     // query
     var theArray = findData.findObjects()
-    println("findData.findObjects() in sEvent   ** - Warning OK. Ignore. - **  ")
+    println("findData.findObjects() ** - Warning OK. Ignore. - **  ")
     return theArray
   }
   

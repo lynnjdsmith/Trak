@@ -151,7 +151,7 @@ class GraphView: UIView {
     // Returns an axis label
     func axisLabel(title: NSString) -> UILabel {
         let label = UILabel(frame: CGRectZero)
-        label.text = title as! String
+        label.text = title as? String
         label.font = labelFont
         label.textColor = labelColor
         label.backgroundColor = backgroundColor

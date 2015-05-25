@@ -41,7 +41,7 @@ class reportBasicView: UIView {
   var fontMedium :UIFont = UIFont.systemFontOfSize(11)
   var dataPoints :NSMutableArray = []
   var theItem   :PFObject!
-  var symptomEvent :sEvent!
+  //var symptomEvent :sEvent!
   var beforeEvents :NSArray = []
   var nameArray :NSArray = []
   var colorz :NSArray = []
@@ -63,8 +63,9 @@ class reportBasicView: UIView {
     title.textColor = UIColor.darkBlue()
     addSubview(title)
     
-    let graph = singleSymptomHorizontalGraphView(frame: CGRectMake(margin, 140, 300, 200), theItem: theItem)
-    self.addSubview(graph)
+    // DEPRECIEATED singleSymptomHorizGraphView. very old
+    //let graph = singleSymptomHorizontalGraphView(frame: CGRectMake(margin, 140, 300, 200), theItem: theItem)
+    //self.addSubview(graph)
     
     /*
     // load data

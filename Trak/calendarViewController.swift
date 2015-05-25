@@ -8,12 +8,16 @@
 import UIKit
 import QuartzCore
 
+
+  // MARK: - Protocol calDelegate
 protocol calDelegate {
     func didPressDate(val :String)
 }
 
 class calendarViewController: UIViewController {
 
+  // MARK: - Variables
+  
   var delegate: calDelegate?
   // The delegate that the parent view controller will conform to
   @IBOutlet var doneBtn: UIButton?
@@ -36,11 +40,23 @@ class calendarViewController: UIViewController {
   var daDay :NSDate = NSDate()
   var scrollView :UIScrollView!
   
+  
+    // MARK: - Functions
+  
   override func viewDidLoad() {
       super.viewDidLoad()
       loadDataForStart()
       self.view.bringSubviewToFront(doneBtn!)
   }
+  
+  @IBAction func done(sender: AnyObject) {
+    if((self.presentingViewController) != nil){
+      self.dismissViewControllerAnimated(false, completion: nil)
+      //println("done")
+    }
+  }
+  
+    // MARK: - Helpers
   
   func loadDataForStart() {
     
@@ -239,13 +255,6 @@ class calendarViewController: UIViewController {
 
   func yearPressed(sender: UIButton!) {
       //println("yearPressed")
-  }
-  
-  @IBAction func done(sender: AnyObject) {
-      if((self.presentingViewController) != nil){
-          self.dismissViewControllerAnimated(false, completion: nil)
-          //println("done")
-      }
   }
   
 }

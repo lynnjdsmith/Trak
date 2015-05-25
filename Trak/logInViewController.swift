@@ -110,7 +110,7 @@ class logInViewController: PFLogInViewController, UITextFieldDelegate, PFLogInVi
 func loadPlistData() {
   
   // getting path to GameData.plist
-  let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! NSArray
+  let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
   let documentsDirectory = paths[0] as! String
   let path = documentsDirectory.stringByAppendingPathComponent("MigraineStopDeets.plist")
   

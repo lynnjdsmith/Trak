@@ -6,7 +6,9 @@ import UIKit
 import QuartzCore
 
 class profileViewController: UIViewController{
-    
+  
+    // MARK: - Variables
+  
   // IBOutlets
   @IBOutlet var username: UILabel!
   @IBOutlet var deleteMyAccount: UIButton!
@@ -14,9 +16,9 @@ class profileViewController: UIViewController{
   @IBOutlet var weatherInfo :UITextView!
   @IBOutlet var menuButton: UIButton!
   @IBOutlet var topBackView: UIView!
-
-  
   var myZip = 0
+  
+    // MARK: - Functions
   
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -27,12 +29,10 @@ class profileViewController: UIViewController{
       // general set stuff
       topBackView.layer.borderWidth = 0.3
       topBackView.layer.borderColor = UIColor.appLightGray().CGColor
-
-      //migraineTrak.normalStyle("Your Traks")
       
-      var theForecast :NSDictionary = (NSUserDefaults.standardUserDefaults().objectForKey("weatherForecast") as? NSDictionary)!
-      println("\n *** the forecast ***")
-      println(theForecast)
+      //var theForecast :NSDictionary = (NSUserDefaults.standardUserDefaults().objectForKey("weatherForecast") as? NSDictionary)!
+      //println("\n *** the forecast ***")
+      //println(theForecast)
       //cWeather.unpinInBackground()
       
     }

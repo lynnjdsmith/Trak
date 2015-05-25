@@ -23,10 +23,14 @@ class settingsMainVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // add nav
+    var nav :navView = navView()
+    nav.myparent = self
+    self.view.addSubview(nav)
   }
   
   
-  @IBAction func triggersBtnPress(sender: AnyObject) {
+ /*  @IBAction func triggersBtnPress(sender: AnyObject) {
     
   }
   
@@ -36,7 +40,7 @@ class settingsMainVC: UIViewController {
   
   @IBAction func treatmentsBtnPress(sender: AnyObject) {
     
-  }
+  } */
   
   
 }

@@ -1,10 +1,7 @@
 //
-//  Sweather.swift
-//  Tests
-//
-//  Created by Heiko Dreyer on 08/12/14.
-//  Copyright (c) 2014 boxedfolder.com. All rights reserved.
-//         client = Sweather(apiKey: "9e0cabd83c8615c7f232ad172c032585")
+//  Sweather_Underground.swift
+// was functions from open weather api, i converted them to weather underground.
+// old "http://api.openweathermap.org/data/"
 
 import Foundation
 import CoreLocation
@@ -48,14 +45,13 @@ public class Sweather_Underground {
     }
     
     public var apiKey: String
-    public var apiVersion: String
-    public var language: String
-    public var temperatureFormat: TemperatureFormat
+    //public var apiVersion: String
+    //public var language: String
+    //public var temperatureFormat: TemperatureFormat
     
     private var queue: NSOperationQueue;
     
     private struct Const {
-        //static let basePath = "http://api.openweathermap.org/data/"
        let basePath = "http://api.openweathermap.org/data/2.5/forecast"
     }
   
@@ -64,23 +60,25 @@ public class Sweather_Underground {
     // MARK: -
     // MARK: Initialization
   
-  public convenience init(apiKey: String) {
-        self.init(apiKey: apiKey, language: "en", temperatureFormat: .Fahrenheit, apiVersion: "2.5")
+   /*public convenience init(apiKey: String) {
+        self.apiKey = apiKey
+        self.init(apiKey: apiKey)
     }
   
-    public convenience init(apiKey: String, temperatureFormat: TemperatureFormat) {
+     public convenience init(apiKey: String, temperatureFormat: TemperatureFormat) {
         self.init(apiKey: apiKey, language: "en", temperatureFormat: temperatureFormat, apiVersion: "2.5")
     }
     
     public convenience init(apiKey: String, language: String, temperatureFormat: TemperatureFormat) {
         self.init(apiKey: apiKey, language: language, temperatureFormat: temperatureFormat, apiVersion: "2.5")
-    }
+    }*/
     
-    public init(apiKey: String, language: String, temperatureFormat: TemperatureFormat, apiVersion: String) {
+    public init(apiKey: String) {
+    //public init(apiKey: String, language: String, temperatureFormat: TemperatureFormat, apiVersion: String) {
         self.apiKey = apiKey
-        self.temperatureFormat = temperatureFormat
-        self.apiVersion = apiVersion
-        self.language = language
+        //self.temperatureFormat = temperatureFormat
+        //self.apiVersion = apiVersion
+        //self.language = language
         self.queue = NSOperationQueue()
     }
     
@@ -98,8 +96,6 @@ public class Sweather_Underground {
     public func forecast(cityName: String, state: String, dateVal: String, callback: (Result) -> ()) {
         call("http://api.wunderground.com/api/75d83e44364c755f/history_\(dateVal)/q/\(state)/\(cityName).json", callback: callback);
     }
-    
-
     
     // MARK: -
     // MARK: Call the api

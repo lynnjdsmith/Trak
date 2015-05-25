@@ -86,15 +86,8 @@ class aDayTimelineMigraine: UIView {
     findData.whereKey("myDateTime", lessThan:date2)
     findData.orderByDescending("myDateTime")
   
-    // query
-    //theArray = findData.findObjects()
-    //println("findData.findObjects() in sEvent   ** - Warning OK. Ignore. - **  ")
-
-  
     // send query
-    
     var num = 1
-    
     findData.findObjectsInBackgroundWithBlock {
       (objects:[AnyObject]!, error:NSError!)->Void in
       if (error == nil) {

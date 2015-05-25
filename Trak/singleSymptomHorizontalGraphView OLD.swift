@@ -9,7 +9,7 @@ class singleSymptomHorizontalGraphView: UIView {
   
   // set vars
   var theItem       :PFObject!
-  var symptomEvent  :sEvent!
+  //var symptomEvent  :sEvent!
   var beforeEvents  :NSArray = []
   var nameArray     :NSArray = []
   var colorz        :NSMutableArray = []
